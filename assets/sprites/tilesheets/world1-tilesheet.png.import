@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0mpn1jxwngc0"
-path="res://.godot/imported/revenant_spritesheet.png-335497d4ce40c176cfd956128d431125.ctex"
+uid="uid://d3asoyjqrf703"
+path="res://.godot/imported/world1-tilesheet.png-febc546366f34069b7935f86b3f89048.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/revenant_spritesheet.png"
-dest_files=["res://.godot/imported/revenant_spritesheet.png-335497d4ce40c176cfd956128d431125.ctex"]
+source_file="res://assets/sprites/tilesheets/world1-tilesheet.png"
+dest_files=["res://.godot/imported/world1-tilesheet.png-febc546366f34069b7935f86b3f89048.ctex"]
 
 [params]
 
