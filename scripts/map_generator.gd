@@ -4,7 +4,7 @@ class_name MapGenerator #this line allows it to show up as a node
 
 #exported variables are visible through the inspector tab
 @export var origin: Vector2i = Vector2i(0,0)
-@export var floor_dimensions: Vector2i = Vector2i(200,200)
+@export var floor_dimensions: Vector2i = Vector2i(20,20)
 @export var total_steps := 1
 @export_tool_button("Generate Map","AtlasTexture") var map_gen_button = generate_map
 @export var tilemap_layer: TileMapLayer
@@ -26,7 +26,8 @@ const TILE_DATA:= {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	generate_map()
+	pass
+	#generate_map()
 
 func draw_walls():
 	for x in range(floor_dimensions.x):
@@ -70,7 +71,7 @@ func generate_map():
 	#draw_arc(Vector2i(13,20),Vector2i(13,20)+Vector2i(10,-10),"floor")
 	#draw_arc(Vector2i(13,20),Vector2i(13,20)+Vector2i(-10,-10),"floor")
 	#draw_arc(Vector2i(13,20),Vector2i(13,20)+Vector2i(0,-10),"floor")
-	var o = Vector2i(42,12)
+	var o = origin/2;
 	#draw_arc(o,o+Vector2i(-70,40),"floor")
 	#draw_circle(o,5,"floor",!true,5)
 	hole_gen(center)
