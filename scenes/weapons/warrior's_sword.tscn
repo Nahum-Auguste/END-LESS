@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dtsfqeirc37ra"]
+
+[ext_resource type="Texture2D" uid="uid://du2jrmlfhyek8" path="res://assets/sprites/items/weapons/in_game_warrior's_sword.png" id="1_bgm54"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lyya"]
+atlas = ExtResource("1_bgm54")
+region = Rect2(13, 12, 6, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1oe7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lyya")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41adi"]
+size = Vector2(6, 17)
+
+[node name="Warrior\'s_Sword" type="Area2D" unique_id=2014644654]
+collision_layer = 8
+collision_mask = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2052581145]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_1oe7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=163744557]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_41adi")

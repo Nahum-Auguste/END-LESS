@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dilt05yq14axw"]
+
+[ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scenes/enemies/giant_spider.gd" id="1_j3pyh"]
+[ext_resource type="Texture2D" uid="uid://c0cmrrd5jxttg" path="res://assets/sprites/enemies/giant_spider_default.png" id="1_kvp8k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3pyh"]
+atlas = ExtResource("1_kvp8k")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svrsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3pyh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
+size = Vector2(32, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3pyh"]
+radius = 9.0
+
+[node name="GiantSpider" type="CharacterBody2D" unique_id=147954774]
+collision_layer = 2
+collision_mask = 7
+platform_floor_layers = 0
+script = ExtResource("1_j3pyh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
+sprite_frames = SubResource("SpriteFrames_svrsm")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1639478681]
+position = Vector2(0, -0.5)
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1198337450]
+shape = SubResource("RectangleShape2D_kvp8k")
+debug_color = Color(0.99357957, 0, 0.26555803, 0.18039216)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=165402881]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_j3pyh")

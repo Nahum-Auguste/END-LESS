@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://bo7uiuquaj6r1"]
 
 [ext_resource type="Script" uid="uid://pe2vjlhfsvuu" path="res://scripts/inventory.gd" id="1_avmd0"]
+[ext_resource type="PackedScene" uid="uid://cangescwpiaap" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_xce7s"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loxu7"]
-bg_color = Color(0.122984864, 0.12298491, 0.122984804, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xce7s"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="Gradient" id="Gradient_loxu7"]
 colors = PackedColorArray(0.16501081, 0.24056065, 0.26681572, 1, 0.083911665, 0.083911665, 0.083911665, 1)
@@ -23,62 +25,56 @@ corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 corner_detail = 2
 
-[node name="Inventory" type="CanvasLayer" unique_id=1761913657]
-
-[node name="Control2" type="Control" parent="." unique_id=992600494]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -33.0
-offset_bottom = -33.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="InventoryContainer" type="PanelContainer" parent="Control2" unique_id=380808113 node_paths=PackedStringArray("inventory_slots_container")]
+[node name="Inventory" type="Control" unique_id=2067996950 node_paths=PackedStringArray("inventory_slots_container")]
 clip_children = 1
-layout_mode = 0
+layout_mode = 3
+anchors_preset = 0
 offset_left = 728.0
 offset_top = 190.0
 offset_right = 946.0
 offset_bottom = 514.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_loxu7")
 script = ExtResource("1_avmd0")
 inventory_slots_container = NodePath("MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer")
 
-[node name="Control" type="Control" parent="Control2/InventoryContainer" unique_id=928399434]
-layout_mode = 2
+[node name="Control" type="Panel" parent="." unique_id=1305818183]
+clip_contents = true
+layout_mode = 0
+offset_right = 218.0
+offset_bottom = 324.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xce7s")
 
-[node name="TextureRect" type="TextureRect" parent="Control2/InventoryContainer/Control" unique_id=942094201]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=942094201]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 258.0
-offset_top = -12.0
-offset_right = 436.90918
-offset_bottom = -12.0
+offset_left = 215.09998
+offset_top = 3.2408123
+offset_right = 315.5473
+offset_bottom = -108.524994
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5707964
 texture = SubResource("GradientTexture2D_s6ek7")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control2/InventoryContainer" unique_id=354989884]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=354989884]
+layout_mode = 0
+offset_right = 218.0
+offset_bottom = 324.0
 theme_override_constants/margin_left = 7
 theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 7
 theme_override_constants/margin_bottom = 7
 
-[node name="VSplitContainer" type="VSplitContainer" parent="Control2/InventoryContainer/MarginContainer" unique_id=1967190969]
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer" unique_id=1967190969]
 layout_mode = 2
 split_offsets = PackedInt32Array(202)
 split_offset = 202
 
-[node name="Control2" type="Control" parent="Control2/InventoryContainer/MarginContainer/VSplitContainer" unique_id=1197588798]
+[node name="Control2" type="Control" parent="MarginContainer/VSplitContainer" unique_id=1197588798]
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control2" unique_id=2034629750]
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VSplitContainer/Control2" unique_id=2034629750]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,12 +83,25 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.7649327, 0.76493275, 0.76493275, 1)
 
-[node name="Control" type="Panel" parent="Control2/InventoryContainer/MarginContainer/VSplitContainer" unique_id=1835131370]
+[node name="MainHandSlot" parent="MarginContainer/VSplitContainer/Control2" unique_id=952192126 node_paths=PackedStringArray("inventory_manager") instance=ExtResource("2_xce7s")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 87.0
+offset_right = 43.0
+offset_bottom = 120.0
+grow_horizontal = 1
+grow_vertical = 1
+inventory_manager = NodePath("")
+
+[node name="Control" type="Panel" parent="MarginContainer/VSplitContainer" unique_id=1835131370]
 clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s6ek7")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control" unique_id=2101556626]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/Control" unique_id=2101556626]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,50 +113,89 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="GridContainer" type="GridContainer" parent="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer" unique_id=1445457407]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VSplitContainer/Control/MarginContainer" unique_id=1445457407]
 layout_mode = 2
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 6
 columns = 7
 
-[connection signal="gui_input" from="Control2/InventoryContainer" to="Control2/InventoryContainer" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33886" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33886" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33886" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33886" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33887" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33887" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33887" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33887" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33888" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33888" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33888" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33888" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33889" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33889" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33889" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33889" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33890" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33890" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33890" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33890" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33891" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33891" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33891" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33891" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33892" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33892" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33892" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33892" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33893" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33893" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33893" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33893" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33894" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33894" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33894" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33894" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33895" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33895" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33895" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33895" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33896" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33896" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33896" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33896" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33897" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33897" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33897" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33897" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33898" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33898" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33898" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33898" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33899" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33899" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33899" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33899" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33900" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33900" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33900" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33900" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33901" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33901" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33901" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33901" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33902" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33902" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33902" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33902" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33903" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33903" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33903" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33903" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33904" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33904" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33904" to="Control2/InventoryContainer/MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@33904" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/Inventory_Slot" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38095" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38095" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38095" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38095" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38096" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38096" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38096" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38096" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38097" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38097" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38097" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38097" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38098" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38098" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38098" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38098" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38099" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38099" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38099" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38099" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38100" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38100" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38100" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38100" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38101" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38101" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38101" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38101" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38102" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38102" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38102" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38102" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38103" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38103" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38103" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38103" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38104" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38104" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38104" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38104" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38105" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38105" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38105" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38105" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38106" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38106" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38106" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38106" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38107" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38107" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38107" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38107" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38108" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38108" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38108" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38108" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38109" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38109" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38109" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38109" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38110" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38110" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38110" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38110" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38111" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38111" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38111" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38111" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38112" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38112" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38112" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38112" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38113" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38113" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38113" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@38113" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87368" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87368" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87368" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87368" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87369" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87369" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87369" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87369" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87370" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87370" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87370" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87370" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87371" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87371" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87371" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87371" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87372" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87372" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87372" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87372" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87373" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87373" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87373" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87373" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87374" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87374" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87374" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87374" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87375" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87375" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87375" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87375" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87376" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87376" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87376" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87376" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87377" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87377" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87377" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87377" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87378" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87378" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87378" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87378" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87379" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87379" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87379" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87379" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87380" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87380" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87380" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87380" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87381" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87381" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87381" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87381" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87382" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87382" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87382" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87382" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87383" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87383" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87383" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87383" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87384" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87384" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87384" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87384" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87385" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87385" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87385" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87385" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87386" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87386" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87386" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87386" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87387" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87387" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87387" to="MarginContainer/VSplitContainer/Control/MarginContainer/GridContainer/@PanelContainer@87387" method="_on_mouse_exited"]
