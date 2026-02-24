@@ -25,8 +25,6 @@ shapes/collision/contact_color=Color(1, 0.2, 0.101960786, 0.22745098)
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [input]
