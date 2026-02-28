@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bua2l4rs3n50s" path="res://scripts/enemy_ai.gd" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://c7x228j2ys2lh" path="res://scripts/map_generator.gd" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://del2ua8ddsqph" path="res://scripts/canvas.gd" id="6_u5sy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_yqjtg")
@@ -75,7 +74,6 @@ tilemap_layer = NodePath("../TileMapLayer")
 metadata/_custom_type_script = "uid://c7x228j2ys2lh"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
-script = ExtResource("6_u5sy4")
 
 [node name="Inventory" parent="CanvasLayer" unique_id=1761913657 instance=ExtResource("1_iywne")]
 anchors_preset = 4

@@ -208,7 +208,7 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=864978702]
 sprite_frames = SubResource("SpriteFrames_yf5mx")
-animation = &"down_sword_attack"
+animation = &"down_walk"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675146412]

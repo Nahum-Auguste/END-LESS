@@ -1,8 +1,7 @@
-class_name Player extends CharacterBody2D
+class_name Player extends Monster
 
 @export var inventory: PlayerInventory
 var speed := 50.0
-var sprite: AnimatedSprite2D
 var animation: String
 var time_between_melee_attack = 1000 
 
@@ -18,38 +17,40 @@ var current_active_weapon: Area2D
 func _ready() -> void:
 	sprite = $AnimatedSprite2D
 
+
 func _physics_process(delta: float) -> void:
 
 	
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
+	
 
-	if not attacking:
-		if horizontalMoveInput:
-			if horizontalMoveInput>0:
-				animation = "right_walk"
-				velocity.x = speed
-			else:
-				animation = "left_walk"
-				velocity.x = -speed
+
+	if horizontalMoveInput:
+		if horizontalMoveInput>0:
+			animation = "right_walk"
+			velocity.x = speed
 		else:
-			velocity.x = move_toward(velocity.x,0,speed*10)
-				
-		if verticalMoveInput:
-			if verticalMoveInput>0:
-				
-				animation = "down_walk"
-				velocity.y = speed
-			else:
-				animation = "up_walk"
-				velocity.y = -speed
-		else:
-			velocity.y = move_toward(velocity.y,0,speed*10)
+			animation = "left_walk"
+			velocity.x = -speed
+	else:
+		velocity.x = move_toward(velocity.x,0,speed*10)
 			
-		sprite.play(animation)
-				
-		if !horizontalMoveInput and !verticalMoveInput:
-			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
+	if verticalMoveInput:
+		if verticalMoveInput>0:
+			
+			animation = "down_walk"
+			velocity.y = speed
+		else:
+			animation = "up_walk"
+			velocity.y = -speed
+	else:
+		velocity.y = move_toward(velocity.y,0,speed*10)
+		
+	sprite.play(animation)
+			
+	if !horizontalMoveInput and !verticalMoveInput:
+		sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
 		
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attack()
@@ -138,15 +139,17 @@ func entity_attacked(area:Area2D):
 	#print("Area attacked: ", area)
 	var min_knockback_strength = 128
 	var max_knockback_strength = 10000
-	var eroot:Node = area.get_parent()
-	print("Entity attacked: ",eroot)
+	var enemy:Enemy= area.get_parent()
+	print("Entity attacked: ",enemy)
 	
-	if eroot is CharacterBody2D and current_active_weapon:
-		var knockdir :Vector2 = (eroot.global_position - current_active_weapon.global_position)
+	if enemy is CharacterBody2D and current_active_weapon:
+		var knockdir :Vector2 = (enemy.global_position - current_active_weapon.global_position)
 		knockdir = knockdir.normalized()
 		var min_abs_knockback = knockdir.abs() * min_knockback_strength
 		var max_abs_knockback = knockdir.abs() * max_knockback_strength
 		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
 		#print(knockback)
-		eroot.velocity += knockback
+		enemy.velocity += knockback
+		enemy.health = clamp(enemy.health-main_hand_item.damage,0,enemy.max_health)
+		#print(enemy.health," ",enemy.max_health)
 		

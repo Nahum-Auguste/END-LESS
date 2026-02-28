@@ -30,6 +30,7 @@ static var item_templates: Dictionary[int,Dictionary] = {
 		"name":"Warrior's Sword",
 		"max_stack_count":1,
 		"item_type":"sword",
+		"damage":5,
 		"image_path":IMAGES_PATH + "weapons/warrior's_sword.png",
 		"scene_path":SCENES_PATH + "weapons/warrior's_sword.tscn"
 	}
@@ -45,6 +46,7 @@ static func create_item(_id:int) -> Item:
 	var scene_path
 	var item_type
 	
+	
 	#print(name)
 	
 	if (data.has("image_path")):
@@ -54,13 +56,15 @@ static func create_item(_id:int) -> Item:
 	if (data.has("item_type")):
 		item_type = data.item_type
 	
+	
 		
 	var item: Item = null
 	match (item_type):
 		"consummable":
 			item = Consummable.new(id,name,msc)
 		"sword":
-			item = Sword.new(id,name,msc,5)
+			var dmg = data.damage
+			item = Sword.new(id,name,msc,dmg)
 		_:
 			item = Item.new(id,name,msc)
 			
