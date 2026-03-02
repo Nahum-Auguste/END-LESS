@@ -3,10 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bo7uiuquaj6r1" path="res://scenes/ui/inventory/inventory.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://g8oort1yt05r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://d3asoyjqrf703" path="res://assets/sprites/tilesheets/world1-tilesheet.png" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://bua2l4rs3n50s" path="res://scripts/enemy_ai.gd" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://c7x228j2ys2lh" path="res://scripts/map_generator.gd" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://del2ua8ddsqph" path="res://scripts/canvas.gd" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://del2ua8ddsqph" path="res://scripts/gui scripts/ground_gui_canvas.gd" id="6_u5sy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_yqjtg")
@@ -23,11 +22,6 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 3
 sources/2 = SubResource("TileSetAtlasSource_yqjtg")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lnu2h"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
-
 [node name="Game" type="Node2D" unique_id=788731704]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1233330161]
@@ -36,32 +30,13 @@ tile_map_data = PackedByteArray("AAD//wIAAgAAAAIAAAD+/wIAAgAAAAIAAAD9/wEAAgAAAAI
 tile_set = SubResource("TileSet_lbhrr")
 metadata/_edit_lock_ = true
 
-[node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("6_p57ef")]
+[node name="GiantSpider" parent="." unique_id=147954774 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
 position = Vector2(-134, 215)
+player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=806514 node_paths=PackedStringArray("inventory") instance=ExtResource("1_uwrxv")]
 position = Vector2(-79, 237)
 inventory = NodePath("../CanvasLayer/Inventory")
-
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=263189761]
-position = Vector2(-413, -239)
-collision_layer = 2
-script = ExtResource("3_lbhrr")
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=2054013023]
-scale = Vector2(0.155, 0.155)
-texture = SubResource("CompressedTexture2D_lnu2h")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=1793645764]
-shape = SubResource("RectangleShape2D_lbhrr")
-
-[node name="Area2D" type="Area2D" parent="Enemy" unique_id=1929980142]
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Enemy/Area2D" unique_id=924705494]
-position = Vector2(-1.0000072, -1.0000019)
-scale = Vector2(1.5361842, 2.1645184)
-polygon = PackedVector2Array(0, 0, -101.550316, 16.631876, -83, 60, -61.841545, 73.91944, -34.501076, 88.24133, -1.9528885, 93.323296, 31.246254, 88.24133, 56.633835, 80.84939, 78.11563, 58.67356, 104.154175, 13.859896)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=594211753]
 position = Vector2(-96, 186)
@@ -86,6 +61,3 @@ offset_top = -162.0
 offset_right = 218.0
 offset_bottom = 162.0
 grow_vertical = 2
-
-[connection signal="body_entered" from="Enemy/Area2D" to="Enemy" method="_on_vision_area_body_entered"]
-[connection signal="body_exited" from="Enemy/Area2D" to="Enemy" method="_on_vison_area_body_exited"]
