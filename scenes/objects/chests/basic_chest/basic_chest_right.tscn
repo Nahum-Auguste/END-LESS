@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://befeatevosuie"]
+
+[ext_resource type="PackedScene" uid="uid://b320ukcejjdwo" path="res://scenes/objects/chests/basic_chest/basic_chest.tscn" id="1_ehjdu"]
+
+[node name="BasicChest" unique_id=1341061286 instance=ExtResource("1_ehjdu")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=921225391]
+animation = &"closed_right"

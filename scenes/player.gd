@@ -1,6 +1,11 @@
 class_name Player extends Monster
 
-@export var inventory: PlayerInventory
+
+var items: Array[Item] = []
+var player_inventory_scene_prefab: PackedScene = preload("res://scenes/ui/inventory/inventory.tscn")
+var inventory:PlayerInventory
+var is_inventory_open:bool = false
+
 var speed := 50.0
 var animation: String
 var time_between_melee_attack = 1000 
@@ -24,8 +29,6 @@ func _physics_process(delta: float) -> void:
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
 	
-
-
 	if horizontalMoveInput:
 		if horizontalMoveInput>0:
 			animation = "right_walk"
@@ -52,12 +55,26 @@ func _physics_process(delta: float) -> void:
 	if !horizontalMoveInput and !verticalMoveInput:
 		sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
 		
-	if Input.is_action_just_pressed("attack") and not attacking:
-		attack()
-		#sprite.pause()
+	
 
 	move_and_slide()
 	
+	
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack") and not attacking:
+		attack()
+		#sprite.pause()
+		
+	if Input.is_action_just_pressed("toggle_inventory"):
+		is_inventory_open = !is_inventory_open
+		if !inventory : create_inventory()
+		
+		if is_inventory_open:
+			display_inventory()
+		else:
+			close_inventory()
+		
 	load_usable_inventory_items()
 
 func load_usable_inventory_items():
@@ -68,6 +85,23 @@ func load_usable_inventory_items():
 		if main_hand_item!=null:
 			main_hand_scene = load(main_hand_item.scene_path)
 			#print("loaded weapon scene")
+
+func create_inventory():
+	if !inventory :
+		inventory = player_inventory_scene_prefab.instantiate()
+	
+
+func display_inventory():
+	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
+		PlayerGuiCanvas.add_child(inventory)
+		
+func close_inventory():
+	if inventory and inventory.get_parent()==PlayerGuiCanvas:
+		PlayerGuiCanvas.remove_child(inventory)
+
+func _exit_tree():
+	if inventory:
+		inventory.queue_free()
 
 func attack():
 	attacking = true

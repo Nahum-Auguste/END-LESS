@@ -16,19 +16,21 @@ var items: Array[Item] = []
 func _init(health:float=0) -> void:
 	super(health)
 	
-func add_possible_item_drop_data (id:int,drop_chance:float=1,max_amount:int=1):
+func add_possible_item_drop_data (id:int,drop_chance:float=1,min_amount:int=0,max_amount:int=1):
 	possible_item_drops_data[id] = {
 		"drop_chance":drop_chance,
+		"min_amount":min_amount,
 		"max_amount":max_amount
 	}
 
 func populate_items():
 	for id in possible_item_drops_data:
 		var data = possible_item_drops_data[id]
+		var min_amount = data.min_amount
 		var max_amount = possible_item_drops_data[id].max_amount
 		var drop_chance = possible_item_drops_data[id].drop_chance
 		var count = 0
-		while (count < max_amount and randf() < drop_chance):
+		while (count < min_amount or (count < max_amount and randf() < drop_chance) ):
 			items.push_back(ItemData.create_item(id))
 			count+=1
 	

@@ -3,7 +3,7 @@ class_name GiantSpider extends Enemy
 func _init(health:float=0) -> void:
 	self.max_health = 12
 	super(health)
-	add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.8,4)
+	add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.7,1,4)
 	populate_items()
 	#print(items)
 
