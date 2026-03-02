@@ -63,8 +63,8 @@ func _physics_process(delta: float) -> void:
 func load_usable_inventory_items():
 	if not inventory:
 		return
-	if main_hand_item != inventory.main_hand_item:
-		main_hand_item = inventory.main_hand_item
+	if main_hand_item != inventory.main_weapon_slot.item:
+		main_hand_item = inventory.main_weapon_slot.item
 		if main_hand_item!=null:
 			main_hand_scene = load(main_hand_item.scene_path)
 			#print("loaded weapon scene")
@@ -137,7 +137,7 @@ func attack():
 	
 func entity_attacked(area:Area2D):
 	#print("Area attacked: ", area)
-	var min_knockback_strength = 128
+	var min_knockback_strength = 78
 	var max_knockback_strength = 10000
 	var enemy:Enemy= area.get_parent()
 	print("Entity attacked: ",enemy)

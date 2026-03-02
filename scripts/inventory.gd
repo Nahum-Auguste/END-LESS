@@ -1,8 +1,8 @@
-@tool
 
-class_name PlayerInventory extends Node
 
-@export_tool_button("Print Items") var print_inv_items = print_items
+class_name PlayerInventoryy extends Node
+
+#@export_tool_button("Print Items") var print_inv_items = print_items
 @export var inventory_slots_container : GridContainer
 const InventorySlot = preload("res://scenes/ui/inventory/inventory_slot.tscn")
 const InventorySlotContextMenu = preload("res://scenes/ui/inventory/inventory_slot_context_menu.tscn")

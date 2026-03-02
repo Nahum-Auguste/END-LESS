@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dilt05yq14axw"]
 
-[ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scenes/enemies/giant_spider.gd" id="1_j3pyh"]
+[ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant_spider.gd" id="1_j3pyh"]
 [ext_resource type="Texture2D" uid="uid://c0cmrrd5jxttg" path="res://assets/sprites/enemies/giant_spider_default.png" id="1_kvp8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3pyh"]

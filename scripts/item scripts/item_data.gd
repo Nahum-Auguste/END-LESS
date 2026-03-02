@@ -36,6 +36,10 @@ static var item_templates: Dictionary[int,Dictionary] = {
 	}
 }
 
+static func create_random_item() -> Item:
+	var id = randi() % item_templates.size()
+	return create_item(id)
+	
 
 static func create_item(_id:int) -> Item:
 	var data = get_item_template_by_id(_id)
@@ -45,7 +49,7 @@ static func create_item(_id:int) -> Item:
 	var img_path
 	var scene_path
 	var item_type
-	
+	var item: Item = null
 	
 	#print(name)
 	
@@ -57,8 +61,6 @@ static func create_item(_id:int) -> Item:
 		item_type = data.item_type
 	
 	
-		
-	var item: Item = null
 	match (item_type):
 		"consummable":
 			item = Consummable.new(id,name,msc)
@@ -74,9 +76,19 @@ static func create_item(_id:int) -> Item:
 			item.set_in_game_image_path("in_game_" + img_path)
 		if (scene_path):
 			item.set_scene_path(scene_path)
+		#if (item_type):
+			#item.set_item_type(item_type)
 		#print(str(item))
 		#print("path: ",img_path, " for id: ",id)
+			
+		
 	return item
+
+static func get_item_id_by_name(name:String):
+	for i in item_templates:
+		if item_templates[i].name == name: return i
+	
+	return null
 
 static func get_item_template_by_id(id:int) -> Dictionary:
 	return item_templates[id]

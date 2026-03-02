@@ -10,6 +10,7 @@ var scene_path: String
 var in_game_image_path: String
 var count:int = 1
 
+
 func _init(_id :int, _name: String, _max_stack_count :int):
 	
 	id = _id
@@ -25,6 +26,7 @@ func set_in_game_image_path(path:String):
 func set_scene_path(path:String):
 	scene_path = path
 	
+
 	
 func _to_string():
 	var props = get_property_list()

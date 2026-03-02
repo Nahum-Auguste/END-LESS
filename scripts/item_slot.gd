@@ -1,39 +1,73 @@
-extends Control
+@tool
+class_name ItemSlot extends Control
+var input_type:= Item
 
-@export var inventory_manager: Control
+#var slot_data:ItemSlotData
+var num: int = 2
+var item:Item
+var inventory:Inventory
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if (inventory_manager):
-		inventory_manager.connect("slot_clicked",_on_click)
-		inventory_manager.connect("slot_hovered",_on_click)
+	sync_item_texture()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func sync_item_texture():
+	#for each slot data
+	var inv_slot = self
+	
+	#if item data exists
+	if (item):
+		var texture_rect: TextureRect = inv_slot.get_node("itemTexture")
+		var texture = texture_rect.texture
+		var item_image_path = item.image_path
 		
+		#if the slot has a texture already
+		if (texture!=null):
+			var current_image_path = texture.resource_path
+			
+			#correct the texture if its set to the wrong path
+			if (current_image_path!=item_image_path):
+				if (item_image_path):
+					#print("correcting texture for slot: ",i)
+					var new_texture:Texture2D = load(item_image_path)
+					texture_rect.texture = new_texture
+				else:
+					texture_rect.texture = null
+		#else, set its texture
+		else:	
+			if (item_image_path):
+				#print("setting texture for slot: ",i)
+				var new_texture:Texture2D = load(item_image_path)
+				texture_rect.texture = new_texture
+			else:
+				texture_rect.texture = null
+	#if no item data, set texture to null
+	else:
+		var texture_rect: TextureRect = inv_slot.get_node("itemTexture")
+		texture_rect.texture = null
+
 
 func _gui_input(event):
-	if (inventory_manager):
+	if (InventoryManager):
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
 					_on_click()
 				
+				
 func _on_click():
-	if (inventory_manager):
-		inventory_manager.clicked_slot = self
+	if (InventoryManager):
+		InventoryManager.slot_clicked = self
 	
-func _on_hover():
-	if (inventory_manager):
-		inventory_manager.hovered_slot = self
-
-
 func _on_mouse_entered():
-	_on_hover()
-
+	if (InventoryManager and not InventoryManager.slot_hovered):
+		InventoryManager.slot_hovered = self
 
 func _on_mouse_exited():
-	if (inventory_manager and inventory_manager.hovered_slot==self):
-		inventory_manager.hovered_slot = null
+	if (InventoryManager and InventoryManager.slot_hovered==self):
+		InventoryManager.slot_hovered = null

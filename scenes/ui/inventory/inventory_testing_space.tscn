@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cce6lgfvg42g7"]
+
+[ext_resource type="PackedScene" uid="uid://bkum5jn4gju5e" path="res://scenes/ui/inventory/corpse_inventory.tscn" id="1_vld6c"]
+[ext_resource type="PackedScene" uid="uid://bo7uiuquaj6r1" path="res://scenes/ui/inventory/inventory.tscn" id="2_7txui"]
+
+[node name="Canvas" type="CanvasLayer" unique_id=648130617]
+
+[node name="CorpseInventory" parent="." unique_id=364913921 instance=ExtResource("1_vld6c")]
+slot_size = 32
+
+[node name="Inventory" parent="." unique_id=2067996950 instance=ExtResource("2_7txui")]
