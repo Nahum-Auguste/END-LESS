@@ -38,10 +38,11 @@ static var item_templates: Dictionary[int,Dictionary] = {
 
 static func create_random_item() -> Item:
 	var id = randi() % item_templates.size()
-	return create_item(id)
+	var stack_count:int = 1 if !item_templates[id].has("max_stack_count") else (randi() % item_templates[id].max_stack_count) + 1
+	return create_item(id,stack_count)
 	
 
-static func create_item(_id:int) -> Item:
+static func create_item(_id:int,stack_count:int=1) -> Item:
 	var data = get_item_template_by_id(_id)
 	var id = _id;
 	var name = data.name
@@ -76,11 +77,8 @@ static func create_item(_id:int) -> Item:
 			item.set_in_game_image_path("in_game_" + img_path)
 		if (scene_path):
 			item.set_scene_path(scene_path)
-		#if (item_type):
-			#item.set_item_type(item_type)
-		#print(str(item))
-		#print("path: ",img_path, " for id: ",id)
-			
+		item.count = stack_count
+	
 		
 	return item
 

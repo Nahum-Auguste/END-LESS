@@ -8,6 +8,7 @@ var item:Item
 var inventory:Inventory
 var context_menu_scene_prefab: PackedScene = preload("res://scenes/ui/item_slot_context_menu.tscn")
 var context_menu: ItemSlotContextMenu
+@export var item_count_label: RichTextLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,12 @@ func _process(delta):
 	if !item and context_menu:
 		context_menu.queue_free()
 		context_menu = null
+	set_item_count_label()
+	
+func set_item_count_label():
+	var text_length = 0 if !item else str(item.count).length()
+	var font_size:float = size.x/(2 * text_length)
+	item_count_label.text = "[font_size=%f]%s[/font_size]" % [font_size,("" if !item || item.count<=1 else str(item.count))]
 	
 func sync_item_texture():
 	#for each slot data
@@ -82,12 +89,9 @@ func display_context_menu():
 		
 	var area_box: MarginContainer = context_menu.get_node("./AreaBox")
 	context_menu.global_position = global_position + Vector2(size.x-area_box.get_theme_constant("margin_left"),0)
-	context_menu.title_label.text = item.name
-	context_menu.stats_label.text = ""
-	var props = item.get_property_list()
-	for p in props:
-		if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			context_menu.stats_label.text += p.name + ": " + str(item[p.name]) + "\n"
+	context_menu.item = item
+	context_menu.inventory = inventory
+	context_menu.slot = self
 	PlayerGuiCanvas.add_child(context_menu)
 	
 		

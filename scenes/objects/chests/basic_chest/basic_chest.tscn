@@ -131,3 +131,5 @@ shape = SubResource("RectangleShape2D_e8xit")
 debug_color = Color(0.65882355, 0.4745098, 0.3764706, 0.26666668)
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="mouse_entered" from="HitBox" to="." method="_on_hit_box_mouse_entered"]
+[connection signal="mouse_exited" from="HitBox" to="." method="_on_hit_box_mouse_exited"]

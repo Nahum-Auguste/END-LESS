@@ -21,6 +21,16 @@ func _process(delta):
 	create_main_slot_container_slots()
 	pass
 	
+func get_empty_slot(start:int=0)->ItemSlot:
+	for i in range(start,slots.size()):
+		if slots[i].item==null:
+			return slots[i]
+	for i in range(0,start):
+		if slots[i].item==null:
+			return slots[i]
+	
+	return null
+	
 func shuffle_items():
 	var indexes: Array[int] = []
 	var items: Array[Item] = []

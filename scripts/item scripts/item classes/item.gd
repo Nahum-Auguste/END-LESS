@@ -26,7 +26,13 @@ func set_in_game_image_path(path:String):
 func set_scene_path(path:String):
 	scene_path = path
 	
-
+func duplicate():
+	var item = ItemData.create_item(self.id)
+	for p in get_property_list():
+		if !(p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE) : continue 
+		#print(p.name,", ",self[p.name])
+		item[p.name] = self[p.name]
+	return item
 	
 func _to_string():
 	var props = get_property_list()
