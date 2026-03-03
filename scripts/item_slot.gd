@@ -6,6 +6,8 @@ var input_type:= Item
 var num: int = 2
 var item:Item
 var inventory:Inventory
+var context_menu_scene_prefab: PackedScene = preload("res://scenes/ui/item_slot_context_menu.tscn")
+var context_menu: ItemSlotContextMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +16,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if !item and context_menu:
+		context_menu.queue_free()
+		context_menu = null
 	
 func sync_item_texture():
 	#for each slot data
@@ -57,12 +61,43 @@ func _gui_input(event):
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
-					_on_click()
+					_on_left_click()
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if event.is_released():
+					_on_right_click_release()
 				
 				
-func _on_click():
+func _on_left_click():
 	if (InventoryManager):
 		InventoryManager.slot_clicked = self
+		
+func _on_right_click_release():
+	if item:
+		display_context_menu()
+	
+func display_context_menu():
+	if item==null: return
+	if !context_menu:
+		context_menu = context_menu_scene_prefab.instantiate()
+		
+	var area_box: MarginContainer = context_menu.get_node("./AreaBox")
+	context_menu.global_position = global_position + Vector2(size.x-area_box.get_theme_constant("margin_left"),0)
+	context_menu.title_label.text = item.name
+	context_menu.stats_label.text = ""
+	var props = item.get_property_list()
+	for p in props:
+		if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
+			context_menu.stats_label.text += p.name + ": " + str(item[p.name]) + "\n"
+	PlayerGuiCanvas.add_child(context_menu)
+	
+		
+func close_context_menu():
+	if context_menu and context_menu.get_parent()==PlayerGuiCanvas:
+		PlayerGuiCanvas.remove_child(context_menu)
+		
+func _exit_tree():
+	if context_menu:
+		context_menu.queue_free()
 	
 func _on_mouse_entered():
 	if (InventoryManager and not InventoryManager.slot_hovered):

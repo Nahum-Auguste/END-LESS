@@ -4,6 +4,7 @@ static var PlayerLayer = 1
 static var EnemyLayer = 2 
 static var TileLayer = 3 
 static var AttackLayer = 4
+static var AttackableObjectsLayer = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

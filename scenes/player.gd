@@ -139,12 +139,12 @@ func attack():
 		weapon.scale = weapon_scale
 		add_child(weapon)
 		move_child(weapon,0)
-		for i in range(1,33):
-			weapon.set_collision_layer_value(i,false)
-			weapon.set_collision_mask_value(i,false)
-		weapon.set_collision_layer_value(LayerConstants.AttackLayer,true)
-		weapon.set_collision_mask_value(LayerConstants.EnemyLayer,true)
-		weapon.area_entered.connect(entity_attacked)
+		#for i in range(1,33):
+			#weapon.set_collision_layer_value(i,false)
+			#weapon.set_collision_mask_value(i,false)
+		#weapon.set_collision_layer_value(LayerConstants.AttackLayer,true)
+		#weapon.set_collision_mask_value(LayerConstants.EnemyLayer,true)
+		weapon.area_entered.connect(handle_entity_attacked)
 	
 	#print(weapon_position)
 	sprite.stop()
@@ -169,21 +169,21 @@ func attack():
 	add_child(attack_release_timer)
 	attack_release_timer.start()
 	
-func entity_attacked(area:Area2D):
+func handle_entity_attacked(area:Area2D):
 	#print("Area attacked: ", area)
 	var min_knockback_strength = 78
 	var max_knockback_strength = 10000
-	var enemy:Enemy= area.get_parent()
-	print("Entity attacked: ",enemy)
+	var entity:PhysicsBody2D= area.get_parent()
+	print("Entity attacked: ",entity)
 	
-	if enemy is CharacterBody2D and current_active_weapon:
-		var knockdir :Vector2 = (enemy.global_position - current_active_weapon.global_position)
+	if entity is Enemy and current_active_weapon:
+		var knockdir :Vector2 = (entity.global_position - current_active_weapon.global_position)
 		knockdir = knockdir.normalized()
 		var min_abs_knockback = knockdir.abs() * min_knockback_strength
 		var max_abs_knockback = knockdir.abs() * max_knockback_strength
 		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
 		#print(knockback)
-		enemy.velocity += knockback
-		enemy.health = clamp(enemy.health-main_hand_item.damage,0,enemy.max_health)
+		entity.velocity += knockback
+		entity.health = clamp(entity.health-main_hand_item.damage,0,entity.max_health)
 		#print(enemy.health," ",enemy.max_health)
 		

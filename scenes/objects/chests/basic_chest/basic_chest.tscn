@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b320ukcejjdwo"]
 
+[ext_resource type="Script" uid="uid://b36tmpcx4rk7o" path="res://scripts/object scripts/chests/chest.gd" id="1_e8xit"]
 [ext_resource type="Texture2D" uid="uid://bdhuny7l4lrh1" path="res://assets/sprites/objects/chests/basic_chest_spritesheet.png" id="1_v0mtj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt2o7"]
@@ -104,12 +105,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdykb"]
 size = Vector2(22, 5)
 
-[node name="BasicChest" type="StaticBody2D" unique_id=1341061286]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8xit"]
+size = Vector2(32, 27)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=921225391]
+[node name="BasicChest" type="StaticBody2D" unique_id=1341061286]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_e8xit")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=921225391]
 sprite_frames = SubResource("SpriteFrames_rbhtf")
 animation = &"closed_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167080516]
 position = Vector2(0, -8.5)
 shape = SubResource("RectangleShape2D_bdykb")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=288322957]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1112426030]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_e8xit")
+debug_color = Color(0.65882355, 0.4745098, 0.3764706, 0.26666668)
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

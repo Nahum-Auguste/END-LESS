@@ -9,6 +9,7 @@ const item_slot_scene = preload("res://scenes/ui/inventory/inventory_slot.tscn")
 @export_tool_button("create main container slots","ActionCopy") var create_slots = create_main_slot_container_slots
 @export_tool_button("populate main slots randomized","AABB") var populate_main_slots_randomized_action = populate_main_slots_randomized
 @export_tool_button("reset","ActionCut") var reset_action = reset
+@export_tool_button("shuffle items","ActionCopy") var shuffle = shuffle_items
 
 
 func _ready():
@@ -20,7 +21,21 @@ func _process(delta):
 	create_main_slot_container_slots()
 	pass
 	
-
+func shuffle_items():
+	var indexes: Array[int] = []
+	var items: Array[Item] = []
+	
+	for i in range(slots.size()):
+		indexes.push_back(i)
+		items.push_back(slots[i].item)
+		
+	indexes.shuffle()
+	for i in range(slots.size()):
+		var idx = indexes[i]
+		slots[i].item = items[idx]
+		slots[i].sync_item_texture()
+		
+	
 
 func create_slot() -> ItemSlot:
 	var slot:ItemSlot = item_slot_scene.instantiate()
