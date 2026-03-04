@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cnkh2kqa03hny"]
+
+[ext_resource type="Script" uid="uid://bnboaif2tmtmy" path="res://scripts/item scripts/item_drop.gd" id="1_sdob7"]
+[ext_resource type="Texture2D" uid="uid://0ywmbhfx74xx" path="res://assets/sprites/items/giant_spider_fangs.png" id="2_edk28"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0olvh"]
+size = Vector2(16, 16)
+
+[node name="ItemDrop" type="Area2D" unique_id=75805211]
+script = ExtResource("1_sdob7")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1796764567]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_edk28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1043606373]
+shape = SubResource("RectangleShape2D_0olvh")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

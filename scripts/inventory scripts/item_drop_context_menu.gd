@@ -1,4 +1,4 @@
-class_name ItemSlotContextMenu extends Control
+class_name ItemDropContextMenu extends Control
 
 var hovering:bool = false
 @export var title_label: RichTextLabel
@@ -93,12 +93,14 @@ func _on_pick_up_item_button_button_up():
 
 
 func _on_drop_item_button_button_up():
-	if player:
-		var item_drop:ItemDrop = item_drop_prefab.instantiate()
-		item_drop.slot = ItemSlot.new()
-		item_drop.slot.item = slot.item
-		item_drop.global_position = player.global_position
-		player.owner.find_child("ItemDrops").add_child(item_drop)
-		slot.item = null
-		slot.sync_item_texture()
-		queue_free()
+	pass
+	#if player:
+		#var item_drop:ItemDrop = item_drop_prefab.instantiate()
+		#item_drop.slot = ItemSlot.new()
+		#item_drop.slot.item = slot.item
+		#item_drop.global_position = player.global_position
+		#print(item_drop.get_parent())
+		##player.owner.find_child("ItemDrops").add_child(item_drop)
+		#slot.item = null
+		#slot.sync_item_texture()
+		#queue_free()

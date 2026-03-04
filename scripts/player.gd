@@ -21,7 +21,28 @@ var current_active_weapon: Area2D
 
 func _ready() -> void:
 	sprite = $AnimatedSprite2D
+	create_inventory()
+	inventory.create_main_slot_container_slots()
 
+func can_interact_with(obj:Node2D,range:float = 50)->bool:
+	if (global_position-obj.global_position).length()<=range:
+		var ray: RayCast2D = RayCast2D.new()
+		ray.global_position = obj.global_position
+		ray.target_position = global_position - obj.global_position
+		ray.enabled = true
+		ray.collision_mask = 0
+		ray.set_collision_mask_value(LayerConstants.TileLayer,true)
+		if ray.is_colliding():
+			var collider:Node2D = ray.get_collider()
+			if collider!=obj:
+				return true
+			else:
+				return false
+		return true
+		
+	return false
+	
+	
 
 func _physics_process(delta: float) -> void:
 

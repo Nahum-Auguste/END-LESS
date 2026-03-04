@@ -24,7 +24,7 @@ func _process(delta):
 	
 func set_item_count_label():
 	var text_length = 0 if !item else str(item.count).length()
-	var font_size:float = size.x/(2 * text_length)
+	var font_size:float = (size.x/2)#/(text_length)
 	item_count_label.text = "[font_size=%f]%s[/font_size]" % [font_size,("" if !item || item.count<=1 else str(item.count))]
 	
 func sync_item_texture():
@@ -33,7 +33,9 @@ func sync_item_texture():
 	
 	#if item data exists
 	if (item):
+		if !inv_slot.has_node("itemTexture") : return
 		var texture_rect: TextureRect = inv_slot.get_node("itemTexture")
+		if !texture_rect: return
 		var texture = texture_rect.texture
 		var item_image_path = item.image_path
 		
@@ -60,7 +62,8 @@ func sync_item_texture():
 	#if no item data, set texture to null
 	else:
 		var texture_rect: TextureRect = inv_slot.get_node("itemTexture")
-		texture_rect.texture = null
+		if texture_rect:
+			texture_rect.texture = null
 
 
 func _gui_input(event):
@@ -89,7 +92,6 @@ func display_context_menu():
 		
 	var area_box: MarginContainer = context_menu.get_node("./AreaBox")
 	context_menu.global_position = global_position + Vector2(size.x-area_box.get_theme_constant("margin_left"),0)
-	context_menu.item = item
 	context_menu.inventory = inventory
 	context_menu.slot = self
 	PlayerGuiCanvas.add_child(context_menu)

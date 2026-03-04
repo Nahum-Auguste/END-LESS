@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dlt3wyqrv7qhu"]
+[gd_scene format=3 uid="uid://bnxs28ibnj8b3"]
 
-[ext_resource type="Script" uid="uid://cv0nlsve0vlkq" path="res://scripts/inventory scripts/item_slot_context_menu.gd" id="1_mt068"]
+[ext_resource type="Script" uid="uid://bahiapmp1x1qn" path="res://scripts/inventory scripts/item_drop_context_menu.gd" id="1_a1kpv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n054v"]
 content_margin_left = 4.0
@@ -18,10 +18,12 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mt068"]
 
-[node name="ItemSlotContextMenu" type="VBoxContainer" unique_id=1167723704 node_paths=PackedStringArray("title_label", "stats_label")]
+[node name="ItemDropContextMenu" type="VBoxContainer" unique_id=1167723704 node_paths=PackedStringArray("title_label", "stats_label")]
 offset_right = 160.0
 offset_bottom = 133.0
-script = ExtResource("1_mt068")
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_a1kpv")
 title_label = NodePath("AreaBox/PanelContainer/MarginContainer/VBoxContainer/ItemNameLabel")
 stats_label = NodePath("AreaBox/PanelContainer/MarginContainer/VBoxContainer/StatsLabel")
 
@@ -36,10 +38,14 @@ theme_override_constants/margin_bottom = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="AreaBox" unique_id=330301705]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="AreaBox/PanelContainer" unique_id=644781631]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
@@ -47,6 +53,8 @@ theme_override_constants/margin_bottom = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AreaBox/PanelContainer/MarginContainer" unique_id=1651846625]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="ItemNameLabel" type="RichTextLabel" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=1338316251]
 custom_minimum_size = Vector2(150, 0)
@@ -77,12 +85,14 @@ theme_override_font_sizes/font_size = 12
 text = "Pick Up"
 
 [node name="SplitItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=701206741]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12
 text = "Split"
 
 [node name="DropItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=2121689046]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12

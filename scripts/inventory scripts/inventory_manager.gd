@@ -52,7 +52,7 @@ func try_aggregate_items(outslot:ItemSlot,inslot:ItemSlot)->bool:
 			outitem.count = left_over
 		else:
 			outslot.item = null
-		on_transaction_complete()
+		on_transaction_complete(outslot,inslot)
 		return true
 	
 	return false
@@ -79,8 +79,8 @@ func swap_slot_items(outslot:ItemSlot,inslot:ItemSlot):
 	var tmp = outslot.item
 	outslot.item = inslot.item
 	inslot.item = tmp
-	on_transaction_complete()
+	on_transaction_complete(outslot,inslot)
 
-func on_transaction_complete():
-	slot_hovered.sync_item_texture()
-	slot_clicked.sync_item_texture()
+func on_transaction_complete(slot1:ItemSlot,slot2:ItemSlot):
+	slot1.sync_item_texture()
+	slot2.sync_item_texture()

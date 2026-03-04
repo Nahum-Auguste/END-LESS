@@ -4,5 +4,5 @@
 
 [node name="BasicChest" unique_id=1341061286 instance=ExtResource("1_4cgvk")]
 
-[node name="AnimatedSprite2D" parent="." index="0" unique_id=921225391]
+[node name="Sprite" parent="." index="0" unique_id=921225391]
 animation = &"closed_left"
