@@ -71,8 +71,24 @@ func _draw():
 		##print(ray.target_position)
 		#draw_line(ray.global_position,ray.target_position,Color.AQUA,1)
 
+func on_hit():
+	var animation:String = sprite.animation
+	
+	match(animation.to_lower()):
+		"closed_down":
+			animation = "open_down"
+		"closed_up":
+			animation = "open_up"
+		"closed_left":
+			animation = "open_left"
+		"closed_right":
+			animation = "open_right"
+			
+	sprite.animation = animation
+	open = true
 
 func _on_hit_box_area_entered(area):
+	return
 	#print(area)
 	var animation:String = sprite.animation
 	

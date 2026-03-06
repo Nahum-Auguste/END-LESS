@@ -12,15 +12,24 @@ var time_between_melee_attack = 1000
 
 
 var attacking = false
-var default_attack_duration: float = .5
+var default_attack_duration: float = .35
 @onready var attack_duration: float = default_attack_duration
 var main_hand_item: Item
 var main_hand_scene: PackedScene 
 var current_active_weapon: Area2D
+var last_attack_animation:String = ""
+@onready var animation_player:AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
+@onready var hand:Node2D = $Hand
+@onready var sword_swing_hitbox: SwordSwingHitBox = $SwordSwingHitBox
+@onready var hand_item_sprite: Sprite2D = $Hand/HandItemSprite
+@onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
+
 
 
 func _ready() -> void:
 	sprite = $AnimatedSprite2D
+	hand_item_sprite.texture = null
+	attack_effect_sprite.visible = false
 	create_inventory()
 	inventory.create_main_slot_container_slots()
 
@@ -42,11 +51,7 @@ func can_interact_with(obj:Node2D,range:float = 50)->bool:
 		
 	return false
 	
-	
-
 func _physics_process(delta: float) -> void:
-
-	
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
 	
@@ -71,21 +76,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = move_toward(velocity.y,0,speed*10)
 		
-	sprite.play(animation)
-			
-	if !horizontalMoveInput and !verticalMoveInput:
-		sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
-		
+	if !attacking:
+		sprite.play(animation)
+		if !horizontalMoveInput and !verticalMoveInput:
+			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
+		move_and_slide()
 	
 
-	move_and_slide()
-	
-	
-	
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack") and not attacking:
+	if Input.is_action_pressed("attack") and not attacking:
 		attack()
-		#sprite.pause()
 		
 	if Input.is_action_just_pressed("toggle_inventory"):
 		is_inventory_open = !is_inventory_open
@@ -97,6 +97,8 @@ func _process(delta: float) -> void:
 			close_inventory()
 		
 	load_usable_inventory_items()
+	#print(animation_player.current_animation_position)
+	sword_swing_hitbox.weapon = main_hand_item
 
 func load_usable_inventory_items():
 	if not inventory:
@@ -104,14 +106,14 @@ func load_usable_inventory_items():
 	if main_hand_item != inventory.main_weapon_slot.item:
 		main_hand_item = inventory.main_weapon_slot.item
 		if main_hand_item!=null:
-			main_hand_scene = load(main_hand_item.scene_path)
+			#main_hand_scene = load(main_hand_item.scene_path)
+			hand_item_sprite.texture = load(main_hand_item.image_path)
 			#print("loaded weapon scene")
 
 func create_inventory():
 	if !inventory :
 		inventory = player_inventory_scene_prefab.instantiate()
 	
-
 func display_inventory():
 	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
 		PlayerGuiCanvas.add_child(inventory)
@@ -126,85 +128,71 @@ func _exit_tree():
 
 func attack():
 	attacking = true
-	velocity = Vector2(0,0)
-	var weapon_position:Vector2 = Vector2(0,0)
-	var weapon_rotation:int = 0
-	var weapon_scale:Vector2 = Vector2(1,1)
+	sprite.pause()
+	var hori = -1 if sprite.animation.contains("left") else 1 if sprite.animation.contains("right") else 0
+	var vert = -1 if sprite.animation.contains("up") else 1 if sprite.animation.contains("down") else 0
+	#velocity -= Vector2(hori,vert) * 500
+	move_and_slide()
+	#print(velocity)
+	var animation:String = ""
 
+	
 	if (sprite.animation.contains("down")):
-		animation = "down_sword_attack"
-		weapon_position = get_node("HandPositionDown").position
-		weapon_rotation = 180
-		weapon_scale = Vector2(-1,1)
+		animation = "sword_swing_down" + ("_left" if (!last_attack_animation.contains("left")) else "_right")
 	elif (sprite.animation.contains("left")):
-		animation = "left_sword_attack"
-		weapon_position = get_node("HandPositionLeft").position
-		weapon_rotation = -90
-		weapon_scale = Vector2(-1,1)
+		animation = "sword_swing_left" + ("_up" if (!last_attack_animation.contains("up")) else "_down")
 	elif (sprite.animation.contains("up")):
-		animation = "up_sword_attack"
-		weapon_position = get_node("HandPositionUp").position
-		weapon_rotation = 0
-		weapon_scale = Vector2(1,1)
+		animation = "sword_swing_up" + ("_left" if (!last_attack_animation.contains("left")) else "_right")
 	elif (sprite.animation.contains("right")):
-		animation = "right_sword_attack"
-		weapon_position = get_node("HandPositionRight").position
-		weapon_rotation = 90
-		weapon_scale = Vector2(1,1)
+		animation = "sword_swing_right" + ("_up" if (!last_attack_animation.contains("up")) else "_down")
 		
-	var weapon:Area2D = main_hand_scene.instantiate() if main_hand_scene else null
-	current_active_weapon = weapon
-	if weapon:
-		weapon.position = weapon_position
-		weapon.rotation_degrees = weapon_rotation
-		weapon.scale = weapon_scale
-		add_child(weapon)
-		move_child(weapon,0)
-		#for i in range(1,33):
-			#weapon.set_collision_layer_value(i,false)
-			#weapon.set_collision_mask_value(i,false)
-		#weapon.set_collision_layer_value(LayerConstants.AttackLayer,true)
-		#weapon.set_collision_mask_value(LayerConstants.EnemyLayer,true)
-		weapon.area_entered.connect(handle_entity_attacked)
+	var effect_rotation:float = 0
+	var base_scale = abs(attack_effect_sprite.scale)
+	var effect_scale_mult = Vector2(1,1)
 	
-	#print(weapon_position)
-	sprite.stop()
-	sprite.frame = 0
-	sprite.animation = animation
-	
-		
-	var attack_release_timer := Timer.new()
-	attack_release_timer.wait_time = attack_duration
-	attack_release_timer.one_shot = true
-	attack_release_timer.timeout.connect(
-		func(): 
-			if weapon==current_active_weapon:
-				current_active_weapon = null
-			if weapon:
-				weapon.queue_free()
-			attacking=false 
-			#print("attacking done")
-			sprite.frame = 1
+	match(animation):
+		"sword_swing_down_left":
+			effect_rotation = 90
+			effect_scale_mult = Vector2(1,-1)
+		"sword_swing_down_right":
+			effect_rotation = 90
+			effect_scale_mult = Vector2(1,1)
+		"sword_swing_up_left":
+			effect_rotation = -90
+			effect_scale_mult = Vector2(1,1)
+		"sword_swing_up_right":
+			effect_rotation = -90
+			effect_scale_mult = Vector2(1,-1)
+		"sword_swing_left_down":
+			effect_rotation = 180
+			effect_scale_mult = Vector2(1,1)
+		"sword_swing_left_up":
+			effect_rotation = 180
+			effect_scale_mult = Vector2(1,-1)
+		"sword_swing_right_down":
+			effect_rotation = 0
+			effect_scale_mult = Vector2(1,-1)
+		"sword_swing_right_up":
+			effect_rotation = 0
+			effect_scale_mult = Vector2(1,1)
 			
-	)
-	add_child(attack_release_timer)
-	attack_release_timer.start()
+	attack_effect_sprite.rotation_degrees = effect_rotation
+	attack_effect_sprite.scale = base_scale * effect_scale_mult
 	
-func handle_entity_attacked(area:Area2D):
-	#print("Area attacked: ", area)
-	var min_knockback_strength = 78
-	var max_knockback_strength = 10000
-	var entity:PhysicsBody2D= area.get_parent()
-	print("Entity attacked: ",entity)
+	last_attack_animation = animation
+	animation_player.speed_scale = animation_player.get_animation(animation).length / attack_duration
 	
-	if entity is Enemy and current_active_weapon:
-		var knockdir :Vector2 = (entity.global_position - current_active_weapon.global_position)
-		knockdir = knockdir.normalized()
-		var min_abs_knockback = knockdir.abs() * min_knockback_strength
-		var max_abs_knockback = knockdir.abs() * max_knockback_strength
-		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
-		#print(knockback)
-		entity.velocity += knockback
-		entity.health = clamp(entity.health-main_hand_item.damage,0,entity.max_health)
-		#print(enemy.health," ",enemy.max_health)
+	sword_swing_hitbox.toggle()
+	animation_player.play(animation)
+	hand_item_sprite.visible = true
+	attack_effect_sprite.visible = true
+	await animation_player.animation_finished
+	attack_effect_sprite.visible = false
+	hand_item_sprite.visible = false
+	attacking = false
+	sword_swing_hitbox.toggle()
+	
+	
+	
+
 		

@@ -31,6 +31,7 @@ static var item_templates: Dictionary[int,Dictionary] = {
 		"max_stack_count":1,
 		"item_type":"sword",
 		"damage":5,
+		"image_name":"warrior's_sword.png",
 		"image_path":IMAGES_PATH + "weapons/warrior's_sword.png",
 		"scene_path":SCENES_PATH + "weapons/warrior's_sword.tscn"
 	}
@@ -48,6 +49,7 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	var name = data.name
 	var msc = data.max_stack_count
 	var img_path
+	var img_name
 	var scene_path
 	var item_type
 	var item: Item = null
@@ -56,6 +58,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	
 	if (data.has("image_path")):
 		img_path = data.image_path
+	if (data.has("image_name")):
+		img_name = data.image_name
 	if (data.has("scene_path")):
 		scene_path = data.scene_path
 	if (data.has("item_type")):
@@ -74,7 +78,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	if (item):
 		if (img_path):
 			item.set_image_path(img_path)
-			item.set_in_game_image_path("in_game_" + img_path)
+		if (img_name):
+			item.set_in_game_image_path(IMAGES_PATH + "weapons/" + "in_game_" + img_name)
 		if (scene_path):
 			item.set_scene_path(scene_path)
 		item.count = stack_count
