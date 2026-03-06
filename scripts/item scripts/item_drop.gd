@@ -58,7 +58,6 @@ func create_context_menu():
 
 func display_context_menu():
 	if !context_menu:
-		#print("awda")
 		create_context_menu()
 	if !context_menu || !can_display_context_menu:
 		return
