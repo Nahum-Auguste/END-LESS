@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://buatbxfyir2ds" path="res://scripts/camera.gd" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://bjenn33xk68qg" path="res://scenes/ui/hud/player_status.tscn" id="12_dinhu"]
+[ext_resource type="AudioStream" uid="uid://decfa2ftt058d" path="res://assets/music/ghost_house_test.wav" id="13_kvuet"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kvuet"]
 
@@ -115,3 +116,7 @@ player = NodePath("../../Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1449308404]
 navigation_polygon = SubResource("NavigationPolygon_dinhu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1948132402]
+stream = ExtResource("13_kvuet")
+autoplay = true
