@@ -10,6 +10,7 @@ class_name ItemData
 
 const IMAGES_PATH:String = "res://assets/sprites/items/"
 const SCENES_PATH:String = "res://scenes/"
+const AUDIO_PATH:String = "res://assets/sfx/"
 
 static var item_templates: Dictionary[int,Dictionary] = {
 	0:{
@@ -30,7 +31,8 @@ static var item_templates: Dictionary[int,Dictionary] = {
 		"damage":5,
 		"image_name":"warrior's_sword.png",
 		"image_path":IMAGES_PATH + "weapons/warrior's_sword.png",
-		"scene_path":SCENES_PATH + "weapons/warrior's_sword.tscn"
+		"scene_path":SCENES_PATH + "weapons/warrior's_sword.tscn",
+		"sfx_folder_path":AUDIO_PATH + "sword"
 	},
 	3:{
 		"name":'helmet',
@@ -69,6 +71,7 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	var img_name
 	var scene_path
 	var item_type
+	var sfx_folder_path
 	var item: Item = null
 	
 	#print(name)
@@ -84,6 +87,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 		scene_path = data.scene_path
 	if (data.has("item_type")):
 		item_type = data.item_type
+	if (data.has("sfx_folder_path")):
+		sfx_folder_path = data.sfx_folder_path
 	
 	
 	match (item_type):
@@ -109,6 +114,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 				item.set_in_game_image_path(IMAGES_PATH + "weapons/" + "in_game_" + img_name)
 		if (scene_path):
 			item.set_scene_path(scene_path)
+		if (sfx_folder_path):
+			item.set_sfx_paths(sfx_folder_path)
 		item.count = stack_count
 	
 		

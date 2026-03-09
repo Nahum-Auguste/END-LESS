@@ -72,7 +72,8 @@ func _on_detection_area_body_exited(body):
 	#player_escape_timer.start()
 
 func _physics_process(delta):
-	if hurt_box_colliding_with_player:
+	super._physics_process(delta)
+	if hurt_box_colliding_with_player and alive:
 		attack(player)
 
 func _on_hurt_box_body_entered(body):

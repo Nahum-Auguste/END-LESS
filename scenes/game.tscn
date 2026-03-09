@@ -77,9 +77,19 @@ tile_set = SubResource("TileSet_lbhrr")
 position = Vector2(-191, 65)
 item_id = 2
 
-[node name="GiantSpider" parent="." unique_id=147954774 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
+[node name="Enemies" type="Node2D" parent="." unique_id=93135162]
+
+[node name="GiantSpider" parent="Enemies" unique_id=147954774 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
 position = Vector2(-243, 16)
-player = NodePath("../Player")
+player = NodePath("../../Player")
+
+[node name="GiantSpider2" parent="Enemies" unique_id=887785859 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
+position = Vector2(31, 111)
+player = NodePath("../../Player")
+
+[node name="GiantSpider3" parent="Enemies" unique_id=1155634563 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
+position = Vector2(-239, 152)
+player = NodePath("../../Player")
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("1_uwrxv")]
 position = Vector2(-150, 54)

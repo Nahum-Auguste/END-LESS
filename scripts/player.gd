@@ -8,13 +8,15 @@ var player_inventory_scene_prefab: PackedScene = preload("res://scenes/ui/invent
 var inventory:PlayerInventory
 var is_inventory_open:bool = false
 
-var speed := 50.0
+var base_speed:= 50.0
+var speed:float
+var sprint_mult:= 1.24
 var animation: String
-var time_between_melee_attack = 1000 
+#var time_between_melee_attack = 1000 
 
 
 var attacking = false
-var default_attack_duration: float = .35
+var default_attack_duration: float = .335
 @onready var attack_duration: float = default_attack_duration
 var main_hand_item: Item
 var main_hand_scene: PackedScene 
@@ -31,6 +33,7 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 
 func _ready() -> void:
+	speed = base_speed
 	sprite = $AnimatedSprite2D
 	hand_item_sprite.texture = null
 	attack_effect_sprite.visible = false
@@ -58,6 +61,9 @@ func can_interact_with(obj:Node2D,range:float = 50)->bool:
 func _physics_process(delta: float) -> void:
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
+	var sprint := Input.is_action_pressed("sprint")
+	
+	speed = base_speed * (sprint_mult if sprint else 1)
 	
 	if horizontalMoveInput:
 		if horizontalMoveInput>0:
@@ -82,12 +88,14 @@ func _physics_process(delta: float) -> void:
 		
 	if !attacking:
 		sprite.play(animation)
+		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
 			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
 		move_and_slide()
 	
 
 func _process(delta: float) -> void:
+	super._process(delta)
 	if Input.is_action_pressed("attack") and not attacking:
 		attack()
 		
@@ -113,6 +121,8 @@ func load_usable_inventory_items():
 			#main_hand_scene = load(main_hand_item.scene_path)
 			hand_item_sprite.texture = load(main_hand_item.image_path)
 			#print("loaded weapon scene")
+		else:
+			hand_item_sprite.texture = null
 
 func create_inventory():
 	if !inventory :
@@ -153,6 +163,17 @@ func attack():
 	var effect_rotation:float = 0
 	var base_scale = abs(attack_effect_sprite.scale)
 	var effect_scale_mult = Vector2(1,1)
+	
+	if main_hand_item:
+		if main_hand_item.sfx_paths:
+			if main_hand_item.sfx_paths.size()>1:
+				var file = main_hand_item.sfx_folder_path + "/" + main_hand_item.sfx_paths[randi() % main_hand_item.sfx_paths.size()]
+				var asp := $AudioStreamPlayer
+				#print(file)
+				asp.stream = load(file)
+				asp.play()
+				
+				
 	
 	match(animation):
 		"sword_swing_down_left":
@@ -197,6 +218,9 @@ func attack():
 	sword_swing_hitbox.toggle()
 	
 	
+func handle_death():
+	super.handle_death()
+	get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
 	
 
 		

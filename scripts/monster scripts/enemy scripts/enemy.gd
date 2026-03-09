@@ -100,9 +100,11 @@ func _process(delta: float) -> void:
 	if !can_display_corpse_inventory and corpse_inventory:
 		close_corpse_inventory()
 		
+		
 func _draw():
-	if corpse_detection_ray:
-		draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
+	pass
+	#if corpse_detection_ray:
+		#draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
 
 func _physics_process(delta):
 	if corpse_detection_ray:

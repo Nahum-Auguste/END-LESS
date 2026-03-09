@@ -49,7 +49,7 @@ custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 
 [node name="HealthLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=116278252]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -60,10 +60,10 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1927888969]
 layout_mode = 0
-offset_left = 192.0
-offset_top = 515.0
-offset_right = 462.0
-offset_bottom = 575.0
+offset_left = 215.0
+offset_top = 628.0
+offset_right = 485.0
+offset_bottom = 688.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 10

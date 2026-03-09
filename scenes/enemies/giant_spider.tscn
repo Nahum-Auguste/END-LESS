@@ -80,7 +80,6 @@ shape = SubResource("CircleShape2D_j3pyh")
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="PathRefreshTimer" type="Timer" parent="." unique_id=2089092033]
 wait_time = 0.5

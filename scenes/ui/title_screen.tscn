@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://d17d6y0l5lfeo"]
+
+[ext_resource type="Script" uid="uid://bt8b0hi1kn132" path="res://scripts/gui scripts/title_screen.gd" id="1_aqpy5"]
+[ext_resource type="AudioStream" uid="uid://cuavgrchov8tv" path="res://assets/music/Tenacity.wav" id="1_eb34j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb34j"]
+bg_color = Color(0.083911665, 0.083911665, 0.083911635, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="TitleScreen" type="Control" unique_id=977598533]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqpy5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=670125012]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10224319, 0.10224321, 0.10224321, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1444443771]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 90.0
+offset_bottom = 173.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "ENDLESS"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2134222111]
+stream = ExtResource("1_eb34j")
+autoplay = true
+
+[node name="PlayButton" type="Button" parent="." unique_id=460527172]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 366.0
+offset_right = 716.0
+offset_bottom = 431.0
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxFlat_eb34j")
+text = "PLAY"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

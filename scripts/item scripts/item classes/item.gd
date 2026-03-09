@@ -8,7 +8,19 @@ var max_stack_count :int
 var image_path: String
 var scene_path: String
 var in_game_image_path: String
+var sfx_folder_path: String
+var sfx_paths:Array[String]
+
 var count:int = 1
+
+func set_sfx_paths(folder_path:String):
+	sfx_folder_path = folder_path
+	var paths:Array[String]= []
+	for path in DirAccess.get_files_at(folder_path):
+		if path.get_extension()=="wav":
+			paths.push_back(path)
+		
+	sfx_paths = paths
 
 
 func _init(_id :int, _name: String, _max_stack_count :int):
