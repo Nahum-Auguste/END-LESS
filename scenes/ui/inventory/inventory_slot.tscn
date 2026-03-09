@@ -16,7 +16,7 @@ corner_radius_bottom_left = 3
 corner_detail = 3
 
 [node name="Inventory_Slot" type="PanelContainer" unique_id=952192126 node_paths=PackedStringArray("item_count_label")]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(10, 10)
 offset_right = 62.0
 offset_bottom = 62.0
 size_flags_horizontal = 0

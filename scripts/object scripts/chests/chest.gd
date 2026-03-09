@@ -1,7 +1,7 @@
 class_name Chest extends StaticBody2D
 @onready var sprite:AnimatedSprite2D = $Sprite
 var open:bool = false
-@export var player: Player
+@export var player: CharacterBody2D
 var player_detection_range = 50
 const inventory_scene = preload("res://scenes/ui/inventory/chest_inventory.tscn")
 var inventory: ChestInventory

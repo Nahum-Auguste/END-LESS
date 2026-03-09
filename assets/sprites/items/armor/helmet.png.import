@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0cmrrd5jxttg"
-path="res://.godot/imported/giant_spider_default.png-2e426dfebef368d7d9e7fb5db737dc2a.ctex"
+uid="uid://cm8uradf3sylc"
+path="res://.godot/imported/helmet.png-a72a1cd21af53b60045e9035aaca1059.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/giant_spider_default.png"
-dest_files=["res://.godot/imported/giant_spider_default.png-2e426dfebef368d7d9e7fb5db737dc2a.ctex"]
+source_file="res://assets/sprites/items/armor/helmet.png"
+dest_files=["res://.godot/imported/helmet.png-a72a1cd21af53b60045e9035aaca1059.ctex"]
 
 [params]
 

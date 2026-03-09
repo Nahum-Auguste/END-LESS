@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://3131irxg4y7p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nya02"]
+bg_color = Color(0.083911665, 0.083911665, 0.083911665, 0.5058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HotBarSlot" type="PanelContainer" unique_id=176156144]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 13.0
+offset_bottom = 13.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nya02")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1898338624]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=855334482]
+layout_mode = 2

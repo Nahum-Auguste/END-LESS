@@ -6,7 +6,9 @@ var max_health:float = 0
 var alive = true
 
 
-func _init(health:float=0) -> void:
+func _init(health:float=0,max_health:float=0) -> void:
+	self.max_health = max_health
+	
 	if health:
 		self.health = health
 	else:

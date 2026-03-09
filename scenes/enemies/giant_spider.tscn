@@ -1,20 +1,41 @@
 [gd_scene format=3 uid="uid://dilt05yq14axw"]
 
 [ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant_spider.gd" id="1_j3pyh"]
-[ext_resource type="Texture2D" uid="uid://c0cmrrd5jxttg" path="res://assets/sprites/enemies/giant_spider_default.png" id="1_kvp8k"]
+[ext_resource type="Texture2D" uid="uid://7ymbwacpcpmr" path="res://assets/sprites/enemies/giant_spider/giant_spider_spritesheet.png" id="2_j3pyh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3pyh"]
-atlas = ExtResource("1_kvp8k")
+[sub_resource type="AtlasTexture" id="AtlasTexture_svrsm"]
+atlas = ExtResource("2_j3pyh")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk4hc"]
+atlas = ExtResource("2_j3pyh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wk86"]
+atlas = ExtResource("2_j3pyh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56y82"]
+atlas = ExtResource("2_j3pyh")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_svrsm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j3pyh")
+"texture": SubResource("AtlasTexture_svrsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk4hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wk86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56y82")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -24,6 +45,12 @@ size = Vector2(32, 29)
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3pyh"]
 radius = 9.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_svrsm"]
+radius = 79.025314
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3pyh"]
+size = Vector2(24, 15)
+
 [node name="GiantSpider" type="CharacterBody2D" unique_id=147954774]
 collision_layer = 2
 collision_mask = 7
@@ -32,6 +59,9 @@ script = ExtResource("1_j3pyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
 sprite_frames = SubResource("SpriteFrames_svrsm")
+animation = &"walk"
+frame = 3
+frame_progress = 0.19989915
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1639478681]
 position = Vector2(0, -0.5)
@@ -45,3 +75,34 @@ debug_color = Color(0.99357957, 0, 0.26555803, 0.18039216)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=165402881]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_j3pyh")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="PathRefreshTimer" type="Timer" parent="." unique_id=2089092033]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1297063088]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=442923613]
+shape = SubResource("CircleShape2D_svrsm")
+debug_color = Color(0.531573, 0.5491353, 0.44196907, 0.41960785)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=123322503]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=143155321]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_j3pyh")
+debug_color = Color(1, 0.09411765, 0.23137255, 0.5294118)
+
+[connection signal="timeout" from="PathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]

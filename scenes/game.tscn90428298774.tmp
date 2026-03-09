@@ -78,7 +78,7 @@ position = Vector2(-191, 65)
 item_id = 2
 
 [node name="GiantSpider" parent="." unique_id=147954774 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
-position = Vector2(-243, 16)
+position = Vector2(-206, 16)
 player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("1_uwrxv")]

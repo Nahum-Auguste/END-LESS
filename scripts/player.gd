@@ -1,3 +1,5 @@
+#@tool
+
 class_name Player extends Monster
 
 
@@ -24,7 +26,9 @@ var last_attack_animation:String = ""
 @onready var hand_item_sprite: Sprite2D = $Hand/HandItemSprite
 @onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
 
-
+func _init(health:float=0,max_health:float=0) -> void:
+	max_health = 25
+	super(health,max_health)
 
 func _ready() -> void:
 	sprite = $AnimatedSprite2D
@@ -74,7 +78,7 @@ func _physics_process(delta: float) -> void:
 			animation = "up_walk"
 			velocity.y = -speed
 	else:
-		velocity.y = move_toward(velocity.y,0,speed*10)
+		velocity.y = move_toward(velocity.y,0,speed)
 		
 	if !attacking:
 		sprite.play(animation)

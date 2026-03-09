@@ -6,6 +6,14 @@ var corpse_inventory: CorpseInventory
 var corpse_inventory_can_display_range = 50
 var corpse_detection_ray: RayCast2D
 var mouse_is_hovering = false
+var player_in_detection_range = false
+var player_seen = false
+var player_escape_time = 3
+var attacking = false
+var attack_speed = 1
+var attack_damage = 4
+var hurt_box_colliding_with_player = false
+@onready var player_escape_timer = Timer.new()
 @export var player: Player
 var can_display_corpse_inventory:bool = false
 var possible_item_drops_data: Dictionary[int,Dictionary] = {
@@ -13,8 +21,30 @@ var possible_item_drops_data: Dictionary[int,Dictionary] = {
 }
 var items: Array[Item] = []
 
-func _init(health:float=0) -> void:
-	super(health)
+func _init(health:float=0,max_health:float=0) -> void:
+	super(health,max_health)
+	
+func _ready():
+	hitbox = get_node("./HitBox")
+	if (hitbox):
+		hitbox.connect("mouse_entered",hitbox_hovered)
+		hitbox.connect("mouse_exited",hitbox_exited)
+		
+	create_corpse_inventory()
+	setup_player_escape_timer()
+	
+func setup_player_escape_timer():
+	add_child(player_escape_timer)
+	player_escape_timer.one_shot = true
+	player_escape_timer.autostart = false
+	player_escape_timer.wait_time = player_escape_time
+	player_escape_timer.connect("timeout",Callable(self,"on_player_escape_timer_timeout"))
+	
+
+	
+func on_player_escape_timer_timeout():
+	player_seen = false
+	#print("player_escaped")
 	
 func add_possible_item_drop_data (id:int,drop_chance:float=1,min_amount:int=0,max_amount:int=1):
 	possible_item_drops_data[id] = {
@@ -34,13 +64,7 @@ func populate_items():
 			items.push_back(ItemData.create_item(id))
 			count+=1
 	
-func _ready():
-	hitbox = get_node("./HitBox")
-	if (hitbox):
-		hitbox.connect("mouse_entered",hitbox_hovered)
-		hitbox.connect("mouse_exited",hitbox_exited)
-		
-	create_corpse_inventory()
+
 	
 func hitbox_hovered():
 	mouse_is_hovering = true

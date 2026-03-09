@@ -13,20 +13,17 @@ const SCENES_PATH:String = "res://scenes/"
 
 static var item_templates: Dictionary[int,Dictionary] = {
 	0:{
-		"id":0,
 		"name":"small bottle of calcium ointment",
 		"max_stack_count":3,
 		"item_type":"consummable",
 		"image_path":IMAGES_PATH + "small_bottle_of_calcium_ointment.png"
 	},
 	1:{
-		"id":1,
 		"name":"giant spider fangs",
 		"max_stack_count":10,
 		"image_path":IMAGES_PATH + "giant_spider_fangs.png"
 	},
 	2:{
-		"id":2,
 		"name":"Warrior's Sword",
 		"max_stack_count":1,
 		"item_type":"sword",
@@ -34,6 +31,26 @@ static var item_templates: Dictionary[int,Dictionary] = {
 		"image_name":"warrior's_sword.png",
 		"image_path":IMAGES_PATH + "weapons/warrior's_sword.png",
 		"scene_path":SCENES_PATH + "weapons/warrior's_sword.tscn"
+	},
+	3:{
+		"name":'helmet',
+		"image_path":IMAGES_PATH + "armor/helmet.png",
+		"item_type":"helmet_armor"
+	},
+	4:{
+		"name":'breastplate',
+		"image_path":IMAGES_PATH + "armor/breastplate.png",
+		"item_type":"chest_armor"
+	},
+	5:{
+		"name":'ring',
+		"image_path":IMAGES_PATH + "accessories/ring_or_bracelet.png",
+		"item_type":"accessory"
+	},
+	6:{
+		"name":'tattered scarf',
+		"image_path":IMAGES_PATH + "accessories/tattered_scarf.png",
+		"item_type":"accessory"
 	}
 }
 
@@ -47,7 +64,7 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	var data = get_item_template_by_id(_id)
 	var id = _id;
 	var name = data.name
-	var msc = data.max_stack_count
+	var msc
 	var img_path
 	var img_name
 	var scene_path
@@ -55,7 +72,10 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	var item: Item = null
 	
 	#print(name)
-	
+	if (!data.has("max_stack_count")):
+		msc = 1
+	else:
+		msc = data.max_stack_count
 	if (data.has("image_path")):
 		img_path = data.image_path
 	if (data.has("image_name")):
@@ -72,6 +92,12 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 		"sword":
 			var dmg = data.damage
 			item = Sword.new(id,name,msc,dmg)
+		"helmet_armor":
+			item = HelmetArmor.new(id,name,msc)
+		"chest_armor":
+			item = ChestArmor.new(id,name,msc)
+		"accessory":
+			item = Accessory.new(id,name,msc)
 		_:
 			item = Item.new(id,name,msc)
 			
@@ -79,7 +105,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 		if (img_path):
 			item.set_image_path(img_path)
 		if (img_name):
-			item.set_in_game_image_path(IMAGES_PATH + "weapons/" + "in_game_" + img_name)
+			if item is Weapon:
+				item.set_in_game_image_path(IMAGES_PATH + "weapons/" + "in_game_" + img_name)
 		if (scene_path):
 			item.set_scene_path(scene_path)
 		item.count = stack_count

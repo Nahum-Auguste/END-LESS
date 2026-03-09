@@ -17,7 +17,7 @@ func _ready():
 		slot.item = ItemData.create_item(item_id,999)
 	if slot.item:
 		sprite.texture = load(slot.item.image_path)
-	player = get_tree().root.find_child("Player",true,false)
+	#player = get_tree().root.find_child("Player",true,false)
 	create_context_menu()
 	
 
