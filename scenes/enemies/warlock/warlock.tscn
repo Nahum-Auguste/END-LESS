@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://b1wutdb6rxfk1"]
+
+[ext_resource type="Script" uid="uid://l0qta7xn1a1q" path="res://scripts/monster scripts/enemy scripts/warlock/warlock.gd" id="1_s4l7h"]
+[ext_resource type="Texture2D" uid="uid://dn6tjd568lh8r" path="res://assets/sprites/enemies/warlock/warlock_spritesheet.png" id="2_mj2cs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i8k0"]
+atlas = ExtResource("2_mj2cs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyihq"]
+atlas = ExtResource("2_mj2cs")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyhbx"]
+atlas = ExtResource("2_mj2cs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuvek"]
+atlas = ExtResource("2_mj2cs")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x32xk"]
+atlas = ExtResource("2_mj2cs")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xqole"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i8k0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyihq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyhbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuvek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x32xk")
+}],
+"loop": false,
+"name": &"primed",
+"speed": 17.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4l7h"]
+size = Vector2(34, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4l7h"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acp8c"]
+radius = 43.11
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ryyrr"]
+radius = 150.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj2cs"]
+size = Vector2(34, 32)
+
+[node name="Warlock" type="CharacterBody2D" unique_id=777216955]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_s4l7h")
+metadata/_custom_type_script = "uid://bl344pnrj1ehp"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=633032348]
+sprite_frames = SubResource("SpriteFrames_xqole")
+animation = &"primed"
+speed_scale = -1.0
+
+[node name="HitBox" type="Area2D" parent="." unique_id=665940647]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=426207971]
+shape = SubResource("RectangleShape2D_s4l7h")
+debug_color = Color(0.7433947, 0.42237285, 0.5221054, 0.41960785)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=268806689]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1295009768]
+shape = SubResource("CircleShape2D_s4l7h")
+debug_color = Color(0.7764706, 0.6862745, 0, 0.1764706)
+
+[node name="TeleportationActivateArea" type="Area2D" parent="." unique_id=1725878402]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportationActivateArea" unique_id=1909323597]
+shape = SubResource("CircleShape2D_acp8c")
+debug_color = Color(2.8878452e-07, 0.538079, 0.6207863, 0.24705882)
+
+[node name="TeleportationRangeArea" type="Area2D" parent="." unique_id=1879901342]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportationRangeArea" unique_id=395711970]
+shape = SubResource("CircleShape2D_ryyrr")
+debug_color = Color(0, 0.11372549, 0.13725491, 0.24705882)
+
+[node name="TeleporationTargetArea" type="Area2D" parent="." unique_id=308405185]
+collision_layer = 0
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleporationTargetArea" unique_id=349742675]
+shape = SubResource("RectangleShape2D_mj2cs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55812942]
+shape = SubResource("RectangleShape2D_mj2cs")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="TeleportationActivateArea" to="." method="_on_teleportation_activate_area_body_entered"]

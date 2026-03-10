@@ -34,17 +34,19 @@ func _ready():
 	setup_player_escape_timer()
 	
 func setup_player_escape_timer():
-	add_child(player_escape_timer)
+	if player_escape_timer.get_parent()!=self:
+		add_child(player_escape_timer)
+		player_escape_timer.connect("timeout",Callable(self,"on_player_escape_timer_timeout"))
 	player_escape_timer.one_shot = true
 	player_escape_timer.autostart = false
 	player_escape_timer.wait_time = player_escape_time
-	player_escape_timer.connect("timeout",Callable(self,"on_player_escape_timer_timeout"))
+	
 	
 
 	
 func on_player_escape_timer_timeout():
 	player_seen = false
-	#print("player_escaped")
+	print("player_escaped from ",self)
 	
 func add_possible_item_drop_data (id:int,drop_chance:float=1,min_amount:int=0,max_amount:int=1):
 	possible_item_drops_data[id] = {
@@ -76,6 +78,9 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	queue_redraw()
 	
+	if player_in_detection_range:
+		player_escape_timer.start()
+	
 	#code running for if you are alive
 	if alive:
 		pass
@@ -102,7 +107,8 @@ func _process(delta: float) -> void:
 		
 		
 func _draw():
-	pass
+	if alive:
+		draw_debug_hp()
 	#if corpse_detection_ray:
 		#draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
 

@@ -19,8 +19,7 @@ func _ready():
 func _process(delta: float) -> void:
 	super._process(delta)
 	
-	if player_in_detection_range:
-		player_escape_timer.start()
+	
 	#print(player_escape_timer.time_left)
 	
 	if !nav_agent.is_target_reached() and alive and player_seen:
@@ -45,8 +44,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	super._draw()
-	if alive:
-		draw_debug_hp()
+	
 	
 	
 func refresh_path():

@@ -1478,6 +1478,9 @@ texture = ExtResource("3_y4r1p")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=985882029]
 
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1979280808]
+current = true
+
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]
 [connection signal="area_entered" from="SwordSwingHitBox/CircleArea" to="SwordSwingHitBox" method="_on_circle_area_area_entered"]
