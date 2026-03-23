@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://l4e0ut13i6iv"]
+
+[ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_ibwrd"]
+[ext_resource type="Texture2D" uid="uid://c38hnafr2pp03" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_hands_spritesheet.png" id="2_370fl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5frxb"]
+radius = 11.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ibwrd"]
+radius = 13.0
+height = 52.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_370fl"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c6lq"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bklt"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n1ll"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ep43u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_370fl")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c6lq")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bklt")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n1ll")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep43u"]
+atlas = ExtResource("2_370fl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5frxb"]
+atlas = ExtResource("2_370fl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxdn7"]
+atlas = ExtResource("2_370fl")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj8l3"]
+atlas = ExtResource("2_370fl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1n53j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep43u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5frxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxdn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj8l3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=528727432]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_5frxb")
+debug_color = Color(0, 0.6, 0.69803923, 0.20392157)
+
+[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="." unique_id=1920595087]
+position = Vector2(0, 16)
+polygon = PackedVector2Array(11, -15, 15, -1, 10, 6, -10, 6, -15, -1, -11, -15)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1382253133]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CapsuleCollisionShape" type="CollisionShape2D" parent="Area2D" unique_id=1733947645]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_ibwrd")
+debug_color = Color(0.9647059, 0, 0.49803922, 0.28627452)
+
+[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="Area2D" unique_id=1377897460]
+position = Vector2(0, 15.5)
+polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, -20, -15.5)
+
+[node name="Sprites" type="Node2D" parent="." unique_id=1315812729]
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="Sprites" unique_id=1732829752]
+sprite_frames = SubResource("SpriteFrames_ep43u")
+animation = &"walk_down"
+
+[node name="LeftHandSprite" type="AnimatedSprite2D" parent="Sprites" unique_id=230459832]
+sprite_frames = SubResource("SpriteFrames_1n53j")
+frame_progress = 0.9763891
+
+[node name="RightHandSprite" type="AnimatedSprite2D" parent="Sprites" unique_id=1207533800]
+rotation = 3.1415927
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_1n53j")
+frame_progress = 0.010108426

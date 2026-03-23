@@ -1,0 +1,52 @@
+[gd_resource type="TileSet" format=3 uid="uid://c6qbpx4nx2spu"]
+
+[ext_resource type="Texture2D" uid="uid://dcty47ydom2wr" path="res://assets/sprites/tilesheets/ghost_house/ghost_house_asset.png" id="1_7jm8j"]
+[ext_resource type="Texture2D" uid="uid://dk7y011faoqle" path="res://assets/sprites/tilesheets/ghost_house/ghost_house_ceiling.png" id="2_pg2ew"]
+[ext_resource type="Texture2D" uid="uid://d3asoyjqrf703" path="res://assets/sprites/tilesheets/world1-tilesheet.png" id="3_yw7pp"]
+[ext_resource type="Texture2D" uid="uid://b0mwkbboivtfj" path="res://assets/sprites/tilesheets/ghost_house/ghost_house_floor1.png" id="4_qomyi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kice"]
+texture = ExtResource("1_7jm8j")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5newe"]
+texture = ExtResource("2_pg2ew")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kvuet"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_trtic"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ir15t"]
+vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
+texture = ExtResource("3_yw7pp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_kvuet")
+0:2/0 = 0
+0:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ir15t")
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -9.877554, -16, -8.921661)
+0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_trtic")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37s47"]
+texture = ExtResource("4_qomyi")
+texture_region_size = Vector2i(32, 32)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 1
+sources/2 = SubResource("TileSetAtlasSource_yqjtg")
+sources/0 = SubResource("TileSetAtlasSource_1kice")
+sources/1 = SubResource("TileSetAtlasSource_5newe")
+sources/3 = SubResource("TileSetAtlasSource_37s47")

@@ -15,5 +15,5 @@ func _process(delta):
 	
 func follow_target():
 	if !target :  return
-	var f = .05
+	var f = .05 * 0 + 1
 	global_position = lerp(global_position,target.global_position,f)
