@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://buatbxfyir2ds" path="res://scripts/camera.gd" id="1_7pa0d"]
 
-[node name="Camera2D" type="Camera2D" unique_id=901842364 node_paths=PackedStringArray("target")]
+[node name="Camera2D" type="Camera2D" unique_id=901842364]
 zoom = Vector2(2.275, 2.275)
 script = ExtResource("1_7pa0d")
-target = NodePath("")

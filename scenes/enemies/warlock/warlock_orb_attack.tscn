@@ -37,6 +37,7 @@ debug_color = Color(0.99607843, 0, 0.20392157, 0.18431373)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1691815993]
 stream = ExtResource("3_tesvw")
 volume_db = -8.356
+pitch_scale = 0.2
 autoplay = true
 
 [node name="SpeedUpTimer" type="Timer" parent="." unique_id=825041025]

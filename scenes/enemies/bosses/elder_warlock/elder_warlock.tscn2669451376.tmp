@@ -98,9 +98,8 @@ polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, 
 sprite_frames = SubResource("SpriteFrames_ep43u")
 animation = &"walk_down"
 
-[node name="RightHand" parent="." unique_id=1698720337 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
-body = NodePath("..")
+[node name="RightHand" parent="." unique_id=1698720337 instance=ExtResource("6_5frxb")]
 
-[node name="LeftHand" parent="." unique_id=1989761050 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
-scale = Vector2(-1, 1)
-body = NodePath("..")
+[node name="LeftHand" parent="." unique_id=1989761050 instance=ExtResource("6_5frxb")]
+rotation = 3.1415927
+scale = Vector2(1, -1)
