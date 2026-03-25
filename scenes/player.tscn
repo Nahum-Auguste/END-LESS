@@ -1471,6 +1471,7 @@ position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_jej6c")
 
 [node name="AttackEffectSprite" type="Sprite2D" parent="." unique_id=1218859863]
+visible = false
 modulate = Color(1, 1, 1, 0.56078434)
 rotation = 1.5707964
 scale = Vector2(1.875, -1.875)

@@ -4,10 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_ibwrd"]
 [ext_resource type="PackedScene" uid="uid://buwvnamwl0ajg" path="res://scenes/enemies/bosses/elder_warlock/elder_warlock_hand.tscn" id="6_5frxb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5frxb"]
-radius = 11.0
-height = 40.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ibwrd"]
 radius = 13.0
 height = 52.0
@@ -63,6 +59,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c6lq"]
+radius = 173.07224
+
 [node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
 collision_layer = 2
 collision_mask = 4
@@ -71,15 +70,6 @@ script = ExtResource("1_0c6lq")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
 position = Vector2(0, 106)
 zoom = Vector2(2.125, 2.125)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=528727432]
-position = Vector2(0, -9)
-shape = SubResource("CapsuleShape2D_5frxb")
-debug_color = Color(0, 0.6, 0.69803923, 0.20392157)
-
-[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="." unique_id=1920595087]
-position = Vector2(0, 16)
-polygon = PackedVector2Array(11, -15, 15, -1, 10, 6, -10, 6, -15, -1, -11, -15)
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1382253133]
 collision_layer = 2
@@ -94,6 +84,10 @@ debug_color = Color(0.9647059, 0, 0.49803922, 0.28627452)
 position = Vector2(0, 15.5)
 polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, -20, -15.5)
 
+[node name="CollisionShape" type="CollisionPolygon2D" parent="." unique_id=1920595087]
+position = Vector2(0, 16)
+polygon = PackedVector2Array(10, -37, 15, -1, 10, 6, -10, 6, -15, -1, -10, -37, 0, -46)
+
 [node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=1732829752]
 sprite_frames = SubResource("SpriteFrames_ep43u")
 animation = &"walk_down"
@@ -104,3 +98,11 @@ body = NodePath("..")
 [node name="LeftHand" parent="." unique_id=1989761050 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
 scale = Vector2(-1, 1)
 body = NodePath("..")
+
+[node name="TeleportSpot" type="Node2D" parent="." unique_id=972661544]
+
+[node name="TeleportArea" type="Area2D" parent="." unique_id=2005192383]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea" unique_id=1709396996]
+shape = SubResource("CircleShape2D_0c6lq")
+debug_color = Color(3.760215e-08, 0.068501174, 0.08698662, 0.21176471)
