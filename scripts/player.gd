@@ -14,7 +14,6 @@ var sprint_mult:= 1.24
 var animation: String
 #var time_between_melee_attack = 1000 
 
-
 var attacking = false
 var default_attack_duration: float = .335
 @onready var attack_duration: float = default_attack_duration
@@ -97,7 +96,10 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	if Input.is_action_pressed("attack") and not attacking:
-		attack()
+		if main_hand_item:
+			attack()
+		else:
+			punch()
 		
 	if Input.is_action_just_pressed("toggle_inventory"):
 		is_inventory_open = !is_inventory_open
@@ -111,6 +113,7 @@ func _process(delta: float) -> void:
 	load_usable_inventory_items()
 	#print(animation_player.current_animation_position)
 	sword_swing_hitbox.weapon = main_hand_item
+	
 
 func load_usable_inventory_items():
 	if not inventory:
@@ -140,6 +143,36 @@ func _exit_tree():
 	if inventory:
 		inventory.queue_free()
 
+func punch():
+	attacking = true
+	var previous_animation: String = ""
+	var animation: String = ""
+	
+	if (sprite.animation.contains("down")):
+		previous_animation = "down_walk"
+		animation = "punch_down"
+	elif (sprite.animation.contains("left")):
+		previous_animation = "left_walk"
+		animation = "punch_left"
+	elif (sprite.animation.contains("up")):
+		previous_animation = "up_walk"
+		animation = "punch_up"
+	elif (sprite.animation.contains("right")):
+		previous_animation = "right_walk"
+		animation = "punch_right"
+		
+	#sprite.animation = animation
+	#sprite.speed_scale = sprite.animation.length() / attack_duration
+	sprite.play(animation, attack_duration)
+	
+	await sprite.animation_finished
+	attacking = false
+	print(previous_animation)
+	sprite.play(previous_animation,1)
+	print("punch finished!")
+		
+	
+
 func attack():
 	attacking = true
 	sprite.pause()
@@ -149,7 +182,8 @@ func attack():
 	move_and_slide()
 	#print(velocity)
 	var animation:String = ""
-
+	
+	
 	
 	if (sprite.animation.contains("down")):
 		animation = "sword_swing_down" + ("_left" if (!last_attack_animation.contains("left")) else "_right")

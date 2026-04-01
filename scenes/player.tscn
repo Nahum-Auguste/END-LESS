@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="1_st07s"]
 [ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="3_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://c3ub08y24iikn" path="res://assets/sprites/player/revenant_punching_sprite_sheet.png" id="4_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://diq8ou4kw6yqd" path="res://assets/sprites/player/revenant_right_attack_spritesheet.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://pgy0u6a7rjbh" path="res://assets/sprites/player/revenant_front_attack_spritesheet.png" id="4_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/revenant_back_attack_spritesheet.png" id="7_fjrip"]
@@ -50,6 +51,22 @@ region = Rect2(160, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_st07s")
 region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5jhy"]
+atlas = ExtResource("4_d2wvv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_holxr"]
+atlas = ExtResource("4_d2wvv")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx1m4"]
+atlas = ExtResource("4_d2wvv")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gjji"]
+atlas = ExtResource("4_d2wvv")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_qhqgy")
@@ -259,6 +276,38 @@ animations = [{
 }],
 "loop": true,
 "name": &"left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5jhy")
+}],
+"loop": false,
+"name": &"punch_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_holxr")
+}],
+"loop": false,
+"name": &"punch_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx1m4")
+}],
+"loop": false,
+"name": &"punch_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gjji")
+}],
+"loop": false,
+"name": &"punch_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1471,6 +1520,7 @@ position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_jej6c")
 
 [node name="AttackEffectSprite" type="Sprite2D" parent="." unique_id=1218859863]
+visible = false
 modulate = Color(1, 1, 1, 0.56078434)
 rotation = 1.5707964
 scale = Vector2(1.875, -1.875)
