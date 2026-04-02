@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://e3dupl3po58e"]
+
+[ext_resource type="Script" uid="uid://jt3rj4ojabk0" path="res://scripts/tiling scripts/tile_pattern_paster.gd" id="1_y1gbx"]
+
+[sub_resource type="Gradient" id="Gradient_q3l7v"]
+offsets = PackedFloat32Array(0, 0.5150376)
+colors = PackedColorArray(0.99999577, 0.37486035, 0.22628957, 1, 0.093160845, 0.093160845, 0.093160816, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dhf6s"]
+gradient = SubResource("Gradient_q3l7v")
+width = 32
+
+[node name="TilePatternPaster" type="Sprite2D" unique_id=2067428821]
+scale = Vector2(1, 32)
+texture = SubResource("GradientTexture1D_dhf6s")
+script = ExtResource("1_y1gbx")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://75430q4r5lxm"]
+
+[ext_resource type="Script" uid="uid://cmg8e6gr8me1y" path="res://scripts/tiling scripts/tile_pattern_paste_tester.gd" id="1_7pntf"]
+[ext_resource type="TileSet" uid="uid://dp3ety8uq0nfc" path="res://tilesets/new_tile_set.tres" id="1_fkbs7"]
+
+[node name="Node2D" type="Node2D" unique_id=1401185838]
+script = ExtResource("1_7pntf")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=452364262]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0)
+tile_set = ExtResource("1_fkbs7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1907283169]
+zoom = Vector2(0.125, 0.125)

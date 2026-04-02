@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cy03hdd5tihd0"]
+
+[ext_resource type="PackedScene" uid="uid://e3dupl3po58e" path="res://scenes/tiling/tile_pattern_paster.tscn" id="1_wxctd"]
+
+[node name="TilePatternPaster" unique_id=2067428821 instance=ExtResource("1_wxctd")]
+rotation = 3.1415927
+direction = "right"
