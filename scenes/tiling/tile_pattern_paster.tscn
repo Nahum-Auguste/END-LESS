@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://e3dupl3po58e"]
 
-[ext_resource type="Script" uid="uid://jt3rj4ojabk0" path="res://scripts/tiling scripts/tile_pattern_paster.gd" id="1_y1gbx"]
+[ext_resource type="Script" uid="uid://jt3rj4ojabk0" path="res://scripts/tiling scripts/pasters/tile_pattern_paster.gd" id="1_y1gbx"]
 
 [sub_resource type="Gradient" id="Gradient_q3l7v"]
 offsets = PackedFloat32Array(0, 0.5150376)

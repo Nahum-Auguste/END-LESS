@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://f4nr34luftje"]
+
+[ext_resource type="PackedScene" uid="uid://dvj6o2iwrkhlm" path="res://scenes/tiling/chest tile pasters/chest_tile_paster.tscn" id="1_avgrn"]
+
+[node name="ChestTilePaster" unique_id=788657215 instance=ExtResource("1_avgrn")]
+rotation = -1.5707964
+direction = "down"

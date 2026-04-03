@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://da7w3xg5yal20"]
+
+[ext_resource type="PackedScene" uid="uid://dvj6o2iwrkhlm" path="res://scenes/tiling/chest tile pasters/chest_tile_paster.tscn" id="1_u774i"]
+
+[node name="ChestTilePaster" unique_id=788657215 instance=ExtResource("1_u774i")]

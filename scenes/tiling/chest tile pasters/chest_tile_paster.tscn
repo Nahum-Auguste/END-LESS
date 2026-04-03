@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dvj6o2iwrkhlm"]
+
+[ext_resource type="Script" uid="uid://b20u14yu7wfuv" path="res://scripts/tiling scripts/pasters/chest_tile_paster.gd" id="1_1h6jl"]
+
+[sub_resource type="Gradient" id="Gradient_cp6xl"]
+offsets = PackedFloat32Array(0.1028481, 1)
+colors = PackedColorArray(0.30945182, 0.09485767, 0.041938283, 1, 0.99999994, 0.89629155, 0.58447534, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_prtkc"]
+noise_type = 2
+frequency = 0.121
+domain_warp_amplitude = 29.845
+domain_warp_frequency = 0.07
+domain_warp_fractal_octaves = 1
+domain_warp_fractal_lacunarity = 5.905
+domain_warp_fractal_gain = 0.175
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sjxqk"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_prtkc")
+color_ramp = SubResource("Gradient_cp6xl")
+bump_strength = 14.7
+
+[sub_resource type="Gradient" id="Gradient_aqe2k"]
+colors = PackedColorArray(0.1518645, 0.058364272, 0, 1, 1, 1, 0.4627451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0oda2"]
+gradient = SubResource("Gradient_aqe2k")
+width = 32
+height = 32
+fill_from = Vector2(0.51794875, 0.13504274)
+fill_to = Vector2(0.51794875, 1)
+
+[node name="ChestTilePaster" type="Node2D" unique_id=788657215]
+script = ExtResource("1_1h6jl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=768521150]
+texture = SubResource("NoiseTexture2D_sjxqk")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=72561734]
+position = Vector2(-12, 0)
+rotation = 1.5707964
+scale = Vector2(1, 0.25)
+texture = SubResource("GradientTexture2D_0oda2")
