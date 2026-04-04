@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://billmxpo0h0xf"]
+
+[ext_resource type="Texture2D" uid="uid://vcyhys1hf3f2" path="res://assets/sprites/ui/short_bone_bar.png" id="1_7xwin"]
+[ext_resource type="Texture2D" uid="uid://dc7f6isn377uh" path="res://assets/sprites/ui/short_bone_bar_selected_frame1.png" id="2_md0y3"]
+[ext_resource type="Texture2D" uid="uid://dlrp2pnsbw5og" path="res://assets/sprites/ui/short_bone_bar_selected_frame2.png" id="3_1ot6w"]
+[ext_resource type="Texture2D" uid="uid://crgpmci62a5j" path="res://assets/sprites/ui/short_bone_bar_selected_frame3.png" id="4_mnnki"]
+[ext_resource type="Texture2D" uid="uid://du3a3lvfyah8i" path="res://assets/sprites/ui/short_bone_bar_selected_frame4.png" id="5_i8181"]
+[ext_resource type="Texture2D" uid="uid://ysib6mr3fyte" path="res://assets/sprites/ui/short_bone_bar_selected_frame5.png" id="6_63v50"]
+[ext_resource type="Texture2D" uid="uid://q204ws30lv6l" path="res://assets/sprites/ui/short_bone_bar_selected_frame6.png" id="7_aum6k"]
+[ext_resource type="Texture2D" uid="uid://rgjwdroiche6" path="res://assets/sprites/ui/short_bone_bar_selected_frame7.png" id="8_h4rrw"]
+[ext_resource type="Texture2D" uid="uid://bb2fyhlr0eyhn" path="res://assets/sprites/ui/short_bone_bar_selected_frame8.png" id="9_f7eyb"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_kulet"]
+frames = 8
+frame_0/texture = ExtResource("2_md0y3")
+frame_0/duration = 0.3
+frame_1/texture = ExtResource("3_1ot6w")
+frame_1/duration = 0.3
+frame_2/texture = ExtResource("4_mnnki")
+frame_2/duration = 0.3
+frame_3/texture = ExtResource("5_i8181")
+frame_3/duration = 0.3
+frame_4/texture = ExtResource("6_63v50")
+frame_4/duration = 0.3
+frame_5/texture = ExtResource("7_aum6k")
+frame_5/duration = 0.3
+frame_6/texture = ExtResource("8_h4rrw")
+frame_6/duration = 0.3
+frame_7/texture = ExtResource("9_f7eyb")
+frame_7/duration = 0.3
+
+[node name="TextureButton" type="TextureButton" unique_id=1736505248]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_7xwin")
+texture_hover = SubResource("AnimatedTexture_kulet")
+stretch_mode = 0
