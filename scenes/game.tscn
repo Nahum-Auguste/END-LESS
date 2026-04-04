@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://bjenn33xk68qg" path="res://scenes/ui/hud/player_status.tscn" id="12_dinhu"]
 [ext_resource type="AudioStream" uid="uid://decfa2ftt058d" path="res://assets/music/ghost_house_test.wav" id="13_kvuet"]
+[ext_resource type="PackedScene" uid="uid://rb6urj8basbh" path="res://scenes/ui/menus/pause_menu.tscn" id="16_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kice"]
 texture = ExtResource("1_rysoc")
@@ -144,3 +145,7 @@ navigation_polygon = SubResource("NavigationPolygon_dinhu")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1948132402]
 stream = ExtResource("13_kvuet")
 autoplay = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1381077855]
+
+[node name="pause_menu" parent="CanvasLayer2" unique_id=504704094 instance=ExtResource("16_ssvqc")]

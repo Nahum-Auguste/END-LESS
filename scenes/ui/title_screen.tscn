@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_w8uqo"]
 
 [node name="TitleScreen" type="Control" unique_id=977598533]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,14 +39,14 @@ horizontal_alignment = 1
 stream = ExtResource("1_eb34j")
 autoplay = true
 
-[node name="TextureButton" parent="." unique_id=1736505248 instance=ExtResource("3_w8uqo")]
+[node name="play" parent="." unique_id=1736505248 instance=ExtResource("3_w8uqo")]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 355.0
 offset_right = 799.2
 offset_bottom = 439.0
 
-[node name="Label" type="Label" parent="TextureButton" unique_id=1202561929]
+[node name="Label" type="Label" parent="play" unique_id=1202561929]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.51100004
@@ -58,20 +59,20 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="TextureButton2" parent="." unique_id=1001627785 instance=ExtResource("3_w8uqo")]
+[node name="settings" parent="." unique_id=1001627785 instance=ExtResource("3_w8uqo")]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 439.0
 offset_right = 799.2
 offset_bottom = 523.0
 
-[node name="Label" type="Label" parent="TextureButton2" unique_id=512388963]
+[node name="Label" type="Label" parent="settings" unique_id=512388963]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.51100004
@@ -84,20 +85,20 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "SETTINGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="TextureButton3" parent="." unique_id=160822897 instance=ExtResource("3_w8uqo")]
+[node name="exit" parent="." unique_id=160822897 instance=ExtResource("3_w8uqo")]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 523.0
 offset_right = 799.2
 offset_bottom = 607.0
 
-[node name="Label" type="Label" parent="TextureButton3" unique_id=771647949]
+[node name="Label" type="Label" parent="exit" unique_id=771647949]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.51100004
@@ -110,10 +111,11 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
