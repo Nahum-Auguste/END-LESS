@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bo718dymeiesy"]
+
+[ext_resource type="Script" uid="uid://cf4yqbt14iydo" path="res://scripts/tiling scripts/level_generator.gd" id="1_dsg28"]
+[ext_resource type="TileSet" uid="uid://dp3ety8uq0nfc" path="res://tilesets/new_tile_set.tres" id="2_j6man"]
+[ext_resource type="PackedScene" uid="uid://g8oort1yt05r" path="res://scenes/player.tscn" id="3_j6man"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dsg28"]
+radius = 1280.0
+
+[node name="LevelGenerator" type="Node2D" unique_id=577514634 node_paths=PackedStringArray("tile_layer")]
+script = ExtResource("1_dsg28")
+tile_layer = NodePath("TileMapLayer")
+max_path_length = 40
+path_width = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1982307032]
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 252, 255, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 5, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("2_j6man")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=156805900]
+zoom = Vector2(0.275, 0.275)
+
+[node name="Player" parent="." unique_id=806514 instance=ExtResource("3_j6man")]
+position = Vector2(-500, -713)
+
+[node name="MaxLengthArea" type="Area2D" parent="." unique_id=2038702773]
+z_index = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MaxLengthArea" unique_id=2128782144]
+position = Vector2(16, 16)
+shape = SubResource("CircleShape2D_dsg28")
+debug_color = Color(0.88235295, 0, 0.8156863, 0.10980392)

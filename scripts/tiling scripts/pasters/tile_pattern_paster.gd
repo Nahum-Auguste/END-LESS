@@ -1,4 +1,4 @@
-
+@tool
 class_name TilePatternPaster extends TilePaster
 
 @export var can_paste: = true
@@ -6,10 +6,14 @@ class_name TilePatternPaster extends TilePaster
 func _ready():
 	super._ready()
 	
-	if can_paste and randf_range(0,1) > .5:
+
+func _process(delta):
+	if can_paste and randf_range(0,1) < .5:
 		paste_pattern()
+		
 
 	on_finish()
+	
 
 
 			
@@ -30,7 +34,7 @@ func paste_pattern():
 			# default origin
 			var origin :Vector2i
 			
-			var cancel_threshold_percent = .1
+			var cancel_threshold_percent = .05
 			var overlap_count = 0
 			var cell_count = pattern.get_used_cells().size()
 			
@@ -47,16 +51,21 @@ func paste_pattern():
 							origin = -cell + map_pos
 						instance.free()
 						
+	
 			# return if too many overlapping tiles with current cells
 			for cell in pattern.get_used_cells():
 				var pos = origin + cell
-				if tile_layer.get_cell_source_id(pos)!=-1:
+				var source_id = tile_layer.get_cell_source_id(pos)
+				var atlas_pos = tile_layer.get_cell_atlas_coords(pos)
+				var is_ceiling:bool = source_id == 0 and atlas_pos == Vector2i(0,0)
+					
+				if source_id!=-1 and !is_ceiling:
 					overlap_count+=1
 					if (float(overlap_count)/cell_count) > cancel_threshold_percent:
-						print("overlap percent: ",float(overlap_count)/cell_count)
+						#print("overlap percent: ",float(overlap_count)/cell_count)
 						return
 			
-			print("pasting ", pattern_name, " at ",tile_layer.local_to_map(position))
+			#print("pasting ", pattern_name, " at ",tile_layer.local_to_map(position))
 			#print(pattern.get_used_cells())
 			
 			
@@ -67,7 +76,7 @@ func paste_pattern():
 				var source = tile_layer.tile_set.get_source(source_id) 
 				var atlas_pos = pattern.get_cell_atlas_coords(cell)
 				var alt_id = pattern.get_cell_alternative_tile(cell)
-	
+				
 				tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 				
 				#if source is TileSetScenesCollectionSource:

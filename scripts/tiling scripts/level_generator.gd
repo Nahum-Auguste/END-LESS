@@ -27,12 +27,15 @@ var tiles: Dictionary[String,TD] = {
 @export var max_paths_closed: int = 3
 @export var max_path_length : int = 30
 @export var path_width: int = 3
+@export var max_room_pasters: int = 10
 @onready var max_length_area_shape: CircleShape2D = $MaxLengthArea/CollisionShape2D.shape 
 
 var level_center: Vector2 = Vector2.ZERO
+var floor_cells: Array[Vector2i]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	generate_level()
 	pass
 	
 func _process(delta):
@@ -90,46 +93,150 @@ func generate_level():
 	clear()
 	draw_ceilings()
 	paste_generated_level()
+	add_rooms()
 	draw_walls()
+	#tile_layer.update_internals()
+	
+	
+	
+func add_rooms():
+	var pasters = 0
+	var max_pasters = max_room_pasters
+	var is_floor: = func (sid,ac) -> bool: 
+			return sid == 0 and ac == Vector2i(0,2)
+	
+	var potential_cells: Array = []
+	var potential_cell_datas : Array = []
+	
+	for cell in floor_cells:
+		var lv = Vector2i(-1,0)
+		var rv = Vector2i(1,0)
+		var tv = Vector2i(0,-1)
+		var bv = Vector2i(0,1)
+
+		var surrounding_cell_displacements = [
+			lv + tv,
+			tv,
+			tv + rv,
+			rv,
+			rv + bv,
+			bv,
+			bv + lv,
+			lv
+		]
+		
+		for j in range(0,surrounding_cell_displacements.size()):
+			var disp = surrounding_cell_displacements[j]
+			var next_disp = surrounding_cell_displacements[(j+1)%(surrounding_cell_displacements.size())]
+			var pos1 = cell + disp
+			var pos2 = cell + next_disp
+			var sid1 = tile_layer.get_cell_source_id(pos1)
+			var sid2 = tile_layer.get_cell_source_id(pos2)
+			var src1 = tile_layer.tile_set.get_source(sid1)
+			var src2 = tile_layer.tile_set.get_source(sid2)
+			
+			# down chest index
+			var dci = 3
+			var lci = 4
+			var rci = 5
+			var uci = 6
+
+			var acceptable :bool = src1 != TileSetScenesCollectionSource and src2 != TileSetScenesCollectionSource and !is_floor.call(sid1,tile_layer.get_cell_atlas_coords(pos1)) and !is_floor.call(sid2,tile_layer.get_cell_atlas_coords(pos2))
+			if acceptable and (pos1 not in potential_cells):
+				var ci = dci
+				
+				match j:
+					0:
+						ci = uci
+					1:
+						ci = uci
+					2:
+						ci = rci
+					3:
+						ci = rci
+					4:
+						ci = dci
+					5:
+						ci = dci
+					6:
+						ci = lci
+					7:
+						ci = lci
+				
+				potential_cells.push_back(pos1)
+				potential_cells.push_back(pos2)
+				potential_cell_datas.push_back([pos1,ci])
+				#tile_layer.set_cell(pos1,1,Vector2i.ZERO,ci)
+	#print(floor_cells.size())
+	#print(potential_cell_datas.size())
+	
+	for i in potential_cell_datas.size():
+		if pasters >= max_pasters and max_pasters>=0: return
+		
+		var data = potential_cell_datas[randi_range(0,potential_cell_datas.size()-1)]
+		var cell: Vector2i = data[0]
+		var ci = data[1]
+		tile_layer.set_cell(cell,1,Vector2i.ZERO,ci)
+		
+		
+		pasters+=1
+		
+		
+		
+		
+		
 	
 func paste_generated_level():
-	
-	#print(path_paste_positions)
-	#print("node pos: ",node_pos)
 	var node_positions: Array[Vector2] = [level_center]
+	
 	# start n nodes
 	for n in range(nodes):
 		var path_paste_positions: Array[Vector2] = draw_random_path(level_center,"floor",path_steps,path_width)
 		var node_pos = path_paste_positions[-1]
 		node_positions.push_back(node_pos)
 	
-	# close n nodes including the start node
-	for n in range(nodes+1):
+	# close n nodes not including the start node
+	for n in range(nodes):
 		var node_pos = node_positions[n]
-		var paths = randi() % max_paths_closed + 1
-		
-		
 		if node_pos==level_center: continue
-		#print("paths: ",paths)
 		
-		for p in range(paths):
-			var end_pos = node_positions[randi() % node_positions.size()]
-			while end_pos==node_pos:
-				end_pos = node_positions[randi() % node_positions.size()]
+		var num_paths = randi() % (max_paths_closed + 1)
+		
+		for p in range(num_paths):
+			var np = node_positions.duplicate()
+			np.remove_at(n)
+			
+			var end_pos
+			while !end_pos or end_pos==node_pos:
+				end_pos = np[randi() % np.size()]
 			draw_random_path_ended(node_pos,end_pos, "floor", path_width)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func draw_tile(pos:Vector2, tile:String = "floor"):
 	var tile_data: TD = tiles[tile]
-	tile_layer.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)
+	
+	
+	if tile_layer.get_cell_source_id(pos)!=tile_data.atlas_id or tile_layer.get_cell_atlas_coords(pos)!=tile_data.atlas_pos:
+		tile_layer.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)
+		if tile=="floor" :
+			floor_cells.push_back(pos)
+		#else:
+			#floor_cells.erase(pos)
+			
+	
 	
 func draw_tile_circle(pos: Vector2, tile:String = "floor", size: float = 1, filled:=true):
-	#print("drew ", tile ," at ",pos)
+	if size<=0: return
 	
+	var angles = []
+	var subdivisions = size * 4 * 2
+	
+	for i in range(0,clamp(subdivisions,0,360)):
+		angles.push_back(i * (360/subdivisions))
 	
 	for r in range(0 if filled else size-1,size):
-		for a in range(0,360):
+		
+		for a in angles:
 			var rad = deg_to_rad(a)
 			var x = cos(rad) * r
 			var y = sin(rad) * r
@@ -191,6 +298,7 @@ func draw_random_path(start_pos:Vector2, tile:String = "floor", steps:= 10, widt
 	"""
 	draw_tile_circle(start_pos,tile,width)
 	
+	
 	var pos: Vector2 = start_pos
 	for step in range(steps):
 		width = ceil(clamp((float(steps-step)/steps) * width,2,width))
@@ -211,3 +319,5 @@ func draw_random_path(start_pos:Vector2, tile:String = "floor", steps:= 10, widt
 func clear():
 	#print("cleared tiles")
 	tile_layer.clear()
+	$ObjectsTileMapLayer.clear()
+	floor_cells = []

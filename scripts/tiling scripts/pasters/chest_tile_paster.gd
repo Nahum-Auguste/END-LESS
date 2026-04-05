@@ -5,7 +5,7 @@ var spawn_chance: float = .5
 var chest_tile_layer: TileMapLayer
 
 func _ready():
-	print(get_parent())
+	#print(get_parent())
 	super._ready()
 	set_chest_tile_layer()
 	
@@ -32,8 +32,11 @@ func paste_chest():
 		var scene: PackedScene = source.get_scene_tile_scene(scene_id)
 		var scene_name = scene.resource_path.get_file().get_basename()
 		if (direction in scene_name):
-			print("spawning: ", scene_name)
+			#print("spawning: ", scene_name)
 			alt_id = scene_id
-	chest_tile_layer.set_cell(map_pos,source_id,Vector2i.ZERO,alt_id)
-	queue_free()
+	if !chest_tile_layer:
+		printerr("ERROR: Cannot place chest scene tile without 'ObjectsTileMapLayer' sibling TileMapLayer node.")
+	else:
+		chest_tile_layer.set_cell(map_pos,source_id,Vector2i.ZERO,alt_id)
+		queue_free()
 	

@@ -1,3 +1,4 @@
+
 class_name TilePaster extends Node2D
 
 @export_enum("left","down","up","right") var direction: String = "left"
@@ -23,7 +24,7 @@ func handle_direction():
 		"down":
 			rotation_degrees = -90
 			
-func on_finish():
+func on_finish():	
 	tile_layer.set_cell(map_pos ,0,Vector2i(0,2))
-	tile_layer.update_internals()
+	#tile_layer.update_internals()
 	queue_free()
