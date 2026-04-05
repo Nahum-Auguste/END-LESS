@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://uijad3lf2xsr"]
+
+[ext_resource type="Texture2D" uid="uid://rgbuppet7wya" path="res://assets/sprites/ui/right_arrow.png" id="1_lqjyd"]
+[ext_resource type="Texture2D" uid="uid://ce4y78qbh7lyf" path="res://assets/sprites/ui/right_arrow_pressed.png" id="2_q7py7"]
+[ext_resource type="Texture2D" uid="uid://0r0oafaviive" path="res://assets/sprites/ui/right_arrow_hover.png" id="3_amwp2"]
+
+[node name="TextureButton" type="TextureButton" unique_id=572653011]
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_lqjyd")
+texture_pressed = ExtResource("2_q7py7")
+texture_hover = ExtResource("3_amwp2")

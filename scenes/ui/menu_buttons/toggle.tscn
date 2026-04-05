@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://5mcrdg644o2e"]
+
+[ext_resource type="Texture2D" uid="uid://b2wsj4kpy5t0m" path="res://assets/sprites/ui/toggle_unselected.png" id="1_o3pat"]
+[ext_resource type="Texture2D" uid="uid://bq38wfkbm21fr" path="res://assets/sprites/ui/toggle_selected.png" id="2_h2sme"]
+[ext_resource type="Texture2D" uid="uid://c457xn3wvgg76" path="res://assets/sprites/ui/toggle_unselected_hover.png" id="3_i8o00"]
+
+[node name="TextureButton" type="TextureButton" unique_id=925975189]
+offset_right = 32.0
+offset_bottom = 32.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("1_o3pat")
+texture_pressed = ExtResource("2_h2sme")
+texture_hover = ExtResource("3_i8o00")

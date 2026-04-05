@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://c80bhyv5au1u5"]
+
+[ext_resource type="Script" uid="uid://bkxtfyias4f8n" path="res://scenes/ui/menus/settings_screen.gd" id="1_1liky"]
+[ext_resource type="Texture2D" uid="uid://c32ogpm2au2ac" path="res://assets/sprites/ui/flame_bg1.png" id="1_gun7u"]
+[ext_resource type="PackedScene" uid="uid://cobiywn8tw4f6" path="res://scenes/ui/menu_buttons/sound_bar.tscn" id="2_htfmr"]
+[ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_s18c7"]
+
+[node name="settings_screen" type="Control" unique_id=597405885]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1liky")
+
+[node name="background" type="TextureRect" parent="." unique_id=488950842]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gun7u")
+
+[node name="backplate" type="ColorRect" parent="." unique_id=2093363885]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -193.0
+offset_right = 416.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21568628, 0.21568628, 0.21568628, 0.7176471)
+
+[node name="settings" type="Label" parent="." unique_id=1908339843]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.5
+offset_top = -340.0
+offset_right = 142.5
+offset_bottom = -254.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 62
+text = "SETTINGS"
+
+[node name="music" type="Label" parent="." unique_id=685821062]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -126.0
+offset_right = 63.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 40
+text = "MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="music_bar" parent="music" unique_id=418467069 instance=ExtResource("2_htfmr")]
+layout_mode = 1
+offset_top = 55.5
+offset_bottom = 55.5
+
+[node name="sfx" type="Label" parent="music" unique_id=814150586]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = 112.5
+offset_right = 63.0
+offset_bottom = 167.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 40
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sfx_bar" parent="music/sfx" unique_id=262495309 instance=ExtResource("2_htfmr")]
+layout_mode = 1
+offset_top = 55.5
+offset_bottom = 55.5
+
+[node name="back" parent="." unique_id=1736505248 instance=ExtResource("3_s18c7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.0
+offset_top = 147.0
+offset_right = 191.0
+offset_bottom = 223.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="back" unique_id=133322885]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -21.0
+offset_right = 125.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 31
+text = "RETURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

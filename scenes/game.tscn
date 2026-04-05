@@ -146,6 +146,6 @@ navigation_polygon = SubResource("NavigationPolygon_dinhu")
 stream = ExtResource("13_kvuet")
 autoplay = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1381077855]
+[node name="pauseLayer" type="CanvasLayer" parent="." unique_id=1381077855]
 
-[node name="pause_menu" parent="CanvasLayer2" unique_id=504704094 instance=ExtResource("16_ssvqc")]
+[node name="pause_menu" parent="pauseLayer" unique_id=504704094 instance=ExtResource("16_ssvqc")]
