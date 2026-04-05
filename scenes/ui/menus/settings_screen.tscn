@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_s18c7"]
 
 [node name="settings_screen" type="Control" unique_id=597405885]
-process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bt8b0hi1kn132" path="res://scripts/gui scripts/title_screen.gd" id="1_aqpy5"]
 [ext_resource type="AudioStream" uid="uid://cuavgrchov8tv" path="res://assets/music/Tenacity.wav" id="1_eb34j"]
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_w8uqo"]
+[ext_resource type="PackedScene" uid="uid://c80bhyv5au1u5" path="res://scenes/ui/menus/settings_screen.tscn" id="4_a4ium"]
 
 [node name="TitleScreen" type="Control" unique_id=977598533]
 process_mode = 3
@@ -116,6 +117,10 @@ text = "exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=908666615]
+
+[node name="settings_screen" parent="CanvasLayer" unique_id=597405885 instance=ExtResource("4_a4ium")]
 
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]

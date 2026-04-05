@@ -80,6 +80,14 @@ sources/0 = SubResource("TileSetScenesCollectionSource_gee14")
 
 [node name="Game" type="Node2D" unique_id=788731704]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
+script = ExtResource("6_u5sy4")
+
+[node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 node_paths=PackedStringArray("player") instance=ExtResource("12_dinhu")]
+player = NodePath("../../Player")
+
+[node name="pause_menu" parent="CanvasLayer" unique_id=504704094 instance=ExtResource("16_ssvqc")]
+
 [node name="TileMaps" type="Node2D" parent="." unique_id=1270821007]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMaps" unique_id=1233330161]
@@ -133,19 +141,9 @@ total_steps = 4
 tilemap_layer = NodePath("../TileMaps/TileMapLayer")
 metadata/_custom_type_script = "uid://c7x228j2ys2lh"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
-script = ExtResource("6_u5sy4")
-
-[node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 node_paths=PackedStringArray("player") instance=ExtResource("12_dinhu")]
-player = NodePath("../../Player")
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1449308404]
 navigation_polygon = SubResource("NavigationPolygon_dinhu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1948132402]
 stream = ExtResource("13_kvuet")
 autoplay = true
-
-[node name="pauseLayer" type="CanvasLayer" parent="." unique_id=1381077855]
-
-[node name="pause_menu" parent="pauseLayer" unique_id=504704094 instance=ExtResource("16_ssvqc")]

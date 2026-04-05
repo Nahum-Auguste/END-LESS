@@ -3,11 +3,6 @@ extends Control
 func _ready():
 	hide()
 
-func settings():
-	show()
 
-func _on_back_pressed():
+func _on_back_pressed() -> void:
 	hide()
-	
-func _process(delta):
-	pass

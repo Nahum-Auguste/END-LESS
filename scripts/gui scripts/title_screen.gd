@@ -24,4 +24,4 @@ func _on_exit_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	$CanvasLayer/settings_screen.show()
