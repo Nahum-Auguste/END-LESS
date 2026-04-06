@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://4aj4bsljbooi"]
+
+[ext_resource type="PackedScene" uid="uid://cgxxi1m73b4pf" path="res://scenes/tiling/player_spawn_tile.tscn" id="1_g3m36"]
+
+[node name="PlayerSpawnTileUp" unique_id=549977856 instance=ExtResource("1_g3m36")]
+direction = "up"

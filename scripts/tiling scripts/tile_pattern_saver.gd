@@ -9,6 +9,7 @@ extends Node2D
 
 @export_category("Pattern Saving")
 @export_enum("world1") var level_theme: String = "world1"
+@export_enum("standard room","spawn room") var pattern_type: String = "standard room"
 @export_enum("left","down","up","right") var direction: String = "left"
 @export var pattern_name: String = ""
 @export_tool_button("save pattern","Save") var save_button = save
@@ -26,7 +27,15 @@ func _process(delta):
 	pass
 	
 func get_save_path() -> String:
-	return "res://assets/tile patterns/" + level_theme + "/" + direction
+	var dir = ""
+	match (pattern_type):
+		"standard room":
+			dir = ""
+		"spawn room":
+			dir = "spawn rooms"
+			
+	if dir : dir += "/"
+	return "res://assets/tile patterns/" + level_theme + "/" + dir + direction
 	
 func load_pattern():
 	var path = loaded_pattern_path
@@ -53,12 +62,14 @@ func save():
 	if !pattern_name:
 		printerr("Error saving pattern. Invalid pattern name provided.")
 		return
+	if !pattern_type:
+		printerr("Error saving pattern. Invalid pattern type provided.")
+		return
+		
 	var pattern := TileMapPattern.new()
 	var cells = tile_layer.get_used_cells()
 	for cell in cells:
 		pattern.set_cell(cell,tile_layer.get_cell_source_id(cell),tile_layer.get_cell_atlas_coords(cell),tile_layer.get_cell_alternative_tile(cell))
-		#print(tile_layer.get_cell_source_id(cell))
-		#print(tile_layer.get_cell_atlas_coords(cell))
 	
 	var dir = DirAccess.open("res://")
 	
@@ -73,3 +84,4 @@ func save():
 	print("Results may take a minute.")
 	direction = ""
 	pattern_name = ""
+	pattern_type = "standard room"

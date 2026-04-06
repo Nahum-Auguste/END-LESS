@@ -1,6 +1,7 @@
 
 class_name TilePaster extends Node2D
 
+
 @export_enum("left","down","up","right") var direction: String = "left"
 var tile_layer :TileMapLayer
 var map_pos: Vector2i
@@ -25,6 +26,63 @@ func handle_direction():
 			rotation_degrees = -90
 			
 func on_finish():	
-	tile_layer.set_cell(map_pos ,0,Vector2i(0,2))
+	if tile_layer:
+		tile_layer.set_cell(map_pos ,0,Vector2i(0,2))
 	#tile_layer.update_internals()
 	queue_free()
+	
+	
+func paste_pattern(pattern_path: String, check_overlap: bool = true):
+	#print("attempting to paste at", map_pos)
+	
+	if tile_layer:
+			var pattern: TileMapPattern = load(pattern_path)
+
+			# default origin
+			var origin :Vector2i
+			
+			var cancel_threshold_percent = .05
+			var overlap_count = 0
+			var cell_count = pattern.get_used_cells().size()
+			
+			# find origin
+			for cell in pattern.get_used_cells():
+				var source_id = pattern.get_cell_source_id(cell)
+				var source = tile_layer.tile_set.get_source(source_id) 
+				if source is TileSetScenesCollectionSource:
+					var alt_id = pattern.get_cell_alternative_tile(cell)
+					var scene: PackedScene = source.get_scene_tile_scene(alt_id)
+					if scene:
+						var instance = scene.instantiate()
+						if instance is TilePatternOrigin:			
+							origin = -cell + map_pos
+						instance.free()
+						
+	
+			# return if too many overlapping tiles with current cells
+			if check_overlap:
+				for cell in pattern.get_used_cells():
+					var pos = origin + cell
+					var source_id = tile_layer.get_cell_source_id(pos)
+					var atlas_pos = tile_layer.get_cell_atlas_coords(pos)
+					var is_ceiling:bool = source_id == 0 and atlas_pos == Vector2i(0,0)
+						
+					if source_id!=-1 and !is_ceiling:
+						overlap_count+=1
+						if (float(overlap_count)/cell_count) > cancel_threshold_percent:
+							#print("overlap percent: ",float(overlap_count)/cell_count)
+							return
+			
+			#print("pasting ", pattern_name, " at ",tile_layer.local_to_map(position))
+
+			# paste pattern tiles
+			for cell in pattern.get_used_cells():
+				var pos = origin + cell
+				var source_id = pattern.get_cell_source_id(cell)
+				var atlas_pos = pattern.get_cell_atlas_coords(cell)
+				var alt_id = pattern.get_cell_alternative_tile(cell)
+				tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
+				
+	else:
+		printerr("Tile Pattern Originator Failed to Paste. No tile layer parent set.")
+	

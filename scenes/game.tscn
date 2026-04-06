@@ -13,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://del2ua8ddsqph" path="res://scripts/canvas scripts/ground_gui_canvas.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="8_trtic"]
-[ext_resource type="Script" uid="uid://buatbxfyir2ds" path="res://scripts/camera.gd" id="9_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://bjenn33xk68qg" path="res://scenes/ui/hud/player_status.tscn" id="12_dinhu"]
 [ext_resource type="AudioStream" uid="uid://decfa2ftt058d" path="res://assets/music/ghost_house_test.wav" id="13_kvuet"]
+[ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="13_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kice"]
 texture = ExtResource("1_rysoc")
@@ -119,11 +119,8 @@ position = Vector2(-24, 52)
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("1_uwrxv")]
 position = Vector2(-150, 54)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=594211753 node_paths=PackedStringArray("target")]
+[node name="Camera2D" parent="." unique_id=1462019472 instance=ExtResource("13_rysoc")]
 position = Vector2(-148, 24)
-zoom = Vector2(2.275, 2.275)
-script = ExtResource("9_kvpfn")
-target = NodePath("../Player")
 
 [node name="MapGenerator" type="Node" parent="." unique_id=1738622800 node_paths=PackedStringArray("tilemap_layer")]
 script = ExtResource("3_lnu2h")

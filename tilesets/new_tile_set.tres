@@ -3,14 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://d3asoyjqrf703" path="res://assets/sprites/tilesheets/world1-tilesheet.png" id="1_48p14"]
 [ext_resource type="PackedScene" uid="uid://e3dupl3po58e" path="res://scenes/tiling/tile_pattern_paster.tscn" id="2_gjbu8"]
 [ext_resource type="PackedScene" uid="uid://b282mds63apfw" path="res://scenes/tiling/tile_pattern_origin.tscn" id="3_am8ro"]
+[ext_resource type="PackedScene" uid="uid://dewlelmwinl0f" path="res://scenes/tiling/player spawner tiles/player_spawn_tile_left.tscn" id="3_hhb8b"]
+[ext_resource type="PackedScene" uid="uid://bhw2hwg6pxv4m" path="res://scenes/tiling/player spawner tiles/player_spawn_tile_right.tscn" id="4_dmb64"]
 [ext_resource type="PackedScene" uid="uid://bfffgwh604vn1" path="res://scenes/tiling/tile pasters/tile_pattern_paster_down.tscn" id="4_xy6nx"]
 [ext_resource type="PackedScene" uid="uid://cr80wtkmbpbf7" path="res://scenes/tiling/tile pasters/tile_pattern_paster_left.tscn" id="5_02ied"]
+[ext_resource type="PackedScene" uid="uid://4aj4bsljbooi" path="res://scenes/tiling/player spawner tiles/player_spawn_tile_up.tscn" id="5_p3g5g"]
 [ext_resource type="PackedScene" uid="uid://cy03hdd5tihd0" path="res://scenes/tiling/tile pasters/tile_pattern_paster_right.tscn" id="6_qfb6t"]
 [ext_resource type="PackedScene" uid="uid://bjrq7jq3yy3pw" path="res://scenes/tiling/tile pasters/tile_pattern_paster_up.tscn" id="7_kxeu4"]
 [ext_resource type="PackedScene" uid="uid://bw6j01wyrnsp8" path="res://scenes/objects/chests/basic_chest/basic_chest_down.tscn" id="8_2vk1n"]
+[ext_resource type="PackedScene" uid="uid://6akkd5x7b6j2" path="res://scenes/tiling/spawn_room_paster_tile.tscn" id="9_pilod"]
 [ext_resource type="PackedScene" uid="uid://bnxyvo316rmvn" path="res://scenes/objects/chests/basic_chest/basic_chest_left.tscn" id="9_wujoy"]
 [ext_resource type="PackedScene" uid="uid://befeatevosuie" path="res://scenes/objects/chests/basic_chest/basic_chest_right.tscn" id="10_kneqj"]
 [ext_resource type="PackedScene" uid="uid://bcba4xv8gqvj" path="res://scenes/objects/chests/basic_chest/basic_chest_up.tscn" id="11_d7s4k"]
+[ext_resource type="PackedScene" uid="uid://ehm4pueg0qwk" path="res://scenes/tiling/player spawner tiles/player_spawn_tile_down.tscn" id="12_actlt"]
 [ext_resource type="PackedScene" uid="uid://da7w3xg5yal20" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_left.tscn" id="12_wujoy"]
 [ext_resource type="PackedScene" uid="uid://f4nr34luftje" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_down.tscn" id="13_k3xfj"]
 [ext_resource type="PackedScene" uid="uid://dsl08deohbmky" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_right.tscn" id="14_3fw8q"]
@@ -49,6 +54,11 @@ scenes/3/scene = ExtResource("4_xy6nx")
 scenes/4/scene = ExtResource("5_02ied")
 scenes/5/scene = ExtResource("6_qfb6t")
 scenes/6/scene = ExtResource("7_kxeu4")
+scenes/8/scene = ExtResource("9_pilod")
+scenes/9/scene = ExtResource("12_actlt")
+scenes/10/scene = ExtResource("3_hhb8b")
+scenes/11/scene = ExtResource("4_dmb64")
+scenes/12/scene = ExtResource("5_p3g5g")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k3xfj"]
 resource_name = "chests"

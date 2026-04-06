@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://6akkd5x7b6j2"]
+
+[ext_resource type="Script" uid="uid://185b67k1scm6" path="res://scripts/tiling scripts/pasters/spawn_room_paster_tile.gd" id="1_8ppr5"]
+
+[sub_resource type="Gradient" id="Gradient_ejfgc"]
+offsets = PackedFloat32Array(0, 0.16917293, 0.43233082, 0.92105263)
+colors = PackedColorArray(0, 0, 0, 1, 0.9764706, 0.9764706, 0.59607846, 1, 0.4354655, 0.8278928, 1.1551381e-06, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8ppr5"]
+noise_type = 2
+frequency = 0.1055
+fractal_type = 0
+cellular_jitter = 1.38
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3k60s"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_8ppr5")
+color_ramp = SubResource("Gradient_ejfgc")
+seamless = true
+in_3d_space = true
+seamless_blend_skirt = 0.655
+
+[sub_resource type="Gradient" id="Gradient_8ppr5"]
+colors = PackedColorArray(0.18359044, 0.18359044, 0.18359044, 1, 1, 1, 0.16470589, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3k60s"]
+gradient = SubResource("Gradient_8ppr5")
+width = 32
+height = 32
+fill_from = Vector2(1, 0.52816904)
+fill_to = Vector2(0.2746479, 0.5657277)
+
+[node name="SpawnRoomPasterTile" type="Sprite2D" unique_id=605307948]
+texture = SubResource("NoiseTexture2D_3k60s")
+script = ExtResource("1_8ppr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=525225107]
+position = Vector2(-19, 0)
+scale = Vector2(0.1875, 1)
+texture = SubResource("GradientTexture2D_3k60s")

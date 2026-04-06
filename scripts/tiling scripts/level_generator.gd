@@ -35,7 +35,7 @@ var floor_cells: Array[Vector2i]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_level()
+	#generate_level()
 	pass
 	
 func _process(delta):
@@ -93,11 +93,13 @@ func generate_level():
 	clear()
 	draw_ceilings()
 	paste_generated_level()
+	add_spawn_room()
 	add_rooms()
 	draw_walls()
 	#tile_layer.update_internals()
 	
-	
+func add_spawn_room():
+	tile_layer.set_cell(level_center,1,Vector2.ZERO,8)
 	
 func add_rooms():
 	var pasters = 0
@@ -142,7 +144,7 @@ func add_rooms():
 			var uci = 6
 
 			var acceptable :bool = src1 != TileSetScenesCollectionSource and src2 != TileSetScenesCollectionSource and !is_floor.call(sid1,tile_layer.get_cell_atlas_coords(pos1)) and !is_floor.call(sid2,tile_layer.get_cell_atlas_coords(pos2))
-			if acceptable and (pos1 not in potential_cells):
+			if acceptable and (cell not in potential_cells):
 				var ci = dci
 				
 				match j:
@@ -163,9 +165,9 @@ func add_rooms():
 					7:
 						ci = lci
 				
-				potential_cells.push_back(pos1)
-				potential_cells.push_back(pos2)
-				potential_cell_datas.push_back([pos1,ci])
+				potential_cells.push_back(cell)
+				potential_cells.push_back(cell)
+				potential_cell_datas.push_back([cell,ci])
 				#tile_layer.set_cell(pos1,1,Vector2i.ZERO,ci)
 	#print(floor_cells.size())
 	#print(potential_cell_datas.size())
@@ -181,10 +183,7 @@ func add_rooms():
 		
 		pasters+=1
 		
-		
-		
-		
-		
+			
 	
 func paste_generated_level():
 	var node_positions: Array[Vector2] = [level_center]
@@ -320,4 +319,11 @@ func clear():
 	#print("cleared tiles")
 	tile_layer.clear()
 	$ObjectsTileMapLayer.clear()
+	var player = get_tree().root.find_child("Player",true,false)
+	var tries = 20
+	while (player and tries):
+		player.queue_free()
+		player = get_tree().root.find_child("Player",true,false)
+		tries -= 1
+		
 	floor_cells = []

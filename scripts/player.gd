@@ -95,6 +95,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
+
 	if Input.is_action_pressed("attack") and not attacking:
 		if main_hand_item:
 			attack()
