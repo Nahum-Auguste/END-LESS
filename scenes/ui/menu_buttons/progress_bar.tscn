@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bc8rhvg6460wb"]
+
+[ext_resource type="Texture2D" uid="uid://bj60oppa4dkht" path="res://assets/sprites/ui/progress_bar_empty.png" id="1_4iiea"]
+[ext_resource type="Texture2D" uid="uid://8wlbxypofxnp" path="res://assets/sprites/ui/progress_bar_full.png" id="2_w01q7"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" unique_id=1923992776]
+offset_right = 450.0
+offset_bottom = 32.0
+step = 10.0
+texture_under = ExtResource("1_4iiea")
+texture_progress = ExtResource("2_w01q7")

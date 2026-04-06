@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cobiywn8tw4f6"]
+
+[ext_resource type="PackedScene" uid="uid://dkuc3p0qsxc4t" path="res://scenes/ui/menu_buttons/left_arrow_button.tscn" id="1_b06u7"]
+[ext_resource type="Script" uid="uid://dkan55ecsevew" path="res://scenes/ui/menu_buttons/sound_bar.gd" id="1_ksswp"]
+[ext_resource type="PackedScene" uid="uid://bc8rhvg6460wb" path="res://scenes/ui/menu_buttons/progress_bar.tscn" id="2_ksswp"]
+[ext_resource type="PackedScene" uid="uid://uijad3lf2xsr" path="res://scenes/ui/menu_buttons/right_arrow_button.tscn" id="4_vnkmm"]
+[ext_resource type="PackedScene" uid="uid://5mcrdg644o2e" path="res://scenes/ui/menu_buttons/toggle.tscn" id="5_xscud"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06u7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ksswp"]
+
+[node name="sound_bar" type="Control" unique_id=418467069]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ksswp")
+
+[node name="left_arrow" parent="." unique_id=1045118006 instance=ExtResource("1_b06u7")]
+layout_mode = 0
+offset_left = 249.0
+offset_top = -17.0
+offset_right = 281.0
+offset_bottom = 15.0
+
+[node name="right_arrow" parent="." unique_id=572653011 instance=ExtResource("4_vnkmm")]
+layout_mode = 0
+offset_left = 335.0
+offset_top = -17.0
+offset_right = 367.0
+offset_bottom = 15.0
+
+[node name="bar" parent="." unique_id=1923992776 instance=ExtResource("2_ksswp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -16.0
+offset_right = 242.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="percent" type="ProgressBar" parent="bar" unique_id=760220618]
+layout_mode = 0
+offset_left = 492.0
+offset_top = -5.0
+offset_right = 538.0
+offset_bottom = 31.0
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 23
+theme_override_styles/background = SubResource("StyleBoxEmpty_b06u7")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_ksswp")
+step = 10.0
+fill_mode = 3
+
+[node name="mute" parent="." unique_id=925975189 instance=ExtResource("5_xscud")]
+layout_mode = 0
+offset_left = -335.0
+offset_top = -16.0
+offset_right = -213.0
+offset_bottom = 16.0
+
+[node name="Label" type="Label" parent="mute" unique_id=1055120396]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 108.0
+offset_bottom = 34.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 26
+text = "MUTE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="pressed" from="left_arrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="right_arrow" to="." method="_on_right_arrow_pressed"]
+[connection signal="value_changed" from="bar" to="." method="_on_bar_value_changed"]
+[connection signal="value_changed" from="bar/percent" to="." method="_on_progress_bar_value_changed"]
+[connection signal="toggled" from="mute" to="." method="_on_mute_toggled"]

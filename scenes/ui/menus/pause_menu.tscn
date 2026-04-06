@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://rb6urj8basbh"]
+
+[ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="1_5p30d"]
+[ext_resource type="Script" uid="uid://dph2sdawf2jqu" path="res://scenes/ui/menus/pause_menu.gd" id="1_n4ldv"]
+[ext_resource type="Shader" uid="uid://sqfdxmtjbnpk" path="res://scenes/ui/menus/pause_menu.gdshader" id="2_idy5m"]
+[ext_resource type="PackedScene" uid="uid://c80bhyv5au1u5" path="res://scenes/ui/menus/settings_screen.tscn" id="4_idy5m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hf471"]
+shader = ExtResource("2_idy5m")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_2f5f3"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_a3xc8"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 0.8, -0.050000004, -0.13333334, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sn3bg"]
+_data = {
+&"RESET": SubResource("Animation_2f5f3"),
+&"blur": SubResource("Animation_a3xc8")
+}
+
+[node name="pause_menu" type="Control" unique_id=504704094]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n4ldv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1718434991]
+material = SubResource("ShaderMaterial_hf471")
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=202955638]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -132.0
+offset_right = 136.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=82919828]
+layout_mode = 2
+theme_override_constants/separation = 33
+alignment = 1
+
+[node name="resume" parent="PanelContainer/VBoxContainer" unique_id=1736505248 instance=ExtResource("1_5p30d")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/resume" unique_id=2030042933]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.0
+offset_right = 58.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+text = "resume"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="settings" parent="PanelContainer/VBoxContainer" unique_id=109889188 instance=ExtResource("1_5p30d")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/settings" unique_id=2008552140]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.0
+offset_right = 58.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+text = "settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="quit" parent="PanelContainer/VBoxContainer" unique_id=1683848722 instance=ExtResource("1_5p30d")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/quit" unique_id=1906459003]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.0
+offset_right = 58.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+text = "quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1636134405]
+libraries/ = SubResource("AnimationLibrary_sn3bg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=416926672]
+
+[node name="settings_screen" parent="CanvasLayer" unique_id=597405885 instance=ExtResource("4_idy5m")]
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

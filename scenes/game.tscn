@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bjenn33xk68qg" path="res://scenes/ui/hud/player_status.tscn" id="12_dinhu"]
 [ext_resource type="AudioStream" uid="uid://decfa2ftt058d" path="res://assets/music/ghost_house_test.wav" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="13_rysoc"]
+[ext_resource type="PackedScene" uid="uid://rb6urj8basbh" path="res://scenes/ui/menus/pause_menu.tscn" id="16_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kice"]
 texture = ExtResource("1_rysoc")
@@ -79,6 +80,14 @@ sources/0 = SubResource("TileSetScenesCollectionSource_gee14")
 
 [node name="Game" type="Node2D" unique_id=788731704]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
+script = ExtResource("6_u5sy4")
+
+[node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 node_paths=PackedStringArray("player") instance=ExtResource("12_dinhu")]
+player = NodePath("../../Player")
+
+[node name="pause_menu" parent="CanvasLayer" unique_id=504704094 instance=ExtResource("16_ssvqc")]
+
 [node name="TileMaps" type="Node2D" parent="." unique_id=1270821007]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMaps" unique_id=1233330161]
@@ -128,12 +137,6 @@ floor_dimensions = Vector2i(200, 200)
 total_steps = 4
 tilemap_layer = NodePath("../TileMaps/TileMapLayer")
 metadata/_custom_type_script = "uid://c7x228j2ys2lh"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
-script = ExtResource("6_u5sy4")
-
-[node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 node_paths=PackedStringArray("player") instance=ExtResource("12_dinhu")]
-player = NodePath("../../Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1449308404]
 navigation_polygon = SubResource("NavigationPolygon_dinhu")
