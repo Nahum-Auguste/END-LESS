@@ -1,5 +1,5 @@
 
-extends AnimatedSprite2D
+class_name WarlockOrbAttack extends AnimatedSprite2D
 
 var speed:float = .7
 var attack_damage = 4

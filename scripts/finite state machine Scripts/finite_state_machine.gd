@@ -1,10 +1,6 @@
 class_name FSM extends Object
 
 var current_state: State
-var parent: Monster
-
-func _init(parent: Monster):
-	self.parent = parent
 
 func update(delta):
 	if current_state:

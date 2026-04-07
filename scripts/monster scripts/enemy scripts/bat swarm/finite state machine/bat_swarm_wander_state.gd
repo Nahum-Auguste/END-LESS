@@ -1,4 +1,4 @@
-class_name BatSwarmWanderState extends State
+class_name BatSwarmWanderState extends BatSwarmState
 
 
 

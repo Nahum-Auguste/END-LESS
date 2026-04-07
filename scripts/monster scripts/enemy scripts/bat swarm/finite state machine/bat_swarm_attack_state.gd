@@ -1,4 +1,4 @@
-class_name BatSwarmAttackState extends State
+class_name BatSwarmAttackState extends BatSwarmState
 
 var parent : BatSwarm
 var nav_agent: NavigationAgent2D

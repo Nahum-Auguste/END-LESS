@@ -1,4 +1,4 @@
-class_name BatSwarmIdleState extends State
+class_name BatSwarmIdleState extends BatSwarmState
 
 var parent : BatSwarm
 

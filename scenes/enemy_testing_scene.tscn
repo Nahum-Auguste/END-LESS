@@ -1,14 +1,67 @@
 [gd_scene format=4 uid="uid://rgen6618bouq"]
 
-[ext_resource type="PackedScene" uid="uid://m3bj7e5v3b3j" path="res://scenes/enemies/bat_swarm.tscn" id="1_ertn4"]
 [ext_resource type="TileSet" uid="uid://dp3ety8uq0nfc" path="res://tilesets/new_tile_set.tres" id="2_lht80"]
 [ext_resource type="PackedScene" uid="uid://g8oort1yt05r" path="res://scenes/player.tscn" id="3_lht80"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="4_0fqcd"]
+[ext_resource type="Script" uid="uid://l0qta7xn1a1q" path="res://scripts/monster scripts/enemy scripts/warlock/warlock.gd" id="4_3teur"]
+[ext_resource type="Texture2D" uid="uid://dn6tjd568lh8r" path="res://assets/sprites/enemies/warlock/warlock_spritesheet.png" id="5_u2380"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4l7h"]
+size = Vector2(34, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4l7h"]
+radius = 139.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj2cs"]
+size = Vector2(34, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i8k0"]
+atlas = ExtResource("5_u2380")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyihq"]
+atlas = ExtResource("5_u2380")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyhbx"]
+atlas = ExtResource("5_u2380")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuvek"]
+atlas = ExtResource("5_u2380")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x32xk"]
+atlas = ExtResource("5_u2380")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xqole"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i8k0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyihq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyhbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuvek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x32xk")
+}],
+"loop": false,
+"name": &"primed",
+"speed": 17.0
+}]
 
 [node name="EnemyTestingScene" type="Node2D" unique_id=2065702540]
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("3_lht80")]
-position = Vector2(-100, 37)
+position = Vector2(15, 112)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1120115649]
 tile_map_data = PackedByteArray("AAD1//n/AAAAAAIAAAD1//r/AAAAAAIAAAD1//v/AAAAAAIAAAD1//z/AAAAAAIAAAD1//3/AAAAAAIAAAD1//7/AAAAAAIAAAD1////AAAAAAIAAAD1/wAAAAAAAAIAAAD1/wEAAAAAAAIAAAD1/wIAAAAAAAIAAAD1/wMAAAAAAAIAAAD1/wQAAAAAAAIAAAD1/wUAAAAAAAIAAAD1/wYAAAAAAAIAAAD2//n/AAAAAAIAAAD2//r/AAAAAAIAAAD2//v/AAAAAAAAAAD2//z/AAAAAAEAAAD2//3/AAAAAAIAAAD2//7/AAAAAAIAAAD2////AAAAAAIAAAD2/wAAAAAAAAIAAAD2/wEAAAAAAAIAAAD2/wIAAAAAAAIAAAD2/wMAAAAAAAIAAAD2/wQAAAAAAAAAAAD2/wUAAAAAAAEAAAD2/wYAAAAAAAIAAAD3//n/AAAAAAIAAAD3//r/AAAAAAAAAAD3//v/AAAAAAEAAAD3//z/AAAAAAIAAAD3//3/AAAAAAIAAAD3//7/AAAAAAAAAAD3////AAAAAAEAAAD3/wAAAAAAAAIAAAD3/wEAAAAAAAIAAAD3/wIAAAAAAAIAAAD3/wMAAAAAAAIAAAD3/wQAAAAAAAAAAAD3/wUAAAAAAAEAAAD3/wYAAAAAAAIAAAD4//n/AAAAAAIAAAD4//r/AAAAAAAAAAD4//v/AAAAAAEAAAD4//z/AAAAAAIAAAD4//3/AAAAAAAAAAD4//7/AAAAAAAAAAD4////AAAAAAEAAAD4/wAAAAAAAAIAAAD4/wEAAAAAAAIAAAD4/wIAAAAAAAIAAAD4/wMAAAAAAAIAAAD4/wQAAAAAAAAAAAD4/wUAAAAAAAEAAAD4/wYAAAAAAAIAAAD5//n/AAAAAAIAAAD5//r/AAAAAAIAAAD5//v/AAAAAAIAAAD5//z/AAAAAAIAAAD5//3/AAAAAAAAAAD5//7/AAAAAAEAAAD5////AAAAAAIAAAD5/wAAAAAAAAIAAAD5/wEAAAAAAAIAAAD5/wIAAAAAAAIAAAD5/wMAAAAAAAIAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAEAAAD6//n/AAAAAAIAAAD6//r/AAAAAAIAAAD6//v/AAAAAAIAAAD6//z/AAAAAAIAAAD6//3/AAAAAAAAAAD6//7/AAAAAAEAAAD6////AAAAAAIAAAD6/wAAAAAAAAIAAAD6/wEAAAAAAAIAAAD6/wIAAAAAAAIAAAD6/wMAAAAAAAIAAAD6/wQAAAAAAAIAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAEAAAD7//n/AAAAAAIAAAD7//r/AAAAAAIAAAD7//v/AAAAAAIAAAD7//z/AAAAAAIAAAD7//3/AAAAAAIAAAD7//7/AAAAAAIAAAD7////AAAAAAIAAAD7/wAAAAAAAAIAAAD7/wEAAAAAAAIAAAD7/wIAAAAAAAIAAAD7/wMAAAAAAAIAAAD7/wQAAAAAAAIAAAD7/wUAAAAAAAIAAAD7/wYAAAAAAAIAAAD8//n/AAAAAAIAAAD8//r/AAAAAAIAAAD8//v/AAAAAAIAAAD8//z/AAAAAAIAAAD8//3/AAAAAAIAAAD8//7/AAAAAAIAAAD8////AAAAAAIAAAD8/wAAAAAAAAIAAAD8/wEAAAAAAAIAAAD8/wIAAAAAAAIAAAD8/wMAAAAAAAIAAAD8/wQAAAAAAAIAAAD8/wUAAAAAAAIAAAD8/wYAAAAAAAIAAAD9//n/AAAAAAIAAAD9//r/AAAAAAIAAAD9//v/AAAAAAIAAAD9//z/AAAAAAIAAAD9//3/AAAAAAIAAAD9//7/AAAAAAIAAAD9////AAAAAAIAAAD9/wAAAAAAAAIAAAD9/wEAAAAAAAIAAAD9/wIAAAAAAAIAAAD9/wMAAAAAAAIAAAD9/wQAAAAAAAIAAAD9/wUAAAAAAAIAAAD9/wYAAAAAAAIAAAD+//n/AAAAAAIAAAD+//r/AAAAAAIAAAD+//v/AAAAAAIAAAD+//z/AAAAAAIAAAD+//3/AAAAAAIAAAD+//7/AAAAAAIAAAD+////AAAAAAIAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAIAAAD+/wIAAAAAAAIAAAD+/wMAAAAAAAIAAAD+/wQAAAAAAAIAAAD+/wUAAAAAAAIAAAD+/wYAAAAAAAIAAAD///n/AAAAAAIAAAD///r/AAAAAAIAAAD///v/AAAAAAIAAAD///z/AAAAAAIAAAD///3/AAAAAAIAAAD///7/AAAAAAIAAAD/////AAAAAAIAAAD//wAAAAAAAAIAAAD//wEAAAAAAAIAAAD//wIAAAAAAAIAAAD//wMAAAAAAAIAAAD//wQAAAAAAAIAAAD//wUAAAAAAAIAAAD//wYAAAAAAAIAAAAAAPn/AAAAAAIAAAAAAPr/AAAAAAIAAAAAAPv/AAAAAAIAAAAAAPz/AAAAAAIAAAAAAP3/AAAAAAIAAAAAAP7/AAAAAAIAAAAAAP//AAAAAAIAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAIAAAAAAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAAAAAYAAAAAAAIAAAABAPn/AAAAAAAAAAABAPr/AAAAAAEAAAABAPv/AAAAAAEAAAABAPz/AAAAAAIAAAABAP3/AAAAAAIAAAABAP7/AAAAAAIAAAABAP//AAAAAAIAAAABAAAAAAAAAAIAAAABAAEAAAAAAAIAAAABAAIAAAAAAAIAAAABAAMAAAAAAAIAAAABAAQAAAAAAAIAAAABAAUAAAAAAAIAAAABAAYAAAAAAAIAAAACAPn/AAAAAAAAAAACAPr/AAAAAAAAAAACAPv/AAAAAAEAAAACAPz/AAAAAAEAAAACAP3/AAAAAAIAAAACAP7/AAAAAAIAAAACAP//AAAAAAIAAAACAAAAAAAAAAIAAAACAAEAAAAAAAIAAAACAAIAAAAAAAIAAAACAAMAAAAAAAIAAAACAAQAAAAAAAIAAAACAAUAAAAAAAIAAAACAAYAAAAAAAIAAAADAPn/AAAAAAIAAAADAPr/AAAAAAAAAAADAPv/AAAAAAEAAAADAPz/AAAAAAEAAAADAP3/AAAAAAIAAAADAP7/AAAAAAIAAAADAP//AAAAAAIAAAADAAAAAAAAAAIAAAADAAEAAAAAAAIAAAADAAIAAAAAAAIAAAADAAMAAAAAAAIAAAADAAQAAAAAAAIAAAADAAUAAAAAAAIAAAADAAYAAAAAAAIAAAAEAPn/AAAAAAIAAAAEAPr/AAAAAAAAAAAEAPv/AAAAAAEAAAAEAPz/AAAAAAEAAAAEAP3/AAAAAAIAAAAEAP7/AAAAAAIAAAAEAP//AAAAAAIAAAAEAAAAAAAAAAIAAAAEAAEAAAAAAAIAAAAEAAIAAAAAAAIAAAAEAAMAAAAAAAIAAAAEAAQAAAAAAAIAAAAEAAUAAAAAAAIAAAAEAAYAAAAAAAIAAAAFAPn/AAAAAAIAAAAFAPr/AAAAAAAAAAAFAPv/AAAAAAEAAAAFAPz/AAAAAAEAAAAFAP3/AAAAAAIAAAAFAP7/AAAAAAIAAAAFAP//AAAAAAIAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAEAAAAFAAMAAAAAAAEAAAAFAAQAAAAAAAIAAAAFAAUAAAAAAAIAAAAFAAYAAAAAAAIAAAAGAPn/AAAAAAIAAAAGAPr/AAAAAAAAAAAGAPv/AAAAAAEAAAAGAPz/AAAAAAEAAAAGAP3/AAAAAAIAAAAGAP7/AAAAAAIAAAAGAP//AAAAAAIAAAAGAAAAAAAAAAIAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAEAAAAGAAMAAAAAAAEAAAAGAAQAAAAAAAIAAAAGAAUAAAAAAAIAAAAGAAYAAAAAAAIAAAAHAPn/AAAAAAIAAAAHAPr/AAAAAAIAAAAHAPv/AAAAAAIAAAAHAPz/AAAAAAIAAAAHAP3/AAAAAAIAAAAHAP7/AAAAAAIAAAAHAP//AAAAAAIAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAEAAAAHAAMAAAAAAAEAAAAHAAQAAAAAAAIAAAAHAAUAAAAAAAIAAAAHAAYAAAAAAAIAAAAIAPn/AAAAAAIAAAAIAPr/AAAAAAIAAAAIAPv/AAAAAAIAAAAIAPz/AAAAAAIAAAAIAP3/AAAAAAIAAAAIAP7/AAAAAAIAAAAIAP//AAAAAAIAAAAIAAAAAAAAAAIAAAAIAAEAAAAAAAIAAAAIAAIAAAAAAAIAAAAIAAMAAAAAAAIAAAAIAAQAAAAAAAIAAAAIAAUAAAAAAAIAAAAIAAYAAAAAAAIAAAAJAPn/AAAAAAIAAAAJAPr/AAAAAAIAAAAJAPv/AAAAAAIAAAAJAPz/AAAAAAIAAAAJAP3/AAAAAAIAAAAJAP7/AAAAAAIAAAAJAP//AAAAAAIAAAAJAAAAAAAAAAIAAAAJAAEAAAAAAAIAAAAJAAIAAAAAAAIAAAAJAAMAAAAAAAIAAAAJAAQAAAAAAAIAAAAJAAUAAAAAAAIAAAAJAAYAAAAAAAIAAAAKAPn/AAAAAAIAAAAKAPr/AAAAAAIAAAAKAPv/AAAAAAIAAAAKAPz/AAAAAAIAAAAKAP3/AAAAAAIAAAAKAP7/AAAAAAIAAAAKAP//AAAAAAIAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAKAAIAAAAAAAIAAAAKAAMAAAAAAAIAAAAKAAQAAAAAAAIAAAAKAAUAAAAAAAIAAAAKAAYAAAAAAAIAAAALAPn/AAAAAAIAAAALAPr/AAAAAAIAAAALAPv/AAAAAAIAAAALAPz/AAAAAAIAAAALAP3/AAAAAAIAAAALAP7/AAAAAAIAAAALAP//AAAAAAIAAAALAAAAAAAAAAIAAAALAAEAAAAAAAIAAAALAAIAAAAAAAIAAAALAAMAAAAAAAIAAAALAAQAAAAAAAIAAAALAAUAAAAAAAIAAAALAAYAAAAAAAIAAAA=")
@@ -16,42 +69,52 @@ tile_set = ExtResource("2_lht80")
 
 [node name="Camera2D" parent="." unique_id=1462019472 instance=ExtResource("4_0fqcd")]
 
-[node name="BatSwarm" parent="." unique_id=1469739853 instance=ExtResource("1_ertn4")]
-position = Vector2(-80.856766, -91.95973)
-base_detection_range = null
-detection_mult = null
-wander_range = null
-min_wander_interval = null
-max_wander_interval = null
-attack_interval = null
-killable = null
+[node name="Warlock" type="CharacterBody2D" parent="." unique_id=777216955 node_paths=PackedStringArray("player")]
+position = Vector2(136, 9)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("4_3teur")
+default_state = "wander"
+base_detection_range = 139.0
+attack_detection_range = 240.0
+wander_range = 141.0
+min_teleportation_range = 31.0
+max_teleportation_range = 99.0
+orb_burst_attack_cone = 45.0
+player = NodePath("../Player")
+metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
-[node name="BatSwarm2" parent="." unique_id=801048355 instance=ExtResource("1_ertn4")]
-position = Vector2(-3, -105)
-base_detection_range = null
-detection_mult = null
-wander_range = null
-min_wander_interval = null
-max_wander_interval = null
-attack_interval = null
-killable = null
+[node name="HurtBox" type="Area2D" parent="Warlock" unique_id=665940647]
+collision_layer = 2
+collision_mask = 8
 
-[node name="BatSwarm3" parent="." unique_id=164442452 instance=ExtResource("1_ertn4")]
-position = Vector2(7, 200)
-base_detection_range = null
-detection_mult = null
-wander_range = null
-min_wander_interval = null
-max_wander_interval = null
-attack_interval = null
-killable = null
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warlock/HurtBox" unique_id=426207971]
+shape = SubResource("RectangleShape2D_s4l7h")
+debug_color = Color(0.7591134, 0.16996804, 2.8878452e-07, 0.41568628)
 
-[node name="BatSwarm4" parent="." unique_id=486206944 instance=ExtResource("1_ertn4")]
-position = Vector2(119, -38)
-base_detection_range = null
-detection_mult = null
-wander_range = null
-min_wander_interval = null
-max_wander_interval = null
-attack_interval = null
-killable = null
+[node name="DetectionArea" type="Area2D" parent="Warlock" unique_id=268806689]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warlock/DetectionArea" unique_id=1295009768]
+shape = SubResource("CircleShape2D_s4l7h")
+debug_color = Color(0.7764706, 0.6862745, 0, 0.1764706)
+
+[node name="TeleportSpotBodyArea" type="Area2D" parent="Warlock" unique_id=308405185]
+position = Vector2(21.797361, -20.687286)
+collision_layer = 0
+collision_mask = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warlock/TeleportSpotBodyArea" unique_id=349742675]
+shape = SubResource("RectangleShape2D_mj2cs")
+debug_color = Color(0.99197274, 0, 0.26462436, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warlock" unique_id=55812942]
+shape = SubResource("RectangleShape2D_mj2cs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Warlock" unique_id=633032348]
+sprite_frames = SubResource("SpriteFrames_xqole")
+animation = &"primed"
+speed_scale = -1.0
+
+[connection signal="body_entered" from="Warlock/DetectionArea" to="Warlock" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Warlock/DetectionArea" to="Warlock" method="_on_detection_area_body_exited"]
