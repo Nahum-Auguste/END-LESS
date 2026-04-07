@@ -1,3 +1,4 @@
+
 class_name Enemy extends Monster
 
 var hitbox: Area2D
@@ -11,10 +12,11 @@ var player_seen = false
 var player_escape_time = 3
 var attacking = false
 var attack_speed = 1
-var attack_damage = 4
+var attack_damage = 0
 var hurt_box_colliding_with_player = false
 @onready var player_escape_timer = Timer.new()
 @export var player: Player
+@export var target_position: Vector2
 var can_display_corpse_inventory:bool = false
 var possible_item_drops_data: Dictionary[int,Dictionary] = {
 	
@@ -24,13 +26,14 @@ var items: Array[Item] = []
 func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 	
+	
 func _ready():
 	hitbox = get_node("./HitBox")
 	if (hitbox):
 		hitbox.connect("mouse_entered",hitbox_hovered)
 		hitbox.connect("mouse_exited",hitbox_exited)
 		
-	create_corpse_inventory()
+	#create_corpse_inventory()
 	setup_player_escape_timer()
 	
 func setup_player_escape_timer():

@@ -1469,7 +1469,7 @@ radius = 30.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
 
 [node name="Player" type="CharacterBody2D" unique_id=806514]
-collision_mask = 7
+collision_mask = 15
 platform_floor_layers = 0
 script = ExtResource("1_g2els")
 
@@ -1492,6 +1492,7 @@ scale = Vector2(0.59, 0.59)
 texture = ExtResource("8_ur7pv")
 
 [node name="SwordSwingHitBox" type="Node2D" parent="." unique_id=585961415 node_paths=PackedStringArray("attack_effect_sprite")]
+visible = false
 script = ExtResource("9_ur7pv")
 attack_effect_sprite = NodePath("../AttackEffectSprite")
 added_range = 10.0
@@ -1530,6 +1531,14 @@ texture = ExtResource("3_y4r1p")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1979280808]
 current = true
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1462812389]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=161785613]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_jej6c")
+debug_color = Color(0.92156863, 0, 0.6862745, 0.13725491)
 
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]

@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 InventoryManager="*uid://bkhc40jsxthe5"
 GroundGuiCanvas="*uid://del2ua8ddsqph"
 PlayerGuiCanvas="*uid://4lh87uosaaxa"
+LayerConstants="*uid://005smirbv4k"
 
 [debug]
 

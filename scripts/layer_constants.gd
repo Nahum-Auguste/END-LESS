@@ -1,16 +1,9 @@
-class_name LayerConstants extends Node
+@tool
 
-static var PlayerLayer = 1 
-static var EnemyLayer = 2 
-static var TileLayer = 3 
-static var AttackLayer = 4
-static var AttackableObjectsLayer = 5
+extends Node
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+var PlayerLayer = 1 
+var EnemyLayer = 2 
+var TileLayer = 3 
+var AttackLayer = 4
+var AttackableObjectsLayer = 5

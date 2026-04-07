@@ -5,6 +5,7 @@ var slot_hovered: ItemSlot
 var slot_clicked: ItemSlot
 var hovered_inventory:Control
 
+var num :int = 2
 
 
 func _process(delta):
