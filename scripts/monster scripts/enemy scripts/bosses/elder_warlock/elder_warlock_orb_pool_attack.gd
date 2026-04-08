@@ -3,6 +3,8 @@
 class_name OrbSpikeAttack extends Node2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @export_tool_button("play attack") var play = start
+var scale_angle = 0
+@onready var base_pool_scale = $Pool.scale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,9 +14,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	scale_angle +=3
 	#start()
 	if !$Pool/HurtBox/CollisionShape2D.disabled:
-		$Pool.skew += 10
+		$Pool.skew += .1
+		$Pool.scale = base_pool_scale * clamp(abs(cos(deg_to_rad(scale_angle))),.3,1)
 	pass
 	
 func start():
@@ -23,6 +27,7 @@ func start():
 		$Pool.skew = 0
 		animator.play("charge")
 		await animator.animation_finished
+		print("stopped")
 		animator.stop()
 		queue_free()
 	

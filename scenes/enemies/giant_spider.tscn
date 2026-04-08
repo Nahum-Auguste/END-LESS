@@ -62,8 +62,6 @@ platform_floor_layers = 0
 script = ExtResource("1_j3pyh")
 base_detection_range = 96.0
 attack_detection_range = 163.0
-min_spiderlings = null
-max_spiderlings = null
 
 [node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "nav_agent")]
 script = ExtResource("2_rk4hc")
@@ -118,7 +116,7 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_j3pyh")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
-target_position = Vector2(61.370636, -74.580666)
+target_position = Vector2(-64.21272, 16.674768)
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1

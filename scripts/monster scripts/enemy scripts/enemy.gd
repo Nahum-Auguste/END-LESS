@@ -123,6 +123,8 @@ func _physics_process(delta):
 			can_display_corpse_inventory = (player and global_position.distance_to(player.global_position)<=corpse_inventory_can_display_range)
 		else:
 			can_display_corpse_inventory = false
+			
+	
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:

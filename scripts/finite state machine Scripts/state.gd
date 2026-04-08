@@ -3,7 +3,7 @@
 class_name State extends Node
 
 var fsm: FSM
-var parent: Monster
+var parent: Enemy
 var nav_agent: NavigationAgent2D
 
 func _ready():

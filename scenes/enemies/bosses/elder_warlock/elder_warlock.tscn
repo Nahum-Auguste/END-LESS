@@ -2,11 +2,22 @@
 
 [ext_resource type="Script" uid="uid://dxtuqkt7psslq" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/elder_warlock.gd" id="1_0c6lq"]
 [ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_ibwrd"]
+[ext_resource type="Script" uid="uid://eep0mvs0akaa" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/elder_warlock_fsm.gd" id="2_0n1ll"]
+[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/wander_state.gd" id="3_ep43u"]
+[ext_resource type="Script" uid="uid://blvpf4a8n3u1w" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/attacks/shoot_orbs.gd" id="4_ep43u"]
+[ext_resource type="Script" uid="uid://bby64d7nid8rr" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/attacks/shoot_orbs_and_spawn_orb_traps.gd" id="5_dxdn7"]
 [ext_resource type="PackedScene" uid="uid://buwvnamwl0ajg" path="res://scenes/enemies/bosses/elder_warlock/elder_warlock_hand.tscn" id="6_5frxb"]
+[ext_resource type="Script" uid="uid://vkhy8xj2gh70" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/attacks/spawn_orb_traps.gd" id="6_tj8l3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ibwrd"]
 radius = 13.0
 height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c6lq"]
+radius = 173.07224
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxdn7"]
+radius = 50.303696
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_370fl"]
 atlas = ExtResource("1_ibwrd")
@@ -59,28 +70,71 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0c6lq"]
-radius = 173.07224
-
 [node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
+position = Vector2(-0.08039981, 0)
+scale = Vector2(1.625, 1.625)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 21
 script = ExtResource("1_0c6lq")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
-position = Vector2(0, 106)
-zoom = Vector2(2.125, 2.125)
+[node name="ElderWarlockFSM" type="Node" parent="." unique_id=1151658549 node_paths=PackedStringArray("wander_state", "close_range_attack", "mid_range_attack", "far_range_attack", "nav_agent")]
+script = ExtResource("2_0n1ll")
+wander_state = NodePath("WanderState")
+close_range_attack = NodePath("ShootOrbs")
+mid_range_attack = NodePath("ShootOrbsAndSpawnTraps")
+far_range_attack = NodePath("SpawnOrbTraps")
+close_range_attack_range = 85.0
+mid_range_attack_range = 127.0
+far_range_attack_range = 195.0
+nav_agent = NodePath("../NavigationAgent2D")
+metadata/_custom_type_script = "uid://eep0mvs0akaa"
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1382253133]
+[node name="WanderState" type="Node" parent="ElderWarlockFSM" unique_id=36214007]
+script = ExtResource("3_ep43u")
+max_wander_range = 151.0
+metadata/_custom_type_script = "uid://ch20l083cmvr8"
+
+[node name="ShootOrbs" type="Node" parent="ElderWarlockFSM" unique_id=1795509346]
+script = ExtResource("4_ep43u")
+metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
+
+[node name="ReloadTimer" type="Timer" parent="ElderWarlockFSM/ShootOrbs" unique_id=990076445]
+wait_time = 1.605
+one_shot = true
+
+[node name="ShootIntervalTimer" type="Timer" parent="ElderWarlockFSM/ShootOrbs" unique_id=964771106]
+wait_time = 0.164
+one_shot = true
+
+[node name="ShootOrbsAndSpawnTraps" type="Node" parent="ElderWarlockFSM" unique_id=1493763290]
+script = ExtResource("5_dxdn7")
+metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
+
+[node name="SpawnOrbTraps" type="Node" parent="ElderWarlockFSM" unique_id=711893090]
+script = ExtResource("6_tj8l3")
+metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
+
+[node name="SwitchHandTimer" type="Timer" parent="ElderWarlockFSM/SpawnOrbTraps" unique_id=856398687]
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=269389469]
+target_position = Vector2(-47.118652, -81.5367)
+path_desired_distance = 10.0
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.57254905, 0.4745098, 1, 1)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1382253133]
 collision_layer = 2
 collision_mask = 8
 
-[node name="CapsuleCollisionShape" type="CollisionShape2D" parent="HitBox" unique_id=1733947645]
+[node name="CapsuleCollisionShape" type="CollisionShape2D" parent="HurtBox" unique_id=1733947645]
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_ibwrd")
 debug_color = Color(0.9647059, 0, 0.49803922, 0.28627452)
 
-[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="HitBox" unique_id=1377897460]
+[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="HurtBox" unique_id=1377897460]
 position = Vector2(0, 15.5)
 polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, -20, -15.5)
 
@@ -88,9 +142,28 @@ polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, 
 position = Vector2(0, 16)
 polygon = PackedVector2Array(10, -37, 15, -1, 10, 6, -10, 6, -15, -1, -10, -37, 0, -46)
 
+[node name="TeleportArea" type="Area2D" parent="." unique_id=2005192383]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea" unique_id=1709396996]
+shape = SubResource("CircleShape2D_0c6lq")
+debug_color = Color(0, 0.06666667, 0.08627451, 0.68235296)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1024746694]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1236397608]
+shape = SubResource("CircleShape2D_dxdn7")
+debug_color = Color(0.58431375, 0.54901963, 0, 0.20392157)
+
+[node name="TeleportSpot" type="Node2D" parent="." unique_id=972661544]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
+position = Vector2(0, 106)
+zoom = Vector2(2.125, 2.125)
+
 [node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=1732829752]
 sprite_frames = SubResource("SpriteFrames_ep43u")
-animation = &"walk_down"
+animation = &"walk_left"
 
 [node name="RightHand" parent="." unique_id=1698720337 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
 body = NodePath("..")
@@ -99,10 +172,7 @@ body = NodePath("..")
 scale = Vector2(-1, 1)
 body = NodePath("..")
 
-[node name="TeleportSpot" type="Node2D" parent="." unique_id=972661544]
-
-[node name="TeleportArea" type="Area2D" parent="." unique_id=2005192383]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea" unique_id=1709396996]
-shape = SubResource("CircleShape2D_0c6lq")
-debug_color = Color(3.760215e-08, 0.068501174, 0.08698662, 0.21176471)
+[connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ReloadTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ShootIntervalTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_shoot_interval_timer_timeout"]
+[connection signal="timeout" from="ElderWarlockFSM/SpawnOrbTraps/SwitchHandTimer" to="ElderWarlockFSM/SpawnOrbTraps" method="_on_switch_hand_timer_timeout"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
