@@ -4,6 +4,7 @@ class_name ElderWarlockHand extends Node2D
 @onready var emitter_node: Node2D = $Sprite/HandCenter
 @onready var animator: AnimationPlayer = $Sprite/AnimationPlayer
 @export var body: ElderWarlock
+var elder_warlock_prefab: PackedScene = preload("res://scenes/enemies/bosses/elder_warlock/elder_warlock.tscn")
 var orb_pool_prefab: PackedScene = preload("res://scenes/enemies/bosses/elder_warlock/elder_warlock_orb_pool_attack.tscn")
 var orb_prefab: PackedScene = preload("res://scenes/enemies/warlock/warlock_orb_attack.tscn")
 @export_tool_button("shoot orb") var shoot_orb_button = shoot_orb
@@ -25,7 +26,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func play_animation(animation: String, speed: float = 0):
+func play_animation(animation: String, speed: float = 0, on_finish: Callable = func (): pass):
 	# set hand state to active
 	hand_state = HandState.ACTIVE
 	
@@ -41,7 +42,25 @@ func play_animation(animation: String, speed: float = 0):
 	# reset the hand state to inactive after done
 	await animator.animation_finished
 	hand_state = HandState.INACTIVE
+	on_finish.call()
 	animator.stop()
+	
+	
+func do_clone_spell():
+	if body.real_warlock!=body: 
+		push_error("TRIED TO USE ELDER WARLOCK CLONE SPELL AS A CLONE")
+		return
+	play_animation("clone", body.clone_speed)
+	
+func clone():
+	#if !body.is_cloning: return
+	if body.clones.size() >= body.max_clones: return
+	var clone: ElderWarlock = elder_warlock_prefab.instantiate()
+	clone.real_warlock = body.real_warlock
+	body.real_warlock.clones.push_back(clone)
+	body.real_warlock.add_child(clone)
+	clone.left_hand.teleport()
+	body.is_cloning = false
 	
 func do_orb_pool_attack():
 	if hand_state == HandState.ACTIVE: return
@@ -59,12 +78,34 @@ func spawn_orb_pool():
 	pool.global_position = pos
 	
 func teleport():
-	if !body.is_teleporting || !body.teleport_collider || !body.teleport_area_shape: return
+	#if !body.is_teleporting || !body.teleport_collider || !body.teleport_area_shape: return
+	
+	var max_tries = 10
+	var tries = 1
 	var min_range = body.min_teleport_range
-	var range := randf_range(min_range,body.teleport_area_shape.radius)
+	var range := randf_range(min_range,body.teleport_range_shape.radius)
 	var angle = randf_range(0,360)
 	body.teleport_spot.global_position = body.global_position + Vector2(cos(deg_to_rad(angle)),sin(deg_to_rad(angle))) * range
-	body.is_teleporting = false
+	
+	var is_obstructed := func()->bool:
+		var colliders = body.teleport_area.get_overlapping_bodies()
+		#print(colliders)
+		return colliders.size()
+	
+	while (is_obstructed.call() and tries<max_tries):
+		body.teleport_spot.global_position = body.global_position + Vector2(cos(deg_to_rad(angle)),sin(deg_to_rad(angle))) * range
+		tries+=1
+		
+	if is_obstructed.call():
+		print("bad")
+		#body.teleport_spot.position = Vector2.ZERO
+		return
+	else:
+		print("good")
+	
+	#body.is_teleporting = false
+	#print("success")
+	#print("finished teleporting: is teleporting: ",body.is_teleporting)
 	#body.global_position = body.teleport_collider.global_position
 	
 func shoot_orb():

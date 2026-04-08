@@ -60,7 +60,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0c6lq"]
-radius = 173.07224
+radius = 173.85
 
 [node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
 collision_layer = 2
@@ -68,7 +68,7 @@ collision_mask = 4
 script = ExtResource("1_0c6lq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
-position = Vector2(0, 106)
+position = Vector2(0, -4)
 zoom = Vector2(2.125, 2.125)
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1382253133]
@@ -101,8 +101,13 @@ body = NodePath("..")
 
 [node name="TeleportSpot" type="Node2D" parent="." unique_id=972661544]
 
-[node name="TeleportArea" type="Area2D" parent="." unique_id=2005192383]
+[node name="Area2D" type="Area2D" parent="TeleportSpot" unique_id=2085696979]
+modulate = Color(4.2185245, 4.1979814, 0.8288764, 1)
+collision_layer = 2
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea" unique_id=1709396996]
+[node name="TeleportRangeArea" type="Area2D" parent="." unique_id=2005192383]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportRangeArea" unique_id=1709396996]
 shape = SubResource("CircleShape2D_0c6lq")
 debug_color = Color(3.760215e-08, 0.068501174, 0.08698662, 0.21176471)
