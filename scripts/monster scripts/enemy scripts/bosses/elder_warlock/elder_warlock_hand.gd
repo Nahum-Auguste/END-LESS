@@ -5,6 +5,7 @@ class_name ElderWarlockHand extends Node2D
 @onready var animator: AnimationPlayer = $Sprite/AnimationPlayer
 @export var body: ElderWarlock
 @export var fsm: ElderWarlockFSM 
+var elder_warlock_prefab: PackedScene = preload("res://scenes/enemies/bosses/elder_warlock/elder_warlock.tscn")
 var orb_pool_prefab: PackedScene = preload("res://scenes/enemies/bosses/elder_warlock/elder_warlock_orb_pool_attack.tscn")
 var orb_prefab: PackedScene = preload("res://scenes/enemies/warlock/warlock_orb_attack.tscn")
 @export_tool_button("shoot orb") var shoot_orb_button = shoot_orb
@@ -28,7 +29,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func play_animation(animation: String, speed: float = 1):
+func play_animation(animation: String, speed: float = 1, on_finish: Callable = func (): pass):
 	# set hand state to active
 	hand_state = HandState.ACTIVE
 	
@@ -41,7 +42,25 @@ func play_animation(animation: String, speed: float = 1):
 	# reset the hand state to inactive after done
 	await animator.animation_finished
 	hand_state = HandState.INACTIVE
+	on_finish.call()
 	animator.stop()
+	
+	
+func do_clone_spell():
+	if body.real_warlock!=body: 
+		push_error("TRIED TO USE ELDER WARLOCK CLONE SPELL AS A CLONE")
+		return
+	play_animation("clone", body.clone_speed)
+	
+func clone():
+	#if !body.is_cloning: return
+	if body.clones.size() >= body.max_clones: return
+	var clone: ElderWarlock = elder_warlock_prefab.instantiate()
+	clone.real_warlock = body.real_warlock
+	body.real_warlock.clones.push_back(clone)
+	body.real_warlock.add_child(clone)
+	clone.left_hand.teleport()
+	body.is_cloning = false
 	
 func do_orb_pool_attack():
 	if hand_state == HandState.ACTIVE: return

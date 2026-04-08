@@ -11,6 +11,11 @@ var teleport_speed = 1
 var teleport_position: Vector2
 @onready var detection_area_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 
+var is_cloning: bool = false
+var clone_speed: float = 1
+var max_clones: int = 4
+var clones: Array[ElderWarlock] = []
+var real_warlock: ElderWarlock = self
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
@@ -40,6 +45,10 @@ func _ready() -> void:
 	#min_area.add_child(min_collider)
 	pass
 	
+	
+func _exit_tree():
+	if real_warlock!=self:
+		real_warlock.clones.erase(self)	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
