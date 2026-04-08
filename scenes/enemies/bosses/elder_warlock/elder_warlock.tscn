@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://l4e0ut13i6iv"]
+
+[ext_resource type="Script" uid="uid://dxtuqkt7psslq" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/elder_warlock.gd" id="1_0c6lq"]
+[ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_ibwrd"]
+[ext_resource type="PackedScene" uid="uid://buwvnamwl0ajg" path="res://scenes/enemies/bosses/elder_warlock/elder_warlock_hand.tscn" id="6_5frxb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ibwrd"]
+radius = 13.0
+height = 52.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_370fl"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c6lq"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bklt"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n1ll"]
+atlas = ExtResource("1_ibwrd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ep43u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_370fl")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c6lq")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bklt")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n1ll")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c6lq"]
+radius = 173.07224
+
+[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_0c6lq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
+position = Vector2(0, 106)
+zoom = Vector2(2.125, 2.125)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1382253133]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CapsuleCollisionShape" type="CollisionShape2D" parent="HitBox" unique_id=1733947645]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_ibwrd")
+debug_color = Color(0.9647059, 0, 0.49803922, 0.28627452)
+
+[node name="BottomCollisionShape" type="CollisionPolygon2D" parent="HitBox" unique_id=1377897460]
+position = Vector2(0, 15.5)
+polygon = PackedVector2Array(20, -15.5, 33, 1.5, 23, 16.5, -22, 16.5, -34, 1.5, -20, -15.5)
+
+[node name="CollisionShape" type="CollisionPolygon2D" parent="." unique_id=1920595087]
+position = Vector2(0, 16)
+polygon = PackedVector2Array(10, -37, 15, -1, 10, 6, -10, 6, -15, -1, -10, -37, 0, -46)
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=1732829752]
+sprite_frames = SubResource("SpriteFrames_ep43u")
+animation = &"walk_down"
+
+[node name="RightHand" parent="." unique_id=1698720337 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
+body = NodePath("..")
+
+[node name="LeftHand" parent="." unique_id=1989761050 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
+scale = Vector2(-1, 1)
+body = NodePath("..")
+
+[node name="TeleportSpot" type="Node2D" parent="." unique_id=972661544]
+
+[node name="TeleportArea" type="Area2D" parent="." unique_id=2005192383]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea" unique_id=1709396996]
+shape = SubResource("CircleShape2D_0c6lq")
+debug_color = Color(3.760215e-08, 0.068501174, 0.08698662, 0.21176471)
