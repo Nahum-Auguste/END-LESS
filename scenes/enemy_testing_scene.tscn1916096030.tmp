@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://g8oort1yt05r" path="res://scenes/player.tscn" id="3_lht80"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="4_0fqcd"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="4_3teur"]
-[ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="5_3teur"]
 
 [node name="EnemyTestingScene" type="Node2D" unique_id=2065702540]
 
@@ -18,10 +17,5 @@ tile_map_data = PackedByteArray("AAD1//n/AAAAAAIAAAD1//r/AAAAAAIAAAD1//v/AAAAAAI
 tile_set = ExtResource("2_lht80")
 
 [node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("4_3teur")]
-position = Vector2(285.13654, 175.78339)
+position = Vector2(-88.74129, -0.8503582)
 scale = Vector2(0.99999136, 0.99999136)
-velocity = Vector2(-30.278708, -13.939552)
-min_spiderlings = 3.0
-max_spiderlings = 10.0
-
-[node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_3teur")]

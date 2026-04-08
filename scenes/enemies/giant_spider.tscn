@@ -1,7 +1,19 @@
 [gd_scene format=3 uid="uid://dilt05yq14axw"]
 
-[ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant_spider.gd" id="1_j3pyh"]
+[ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant spider/giant_spider.gd" id="1_j3pyh"]
 [ext_resource type="Texture2D" uid="uid://7ymbwacpcpmr" path="res://assets/sprites/enemies/giant_spider/giant_spider_spritesheet.png" id="2_j3pyh"]
+[ext_resource type="Script" uid="uid://bcnbrnhwnfq7x" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_fsm.gd" id="2_rk4hc"]
+[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/wander_state.gd" id="2_svrsm"]
+[ext_resource type="Script" uid="uid://cy0ejmea03wwo" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_attack_state.gd" id="4_8wk86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
+size = Vector2(32, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3pyh"]
+size = Vector2(24, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svrsm"]
+radius = 96.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svrsm"]
 atlas = ExtResource("2_j3pyh")
@@ -39,52 +51,55 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
-size = Vector2(32, 29)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3pyh"]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_svrsm"]
-radius = 79.025314
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3pyh"]
-size = Vector2(24, 15)
-
 [node name="GiantSpider" type="CharacterBody2D" unique_id=147954774]
+position = Vector2(-10.207446, -12.110563)
 collision_layer = 2
 collision_mask = 7
 platform_floor_layers = 0
 script = ExtResource("1_j3pyh")
+base_detection_range = 96.0
+attack_detection_range = 163.0
+min_spiderlings = null
+max_spiderlings = null
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
-sprite_frames = SubResource("SpriteFrames_svrsm")
-animation = &"walk"
-frame = 3
-frame_progress = 0.19989915
+[node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "nav_agent")]
+script = ExtResource("2_rk4hc")
+wander_state = NodePath("WanderState")
+attack_state = NodePath("GiantSpiderAttackState")
+nav_agent = NodePath("../NavigationAgent2D")
+metadata/_custom_type_script = "uid://bcnbrnhwnfq7x"
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1639478681]
+[node name="WanderState" type="Node" parent="GiantSpiderFSM" unique_id=849795966]
+script = ExtResource("2_svrsm")
+max_wander_range = 143.0
+min_wander_interval = 2.75
+max_wander_interval = 6.5
+metadata/_custom_type_script = "uid://ch20l083cmvr8"
+
+[node name="GiantSpiderAttackState" type="Node" parent="GiantSpiderFSM" unique_id=1824551949]
+script = ExtResource("4_8wk86")
+metadata/_custom_type_script = "uid://cy0ejmea03wwo"
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1639478681]
 position = Vector2(0, -0.5)
 collision_layer = 2
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1198337450]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1198337450]
 shape = SubResource("RectangleShape2D_kvp8k")
 debug_color = Color(0.99357957, 0, 0.26555803, 0.18039216)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=165402881]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_j3pyh")
+[node name="HitBox" type="Area2D" parent="." unique_id=123322503]
+rotation = 1.9275293
+collision_layer = 8
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
-path_desired_distance = 3.0
-target_desired_distance = 3.0
-path_postprocessing = 1
-
-[node name="PathRefreshTimer" type="Timer" parent="." unique_id=2089092033]
-wait_time = 0.5
-one_shot = true
-autostart = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=143155321]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_j3pyh")
+debug_color = Color(1, 0.09411765, 0.23137255, 0.5294118)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1297063088]
 collision_layer = 0
@@ -93,16 +108,23 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_svrsm")
 debug_color = Color(0.531573, 0.5491353, 0.44196907, 0.41960785)
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=123322503]
-collision_layer = 8
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
+rotation = 1.9275293
+sprite_frames = SubResource("SpriteFrames_svrsm")
+animation = &"walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=143155321]
-position = Vector2(0, 11.5)
-shape = SubResource("RectangleShape2D_j3pyh")
-debug_color = Color(1, 0.09411765, 0.23137255, 0.5294118)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=165402881]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_j3pyh")
 
-[connection signal="timeout" from="PathRefreshTimer" to="." method="_on_path_refresh_timer_timeout"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
+target_position = Vector2(61.370636, -74.580666)
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+debug_enabled = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_hurt_box_body_exited"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
-[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
-[connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]

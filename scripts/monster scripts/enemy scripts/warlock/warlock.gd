@@ -2,21 +2,27 @@
 class_name Warlock extends Enemy
 
 
-@export_enum("wander","attack") var default_state = "attack"
+@export_enum("wander","attack") var default_state = "wander"
 @export_range(0,500,1) var base_detection_range: float = 50
 @export_range(0,500,1) var attack_detection_range: float = 300
 @export_range(.5,3,.1) var detection_mult : = 1.7
 @export_range(0,500,1) var wander_range:float = 150
+@export_range(0,30,0.25) var min_wander_interval: float = 3
+@export_range(0,30,0.25) var max_wander_interval: float = 7
 @export_range(0,500,1) var min_teleportation_range:float = 150
 @export_range(0,500,1) var max_teleportation_range:float = 150
 @export_range(0,10,.5) var teleport_interval :float = 1.5
-@export_range(0,180,5) var orb_burst_attack_cone :float = 90
+@export_range(0,180,5) var orb_burst_attack_cone :float = 145
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var detection_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 var detection_range
 @onready var detection_ray: RayCast2D = RayCast2D.new()
+
+var speed = 3000
+var speed_angle = 0
 
 @onready var teleport_spot_body_area: Area2D = $TeleportSpotBodyArea
  
@@ -70,11 +76,19 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	fsm.physics_update(delta)
+	speed_angle+=.75
 	
 	if player:
 		detection_ray.target_position = player.global_position - global_position
 	else:
 		detection_ray.target_position = Vector2.ZERO
+		
+	if !nav_agent.is_navigation_finished():
+		velocity = (nav_agent.get_next_path_position() - global_position).normalized() * abs(cos(deg_to_rad(speed_angle))) * speed * delta
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO,30)
+	
+	move_and_slide()
 
 func is_detection_ray_blocked():
 	return !(player and detection_ray.is_colliding() and detection_ray.get_collider() == player)
@@ -108,47 +122,3 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	pass
 	
-#func teleport():
-	#var max_tries = 30
-	#var tries = 1
-	#
-	#var center_offset = 30
-	#var rx = cos(deg_to_rad(randf_range(0,361))) * randf_range(center_offset,teleportation_range-center_offset)
-	#var ry = sin(deg_to_rad(randf_range(0,361))) * randf_range(center_offset,teleportation_range-center_offset)
-	#$TeleporationTargetArea.global_position = Vector2(rx,ry)
-	#while (tries<max_tries and $TeleporationTargetArea.get_overlapping_bodies()):
-		#tries+=1
-		#rx = cos(deg_to_rad(randf_range(0,361))) * randf_range(center_offset,teleportation_range-center_offset)
-		#ry = sin(deg_to_rad(randf_range(0,361))) * randf_range(center_offset,teleportation_range-center_offset)
-		#$TeleporationTargetArea.global_position = Vector2(rx,ry)
-		#
-	#if !$TeleporationTargetArea.get_overlapping_bodies():
-		#global_position = $TeleporationTargetArea.global_position
-	#
-#func attack():
-	#attacking = true
-	#
-	#var orb := orb_attack_prefab.instantiate()
-	#orb.detectionion = (player.global_position - global_position).normalized()
-	#add_child(orb)
-	#
-	#var timer := Timer.new()
-	#timer.wait_time = attack_speed
-	#add_child(timer)
-	#timer.start()
-	#timer.timeout.connect(func ():
-		#attacking = false
-		#timer.queue_free()
-	#)
-
-#
-#func _on_teleportation_activate_area_body_entered(body):
-	#var timer := Timer.new()
-	#timer.wait_time = teleportation_cooldown
-	#add_child(timer)
-	#timer.timeout.connect(func ():
-		#if alive:
-			#teleport()
-		#timer.queue_free()	
-	#)
-	#timer.start()

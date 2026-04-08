@@ -1,0 +1,1 @@
+class_name GiantSpiderWanderState extends GiantSpiderState

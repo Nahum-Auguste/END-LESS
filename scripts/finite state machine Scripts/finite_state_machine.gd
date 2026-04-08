@@ -1,6 +1,9 @@
-class_name FSM extends Object
+@tool
+
+class_name FSM extends Node
 
 var current_state: State
+@export var nav_agent: NavigationAgent2D
 
 func update(delta):
 	if current_state:

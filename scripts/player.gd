@@ -9,7 +9,6 @@ var inventory:PlayerInventory
 var is_inventory_open:bool = false
 
 var base_speed:= 50.0
-var speed:float
 var sprint_mult:= 1.24
 var animation: String
 #var time_between_melee_attack = 1000 
@@ -26,6 +25,7 @@ var last_attack_animation:String = ""
 @onready var sword_swing_hitbox: SwordSwingHitBox = $SwordSwingHitBox
 @onready var hand_item_sprite: Sprite2D = $Hand/HandItemSprite
 @onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
+@onready var hurtbox: Area2D = $HurtBox
 
 func _init(health:float=0,max_health:float=0) -> void:
 	max_health = 25
@@ -64,33 +64,41 @@ func _physics_process(delta: float) -> void:
 	
 	speed = base_speed * (sprint_mult if sprint else 1)
 	
+	
+	
 	if horizontalMoveInput:
 		if horizontalMoveInput>0:
 			animation = "right_walk"
-			velocity.x = speed
+			movement_velocity.x = speed
 		else:
 			animation = "left_walk"
-			velocity.x = -speed
+			movement_velocity.x = -speed
 	else:
-		velocity.x = move_toward(velocity.x,0,speed*10)
+		movement_velocity.x = move_toward(velocity.x,0,speed*10)
 			
 	if verticalMoveInput:
 		if verticalMoveInput>0:
 			
 			animation = "down_walk"
-			velocity.y = speed
+			movement_velocity.y = speed
 		else:
 			animation = "up_walk"
-			velocity.y = -speed
+			movement_velocity.y = -speed
 	else:
-		velocity.y = move_toward(velocity.y,0,speed)
+		movement_velocity.y = move_toward(velocity.y,0,speed)
 		
 	if !attacking:
 		sprite.play(animation)
 		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
 			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
-		move_and_slide()
+		
+	velocity = movement_velocity + knockback_velocity
+	
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,50)
+	#print(knockback_velocity)
+		
+	move_and_slide()
 	
 
 func _process(delta: float) -> void:

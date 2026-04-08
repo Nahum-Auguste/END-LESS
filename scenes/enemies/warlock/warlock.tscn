@@ -7,10 +7,10 @@
 size = Vector2(34, 34)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s4l7h"]
-radius = 50.0
+radius = 124.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mj2cs"]
-size = Vector2(34, 32)
+size = Vector2(24.19494, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i8k0"]
 atlas = ExtResource("2_mj2cs")
@@ -59,10 +59,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_s4l7h")
-default_state = null
 wander_range = 141.0
-min_teleportation_range = null
-max_teleportation_range = null
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=665940647]
@@ -89,12 +86,21 @@ shape = SubResource("RectangleShape2D_mj2cs")
 debug_color = Color(0.99197274, 0, 0.26462436, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55812942]
+position = Vector2(0, -1.2570477)
 shape = SubResource("RectangleShape2D_mj2cs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=633032348]
 sprite_frames = SubResource("SpriteFrames_xqole")
 animation = &"primed"
-speed_scale = -1.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=289402393]
+target_position = Vector2(-37.06753, -32.461872)
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 67.69
+debug_enabled = true
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

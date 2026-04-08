@@ -1,9 +1,13 @@
+@tool
 class_name Monster extends CharacterBody2D
 @export var killable:bool = true
 var sprite:AnimatedSprite2D
 var health:float
 var max_health:float = 0
+var movement_velocity: Vector2
+var knockback_velocity: Vector2
 var alive = true
+var speed = 0
 
 
 func _init(health:float=0,max_health:float=0) -> void:

@@ -2,6 +2,8 @@
 class_name Enemy extends Monster
 
 var hitbox: Area2D
+var detection_ray: RayCast2D
+var detection_area: Area2D
 const corpse_inventory_scene = preload("res://scenes/ui/inventory/corpse_inventory.tscn")
 var corpse_inventory: CorpseInventory
 var corpse_inventory_can_display_range = 50
@@ -146,18 +148,38 @@ func display_corpse_inventory():
 func close_corpse_inventory():
 	if corpse_inventory and corpse_inventory.get_parent()==GroundGuiCanvas : GroundGuiCanvas.remove_child(corpse_inventory)
 	
-func draw_debug_hp(x=-16+1,y=-25,w=30,h=5):
+func draw_debug_hp(x=-16+1,y=-25 + 48,w=30,h=1):
 	draw_rect(Rect2(x-1,y-1,w+2,h+2),Color.BLACK,true)
 	draw_rect(Rect2(x,y,w,h),Color.DIM_GRAY,true)
 	draw_rect(Rect2(x+w*.025,y+h*.1,(w-(w*.025*2)),h-(h*.1*2)),Color.BLACK,true)
 	draw_rect(Rect2(x+w*.025,y+h*.1,(self.health/self.max_health) * (w-(w*.025*2)),h-(h*.1*2)),Color.CRIMSON,true)
 
+func configure_detection_ray():
+	if !detection_ray:
+		detection_ray = RayCast2D.new()
+		
+	if detection_ray.get_parent()!=self:
+		add_child(detection_ray)
+	if player:
+		detection_ray.target_position = player.global_position - global_position
+	detection_ray.enabled = true
+	detection_ray.set_collision_mask_value(LayerConstants.PlayerLayer,true)
+	detection_ray.set_collision_mask_value(LayerConstants.AttackableObjectsLayer,true)
+	detection_ray.set_collision_mask_value(LayerConstants.TileLayer,true)
+	
+
+func is_player_in_detection_area()->bool:
+	return player and detection_area and (player in detection_area.get_overlapping_bodies())
+
+func is_detection_ray_blocked()->bool:
+	configure_detection_ray()
+	return !(player and detection_ray.get_collider() == player)
 
 func handle_death():
 	super.handle_death()
-	#queue_free()
+	queue_free()
 	
 func _exit_tree():
-	if corpse_inventory:
+	if corpse_inventory!=null:
 		corpse_inventory.queue_free()
 	
