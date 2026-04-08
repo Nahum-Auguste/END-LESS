@@ -21,11 +21,11 @@ tile_set = ExtResource("1_l5rq8")
 navigation_enabled = false
 
 [node name="ElderWarlock" parent="." unique_id=1843472655 instance=ExtResource("2_dkffi")]
-position = Vector2(-186.84196, -122.648834)
-velocity = Vector2(8.4833145, 14.34612)
+position = Vector2(-28, -95)
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("3_f2qwb")]
 position = Vector2(1, 68)
 
 [node name="Camera2D" parent="." unique_id=901842364 node_paths=PackedStringArray("target") instance=ExtResource("4_dkffi")]
+zoom = Vector2(1.3, 1.3)
 target = NodePath("../Player")

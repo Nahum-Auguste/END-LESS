@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant spider/giant_spider.gd" id="1_j3pyh"]
 [ext_resource type="Texture2D" uid="uid://7ymbwacpcpmr" path="res://assets/sprites/enemies/giant_spider/giant_spider_spritesheet.png" id="2_j3pyh"]
 [ext_resource type="Script" uid="uid://bcnbrnhwnfq7x" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_fsm.gd" id="2_rk4hc"]
-[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/wander_state.gd" id="2_svrsm"]
+[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="2_svrsm"]
 [ext_resource type="Script" uid="uid://cy0ejmea03wwo" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_attack_state.gd" id="4_8wk86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]

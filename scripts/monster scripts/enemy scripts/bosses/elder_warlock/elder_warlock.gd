@@ -7,11 +7,8 @@ class_name ElderWarlock extends Enemy
 @onready var left_hand: ElderWarlockHand = $LeftHand
 @onready var right_hand: ElderWarlockHand = $RightHand
 var is_teleporting: bool = false 
-var teleport_collider: CollisionPolygon2D
-var min_teleport_range = 100
 var teleport_speed = 1
-@onready var teleport_spot: Node2D = $TeleportSpot
-@onready var teleport_area_shape: CircleShape2D = $TeleportArea/CollisionShape2D.shape
+var teleport_position: Vector2
 @onready var detection_area_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 
 
@@ -28,7 +25,7 @@ var speed_angle = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	detection_area = $DetectionAre
+	detection_area = $DetectionArea
 	sprite = $BodySprite
 	speed = 2000
 	nav_agent.target_position = global_position
@@ -58,11 +55,12 @@ func _physics_process(delta):
 	speed_angle += 2
 	fsm.physics_update(delta)
 	
-	var movement_dir = global_position.direction_to(nav_agent.get_next_path_position())
-	movement_velocity = movement_dir * speed * clamp(abs(sin(deg_to_rad(speed_angle))),.5,1) * delta
 	
-
+	
 	if !nav_agent.is_navigation_finished():
+		var movement_dir = global_position.direction_to(nav_agent.get_next_path_position())
+		movement_velocity = movement_dir * speed * clamp(abs(sin(deg_to_rad(speed_angle))),.5,1) * delta
+		
 		if movement_velocity.abs().x > movement_velocity.abs().y:
 			if movement_dir.x > 0:
 				sprite.animation = "walk_right"
@@ -76,6 +74,7 @@ func _physics_process(delta):
 	
 	
 	velocity = movement_velocity + knockback_velocity
+
 	move_and_slide()
 	
 	movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed * delta)
@@ -87,13 +86,10 @@ func _draw():
 func spawn_orb_pool(hand: ElderWarlockHand):
 	hand.do_orb_pool_attack()
 
-func teleport():
+func teleport(speed: float = teleport_speed):
 	is_teleporting = true
-	if left_hand.hand_state == left_hand.HandState.INACTIVE:
-		global_position += teleport_spot.position
-		teleport_spot.position = Vector2.ZERO
-	left_hand.play_animation("teleport",teleport_speed)
-	right_hand.play_animation("teleport",teleport_speed)
+	left_hand.teleport(speed)
+	right_hand.teleport(speed)
 
 func shoot_orb_left_hand(shoot_speed:float = shoot_speed):
 	shoot_orb(left_hand,shoot_speed)
