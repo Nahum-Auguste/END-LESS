@@ -20,6 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://f4nr34luftje" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_down.tscn" id="13_k3xfj"]
 [ext_resource type="PackedScene" uid="uid://dsl08deohbmky" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_right.tscn" id="14_3fw8q"]
 [ext_resource type="PackedScene" uid="uid://djljroqop3e4k" path="res://scenes/tiling/chest tile pasters/chest_tile_paster_up.tscn" id="15_pilod"]
+[ext_resource type="PackedScene" uid="uid://dnv2vxq6vsvet" path="res://scenes/objects/level_door_closed.tscn" id="22_actlt"]
+[ext_resource type="PackedScene" uid="uid://c1aicrmu1htm6" path="res://scenes/tiling/enemy spawners/elder_warlock_tile_spawner.tscn" id="22_p3g5g"]
+[ext_resource type="PackedScene" uid="uid://h4c4d2u7u6nf" path="res://scenes/objects/level_door_opened.tscn" id="23_tqutu"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_j6man"]
 tile_data = PackedInt32Array(131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 1, 262145, 0, 2, 327681, 0, 2, 393217, 0, 2, 458753, 0, 0, 524289, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 1, 196610, 0, 2, 262146, 0, 2, 327682, 0, 2, 393218, 0, 2, 458754, 0, 2, 524290, 0, 0, 589826, 0, 0, 3, 0, 0, 65539, 0, 1, 131075, 0, 2, 196611, 0, 2, 262147, 0, 2, 327683, 0, 2, 393219, 0, 2, 458755, 0, 2, 524291, 0, 2, 589827, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 0, 0, 4, 0, 0, 65540, 0, 1, 131076, 0, 2, 196612, 0, 2, 262148, 0, 2, 327684, 0, 2, 393220, 0, 2, 458756, 0, 2, 524292, 0, 2, 589828, 0, 2, 655364, 0, 2, 720900, 0, 2, 786436, 0, 2, 5, 0, 0, 65541, 0, 1, 131077, 0, 2, 196613, 0, 2, 262149, 0, 2, 327685, 0, 2, 393221, 0, 2, 458757, 0, 2, 524293, 0, 2, 589829, 0, 2, 655365, 0, 2, 720901, 0, 2, 786437, 0, 2, 6, 0, 0, 65542, 0, 1, 131078, 0, 2, 196614, 0, 2, 262150, 0, 2, 327686, 0, 2, 393222, 0, 2, 458758, 0, 2, 524294, 0, 2, 589830, 0, 0, 655366, 0, 0, 720902, 0, 0, 786438, 0, 0, 7, 0, 0, 65543, 0, 0, 131079, 0, 1, 196615, 0, 2, 262151, 0, 2, 327687, 0, 2, 393223, 0, 2, 458759, 0, 2, 524295, 0, 0, 589831, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 1, 262152, 0, 2, 327688, 0, 2, 393224, 0, 2, 458760, 0, 0, 524296, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 0, 0)
@@ -83,6 +86,15 @@ scenes/2/scene = ExtResource("13_k3xfj")
 scenes/3/scene = ExtResource("14_3fw8q")
 scenes/4/scene = ExtResource("15_pilod")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_p3g5g"]
+resource_name = "doors"
+scenes/2/scene = ExtResource("22_actlt")
+scenes/3/scene = ExtResource("23_tqutu")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_actlt"]
+resource_name = "enemy spawners"
+scenes/1/scene = ExtResource("22_p3g5g")
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 4
@@ -92,6 +104,8 @@ sources/0 = SubResource("TileSetAtlasSource_dsg28")
 sources/1 = SubResource("TileSetScenesCollectionSource_am8ro")
 sources/2 = SubResource("TileSetScenesCollectionSource_k3xfj")
 sources/3 = SubResource("TileSetScenesCollectionSource_kneqj")
+sources/4 = SubResource("TileSetScenesCollectionSource_p3g5g")
+sources/5 = SubResource("TileSetScenesCollectionSource_actlt")
 pattern_0 = SubResource("TileMapPattern_j6man")
 pattern_1 = SubResource("TileMapPattern_ym4vs")
 pattern_2 = SubResource("TileMapPattern_gqigr")

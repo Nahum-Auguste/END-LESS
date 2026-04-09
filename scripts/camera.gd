@@ -18,7 +18,7 @@ func _process(delta):
 	
 func find_player():
 	
-	if target is not Player:
+	if !target or target is not Player:
 		target = get_tree().root.find_child("Player",true,false)
 	
 func follow_target():

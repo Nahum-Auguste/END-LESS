@@ -60,6 +60,10 @@ func _exit_tree():
 	else:
 		for c in real_warlock.clones:
 			c.free()
+			
+	var exit_door : LevelDoor = get_tree().root.find_child("ExitDoor",true,false)
+	if exit_door:
+		exit_door.locked = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

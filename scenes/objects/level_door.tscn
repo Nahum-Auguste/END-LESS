@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bxf5lmevd67uq"]
+
+[ext_resource type="Texture2D" uid="uid://dwybd3qss77q3" path="res://assets/sprites/objects/doors/world_1_door_spritesheet.png" id="1_8kicy"]
+[ext_resource type="Script" uid="uid://bui7tufcqvhag" path="res://scripts/object scripts/level_door.gd" id="1_fx3ej"]
+[ext_resource type="Texture2D" uid="uid://bq4xdsom4c430" path="res://assets/sprites/objects/doors/level_room_doors_spritesheet.png" id="1_fxgtp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5bto"]
+atlas = ExtResource("1_8kicy")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kicy"]
+atlas = ExtResource("1_fxgtp")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jxky"]
+atlas = ExtResource("1_8kicy")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx3ej"]
+atlas = ExtResource("1_fxgtp")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5bto"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5bto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kicy")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jxky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fx3ej")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxgtp"]
+size = Vector2(50, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kicy"]
+size = Vector2(30, 40)
+
+[node name="LevelDoor" type="StaticBody2D" unique_id=1277415400]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_fx3ej")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=121311376]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_q5bto")
+animation = &"closed"
+
+[node name="InteractBox" type="Area2D" parent="Sprite" unique_id=408350306]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/InteractBox" unique_id=495952794]
+shape = SubResource("RectangleShape2D_fxgtp")
+debug_color = Color(0.6268445, 0.5300078, 0.11028049, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=829921851]
+position = Vector2(0, -29)
+shape = SubResource("RectangleShape2D_8kicy")

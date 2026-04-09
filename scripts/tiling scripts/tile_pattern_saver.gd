@@ -9,7 +9,7 @@ extends Node2D
 
 @export_category("Pattern Saving")
 @export_enum("world1") var level_theme: String = "world1"
-@export_enum("standard room","spawn room") var pattern_type: String = "standard room"
+@export_enum("standard room","spawn room","boss room") var pattern_type: String = "standard room"
 @export_enum("left","down","up","right") var direction: String = "left"
 @export var pattern_name: String = ""
 @export_tool_button("save pattern","Save") var save_button = save
@@ -33,6 +33,8 @@ func get_save_path() -> String:
 			dir = ""
 		"spawn room":
 			dir = "spawn rooms"
+		"boss room":
+			dir = "boss rooms"
 			
 	if dir : dir += "/"
 	return "res://assets/tile patterns/" + level_theme + "/" + dir + direction

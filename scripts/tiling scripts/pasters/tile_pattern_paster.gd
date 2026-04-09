@@ -9,7 +9,7 @@ func _ready():
 	
 
 func _process(delta):
-	if can_paste and randf_range(0,1) < .5:
+	if can_paste and randf_range(0,1) < .3:
 		paste_pattern(get_pattern_path())
 		
 

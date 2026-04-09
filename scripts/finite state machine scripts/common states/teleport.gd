@@ -48,6 +48,8 @@ func physics_update(delta):
 		var dist = body_area_copy.global_position.distance_to(teleport_anchor.global_position)
 		if dist < min_teleport_range or dist > max_teleport_range:
 			body_area_copy.global_position = get_random_teleport_spot()
+	else:
+		teleport_anchor = parent
 		
 	
 	

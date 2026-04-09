@@ -65,6 +65,8 @@ func do_clone_spell():
 	clone.health = clone.max_health
 	real_warlock.clones.push_back(clone)
 	real_warlock.get_tree().root.add_child(clone)
+	clone.fsm.player = body.player
+	clone.player = body.player
 	clone.fsm.enter_state(clone.fsm.teleport)
 	
 	for w in (real_warlock.clones + [real_warlock]):

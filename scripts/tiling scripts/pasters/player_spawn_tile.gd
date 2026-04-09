@@ -16,10 +16,14 @@ func _process(delta):
 	on_finish()
 	
 func spawn_player():
-	var player : Player = player_prefab.instantiate()
+	var player : Player = get_tree().root.find_child("Player",true,false)
+	if !player:
+		player = player_prefab.instantiate()
+		get_tree().root.add_child(player)
+	print(global_position)
 	player.global_position = global_position
 	player.animation = direction + "_walk"
-	get_tree().root.add_child(player)
+	
 	
 	
 	

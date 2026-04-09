@@ -25,4 +25,5 @@ func get_pattern_path() -> String:
 		var pattern_name = pattern_paths[randi() % pattern_paths.size()]
 		pattern_path = path_root + pattern_name
 		
-	return pattern_path
+	#return pattern_path
+	return "res://assets/tile patterns/world1/spawn rooms/down/spawn_room_down_1.tres"

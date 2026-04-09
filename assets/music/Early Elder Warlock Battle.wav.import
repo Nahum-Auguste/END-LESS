@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcu47mkkomgj8"
+path="res://.godot/imported/Early Elder Warlock Battle.wav-ae2f572a3c1a694597ab4c81a719f8c5.sample"
+
+[deps]
+
+source_file="res://assets/music/Early Elder Warlock Battle.wav"
+dest_files=["res://.godot/imported/Early Elder Warlock Battle.wav-ae2f572a3c1a694597ab4c81a719f8c5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

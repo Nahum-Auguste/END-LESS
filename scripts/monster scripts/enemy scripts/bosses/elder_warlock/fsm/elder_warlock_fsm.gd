@@ -19,6 +19,8 @@ var phase: int = 1
 func _ready():
 	super._ready()
 	parent = get_parent()
+	nav_agent.target_position = parent.global_position
+	enter_state(idle_state)
 	#if !parent.is_clone():
 		#enter_state(clone_state)
 	
@@ -27,6 +29,8 @@ func _ready():
 func physics_update(delta):
 	super.physics_update(delta)
 	var real_warlock: ElderWarlock = parent.real_warlock
+	
+	#print(current_state)
 	
 	if !parent.is_clone() and parent.health<= parent.max_health/2 and phase==1:
 		phase = 2

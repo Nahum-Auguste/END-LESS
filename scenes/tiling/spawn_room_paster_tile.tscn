@@ -32,6 +32,7 @@ fill_from = Vector2(1, 0.52816904)
 fill_to = Vector2(0.2746479, 0.5657277)
 
 [node name="SpawnRoomPasterTile" type="Sprite2D" unique_id=605307948]
+rotation = -1.5707964
 texture = SubResource("NoiseTexture2D_3k60s")
 script = ExtResource("1_8ppr5")
 

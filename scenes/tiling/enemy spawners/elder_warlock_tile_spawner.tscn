@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c1aicrmu1htm6"]
+
+[ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_d5b40"]
+[ext_resource type="Script" uid="uid://cki7bb5cfahm4" path="res://scripts/tiling scripts/pasters/enemy spawners/elder_warlock_tile_spawner.gd" id="1_rabk2"]
+
+[sub_resource type="Gradient" id="Gradient_rabk2"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0.56078434, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_os7tt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_03la4"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_os7tt")
+color_ramp = SubResource("Gradient_rabk2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jufl"]
+atlas = ExtResource("1_d5b40")
+region = Rect2(16, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_836p0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jufl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ElderWarlockTileSpawner" type="Node2D" unique_id=1390966135]
+script = ExtResource("1_rabk2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=665525247]
+texture = SubResource("NoiseTexture2D_03la4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=579486217]
+sprite_frames = SubResource("SpriteFrames_836p0")

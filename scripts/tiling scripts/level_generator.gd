@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+class_name LevelGenerator extends Node2D
 
 @export var tile_layer: TileMapLayer
 
@@ -21,6 +21,7 @@ var tiles: Dictionary[String,TD] = {
 #@export_tool_button("clear console") var clear_console = func(): print("\u001b")
 @export_tool_button("clear tiles","CurveDelete") var clear_button = clear
 @export_tool_button("generate level","Edit") var gen_button = generate_level
+@export_tool_button("add boss room") var add_boss_room_button = add_boss_room
 @export_tool_button("paste generated level","Edit") var paste_gen_button = paste_generated_level
 @export var path_steps: int = 130
 @export var nodes: int = clamp(3,1,10)
@@ -32,6 +33,7 @@ var tiles: Dictionary[String,TD] = {
 
 var level_center: Vector2 = Vector2.ZERO
 var floor_cells: Array[Vector2i]
+var node_positions: Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,6 +61,9 @@ func draw_walls():
 	
 	for cell_pos in tile_layer.get_used_cells():
 		var atlas_pos: = tile_layer.get_cell_atlas_coords(cell_pos)
+		var source_id = tile_layer.get_cell_source_id(cell_pos)
+		var source = tile_layer.tile_set.get_source(source_id)
+		if source is TileSetScenesCollectionSource: continue
 		var above_atlas = tile_layer.get_cell_atlas_coords(cell_pos + Vector2i(0,-1))
 		var below_atlas = tile_layer.get_cell_atlas_coords(cell_pos + Vector2i(0,1))
 		if atlas_pos==tiles["ceiling"].atlas_pos:
@@ -93,10 +98,65 @@ func generate_level():
 	clear()
 	draw_ceilings()
 	paste_generated_level()
-	add_spawn_room()
+	
 	add_rooms()
 	draw_walls()
+	add_boss_room()
+	add_spawn_room()
 	#tile_layer.update_internals()
+	$NavigationRegion2D.bake_navigation_polygon()
+	$NavigationRegion2D.bake_navigation_polygon()
+	
+	
+func add_boss_room():
+	var nodes = node_positions.duplicate()
+	nodes.erase(level_center)
+	print(nodes)
+	
+	var node :Vector2
+	
+	if nodes.size()==0:
+		node = level_center
+	else:
+		node = nodes[randi() % nodes.size()]
+		
+	var path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
+		
+	if node:
+		paste_pattern(node, path)
+		
+	
+func paste_pattern(position: Vector2i, path: String):
+	if not path or DirAccess.dir_exists_absolute(path) or !FileAccess.file_exists(path):
+		printerr("Error: Invalid Loaded Pattern Path.")
+		return
+	
+	var pattern: TileMapPattern = load(path)
+	
+	# default origin
+	var origin :Vector2i
+	
+	# find origin
+	for cell in pattern.get_used_cells():
+		var source_id = pattern.get_cell_source_id(cell)
+		var source = tile_layer.tile_set.get_source(source_id) 
+		if source is TileSetScenesCollectionSource:
+			var alt_id = pattern.get_cell_alternative_tile(cell)
+			var scene: PackedScene = source.get_scene_tile_scene(alt_id)
+			if scene:
+				var instance = scene.instantiate()
+				if instance is TilePatternOrigin:			
+					origin = -cell + position
+				instance.free()
+	
+	# paste pattern tiles
+	for cell in pattern.get_used_cells():
+		var pos = origin + cell
+		var source_id = pattern.get_cell_source_id(cell)
+		var atlas_pos = pattern.get_cell_atlas_coords(cell)
+		var alt_id = pattern.get_cell_alternative_tile(cell)
+		tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
+
 	
 func add_spawn_room():
 	tile_layer.set_cell(level_center,1,Vector2.ZERO,8)
@@ -186,7 +246,7 @@ func add_rooms():
 			
 	
 func paste_generated_level():
-	var node_positions: Array[Vector2] = [level_center]
+	node_positions = [level_center]
 	
 	# start n nodes
 	for n in range(nodes):
@@ -318,7 +378,7 @@ func draw_random_path(start_pos:Vector2, tile:String = "floor", steps:= 10, widt
 func clear():
 	#print("cleared tiles")
 	tile_layer.clear()
-	$ObjectsTileMapLayer.clear()
+	$NavigationRegion2D/ObjectsTileMapLayer.clear()
 	var player = get_tree().root.find_child("Player",true,false)
 	var tries = 20
 	while (player and tries):
