@@ -22,7 +22,7 @@ var real_warlock: ElderWarlock = self
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
 
-var base_speed = 1500
+
 var shoot_speed = .5
 var orb_damage = 1
 var orb_speed = 1
@@ -37,6 +37,7 @@ func _init(health:float=200,max_health:float=200) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
+	base_speed = 1500
 	base_scale = scale
 	detection_area = $DetectionArea
 	sprite = $BodySprite
@@ -116,7 +117,7 @@ func _physics_process(delta):
 func _draw():
 	super._draw()
 	draw_debug_hp()
-	fsm.draw()
+	#fsm.draw()
 	
 
 func spawn_orb_pool(hand: ElderWarlockHand):

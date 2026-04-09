@@ -97,17 +97,17 @@ func is_detection_ray_blocked():
 
 func _draw():
 	super._draw()
-	fsm.draw()
+	#fsm.draw()
 	#draw_circle(Vector2.ZERO,teleportation_range,Color(Color.PURPLE,.1))
-	draw_circle(Vector2.ZERO,base_detection_range,Color(Color.YELLOW,.1))
-	draw_circle(Vector2.ZERO,attack_detection_range,Color(Color.YELLOW,.05))
-	draw_circle(Vector2.ZERO,wander_range,Color.WHITE_SMOKE,false,2)
-	
+	#draw_circle(Vector2.ZERO,base_detection_range,Color(Color.YELLOW,.1))
+	#draw_circle(Vector2.ZERO,attack_detection_range,Color(Color.YELLOW,.05))
+	#draw_circle(Vector2.ZERO,wander_range,Color.WHITE_SMOKE,false,2)
+	#
 	#print(player)
 	if player:
 		var pos = player.global_position - global_position
 		var diff = max_teleportation_range - min_teleportation_range
-		draw_circle(pos,min_teleportation_range+diff/2,Color(Color.PLUM,.2),false,diff)
+		#draw_circle(pos,min_teleportation_range+diff/2,Color(Color.PLUM,.2),false,diff)
 	pass
 	
 

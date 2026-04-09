@@ -20,7 +20,10 @@ func _process(delta):
 	if !item and context_menu:
 		context_menu.queue_free()
 		context_menu = null
+	if !is_instance_valid(item):
+		item = null
 	set_item_count_label()
+	sync_item_texture()
 	
 func set_item_count_label():
 	var text_length = 0 if !item else str(item.count).length()

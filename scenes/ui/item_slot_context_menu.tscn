@@ -76,6 +76,12 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 12
 text = "Pick Up"
 
+[node name="UseItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=695849592]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 12
+text = "Use"
+
 [node name="SplitItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=701206741]
 layout_mode = 2
 mouse_filter = 1
@@ -91,5 +97,6 @@ text = "Drop"
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="button_up" from="AreaBox/PanelContainer/MarginContainer/VBoxContainer/PickUpItemButton" to="." method="_on_pick_up_item_button_button_up"]
+[connection signal="button_up" from="AreaBox/PanelContainer/MarginContainer/VBoxContainer/UseItemButton" to="." method="_on_use_item_button_button_up"]
 [connection signal="button_up" from="AreaBox/PanelContainer/MarginContainer/VBoxContainer/SplitItemButton" to="." method="_on_split_item_button_button_up"]
 [connection signal="button_up" from="AreaBox/PanelContainer/MarginContainer/VBoxContainer/DropItemButton" to="." method="_on_drop_item_button_button_up"]

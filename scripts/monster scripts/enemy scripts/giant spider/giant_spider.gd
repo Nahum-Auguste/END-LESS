@@ -10,7 +10,6 @@ class_name GiantSpider extends Enemy
 @export_range(0,30,1) var max_spiderlings:float = 10
 @onready var is_mother: bool = true if randi() % 2 == 0 else false
 var spiderlings : int = 0
-var base_speed = 2000
 var sprint_mult = 1.5
 var detection_range
 
@@ -28,6 +27,7 @@ func _ready():
 	super._ready()
 	sprite = $AnimatedSprite2D
 	hitbox = $HitBox
+	base_speed = 2000
 	speed = base_speed
 	detection_area = $DetectionArea
 	detection_range = base_detection_range
@@ -71,7 +71,7 @@ func _physics_process(delta):
 
 func _draw() -> void:
 	super._draw()
-	fsm.draw()
+	#fsm.draw()
 	
 
 

@@ -1473,7 +1473,6 @@ collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
 script = ExtResource("1_g2els")
-killable = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=864978702]
 sprite_frames = SubResource("SpriteFrames_yf5mx")

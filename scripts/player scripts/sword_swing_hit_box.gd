@@ -54,7 +54,7 @@ func handle_attack(area:Area2D):
 		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
 		#print(knockback)
 		entity.velocity += knockback
-		entity.health = clamp(entity.health-weapon.damage,0,entity.max_health)
+		entity.inflict_damage(weapon.damage)
 		#print(enemy.health," ",enemy.max_health)
 	if entity is Chest:
 		entity.on_hit()

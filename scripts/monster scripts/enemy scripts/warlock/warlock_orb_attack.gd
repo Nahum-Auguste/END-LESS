@@ -44,7 +44,7 @@ func follow_target():
 
 func _on_hurt_box_body_entered(body):
 	if body is Player:
-		body.health = clamp(body.health-attack_damage,0,body.max_health)
+		body.inflict_damage(attack_damage)
 	queue_free()
 
 

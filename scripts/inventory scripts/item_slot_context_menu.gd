@@ -9,6 +9,7 @@ var player: Player
 @onready var split_button = $AreaBox/PanelContainer/MarginContainer/VBoxContainer/SplitItemButton
 @onready var pickup_button = $AreaBox/PanelContainer/MarginContainer/VBoxContainer/PickUpItemButton
 @onready var drop_button = $AreaBox/PanelContainer/MarginContainer/VBoxContainer/DropItemButton
+@onready var use_button = $AreaBox/PanelContainer/MarginContainer/VBoxContainer/UseItemButton
 var can_drop: bool = true
 var can_split: bool = true
 var can_pickup: bool = false
@@ -32,6 +33,7 @@ func _process(delta):
 		inventory = player.inventory
 	split_button.visible = can_split and slot and slot.item and slot.item.count>1 and inventory and inventory.get_empty_slot()
 	drop_button.visible = can_drop and player
+	use_button.visible = slot.item and slot.item is Consumable
 	pickup_button.visible = can_pickup
 	format_data()
 			
@@ -98,7 +100,13 @@ func _on_drop_item_button_button_up():
 		item_drop.slot = ItemSlot.new()
 		item_drop.slot.item = slot.item
 		item_drop.global_position = player.global_position
-		player.owner.find_child("ItemDrops").add_child(item_drop)
+		player.get_parent().add_child(item_drop)
 		slot.item = null
 		slot.sync_item_texture()
 		queue_free()
+
+
+func _on_use_item_button_button_up():
+	var item = slot.item
+	if item is Consumable:
+		item.consume(player)

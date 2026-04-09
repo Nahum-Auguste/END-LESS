@@ -42,4 +42,4 @@ func enable_attack():
 func _on_hit_box_area_entered(area: Area2D):
 	var body = area.get_parent()
 	if body is Player:
-		body.health = clamp(body.health-damage,0,body.max_health)
+		body.inflict_damage(damage)

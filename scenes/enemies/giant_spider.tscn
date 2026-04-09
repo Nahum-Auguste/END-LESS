@@ -55,7 +55,6 @@ animations = [{
 radius = 9.0
 
 [node name="GiantSpider" type="CharacterBody2D" unique_id=147954774]
-position = Vector2(-11.301272, -12.305784)
 collision_layer = 2
 collision_mask = 7
 platform_floor_layers = 0
@@ -91,7 +90,6 @@ shape = SubResource("RectangleShape2D_kvp8k")
 debug_color = Color(0.99357957, 0, 0.26555803, 0.18039216)
 
 [node name="HitBox" type="Area2D" parent="." unique_id=123322503]
-rotation = 1.8111742
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=143155321]
@@ -107,7 +105,6 @@ shape = SubResource("CircleShape2D_svrsm")
 debug_color = Color(0.531573, 0.5491353, 0.44196907, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
-rotation = 1.8111742
 sprite_frames = SubResource("SpriteFrames_svrsm")
 animation = &"walk"
 
@@ -116,11 +113,10 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_j3pyh")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
-target_position = Vector2(-28.16427, 114.93057)
+target_position = Vector2(56.44943, -78.05417)
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
-debug_enabled = true
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

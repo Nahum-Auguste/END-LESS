@@ -1,6 +1,4 @@
-extends Object
-
-class_name Item
+class_name Item extends Object
 
 var id :int
 var name :String

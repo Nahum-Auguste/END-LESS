@@ -151,7 +151,6 @@ one_shot = true
 path_desired_distance = 10.0
 avoidance_enabled = true
 radius = 51.92
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.57254905, 0.4745098, 1, 1)
 

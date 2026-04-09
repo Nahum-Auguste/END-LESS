@@ -8,7 +8,6 @@ var player_inventory_scene_prefab: PackedScene = preload("res://scenes/ui/invent
 var inventory:PlayerInventory
 var is_inventory_open:bool = false
 
-var base_speed:= 50.0
 var sprint_mult:= 1.24
 var animation: String
 #var time_between_melee_attack = 1000 
@@ -32,6 +31,7 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 
 func _ready() -> void:
+	base_speed= 50.0
 	speed = base_speed
 	sprite = $AnimatedSprite2D
 	hand_item_sprite.texture = null
@@ -104,6 +104,9 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	
+	if inventory:
+		inventory.player = self
 
 	if Input.is_action_pressed("attack") and not attacking:
 		if main_hand_item:

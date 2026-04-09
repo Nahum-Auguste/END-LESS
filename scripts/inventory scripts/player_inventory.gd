@@ -2,6 +2,7 @@
 
 class_name PlayerInventory extends Inventory
 
+var player: Player
 @export var main_weapon_slot: ItemSlot
 @export var helmet_slot: ItemSlot
 @export var chest_slot: ItemSlot
@@ -13,6 +14,8 @@ class_name PlayerInventory extends Inventory
 func _ready():
 	super._ready()
 	populate_main_slots_randomized()
+	
+	var equippables = [main_weapon_slot,helmet_slot,chest_slot,accessory_slot1,accessory_slot2,accessory_slot3]
 	main_weapon_slot.input_type = Weapon
 	helmet_slot.input_type = HelmetArmor
 	chest_slot.input_type = ChestArmor
@@ -20,5 +23,8 @@ func _ready():
 	accessory_slot2.input_type = Accessory
 	accessory_slot3.input_type = Accessory
 	
+	for e in equippables:
+		e.inventory = self
+	
 	for slot:ItemSlot in hot_bar_slots_container.get_children():
-		slot.input_type = Consummable
+		slot.input_type = Consumable

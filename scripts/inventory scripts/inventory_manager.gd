@@ -3,7 +3,7 @@ extends Node
 
 var slot_hovered: ItemSlot
 var slot_clicked: ItemSlot
-var hovered_inventory:Control
+var hovered_inventory: Inventory
 
 var num :int = 2
 
@@ -82,6 +82,19 @@ func swap_slot_items(outslot:ItemSlot,inslot:ItemSlot):
 	inslot.item = tmp
 	on_transaction_complete(outslot,inslot)
 
-func on_transaction_complete(slot1:ItemSlot,slot2:ItemSlot):
-	slot1.sync_item_texture()
-	slot2.sync_item_texture()
+func on_transaction_complete(outslot:ItemSlot,inslot:ItemSlot):
+	outslot.sync_item_texture()
+	inslot.sync_item_texture()
+	
+	if hovered_inventory is PlayerInventory:
+		var player = hovered_inventory.player
+		var ini = inslot.item
+		var outi = outslot.item
+
+		if ini:
+			if ini is Armor:
+				if inslot is ArmorItemSlot:
+					ini.on_equip(player)
+				else:
+					ini.on_unequip()
+	

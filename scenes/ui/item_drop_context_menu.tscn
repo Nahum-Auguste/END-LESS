@@ -85,14 +85,12 @@ theme_override_font_sizes/font_size = 12
 text = "Pick Up"
 
 [node name="SplitItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=701206741]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12
 text = "Split"
 
 [node name="DropItemButton" type="Button" parent="AreaBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=2121689046]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 12

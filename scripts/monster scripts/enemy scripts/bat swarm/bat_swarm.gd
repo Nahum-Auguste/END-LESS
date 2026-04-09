@@ -23,7 +23,6 @@ class_name BatSwarm extends Enemy
 
 var detection_range
 
-var base_speed :float = 1500
 var sprint_mult := 1.8
 
 
@@ -37,6 +36,7 @@ func _init(health:float=15,max_health:float=15) -> void:
 func _ready():
 	super._ready()
 	sprite = $Sprite
+	base_speed  = 1500
 	speed = base_speed
 	
 	detection_ray = RayCast2D.new()
@@ -134,7 +134,7 @@ func attack(body: Player):
 	body.velocity += knockback
 	body.move_and_slide()
 	attack_interval_timer.start()
-	body.health = clamp(body.health-attack_damage,0,body.max_health)
+	body.inflict_damage(attack_damage)
 
 
 func is_player_in_detection_area()->bool:

@@ -98,13 +98,12 @@ sprite_frames = SubResource("SpriteFrames_xqole")
 animation = &"primed"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=289402393]
-target_position = Vector2(-9.010262, -103.87648)
+target_position = Vector2(31.567509, -46.164257)
 path_desired_distance = 5.0
 target_desired_distance = 5.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 67.69
-debug_enabled = true
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

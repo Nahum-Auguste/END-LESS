@@ -16,8 +16,9 @@ static var item_templates: Dictionary[int,Dictionary] = {
 	0:{
 		"name":"small bottle of calcium ointment",
 		"max_stack_count":3,
-		"item_type":"consummable",
-		"image_path":IMAGES_PATH + "small_bottle_of_calcium_ointment.png"
+		"item_type":"consumable",
+		"image_path":IMAGES_PATH + "small_bottle_of_calcium_ointment.png",
+		"status_effects": [HealStatusEffect.new(10)]
 	},
 	1:{
 		"name":"giant spider fangs",
@@ -37,22 +38,27 @@ static var item_templates: Dictionary[int,Dictionary] = {
 	3:{
 		"name":'helmet',
 		"image_path":IMAGES_PATH + "armor/helmet.png",
-		"item_type":"helmet_armor"
+		"item_type":"helmet_armor",
+		"defense": 3
 	},
 	4:{
 		"name":'breastplate',
 		"image_path":IMAGES_PATH + "armor/breastplate.png",
-		"item_type":"chest_armor"
+		"item_type":"chest_armor",
+		"defense" : 5
 	},
 	5:{
 		"name":'ring',
 		"image_path":IMAGES_PATH + "accessories/ring_or_bracelet.png",
-		"item_type":"accessory"
+		"item_type":"accessory",
+		"speed": 7
 	},
 	6:{
 		"name":'tattered scarf',
 		"image_path":IMAGES_PATH + "accessories/tattered_scarf.png",
-		"item_type":"accessory"
+		"item_type":"accessory",
+		"defense": 1,
+		"speed" : 2
 	}
 }
 
@@ -73,6 +79,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	var item_type
 	var sfx_folder_path
 	var item: Item = null
+	var speed = 0
+	var defense = 0
 	
 	#print(name)
 	if (!data.has("max_stack_count")):
@@ -92,8 +100,11 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 	
 	
 	match (item_type):
-		"consummable":
-			item = Consummable.new(id,name,msc)
+		"consumable":
+			item = Consumable.new(id,name,msc)
+			var effects : Array[StatusEffect]
+			effects.assign(data.status_effects)
+			item.set_status_effects(effects)
 		"sword":
 			var dmg = data.damage
 			item = Sword.new(id,name,msc,dmg)
@@ -105,6 +116,8 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 			item = Accessory.new(id,name,msc)
 		_:
 			item = Item.new(id,name,msc)
+		#_:
+			#printerr("ERROR: INVALID/NON EXISTENT ITEM TYPE: ", item_type)
 			
 	if (item):
 		if (img_path):
@@ -116,6 +129,11 @@ static func create_item(_id:int,stack_count:int=1) -> Item:
 			item.set_scene_path(scene_path)
 		if (sfx_folder_path):
 			item.set_sfx_paths(sfx_folder_path)
+		if (item is Armor):
+			if data.has("defense"):
+				item.defense = data["defense"]
+			if data.has("speed"):
+				item.speed = data["speed"]
 		item.count = stack_count
 	
 		
