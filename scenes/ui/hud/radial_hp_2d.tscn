@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c8ficc2ptmg4s"]
+
+[ext_resource type="Texture2D" uid="uid://dqbf5y7qnfs0d" path="res://assets/sprites/ui/radial_hp_test.png" id="1_rahfm"]
+[ext_resource type="Texture2D" uid="uid://cdknt8vh545ui" path="res://assets/sprites/ui/flame_hp.png" id="2_gyigy"]
+
+[node name="Node2D" type="Node2D" unique_id=421455264]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1780140143]
+offset_right = 40.0
+offset_bottom = 40.0
+step = 10.0
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("1_rahfm")
+texture_progress = ExtResource("2_gyigy")
