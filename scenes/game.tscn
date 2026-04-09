@@ -5,8 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://bw6j01wyrnsp8" path="res://scenes/objects/chests/basic_chest/basic_chest_down.tscn" id="3_gee14"]
 [ext_resource type="Script" uid="uid://c7x228j2ys2lh" path="res://scripts/map_generator.gd" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bnxyvo316rmvn" path="res://scenes/objects/chests/basic_chest/basic_chest_left.tscn" id="3_vtaks"]
+[ext_resource type="Texture2D" uid="uid://d3asoyjqrf703" path="res://assets/sprites/tilesheets/world1-tilesheet.png" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://b56big4ovtm67" path="res://scenes/minimap.gd" id="2_bt5mj"]
+[ext_resource type="Texture2D" uid="uid://dk7y011faoqle" path="res://assets/sprites/tilesheets/ghost_house/ghost_house_ceiling.png" id="2_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bvxc0w4hmr700" path="res://scenes/ui/hud/player_hud.tscn" id="3_1kice"]
+[ext_resource type="Texture2D" uid="uid://eydtq4awyf3m" path="res://assets/sprites/ui/minimap/player_marker.png" id="3_37s47"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud/quick_menu.tscn" id="4_1kice"]
+[ext_resource type="Texture2D" uid="uid://b0mwkbboivtfj" path="res://assets/sprites/tilesheets/ghost_house/ghost_house_floor1.png" id="4_264po"]
 [ext_resource type="PackedScene" uid="uid://befeatevosuie" path="res://scenes/objects/chests/basic_chest/basic_chest_right.tscn" id="4_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://bcba4xv8gqvj" path="res://scenes/objects/chests/basic_chest/basic_chest_up.tscn" id="5_dinhu"]
+[ext_resource type="Script" uid="uid://cy5jx351uxv4h" path="res://scenes/enemy_markers.gd" id="5_pl11u"]
+[ext_resource type="Script" uid="uid://cqjjx7hvvk84k" path="res://scenes/ui/hud/sub_viewport.gd" id="6_5newe"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://del2ua8ddsqph" path="res://scripts/canvas scripts/ground_gui_canvas.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="8_trtic"]
@@ -17,6 +26,15 @@
 [ext_resource type="AudioStream" uid="uid://decfa2ftt058d" path="res://assets/music/ghost_house_test.wav" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="13_rysoc"]
 [ext_resource type="PackedScene" uid="uid://rb6urj8basbh" path="res://scenes/ui/menus/pause_menu.tscn" id="16_ssvqc"]
+[ext_resource type="Script" uid="uid://d26mjnd0xg5ss" path="res://scenes/enemies.gd" id="18_e1j6l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37s47"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gee14"]
 resource_name = "world1_objects"
@@ -36,10 +54,90 @@ sources/0 = SubResource("TileSetScenesCollectionSource_gee14")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=651875168]
 script = ExtResource("6_u5sy4")
 
+[node name="TextEdit" type="Label" parent="CanvasLayer" unique_id=728482019]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_right = 76.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 20
+text = "\"M\": Show Minimap"
+horizontal_alignment = 1
+
+[node name="Minimap" type="SubViewportContainer" parent="CanvasLayer" unique_id=2092590117]
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 200.0
+grow_horizontal = 2
+script = ExtResource("2_bt5mj")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Minimap" unique_id=1457022408]
+handle_input_locally = false
+canvas_cull_mask = 4294967293
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+script = ExtResource("6_5newe")
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/Minimap/SubViewport" unique_id=1934501918]
+zoom = Vector2(0.3, 0.3)
+
+[node name="MinimapOutline" type="Panel" parent="CanvasLayer/Minimap" unique_id=913675295]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_37s47")
+
+[node name="PlayerMarker" type="TextureRect" parent="CanvasLayer/Minimap/MinimapOutline" unique_id=27547624]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_37s47")
+
+[node name="EnemyMarkers" type="Control" parent="CanvasLayer/Minimap/MinimapOutline" unique_id=512218315]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -27.0
+offset_right = -27.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_pl11u")
+
+[node name="QuickMenu" parent="CanvasLayer" unique_id=940785281 instance=ExtResource("4_1kice")]
+visible = false
+
+[node name="player_hud" parent="CanvasLayer" unique_id=764259258 instance=ExtResource("3_1kice")]
+
 [node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 node_paths=PackedStringArray("player") instance=ExtResource("12_dinhu")]
+visible = false
 player = NodePath("../../Player")
 
 [node name="pause_menu" parent="CanvasLayer" unique_id=504704094 instance=ExtResource("16_ssvqc")]
+visible = false
 
 [node name="TileMaps" type="Node2D" parent="." unique_id=1270821007]
 
@@ -57,12 +155,15 @@ tile_map_data = PackedByteArray("AAD8/wMAAgAAAAAAAAD+/wMAAgAAAAAAAAD+/wUAAgAAAAA
 tile_set = ExtResource("1_ir15t")
 
 [node name="ItemDrops" type="Node2D" parent="." unique_id=1499223933]
+visibility_layer = 2
 
 [node name="ItemDrop" parent="ItemDrops" unique_id=75805211 instance=ExtResource("10_vtaks")]
 position = Vector2(-191, 65)
 item_id = 2
 
 [node name="Enemies" type="Node2D" parent="." unique_id=93135162]
+visibility_layer = 2
+script = ExtResource("18_e1j6l")
 
 [node name="GiantSpider" parent="Enemies" unique_id=147954774 node_paths=PackedStringArray("player") instance=ExtResource("6_p57ef")]
 position = Vector2(8, 222)
@@ -83,6 +184,7 @@ position = Vector2(95, -28)
 position = Vector2(-241, -337)
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("1_uwrxv")]
+visibility_layer = 2
 position = Vector2(-150, 54)
 
 [node name="Camera2D" parent="." unique_id=1462019472 instance=ExtResource("13_rysoc")]
