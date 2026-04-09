@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://23e67hfn8jsm"]
+
+[ext_resource type="Script" uid="uid://bp8l7bhm1voks" path="res://scenes/ui/hud/stamina_bar.gd" id="1_ug0v8"]
+[ext_resource type="Script" uid="uid://dr0vmj7eo5aac" path="res://scenes/ui/hud/stamina_segments.gd" id="1_vy3py"]
+[ext_resource type="PackedScene" uid="uid://ben2wlrdrhv7r" path="res://scenes/ui/hud/stamina/segment.tscn" id="5_ax6ix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy3py"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2d0s"]
+bg_color = Color(0.45452422, 0.45452428, 0.45452416, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug0v8"]
+bg_color = Color(1, 0, 1, 1)
+
+[node name="StaminaBar" type="Control" unique_id=188713738]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 1.7300003
+offset_right = -859.9268
+offset_bottom = -666.39197
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.41, 0.41)
+script = ExtResource("1_ug0v8")
+
+[node name="BarBackground" type="Panel" parent="." unique_id=1152867570]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vy3py")
+
+[node name="StaminaMeter" type="ProgressBar" parent="BarBackground" unique_id=1246932218]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.3170733
+offset_top = 5.536585
+offset_right = -7.3170776
+offset_bottom = -5.5365868
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_h2d0s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ug0v8")
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="StaminaSegments" type="HBoxContainer" parent="BarBackground" unique_id=1627652550]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.00018310547
+offset_bottom = 0.99996567
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_vy3py")
+
+[node name="Segment" parent="BarBackground/StaminaSegments" unique_id=121468669 instance=ExtResource("5_ax6ix")]
+layout_mode = 2
+
+[node name="Segment2" parent="BarBackground/StaminaSegments" unique_id=415355561 instance=ExtResource("5_ax6ix")]
+layout_mode = 2
+
+[node name="Segment3" parent="BarBackground/StaminaSegments" unique_id=1752024301 instance=ExtResource("5_ax6ix")]
+layout_mode = 2

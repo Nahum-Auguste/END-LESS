@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://c8wkkmmlrjcn4"]
+
+[ext_resource type="Script" uid="uid://1biatxnjebej" path="res://scenes/ui/hud/quick_menu.gd" id="1_lslh4"]
+[ext_resource type="PackedScene" uid="uid://3131irxg4y7p" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="1_wpaxx"]
+
+[node name="QuickMenu" type="Control" unique_id=940785281]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lslh4")
+
+[node name="Consumables" type="Control" parent="." unique_id=2116843471]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Consumable1" parent="Consumables" unique_id=176156144 instance=ExtResource("1_wpaxx")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 30.0
+offset_bottom = 60.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+
+[node name="Consumable2" parent="Consumables" unique_id=1646714839 instance=ExtResource("1_wpaxx")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -30.0
+offset_right = 0.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Consumable3" parent="Consumables" unique_id=1441185922 instance=ExtResource("1_wpaxx")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -60.0
+offset_right = 30.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Consumable4" parent="Consumables" unique_id=1798241422 instance=ExtResource("1_wpaxx")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = 30.0
+grow_vertical = 2

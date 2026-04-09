@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bvxc0w4hmr700"]
+
+[ext_resource type="PackedScene" uid="uid://23e67hfn8jsm" path="res://scenes/ui/hud/stamina_bar.tscn" id="1_6k60i"]
+[ext_resource type="PackedScene" uid="uid://cwh1y8qsby475" path="res://scenes/ui/hud/health/health_container.tscn" id="2_cmdvl"]
+[ext_resource type="PackedScene" uid="uid://dy51o0d56utat" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="3_x7jc0"]
+
+[node name="player_hud" type="Control" unique_id=764259258]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HUDArea" type="ColorRect" parent="." unique_id=541279629]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -617.0
+offset_top = -338.0
+offset_right = 617.0
+offset_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaminaBar" parent="." unique_id=188713738 instance=ExtResource("1_6k60i")]
+layout_mode = 1
+offset_left = 23.000002
+offset_top = 92.0
+offset_right = -839.9268
+offset_bottom = -576.12195
+
+[node name="HealthContainer" parent="." unique_id=669422447 instance=ExtResource("2_cmdvl")]
+layout_mode = 1
+offset_left = 23.0
+offset_top = 22.0
+offset_right = -1057.0
+offset_bottom = -666.0
+
+[node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=227969146]
+layout_mode = 0
+offset_left = 866.0
+offset_top = 22.0
+offset_right = 1136.0
+offset_bottom = 82.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="HotBarSlot" parent="ConsumablesContainer" unique_id=176156144 instance=ExtResource("3_x7jc0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="HotBarSlot2" parent="ConsumablesContainer" unique_id=1401953390 instance=ExtResource("3_x7jc0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="HotBarSlot3" parent="ConsumablesContainer" unique_id=580478 instance=ExtResource("3_x7jc0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="HotBarSlot4" parent="ConsumablesContainer" unique_id=1012674154 instance=ExtResource("3_x7jc0")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="WeaponSlots" type="VBoxContainer" parent="." unique_id=142993711]
+layout_mode = 0
+offset_left = 1141.0
+offset_top = 23.0
+offset_right = 1255.0
+offset_bottom = 137.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MainWeaponSlot" parent="WeaponSlots" unique_id=1863084595 instance=ExtResource("3_x7jc0")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+
+[node name="SecondaryWeaponSlot" parent="WeaponSlots" unique_id=1538624252 instance=ExtResource("3_x7jc0")]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2

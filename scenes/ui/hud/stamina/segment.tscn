@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ben2wlrdrhv7r"]
+
+[ext_resource type="Script" uid="uid://hamn1hy2yy13" path="res://scenes/ui/hud/stamina/segment.gd" id="1_ccvxv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rapcp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[node name="Segment" type="Panel" unique_id=121468669]
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rapcp")
+script = ExtResource("1_ccvxv")
