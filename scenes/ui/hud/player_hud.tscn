@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HUDArea" type="ColorRect" parent="." unique_id=541279629]
 visible = false
@@ -41,7 +42,7 @@ offset_top = 22.0
 offset_right = -1057.0
 offset_bottom = -666.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=227969146]
+[node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=227969146]
 layout_mode = 0
 offset_left = 985.0
 offset_top = 24.0
@@ -51,25 +52,25 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="HotBarSlot" parent="HBoxContainer2" unique_id=176156144 instance=ExtResource("3_x7jc0")]
+[node name="HotBarSlot" parent="ConsumablesContainer" unique_id=176156144 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot2" parent="HBoxContainer2" unique_id=1401953390 instance=ExtResource("3_x7jc0")]
+[node name="HotBarSlot2" parent="ConsumablesContainer" unique_id=1401953390 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot3" parent="HBoxContainer2" unique_id=580478 instance=ExtResource("3_x7jc0")]
+[node name="HotBarSlot3" parent="ConsumablesContainer" unique_id=580478 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot4" parent="HBoxContainer2" unique_id=1012674154 instance=ExtResource("3_x7jc0")]
+[node name="HotBarSlot4" parent="ConsumablesContainer" unique_id=1012674154 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8

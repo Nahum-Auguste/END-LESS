@@ -109,6 +109,10 @@ func _process(delta: float) -> void:
 func _draw():
 	if alive:
 		draw_debug_hp()
+		
+		# jeremy minimap code
+		#create_marker()
+		
 	#if corpse_detection_ray:
 		#draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
 
@@ -158,3 +162,13 @@ func _exit_tree():
 	if corpse_inventory:
 		corpse_inventory.queue_free()
 	
+# jeremy minimap code
+#var marker_position = $".".position
+#@export var marker_color = Color("red")
+#
+#func get_current_position():
+	#marker_position = $".".position
+#func create_marker():
+	#if alive:
+		#get_current_position()
+		#draw_circle(marker_position, 15, marker_color, true)
