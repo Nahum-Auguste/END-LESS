@@ -13,7 +13,7 @@ var player: Player
 
 func _ready():
 	super._ready()
-	populate_main_slots_randomized()
+	#populate_main_slots_randomized()
 	
 	var equippables = [main_weapon_slot,helmet_slot,chest_slot,accessory_slot1,accessory_slot2,accessory_slot3]
 	main_weapon_slot.input_type = Weapon
@@ -22,6 +22,8 @@ func _ready():
 	accessory_slot1.input_type = Accessory
 	accessory_slot2.input_type = Accessory
 	accessory_slot3.input_type = Accessory
+	
+	main_weapon_slot.item = ItemData.create_item(2)
 	
 	for e in equippables:
 		e.inventory = self
