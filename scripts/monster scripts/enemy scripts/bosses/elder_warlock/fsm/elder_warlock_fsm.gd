@@ -15,6 +15,7 @@ var player: Player
 @export_range(0,500,1) var mid_range_attack_range: float = 150
 @export_range(0,500,1) var far_range_attack_range: float = 300
 var phase: int = 1
+var playing_theme = false
 
 func _ready():
 	super._ready()
@@ -41,7 +42,14 @@ func physics_update(delta):
 	if parent.player and !parent.is_detection_ray_blocked():
 		player = parent.player
 		parent.detection_area_shape.radius = mid_range_attack_range
-
+		if playing_theme == false and !parent.is_clone():
+			playing_theme = true
+			var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
+			var music : AudioStreamWAV = load("res://assets/music/early_elder_warlock_battle_theme.wav")
+			music.loop_mode = AudioStreamWAV.LOOP_FORWARD
+			theme_player.stream = music
+			theme_player.play()
+	
 	if player:
 		if current_state is not TeleportState and current_state is not ElderWarlockCloneState:
 			if is_player_in_range(close_range_attack_range):

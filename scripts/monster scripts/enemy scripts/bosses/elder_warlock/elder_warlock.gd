@@ -65,6 +65,10 @@ func _exit_tree():
 	if exit_door:
 		exit_door.locked = false
 		exit_door.sprite.animation = "open"
+		
+	if !is_clone():
+		var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
+		theme_player.stop()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

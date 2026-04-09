@@ -103,6 +103,7 @@ func _draw():
 	draw_circle(Vector2.ZERO,attack_detection_range,Color(Color.YELLOW,.05))
 	draw_circle(Vector2.ZERO,wander_range,Color.WHITE_SMOKE,false,2)
 	
+	#print(player)
 	if player:
 		var pos = player.global_position - global_position
 		var diff = max_teleportation_range - min_teleportation_range

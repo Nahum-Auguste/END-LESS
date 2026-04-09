@@ -56,11 +56,14 @@ animations = [{
 }]
 
 [node name="Warlock" type="CharacterBody2D" unique_id=777216955]
-position = Vector2(-1.4903929, -0.74519646)
+position = Vector2(-2.9807858, -1.4903929)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_s4l7h")
 wander_range = 141.0
+min_teleportation_range = 61.0
+max_teleportation_range = 118.0
+teleport_interval = 3.5
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=665940647]
@@ -95,7 +98,7 @@ sprite_frames = SubResource("SpriteFrames_xqole")
 animation = &"primed"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=289402393]
-target_position = Vector2(-37.06753, -32.461872)
+target_position = Vector2(-9.010262, -103.87648)
 path_desired_distance = 5.0
 target_desired_distance = 5.0
 path_postprocessing = 1

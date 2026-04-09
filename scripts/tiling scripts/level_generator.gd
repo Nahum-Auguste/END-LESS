@@ -35,7 +35,7 @@ var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
 @export var max_room_pasters: int = 10
 @export_range(0,200,1) var enemies: int = 30
 @onready var max_length_area_shape: CircleShape2D = $MaxLengthArea/CollisionShape2D.shape 
-
+@export var level_theme_player: AudioStreamPlayer
 
 var level_center: Vector2 = Vector2.ZERO
 var floor_cells: Array[Vector2i]
@@ -112,9 +112,15 @@ func generate_level():
 	add_boss_room()
 	add_spawn_room()
 	spawn_enemies()
+	set_level_theme()
 	#tile_layer.update_internals()
 	$NavigationRegion2D.bake_navigation_polygon()
 	
+func set_level_theme():
+	var sound : AudioStreamWAV = load("res://assets/music/ghost_house_test.wav")
+	sound.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	level_theme_player.stream = sound
+	level_theme_player.play()
 	
 func spawn_enemies():
 	var spots : Array[Vector2i] = []
