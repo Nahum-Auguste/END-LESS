@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://o8s88qsfgawu"]
+[gd_scene format=3 uid="uid://bvxc0w4hmr700"]
+
+[ext_resource type="PackedScene" uid="uid://23e67hfn8jsm" path="res://scenes/ui/hud/stamina_bar.tscn" id="1_6k60i"]
 
 [node name="player_hud" type="Control" unique_id=764259258]
 layout_mode = 3
@@ -8,7 +10,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HPContainer" type="HBoxContainer" parent="." unique_id=1060061401]
+[node name="HUDArea" type="ColorRect" parent="." unique_id=541279629]
 layout_mode = 1
-offset_right = 164.0
-offset_bottom = 32.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -617.0
+offset_top = -338.0
+offset_right = 617.0
+offset_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaminaBar" parent="." unique_id=188713738 instance=ExtResource("1_6k60i")]
+layout_mode = 1
+offset_left = 23.000002
+offset_top = 54.0
+offset_right = -839.9268
+offset_bottom = -614.12195
