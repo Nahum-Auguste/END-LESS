@@ -42,6 +42,8 @@ func handle_attack(area:Area2D):
 	var min_knockback_strength = 108
 	var max_knockback_strength = 10000
 	var entity:PhysicsBody2D= area.get_parent()
+	#print(area)
+	#print(entity)
 	#print("Entity attacked: ",entity)
 	
 	if entity is Enemy:

@@ -150,11 +150,16 @@ func display_corpse_inventory():
 func close_corpse_inventory():
 	if corpse_inventory and corpse_inventory.get_parent()==GroundGuiCanvas : GroundGuiCanvas.remove_child(corpse_inventory)
 	
-func draw_debug_hp(x=-16+1,y=-25 + 48,w=30,h=1):
+func draw_debug_hp(x=-16+1,y=-25 + 48,w=30,h=2):
+	
+	y += get_sprite_size().y/2.5
+	w += get_sprite_size().x/2
+	x -= get_sprite_size().x/4
+
 	draw_rect(Rect2(x-1,y-1,w+2,h+2),Color.BLACK,true)
 	draw_rect(Rect2(x,y,w,h),Color.DIM_GRAY,true)
 	draw_rect(Rect2(x+w*.025,y+h*.1,(w-(w*.025*2)),h-(h*.1*2)),Color.BLACK,true)
-	draw_rect(Rect2(x+w*.025,y+h*.1,(self.health/self.max_health) * (w-(w*.025*2)),h-(h*.1*2)),Color.CRIMSON,true)
+	draw_rect(Rect2(x+w*.025,y+h*.1,(self.health/self.max_health) * (w-(w*.025*2)),h-(h*.1*2)),Color.ROSY_BROWN,true)
 
 func configure_detection_ray():
 	if !detection_ray:

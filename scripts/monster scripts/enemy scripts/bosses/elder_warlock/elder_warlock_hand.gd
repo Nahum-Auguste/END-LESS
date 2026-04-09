@@ -47,20 +47,38 @@ func play_animation(animation: String, speed: float = 1, on_finish: Callable = f
 	
 	
 func do_clone_spell():
+	var real_warlock = body.real_warlock
+	if body != real_warlock: return
+	if real_warlock.clones.size() >= real_warlock.max_clones: return
+	
+	var clone: ElderWarlock = elder_warlock_prefab.instantiate()
+	
+	clone.real_warlock = real_warlock
+	real_warlock.max_health = real_warlock.health
+	#print(real_warlock.max_clones)
+	#clone.set_collision_layer_value(LayerConstants.EnemyLayer,false)
+	#clone.set_collision_mask_value(LayerConstants.EnemyLayer,false)
+	#clone.set_collision_mask_value(LayerConstants.PlayerLayer,false)
+	clone.max_health = real_warlock.max_health/7.0
+	clone.orb_damage = real_warlock.orb_damage/7.0
+	clone.pool_attack_damage = real_warlock.pool_attack_damage/7.0
+	clone.health = clone.max_health
+	real_warlock.clones.push_back(clone)
+	real_warlock.get_tree().root.add_child(clone)
+	clone.fsm.enter_state(clone.fsm.teleport)
+	
+	for w in (real_warlock.clones + [real_warlock]):
+		w.scale = real_warlock.base_scale * .8
+	
+	#body.is_cloning = false
+	
+	
+func clone(speed: float = body.cloning_speed):
 	if body.real_warlock!=body: 
 		push_error("TRIED TO USE ELDER WARLOCK CLONE SPELL AS A CLONE")
 		return
-	play_animation("clone", body.clone_speed)
+	play_animation("clone", speed)
 	
-func clone():
-	#if !body.is_cloning: return
-	if body.clones.size() >= body.max_clones: return
-	var clone: ElderWarlock = elder_warlock_prefab.instantiate()
-	clone.real_warlock = body.real_warlock
-	body.real_warlock.clones.push_back(clone)
-	body.real_warlock.add_child(clone)
-	clone.left_hand.teleport()
-	body.is_cloning = false
 	
 func do_orb_pool_attack():
 	if hand_state == HandState.ACTIVE: return
@@ -84,7 +102,7 @@ func teleport(speed:float = body.teleport_speed):
 	
 func do_teleport():
 	body.global_position = body.teleport_position
-	print("telepoted")
+	#print("telepoted")
 	
 func shoot_orb(shoot_speed:float = body.shoot_speed):
 	if hand_state == HandState.ACTIVE: return

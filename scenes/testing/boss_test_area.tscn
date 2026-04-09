@@ -21,7 +21,7 @@ tile_set = ExtResource("1_l5rq8")
 navigation_enabled = false
 
 [node name="ElderWarlock" parent="." unique_id=1843472655 instance=ExtResource("2_dkffi")]
-position = Vector2(-28, -95)
+position = Vector2(-2, -197.00002)
 
 [node name="Player" parent="." unique_id=806514 instance=ExtResource("3_f2qwb")]
 position = Vector2(1, 68)

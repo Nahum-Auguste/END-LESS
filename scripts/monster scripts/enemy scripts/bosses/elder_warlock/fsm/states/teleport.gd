@@ -13,6 +13,8 @@ func _ready():
 	tp_timer.wait_time = teleport_speed
 	tp_timer.timeout.connect(teleport)
 	
+func exit():
+	tp_timer.stop()
 	
 func physics_update(delta):
 	super.physics_update(delta)

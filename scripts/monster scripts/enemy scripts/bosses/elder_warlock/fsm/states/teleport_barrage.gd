@@ -22,7 +22,11 @@ func enter():
 	#if parent is ElderWarlock:
 		#parent.teleport(tp_timer.wait_time)
 		
+func exit():
+	tp_timer.stop()
+		
 func update(delta):
+	super.update(delta)
 	if teleport_count<=0:
 		fsm.exit_state()
 
@@ -30,7 +34,6 @@ func physics_update(delta):
 	super.physics_update(delta)
 	
 	if parent is ElderWarlock:
-		parent.teleport_position = parent.global_position
 		parent.teleport_position = body_area_copy.global_position
 		
 		if parent.player and tp_timer.is_stopped():
@@ -52,6 +55,7 @@ func physics_update(delta):
 					
 func teleport():
 	if teleport_count > 0:
+			
 		tp_timer.wait_time = randf_range(min_teleport_speed,max_teleport_speed)
 		parent.teleport(tp_timer.wait_time)
 		tp_timer.start()

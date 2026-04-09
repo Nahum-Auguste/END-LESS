@@ -6,33 +6,41 @@ class_name ElderWarlock extends Enemy
 #@export_tool_button("shoot_orb_right_hand") var shoot_orb_right: Callable = shoot_orb_right_hand
 @onready var left_hand: ElderWarlockHand = $LeftHand
 @onready var right_hand: ElderWarlockHand = $RightHand
+var base_scale: Vector2
 var is_teleporting: bool = false 
 var teleport_speed = 1
 var teleport_position: Vector2
 @onready var detection_area_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 
 var is_cloning: bool = false
-var clone_speed: float = 1
-var max_clones: int = 4
+var cloning_speed: float = 1
+
+var max_clones: int = 1
 var clones: Array[ElderWarlock] = []
 var real_warlock: ElderWarlock = self
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
 
-
+var base_speed = 1500
 var shoot_speed = .5
 var orb_damage = 0
 var orb_speed = 1
 var orb_follow_time = .75
-var pool_attack_speed = 1
+var pool_attack_damage = 10
+var pool_attack_speed = 3
 var speed_angle = 0
+
+func _init(health:float=200,max_health:float=200) -> void:
+	super._init(health,max_health)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
+	base_scale = scale
 	detection_area = $DetectionArea
 	sprite = $BodySprite
-	speed = 2000
+	speed = base_speed
 	nav_agent.target_position = global_position
 	#teleport_collider = $CollisionShape.duplicate()
 	#teleport_spot.add_child(teleport_collider)
@@ -49,9 +57,13 @@ func _ready() -> void:
 func _exit_tree():
 	if real_warlock!=self:
 		real_warlock.clones.erase(self)	
+	else:
+		for c in real_warlock.clones:
+			c.free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	super._process(delta)
 	queue_redraw()
 	fsm.update(delta)
 	#teleport()
@@ -59,8 +71,12 @@ func _process(delta: float) -> void:
 	#shoot_orb(right_hand)
 	#shoot_orb(left_hand)
 	pass
+
+func is_clone()->bool:
+	return real_warlock!=self
 	
 func _physics_process(delta):
+	super._physics_process(delta)
 	speed_angle += 2
 	fsm.physics_update(delta)
 	
@@ -89,6 +105,8 @@ func _physics_process(delta):
 	movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed * delta)
 	
 func _draw():
+	super._draw()
+	draw_debug_hp()
 	fsm.draw()
 	
 
@@ -99,6 +117,10 @@ func teleport(speed: float = teleport_speed):
 	is_teleporting = true
 	left_hand.teleport(speed)
 	right_hand.teleport(speed)
+
+func clone(speed: float = cloning_speed):
+	left_hand.clone(speed)
+	right_hand.clone(speed)
 
 func shoot_orb_left_hand(shoot_speed:float = shoot_speed):
 	shoot_orb(left_hand,shoot_speed)
@@ -115,3 +137,8 @@ func _on_detection_area_area_entered(area):
 	var body = area.get_parent() 
 	if body is Player:
 		player = body
+		
+
+
+func _on_hurt_box_area_entered(area):
+	pass # Replace with function body.

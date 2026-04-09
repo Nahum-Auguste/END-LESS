@@ -27,7 +27,7 @@ func start():
 		$Pool.skew = 0
 		animator.play("charge")
 		await animator.animation_finished
-		print("stopped")
+		#print("stopped")
 		animator.stop()
 		queue_free()
 	

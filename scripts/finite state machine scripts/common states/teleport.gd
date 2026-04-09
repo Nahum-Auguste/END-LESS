@@ -31,6 +31,8 @@ func enter():
 	if teleport_origin_type == "player" and parent.player:
 		teleport_anchor = parent.player
 		
+
+		
 func update(delta):
 	if teleport_origin_type == "self":
 		teleport_anchor = parent

@@ -24,3 +24,12 @@ func _process(delta: float) -> void:
 func handle_death():
 	alive = false
 	pass
+	
+func get_sprite_size()->Vector2:
+	var size : Vector2
+	
+	if sprite:
+		size = sprite.sprite_frames.get_frame_texture(sprite.animation,sprite.frame).get_size()
+	
+	return size
+	

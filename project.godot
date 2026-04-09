@@ -101,6 +101,7 @@ esc={
 2d_physics/layer_3="Tiles"
 2d_physics/layer_4="Attacks"
 2d_physics/layer_5="Attackable Objects"
+2d_physics/layer_9="player attack"
 
 [physics]
 
