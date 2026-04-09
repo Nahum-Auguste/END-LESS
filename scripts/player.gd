@@ -58,6 +58,7 @@ func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	return false
 	
 func _physics_process(delta: float) -> void:
+
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
 	var sprint := Input.is_action_pressed("sprint")

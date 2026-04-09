@@ -18,6 +18,10 @@ var tiles: Dictionary[String,TD] = {
 	"wall": TD.new(Vector2i(0,1))
 }
 
+var bat_swarm_prefab = preload("res://scenes/enemies/bat_swarm.tscn")
+var warlock_prefab = preload("res://scenes/enemies/warlock/warlock.tscn")
+var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
+
 #@export_tool_button("clear console") var clear_console = func(): print("\u001b")
 @export_tool_button("clear tiles","CurveDelete") var clear_button = clear
 @export_tool_button("generate level","Edit") var gen_button = generate_level
@@ -29,7 +33,9 @@ var tiles: Dictionary[String,TD] = {
 @export var max_path_length : int = 30
 @export var path_width: int = 3
 @export var max_room_pasters: int = 10
+@export_range(0,200,1) var enemies: int = 30
 @onready var max_length_area_shape: CircleShape2D = $MaxLengthArea/CollisionShape2D.shape 
+
 
 var level_center: Vector2 = Vector2.ZERO
 var floor_cells: Array[Vector2i]
@@ -37,7 +43,7 @@ var node_positions: Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#generate_level()
+	generate_level()
 	pass
 	
 func _process(delta):
@@ -54,6 +60,8 @@ func draw_ceilings():
 			var pos = start + Vector2(x,y)
 			#print(pos)
 			draw_tile(pos,"ceiling")
+			
+
 			
 func draw_walls():
 	var size = max_path_length * 1.1
@@ -98,15 +106,37 @@ func generate_level():
 	clear()
 	draw_ceilings()
 	paste_generated_level()
-	
 	add_rooms()
 	draw_walls()
+	
 	add_boss_room()
 	add_spawn_room()
+	spawn_enemies()
 	#tile_layer.update_internals()
 	$NavigationRegion2D.bake_navigation_polygon()
-	$NavigationRegion2D.bake_navigation_polygon()
 	
+	
+func spawn_enemies():
+	var spots : Array[Vector2i] = []
+	for cell in tile_layer.get_used_cells():
+		var source_id = tile_layer.get_cell_source_id(cell)
+		var atlas_pos = tile_layer.get_cell_atlas_coords(cell)
+		if source_id==tiles["floor"].atlas_id and atlas_pos==tiles["floor"].atlas_pos:
+			spots.push_back(cell)
+			#print(cell)
+	
+
+	for e in range(enemies):
+		var cell = spots[randi_range(0,spots.size()-1)]
+		var pos = tile_layer.to_global(tile_layer.map_to_local(cell))
+		spots.erase(cell)
+		
+		var enemy_list :Array[PackedScene]  = [giant_spider_prefab,warlock_prefab,bat_swarm_prefab]
+		var enemy : Enemy = (enemy_list[randi_range(0,enemy_list.size()-1)]).instantiate()
+		
+		get_parent().add_child.call_deferred(enemy)
+		enemy.global_position = pos
+		print(enemy.global_position)
 	
 func add_boss_room():
 	var nodes = node_positions.duplicate()
@@ -156,6 +186,7 @@ func paste_pattern(position: Vector2i, path: String):
 		var atlas_pos = pattern.get_cell_atlas_coords(cell)
 		var alt_id = pattern.get_cell_alternative_tile(cell)
 		tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
+		#floor_cells.erase(pos)
 
 	
 func add_spawn_room():
@@ -385,5 +416,10 @@ func clear():
 		player.queue_free()
 		player = get_tree().root.find_child("Player",true,false)
 		tries -= 1
+		
+	for child in get_parent().get_children():
+		if child is Enemy:
+			
+			child.queue_free()
 		
 	floor_cells = []

@@ -1,8 +1,7 @@
 class_name WarlockWanderState extends WarlockState
 
 
-var parent : Warlock
-var nav_agent: NavigationAgent2D
+
 
 var wander_timer: Timer = Timer.new()
 

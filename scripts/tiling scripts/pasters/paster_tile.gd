@@ -41,7 +41,7 @@ func paste_pattern(pattern_path: String, check_overlap: bool = true):
 			# default origin
 			var origin :Vector2i
 			
-			var cancel_threshold_percent = .05
+			var cancel_threshold_percent = .1
 			var overlap_count = 0
 			var cell_count = pattern.get_used_cells().size()
 			

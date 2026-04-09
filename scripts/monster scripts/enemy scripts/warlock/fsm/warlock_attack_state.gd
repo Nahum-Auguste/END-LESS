@@ -2,7 +2,7 @@
 
 class_name WarlockAttackState extends WarlockState
 
-var parent: Warlock
+
 var player: Player
 var tp_timer: Timer = Timer.new()
 

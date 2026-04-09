@@ -18,6 +18,7 @@ var detection_range
 func _init(health:float=0,max_health:float=0) -> void:
 	max_health = 12
 	attack_speed = 1
+	attack_damage = 4
 	super(health,max_health)
 	add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.7,1,4)
 	populate_items()
@@ -80,6 +81,11 @@ func _on_detection_area_body_entered(body):
 		
 		
 func _exit_tree():
+	if !alive:
+		spawn_spiderlings()
+
+
+func spawn_spiderlings():
 	if is_mother:
 		for i in range(0,spiderlings):
 			var spiderling: GiantSpider = load(scene_file_path).instantiate()
@@ -97,5 +103,9 @@ func _exit_tree():
 		print("spawned ", spiderlings)
 
 
-	
-	
+func _on_hit_box_body_entered(body):
+	pass # Replace with function body.
+
+
+func _on_hit_box_body_exited(body):
+	pass # Replace with function body.

@@ -1,6 +1,6 @@
 class_name BatSwarmIdleState extends BatSwarmState
 
-var parent : BatSwarm
+
 
 func enter():
 	parent = fsm.parent

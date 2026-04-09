@@ -178,7 +178,7 @@ shape = SubResource("CircleShape2D_somum")
 debug_color = Color(0.5176471, 0.5529412, 0.39607844, 0.15686275)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=418676552]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1302069449]

@@ -20,16 +20,15 @@ class_name BatSwarm extends Enemy
 
 
 @onready var detection_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
-@onready var detection_ray: RayCast2D = RayCast2D.new()
+
 var detection_range
 
 var base_speed :float = 1500
-var speed: float
 var sprint_mult := 1.8
 
 
 
-func _init(health:float=0,max_health:float=15) -> void:
+func _init(health:float=15,max_health:float=15) -> void:
 	super._init(health,max_health)
 	attack_damage = .1
 	
@@ -39,6 +38,8 @@ func _ready():
 	super._ready()
 	sprite = $Sprite
 	speed = base_speed
+	
+	detection_ray = RayCast2D.new()
 	
 	match (current_state):
 		"idle":
@@ -67,6 +68,7 @@ func set_attack_interval_timer():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	super._process(delta)
 	detection_shape.radius = detection_range
 	#print(player.health)
 	fsm.update(delta)
@@ -78,6 +80,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	super._physics_process(delta)
 	fsm.physics_update(delta)
 	if !nav_agent.is_navigation_finished():
 		velocity = (nav_agent.get_next_path_position() - global_position).normalized() * speed * delta
@@ -103,6 +106,7 @@ func is_detection_ray_blocked()->bool:
 	return detection_ray.is_colliding() and  detection_ray.get_collider() is not Player
 	
 func _draw():	
+	super._draw()
 	#fsm.draw()
 	
 	#if player:
@@ -130,6 +134,7 @@ func attack(body: Player):
 	body.velocity += knockback
 	body.move_and_slide()
 	attack_interval_timer.start()
+	body.health = clamp(body.health-attack_damage,0,body.max_health)
 
 
 func is_player_in_detection_area()->bool:

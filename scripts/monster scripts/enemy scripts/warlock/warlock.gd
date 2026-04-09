@@ -14,14 +14,13 @@ class_name Warlock extends Enemy
 @export_range(0,10,.5) var teleport_interval :float = 1.5
 @export_range(0,180,5) var orb_burst_attack_cone :float = 145
 
-@onready var detection_area: Area2D = $DetectionArea
 @onready var detection_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 var detection_range
-@onready var detection_ray: RayCast2D = RayCast2D.new()
 
-var speed = 3000
+
+
 var speed_angle = 0
 
 @onready var teleport_spot_body_area: Area2D = $TeleportSpotBodyArea
@@ -29,8 +28,7 @@ var speed_angle = 0
 
 var fsm: WarlockFSM = WarlockFSM.new(self)
 
-func _init(health:float=0,max_health:float=0) -> void:
-	max_health = 30
+func _init(health:float=30,max_health:float=30) -> void:
 	super._init(health,max_health)
 
 func _ready():
@@ -38,7 +36,10 @@ func _ready():
 	sprite = $AnimatedSprite2D
 	attack_speed = 1.4
 	player_escape_time = 5
+	detection_area= $DetectionArea
+	speed = 3000
 	
+	detection_ray = RayCast2D.new()
 	detection_ray.enabled = true
 	detection_ray.set_collision_mask_value(LayerConstants.PlayerLayer,true)
 	detection_ray.set_collision_mask_value(LayerConstants.TileLayer,true)
@@ -75,6 +76,7 @@ func _process(delta: float) -> void:
 			#sprite.play()
 
 func _physics_process(delta):
+	super._physics_process(delta)
 	fsm.physics_update(delta)
 	speed_angle+=.75
 	
@@ -94,6 +96,7 @@ func is_detection_ray_blocked():
 	return !(player and detection_ray.is_colliding() and detection_ray.get_collider() == player)
 
 func _draw():
+	super._draw()
 	fsm.draw()
 	#draw_circle(Vector2.ZERO,teleportation_range,Color(Color.PURPLE,.1))
 	draw_circle(Vector2.ZERO,base_detection_range,Color(Color.YELLOW,.1))

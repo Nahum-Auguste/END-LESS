@@ -2,8 +2,7 @@ class_name BatSwarmWanderState extends BatSwarmState
 
 
 
-var parent : BatSwarm
-var nav_agent: NavigationAgent2D
+
 
 var wander_timer: Timer = Timer.new()
 

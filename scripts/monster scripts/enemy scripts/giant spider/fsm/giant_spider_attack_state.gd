@@ -32,6 +32,7 @@ func attack():
 			var knockback_strength = 170
 			var knockback = dir * knockback_strength
 			parent.player.knockback_velocity += knockback
+			parent.player.health = clamp(parent.player.health-parent.attack_damage,0,parent.player.max_health)
 			
 func update(delta):
 	if parent is GiantSpider:

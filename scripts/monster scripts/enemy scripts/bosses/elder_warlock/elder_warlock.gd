@@ -24,10 +24,10 @@ var real_warlock: ElderWarlock = self
 
 var base_speed = 1500
 var shoot_speed = .5
-var orb_damage = 0
+var orb_damage = 1
 var orb_speed = 1
 var orb_follow_time = .75
-var pool_attack_damage = 10
+var pool_attack_damage = 5
 var pool_attack_speed = 3
 var speed_angle = 0
 
@@ -64,6 +64,7 @@ func _exit_tree():
 	var exit_door : LevelDoor = get_tree().root.find_child("ExitDoor",true,false)
 	if exit_door:
 		exit_door.locked = false
+		exit_door.sprite.animation = "open"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

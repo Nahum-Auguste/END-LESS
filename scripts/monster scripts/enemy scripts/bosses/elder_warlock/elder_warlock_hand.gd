@@ -65,8 +65,9 @@ func do_clone_spell():
 	clone.health = clone.max_health
 	real_warlock.clones.push_back(clone)
 	real_warlock.get_tree().root.add_child(clone)
-	clone.fsm.player = body.player
-	clone.player = body.player
+	clone.global_position = real_warlock.global_position
+	clone.fsm.player = real_warlock.player
+	clone.player = real_warlock.player
 	clone.fsm.enter_state(clone.fsm.teleport)
 	
 	for w in (real_warlock.clones + [real_warlock]):
@@ -91,6 +92,7 @@ func spawn_orb_pool():
 	var pool: OrbSpikeAttack = orb_pool_prefab.instantiate()
 	
 	var pos: Vector2 = global_position + Vector2(0,40)
+	pool.damage = body.pool_attack_damage
 	var player: Player = body.player
 	if player:
 		pos = player.global_position + player.scale * Vector2(0,player.sprite.sprite_frames.get_frame_texture(player.sprite.animation,player.sprite.frame).get_height()/2)

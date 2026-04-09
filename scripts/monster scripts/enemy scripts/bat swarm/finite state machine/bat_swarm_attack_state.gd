@@ -1,7 +1,6 @@
 class_name BatSwarmAttackState extends BatSwarmState
 
-var parent : BatSwarm
-var nav_agent: NavigationAgent2D
+
 var player: Player
 
 func enter():

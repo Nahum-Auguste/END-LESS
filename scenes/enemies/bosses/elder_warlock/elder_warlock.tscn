@@ -190,9 +190,6 @@ body = NodePath("..")
 scale = Vector2(-1, 1)
 body = NodePath("..")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1146806496]
-zoom = Vector2(2.125, 2.125)
-
 [connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ReloadTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ShootIntervalTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_shoot_interval_timer_timeout"]
 [connection signal="timeout" from="ElderWarlockFSM/SpawnOrbTraps/SwitchHandTimer" to="ElderWarlockFSM/SpawnOrbTraps" method="_on_switch_hand_timer_timeout"]

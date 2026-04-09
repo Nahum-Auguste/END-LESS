@@ -279,9 +279,10 @@ visibility_layer = 8
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_t6ryo")
 
-[node name="HurtBox" type="Area2D" parent="Pool" unique_id=1388726614]
+[node name="HitBox" type="Area2D" parent="Pool" unique_id=1388726614]
+collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pool/HurtBox" unique_id=1346245389]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pool/HitBox" unique_id=1346245389]
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_3u273")
 disabled = true
@@ -311,3 +312,5 @@ stream = ExtResource("3_ilr1v")
 volume_db = -1.21
 pitch_scale = 4.0
 autoplay = true
+
+[connection signal="area_entered" from="Pool/HitBox" to="." method="_on_hit_box_area_entered"]
