@@ -49,9 +49,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_h2d0s")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ug0v8")
-max_value = 5.0
+max_value = 3.0
 step = 1.0
-value = 5.0
+value = 3.0
 show_percentage = false
 
 [node name="StaminaSegments" type="HBoxContainer" parent="BarBackground" unique_id=1627652550]
@@ -74,10 +74,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Segment3" parent="BarBackground/StaminaSegments" unique_id=1752024301 instance=ExtResource("5_ax6ix")]
-layout_mode = 2
-
-[node name="Segment4" parent="BarBackground/StaminaSegments" unique_id=1775970491 instance=ExtResource("5_ax6ix")]
-layout_mode = 2
-
-[node name="Segment5" parent="BarBackground/StaminaSegments" unique_id=1320424793 instance=ExtResource("5_ax6ix")]
 layout_mode = 2
