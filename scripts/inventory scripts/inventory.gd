@@ -18,6 +18,7 @@ func _ready():
 	pass
 	
 func _process(delta):
+	#print(main_slot_container)
 	create_main_slot_container_slots()
 	pass
 	

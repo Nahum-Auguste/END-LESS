@@ -69,7 +69,8 @@ func _exit_tree():
 		
 	if !is_clone():
 		var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
-		theme_player.stop()
+		if theme_player:
+			theme_player.stop()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

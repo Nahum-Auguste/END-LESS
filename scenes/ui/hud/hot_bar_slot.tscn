@@ -13,6 +13,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6w6p1")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=855334482]
+[node name="TextureRectBackground" type="TextureRect" parent="." unique_id=855334482]
 layout_mode = 2
 texture = ExtResource("1_00h0i")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=642685595]
+layout_mode = 2

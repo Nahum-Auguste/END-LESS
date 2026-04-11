@@ -38,6 +38,10 @@ func _ready() -> void:
 	attack_effect_sprite.visible = false
 	create_inventory()
 	inventory.create_main_slot_container_slots()
+	inventory.visible = false
+	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
+		PlayerGuiCanvas.add_child(inventory)
+	#display_inventory()
 
 func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	if (global_position-obj.global_position).length()<=range:
@@ -104,6 +108,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	#print(inventory)
 	
 	if inventory:
 		inventory.player = self
@@ -147,10 +152,12 @@ func create_inventory():
 func display_inventory():
 	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
 		PlayerGuiCanvas.add_child(inventory)
+	inventory.visible = true
 		
 func close_inventory():
-	if inventory and inventory.get_parent()==PlayerGuiCanvas:
-		PlayerGuiCanvas.remove_child(inventory)
+	#if inventory and inventory.get_parent()==PlayerGuiCanvas:
+		#PlayerGuiCanvas.remove_child(inventory)
+	inventory.visible = false
 
 func _exit_tree():
 	if inventory:

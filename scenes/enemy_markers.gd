@@ -3,15 +3,16 @@ extends Control
 var enemies = []
 var positions = []
 @export var marker_color = Color("red")
+@export var enemy_container: Node2D
 
 
 
 func get_enemy_list():
-	for i in $"../../../../Enemies".get_children():
+	for i in enemy_container.get_children():
 		enemies.append(i)
 		
 func init_enemy_positions():
-	for i in $"../../../../Enemies".get_children():
+	for i in enemy_container.get_children():
 		positions.append(i.position)
 
 func update_enemy_positions():

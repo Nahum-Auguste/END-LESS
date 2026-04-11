@@ -47,8 +47,9 @@ func physics_update(delta):
 			var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
 			var music : AudioStreamWAV = load("res://assets/music/early_elder_warlock_battle_theme.wav")
 			music.loop_mode = AudioStreamWAV.LOOP_FORWARD
-			theme_player.stream = music
-			theme_player.play()
+			#if theme_player:
+	#A			theme_player.stream = music
+				#theme_player.play()
 	
 	if player:
 		if current_state is not TeleportState and current_state is not ElderWarlockCloneState:

@@ -1500,7 +1500,7 @@ added_range = 10.0
 
 [node name="RectArea" type="Area2D" parent="SwordSwingHitBox" unique_id=686574378]
 collision_layer = 256
-collision_mask = 2
+collision_mask = 18
 
 [node name="RectCollsionShape" type="CollisionShape2D" parent="SwordSwingHitBox/RectArea" unique_id=1508400630]
 position = Vector2(0, 15)
@@ -1510,7 +1510,7 @@ debug_color = Color(0.49824357, 0.5822027, 0, 0.41960785)
 
 [node name="CircleArea" type="Area2D" parent="SwordSwingHitBox" unique_id=282821700]
 collision_layer = 256
-collision_mask = 2
+collision_mask = 18
 
 [node name="CircleCollisionShape" type="CollisionShape2D" parent="SwordSwingHitBox/CircleArea" unique_id=1480416717]
 shape = SubResource("CircleShape2D_smehm")

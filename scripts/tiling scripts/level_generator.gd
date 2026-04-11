@@ -112,7 +112,7 @@ func generate_level():
 	add_boss_room()
 	add_spawn_room()
 	spawn_enemies()
-	set_level_theme()
+	#set_level_theme()
 	#tile_layer.update_internals()
 	$NavigationRegion2D.bake_navigation_polygon()
 	
@@ -140,7 +140,7 @@ func spawn_enemies():
 		var enemy_list :Array[PackedScene]  = [giant_spider_prefab,warlock_prefab,bat_swarm_prefab]
 		var enemy : Enemy = (enemy_list[randi_range(0,enemy_list.size()-1)]).instantiate()
 		
-		get_parent().add_child.call_deferred(enemy)
+		$Enemies.add_child.call_deferred(enemy)
 		enemy.global_position = pos
 		print(enemy.global_position)
 	

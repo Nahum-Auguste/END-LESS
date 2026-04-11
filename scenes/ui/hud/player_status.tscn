@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bjenn33xk68qg"]
 
-[ext_resource type="PackedScene" uid="uid://3131irxg4y7p" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="1_7nce7"]
+[ext_resource type="PackedScene" uid="uid://dy51o0d56utat" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="1_7nce7"]
 [ext_resource type="Script" uid="uid://f6syqvjm673e" path="res://scripts/hud/player_hud.gd" id="1_s3rv2"]
+[ext_resource type="PackedScene" uid="uid://cwh1y8qsby475" path="res://scenes/ui/hud/health/health_container.tscn" id="3_bev0u"]
 
 [node name="PlayerStatus" type="Control" unique_id=595387824 node_paths=PackedStringArray("health_label", "main_weapon_slot", "hot_bar_container")]
 layout_mode = 3
@@ -13,10 +14,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_s3rv2")
 health_label = NodePath("HBoxContainer/VBoxContainer/HealthLabel")
-main_weapon_slot = NodePath("HBoxContainer/VBoxContainer/CenterContainer/WeaponSlots/MainWeaponSlot")
-hot_bar_container = NodePath("HBoxContainer2")
+main_weapon_slot = NodePath("WeaponSlots/MainWeaponSlot")
+hot_bar_container = NodePath("ConsumablesContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1680263025]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -58,36 +60,63 @@ text = "Health: 25/25"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1927888969]
+[node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=1173522643]
 layout_mode = 0
-offset_left = 613.0
-offset_top = 628.0
-offset_right = 883.0
-offset_bottom = 688.0
+offset_left = 866.0
+offset_top = 22.0
+offset_right = 1136.0
+offset_bottom = 82.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="HotBarSlot" parent="HBoxContainer2" unique_id=650159885 instance=ExtResource("1_7nce7")]
+[node name="HotBarSlot" parent="ConsumablesContainer" unique_id=357517605 instance=ExtResource("1_7nce7")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot2" parent="HBoxContainer2" unique_id=1116307927 instance=ExtResource("1_7nce7")]
+[node name="HotBarSlot2" parent="ConsumablesContainer" unique_id=1039537806 instance=ExtResource("1_7nce7")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot3" parent="HBoxContainer2" unique_id=623783252 instance=ExtResource("1_7nce7")]
+[node name="HotBarSlot3" parent="ConsumablesContainer" unique_id=654741995 instance=ExtResource("1_7nce7")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="HotBarSlot4" parent="HBoxContainer2" unique_id=735667352 instance=ExtResource("1_7nce7")]
+[node name="HotBarSlot4" parent="ConsumablesContainer" unique_id=1631051565 instance=ExtResource("1_7nce7")]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="WeaponSlots" type="VBoxContainer" parent="." unique_id=1707707316]
+layout_mode = 0
+offset_left = 1141.0
+offset_top = 23.0
+offset_right = 1255.0
+offset_bottom = 137.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MainWeaponSlot" parent="WeaponSlots" unique_id=1619372156 instance=ExtResource("1_7nce7")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+
+[node name="SecondaryWeaponSlot" parent="WeaponSlots" unique_id=843065966 instance=ExtResource("1_7nce7")]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+
+[node name="HealthContainer" parent="." unique_id=669422447 instance=ExtResource("3_bev0u")]
+layout_mode = 1
+offset_left = 23.0
+offset_top = 22.0
+offset_right = -1057.0
+offset_bottom = -666.0

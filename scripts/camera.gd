@@ -12,6 +12,8 @@ func _ready():
 func _process(delta):
 	if find_player_target:
 		find_player()
+		
+	#print(target)
 	
 	if target:
 		follow_target()
@@ -24,8 +26,11 @@ func find_player():
 func follow_target():
 	if !target :  return
 	var f = .05
+	print(target.global_position)
+	print(global_position)
 	
 	global_position =  lerp(global_position,target.global_position,f)
+	#global_position = target.global_position
 	#print(lerp(global_position,target.global_position,f))
 	#print(global_position)
 	#print("player global: ",target.global_position)

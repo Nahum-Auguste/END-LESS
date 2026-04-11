@@ -372,6 +372,6 @@ size_flags_vertical = 0
 
 [node name="FlameAnimation" type="AnimatedSprite2D" parent="." unique_id=417914833]
 sprite_frames = SubResource("SpriteFrames_uypfd")
-animation = &"empty"
+animation = &"low"
 centered = false
 script = ExtResource("5_1ecxe")

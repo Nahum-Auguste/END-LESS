@@ -2,7 +2,7 @@
 extends Control
 
 @export var player: Player
-@export var inventory:PlayerInventory
+var inventory:PlayerInventory
 @export var health_label: RichTextLabel
 @export var main_weapon_slot: Control
 @export var hot_bar_container: Container
@@ -16,9 +16,14 @@ func _ready():
 func _process(delta):
 	if !inventory:
 		inventory = get_tree().root.find_child("Inventory",true,false)
+		
+	
+	if !player:
+		player = get_tree().root.find_child("Player",true,false)
 
 	if player:
 		health_label.text = "health:\n" + str(floor(player.health)) + "/" + str(floor(player.max_health))
+		inventory = player.inventory
 	sync_player_status()
 	sync_item_textures()
 		
@@ -27,6 +32,7 @@ func sync_player_status():
 
 	
 func sync_item_textures():
+	
 	if !inventory : return
 	
 	sync_hot_bar_slot_texture(main_weapon_slot,inventory.main_weapon_slot)
@@ -40,6 +46,7 @@ func sync_item_textures():
 		
 func sync_hot_bar_slot_texture(hot_slot:Control,item_slot:ItemSlot):
 	if !hot_slot || !item_slot : return
+
 	var texture_rect:TextureRect = hot_slot.find_child("TextureRect")
 	if texture_rect and item_slot.item:
 		if texture_rect.texture==null or (texture_rect.texture.resource_path != item_slot.item.image_path):

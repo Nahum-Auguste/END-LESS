@@ -18,8 +18,6 @@ tile_map_data = PackedByteArray("AAD1//n/AAAAAAIAAAD1//r/AAAAAAIAAAD1//v/AAAAAAI
 tile_set = ExtResource("2_lht80")
 
 [node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("4_tdv1v")]
-position = Vector2(56.269367, -77.77601)
+position = Vector2(55.3637, -76.37689)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=216395787]
-
-[node name="PlayerStatus" parent="CanvasLayer" unique_id=595387824 instance=ExtResource("5_m6wgr")]
+[node name="PlayerStatus" parent="." unique_id=595387824 instance=ExtResource("5_m6wgr")]
