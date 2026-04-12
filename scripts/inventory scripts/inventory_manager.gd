@@ -1,5 +1,5 @@
 @tool 
-extends Control
+extends Node
 
 var selected_slot: ItemSlot
 var hovered_slot: ItemSlot
@@ -14,7 +14,7 @@ func create_inventory():
 	if !player_hud:
 		player_hud = player_hud_prefab.instantiate()
 		#player_inventory.visible = false
-		PlayerGuiCanvas.add_child(player_hud)
+		#PlayerGuiCanvas.add_child(player_hud)
 		
 
 func _input(event):
@@ -28,19 +28,8 @@ func _input(event):
 				hovered_slot = null
 				
 func _process(delta):
-	queue_redraw()
-				
-#func _draw():
-	#draw_item_at_mouse()
-		#
-#func draw_item_at_mouse():
-	#z_index = 0
-	#if selected_slot and selected_slot.item:
-		#selected_slot.item_texture_rect.visible = false
-		#var texture :Texture2D = selected_slot.item.texture
-		#z_index = 15
-		#draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
-
+	pass
+	
 func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 	if !in_slot or !out_slot: return
 	if !out_slot.item: return

@@ -3,7 +3,7 @@ class_name ItemDropContextMenu extends Control
 var hovering:bool = false
 @export var title_label: RichTextLabel
 @export var stats_label: RichTextLabel
-var slot:ItemSlot
+var item: Item
 var inventory: Inventory
 var player: Player
 @onready var split_button = $AreaBox/PanelContainer/MarginContainer/VBoxContainer/SplitItemButton
@@ -20,7 +20,7 @@ func _ready():
 	if !player:
 		player = get_tree().root.find_child("Player",true,false)
 		inventory = player.inventory
-	split_button.visible = can_split and slot and slot.item and slot.item.count>1 and inventory and inventory.get_empty_slot()
+	split_button.visible = can_split and item and item.stack_count>1 and inventory and inventory.get_empty_slot()
 	drop_button.visible = can_drop and player
 	pickup_button.visible = can_pickup
 	
@@ -31,7 +31,7 @@ func _process(delta):
 	if !player:
 		player = get_tree().root.find_child("Player",true,false)
 		inventory = player.inventory
-	split_button.visible = can_split and slot and slot.item and slot.item.count>1 and inventory and inventory.get_empty_slot()
+	split_button.visible = can_split and item and item.stack_count>1 and inventory and inventory.get_empty_slot()
 	drop_button.visible = can_drop and player
 	#use_button.visible = slot.item and slot.item is Consumable
 	pickup_button.visible = can_pickup
@@ -43,19 +43,19 @@ func _process(delta):
 	
 	
 func format_data():
-	if !slot : return
-	if !slot.item : 
+	if !item: 
 		title_label.text = "null"
 		stats_label.text = "empty"
 		return
-	title_label.text = slot.item.name
+	title_label.text = item.name
 	stats_label.text = ""
-	var props = slot.item.get_property_list()
+	var props = item.get_property_list()
 	for p in props:
 		var name:String = p.name
-		if name.contains("path") || name =="id" || name=="name" || name=="max_stack_count": continue
+		var val = item[name]
+		if name.contains("path") || name =="id" || name=="name" || name=="max_stack_count" || val is Array: continue
 		if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			stats_label.text += p.name + ": " + str(slot.item[p.name]) + "\n"
+			stats_label.text += p.name + ": " + val + "\n"
 	
 	
 	
@@ -67,30 +67,30 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	hovering = false
 
-func _on_split_item_button_button_up():
-	if !inventory : return
-	var empty_slot:ItemSlot = inventory.get_empty_slot(inventory.slots.find(slot))
-	if !empty_slot : return
-	var new:Item = slot.item.duplicate()
-	slot.item.count -= 1
-	new.count = 1
-	empty_slot.item = new
-	empty_slot.sync_item_texture()
+#func _on_split_item_button_button_up():
+	#if !inventory : return
+	#var empty_slot:ItemSlot = inventory.get_empty_slot(inventory.slots.find(slot))
+	#if !empty_slot : return
+	#var new:Item = item.clone
+	#slot.item.count -= 1
+	#new.count = 1
+	#empty_slot.item = new
+	#empty_slot.sync_item_texture()
 
 
-func _on_pick_up_item_button_button_up():
-	var empty_slot: ItemSlot
-	
-	if inventory:
-		for invslot in inventory.slots:
-			if empty_slot==null and invslot.item==null:
-				empty_slot = invslot
-			if InventoryManager.try_aggregate_items(slot,invslot):
-				return
-		if empty_slot:
-			InventoryManager.swap_slot_items(slot,empty_slot)
-	#slot.queue_free()
-	#slot = null
+#func _on_pick_up_item_button_button_up():
+	#var empty_slot: ItemSlot
+	#
+	#if inventory:
+		#for invslot in inventory.slots:
+			#if empty_slot==null and invslot.item==null:
+				#empty_slot = invslot
+			#if InventoryManager.try_aggregate_items(slot,invslot):
+				#return
+		#if empty_slot:
+			#InventoryManager.swap_slot_items(slot,empty_slot)
+	##slot.queue_free()
+	##slot = null
 		
 
 

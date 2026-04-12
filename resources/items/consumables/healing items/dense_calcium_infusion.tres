@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://cvuttsiyestwo"]
 
-[ext_resource type="Script" uid="uid://qcwnfmt1c1yc" path="res://scripts/item scripts/consumable.gd" id="1_5cg1d"]
+[ext_resource type="Script" uid="uid://qcwnfmt1c1yc" path="res://scripts/item scripts/item types/consumables/consumable.gd" id="1_5cg1d"]
 [ext_resource type="Script" uid="uid://mpib8fdqsv7q" path="res://scripts/status effects/status_effect.gd" id="2_b0lap"]
 [ext_resource type="Resource" uid="uid://cs4ssbcfduccy" path="res://resources/status effects/instant_lesser_healing.tres" id="3_pc4ec"]
 [ext_resource type="Resource" uid="uid://wk6av7mtk3ap" path="res://resources/status effects/lasting_dense_healing.tres" id="4_wamrv"]

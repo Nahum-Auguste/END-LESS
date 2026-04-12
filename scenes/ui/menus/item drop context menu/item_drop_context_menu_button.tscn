@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://t1wi02l7qybl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uiefq"]
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.25275353, 0.2527536, 0.25275344, 1)
+
+[node name="Button" type="Button" unique_id=1419222951]
+size_flags_vertical = 4
+theme_override_constants/h_separation = 4
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_uiefq")
+text = "Pick Up"
