@@ -16,9 +16,9 @@ func _ready():
 	
 func enter():
 	clone_timer.start()
-	if parent is ElderWarlock:
-		parent.real_warlock.max_clones = max_clones
-		print(parent.real_warlock.max_clones)
+	if body is ElderWarlock:
+		body.real_warlock.max_clones = max_clones
+		print(body.real_warlock.max_clones)
 
 
 
@@ -28,8 +28,8 @@ func exit():
 	
 
 func clone():
-	if parent is ElderWarlock:
-		parent.clone(clone_timer.wait_time)
-		if parent.real_warlock.clones.size() >= max_clones:
-			parent.fsm.enter_state(parent.fsm.teleport_barrage)
+	if body is ElderWarlock:
+		body.clone(clone_timer.wait_time)
+		if body.real_warlock.clones.size() >= max_clones:
+			body.fsm.enter_state(body.fsm.teleport_barrage)
 		

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant spider/giant_spider.gd" id="1_j3pyh"]
 [ext_resource type="Texture2D" uid="uid://7ymbwacpcpmr" path="res://assets/sprites/enemies/giant_spider/giant_spider_spritesheet.png" id="2_j3pyh"]
 [ext_resource type="Script" uid="uid://bcnbrnhwnfq7x" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_fsm.gd" id="2_rk4hc"]
-[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="2_svrsm"]
+[ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="2_svrsm"]
 [ext_resource type="Script" uid="uid://cy0ejmea03wwo" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_attack_state.gd" id="4_8wk86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
@@ -54,34 +54,37 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3pyh"]
 radius = 9.0
 
-[node name="GiantSpider" type="CharacterBody2D" unique_id=147954774]
+[node name="GiantSpider" type="CharacterBody2D" unique_id=147954774 node_paths=PackedStringArray("fsm")]
 collision_layer = 2
 collision_mask = 7
 platform_floor_layers = 0
 script = ExtResource("1_j3pyh")
 base_detection_range = 96.0
 attack_detection_range = 163.0
+fsm = NodePath("GiantSpiderFSM")
 
-[node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "nav_agent")]
+[node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "body", "nav_agent", "detection_area")]
 script = ExtResource("2_rk4hc")
 wander_state = NodePath("WanderState")
 attack_state = NodePath("GiantSpiderAttackState")
+body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent2D")
+detection_area = NodePath("../DetectionArea")
 metadata/_custom_type_script = "uid://bcnbrnhwnfq7x"
 
-[node name="WanderState" type="Node" parent="GiantSpiderFSM" unique_id=849795966]
+[node name="WanderState" type="Node" parent="GiantSpiderFSM" unique_id=849795966 node_paths=PackedStringArray("fsm")]
 script = ExtResource("2_svrsm")
 max_wander_range = 143.0
 min_wander_interval = 2.75
 max_wander_interval = 6.5
-metadata/_custom_type_script = "uid://ch20l083cmvr8"
+fsm = NodePath("..")
 
-[node name="GiantSpiderAttackState" type="Node" parent="GiantSpiderFSM" unique_id=1824551949]
+[node name="GiantSpiderAttackState" type="Node" parent="GiantSpiderFSM" unique_id=1824551949 node_paths=PackedStringArray("fsm")]
 script = ExtResource("4_8wk86")
+fsm = NodePath("..")
 metadata/_custom_type_script = "uid://cy0ejmea03wwo"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1639478681]
-position = Vector2(0, -0.5)
 collision_layer = 2
 collision_mask = 8
 
@@ -117,6 +120,8 @@ target_position = Vector2(56.44943, -78.05417)
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

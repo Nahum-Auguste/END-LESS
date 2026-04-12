@@ -2,12 +2,14 @@
 
 class_name FSM extends Node
 
-
+@export var body: Monster
 var current_state: State
 @export var nav_agent: NavigationAgent2D
+@export var detection_area: Area2D
 
 func _ready():
-	pass
+	if !body:
+		body = get_parent()
 
 func update(delta):
 	if current_state:

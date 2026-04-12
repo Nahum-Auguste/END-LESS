@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://b1wutdb6rxfk1"]
 
 [ext_resource type="Script" uid="uid://l0qta7xn1a1q" path="res://scripts/monster scripts/enemy scripts/warlock/warlock.gd" id="1_s4l7h"]
+[ext_resource type="Script" uid="uid://psrnxotbqf8m" path="res://scripts/monster scripts/enemy scripts/warlock/fsm/warlock_fsm.gd" id="2_acp8c"]
 [ext_resource type="Texture2D" uid="uid://dn6tjd568lh8r" path="res://assets/sprites/enemies/warlock/warlock_spritesheet.png" id="2_mj2cs"]
+[ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_47hsy"]
+[ext_resource type="Script" uid="uid://bjivga5mf183i" path="res://scripts/monster scripts/enemy scripts/warlock/fsm/warlock_attack_state.gd" id="4_hcf2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4l7h"]
 size = Vector2(34, 34)
@@ -55,8 +58,7 @@ animations = [{
 "speed": 17.0
 }]
 
-[node name="Warlock" type="CharacterBody2D" unique_id=777216955]
-position = Vector2(-2.9807858, -1.4903929)
+[node name="Warlock" type="CharacterBody2D" unique_id=777216955 node_paths=PackedStringArray("fsm")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_s4l7h")
@@ -64,7 +66,30 @@ wander_range = 141.0
 min_teleportation_range = 61.0
 max_teleportation_range = 118.0
 teleport_interval = 3.5
+fsm = NodePath("WarlockFSM")
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
+
+[node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "body", "nav_agent", "detection_area")]
+script = ExtResource("2_acp8c")
+wander_state = NodePath("WanderState")
+attack_state = NodePath("WarlockAttackState")
+body = NodePath("..")
+nav_agent = NodePath("../NavigationAgent2D")
+detection_area = NodePath("../DetectionArea")
+metadata/_custom_type_script = "uid://psrnxotbqf8m"
+
+[node name="WanderState" type="Node" parent="WarlockFSM" unique_id=1252500721 node_paths=PackedStringArray("fsm")]
+script = ExtResource("3_47hsy")
+max_wander_range = 236.0
+min_wander_interval = 1.0
+max_wander_interval = 5.25
+fsm = NodePath("..")
+metadata/_custom_type_script = "uid://bcbn8tpdufhq7"
+
+[node name="WarlockAttackState" type="Node" parent="WarlockFSM" unique_id=508926870 node_paths=PackedStringArray("fsm")]
+script = ExtResource("4_hcf2u")
+fsm = NodePath("..")
+metadata/_custom_type_script = "uid://bjivga5mf183i"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=665940647]
 collision_layer = 2
@@ -98,12 +123,13 @@ sprite_frames = SubResource("SpriteFrames_xqole")
 animation = &"primed"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=289402393]
-target_position = Vector2(31.567509, -46.164257)
+target_position = Vector2(-28.323483, 45.12289)
 path_desired_distance = 5.0
 target_desired_distance = 5.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 67.69
+debug_enabled = true
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

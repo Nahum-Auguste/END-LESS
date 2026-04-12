@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bvxc0w4hmr700"]
 
+[ext_resource type="Script" uid="uid://f6syqvjm673e" path="res://scripts/hud/player_hud.gd" id="1_5cnp3"]
 [ext_resource type="PackedScene" uid="uid://23e67hfn8jsm" path="res://scenes/ui/hud/stamina_bar.tscn" id="1_6k60i"]
 [ext_resource type="PackedScene" uid="uid://cwh1y8qsby475" path="res://scenes/ui/hud/health/health_container.tscn" id="2_cmdvl"]
 [ext_resource type="PackedScene" uid="uid://dy51o0d56utat" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="3_x7jc0"]
+[ext_resource type="PackedScene" uid="uid://cw32uxj8k4nry" path="res://scenes/ui/hud/inventory/player_inventory.tscn" id="5_ful6q"]
+[ext_resource type="Script" uid="uid://bagm0ilc33vic" path="res://scripts/hud/player_hud_drawing_node.gd" id="6_b4vbk"]
 
-[node name="player_hud" type="Control" unique_id=764259258]
+[node name="PlayerHud" type="Control" unique_id=764259258 node_paths=PackedStringArray("player_inventory")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_5cnp3")
+player_inventory = NodePath("PlayerInventory")
 
 [node name="HUDArea" type="ColorRect" parent="." unique_id=541279629]
 visible = false
@@ -95,3 +100,13 @@ size_flags_vertical = 3
 visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
+
+[node name="PlayerInventory" parent="." unique_id=263435617 instance=ExtResource("5_ful6q")]
+visible = false
+layout_mode = 1
+
+[node name="DrawingNode" type="Control" parent="." unique_id=1732735798]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_b4vbk")

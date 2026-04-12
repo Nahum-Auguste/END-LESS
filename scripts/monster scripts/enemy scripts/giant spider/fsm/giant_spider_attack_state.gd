@@ -11,51 +11,51 @@ func _ready():
 	add_child(attack_timer)
 
 func enter():
-	if parent is GiantSpider:
-		if parent.player:
-			nav_agent.target_position = parent.player.global_position
-		parent.detection_range = parent.attack_detection_range
-		parent.speed = parent.base_speed * parent.sprint_mult
-		parent.sprite.speed_scale = parent.sprint_mult
+	if body is GiantSpider:
+		if body.player:
+			nav_agent.target_position = body.player.global_position
+		body.detection_range = body.attack_detection_range
+		body.speed = body.base_speed * body.sprint_mult
+		body.sprite.speed_scale = body.sprint_mult
 		
 		
-		attack_timer.wait_time = parent.attack_speed
+		attack_timer.wait_time = body.attack_speed
 		
 		
 		
 	
 func attack():
 	#print("attack")
-	if parent is GiantSpider:
-		if parent.player:
-			var dir = parent.hitbox.global_position.direction_to(parent.player.global_position)
+	if body is GiantSpider:
+		if body.player:
+			var dir = body.hitbox.global_position.direction_to(body.player.global_position)
 			var knockback_strength = 170
 			var knockback = dir * knockback_strength
-			parent.player.knockback_velocity += knockback
-			parent.player.inflict_damage(parent.attack_damage)
+			body.player.knockback_velocity += knockback
+			body.player.inflict_damage(body.attack_damage)
 			
 func update(delta):
-	if parent is GiantSpider:
-		if attack_timer.is_stopped() and parent.player and parent.player.hurtbox in parent.hitbox.get_overlapping_areas():
+	if body is GiantSpider:
+		if attack_timer.is_stopped() and body.player and body.player.hurtbox in body.hitbox.get_overlapping_areas():
 			attack()
 			attack_timer.start()
 	
 func physics_update(delta):
-	if parent is GiantSpider:
-		parent.detection_range = parent.attack_detection_range
-		if parent.is_player_in_detection_area() and !parent.is_detection_ray_blocked():
-			nav_agent.target_position = parent.player.global_position
+	if body is GiantSpider:
+		body.detection_range = body.attack_detection_range
+		if body.is_player_in_detection_area() and !body.is_detection_ray_blocked():
+			nav_agent.target_position = body.player.global_position
 	
 	
 func exit():
-	if parent is GiantSpider:
-		parent.detection_range = parent.base_detection_range
-		parent.speed = parent.base_speed
-		parent.sprite.speed_scale = 1
+	if body is GiantSpider:
+		body.detection_range = body.base_detection_range
+		body.speed = body.base_speed
+		body.sprite.speed_scale = 1
 		attack_timer.stop()
 		
 		
 func draw():
-	if parent is GiantSpider:
-		parent.draw_circle(Vector2.ZERO,parent.base_detection_range,Color(Color.YELLOW,.1))
-		parent.draw_circle(Vector2.ZERO,parent.attack_detection_range,Color(Color.YELLOW,.1))
+	if body is GiantSpider:
+		body.draw_circle(Vector2.ZERO,body.base_detection_range,Color(Color.YELLOW,.1))
+		body.draw_circle(Vector2.ZERO,body.attack_detection_range,Color(Color.YELLOW,.1))

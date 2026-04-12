@@ -26,8 +26,8 @@ func find_player():
 func follow_target():
 	if !target :  return
 	var f = .05
-	print(target.global_position)
-	print(global_position)
+	#print(target.global_position)
+	#print(global_position)
 	
 	global_position =  lerp(global_position,target.global_position,f)
 	#global_position = target.global_position

@@ -19,6 +19,7 @@ var hurt_box_colliding_with_player = false
 @onready var player_escape_timer = Timer.new()
 @export var player: Player
 @export var target_position: Vector2
+@export var fsm: FSM
 var can_display_corpse_inventory:bool = false
 var possible_item_drops_data: Dictionary[int,Dictionary] = {
 	
@@ -82,6 +83,8 @@ func hitbox_exited():
 func _process(delta: float) -> void:
 	super._process(delta)
 	queue_redraw()
+	if fsm:
+		fsm.update(delta)
 	
 	if player_in_detection_range:
 		player_escape_timer.start()
@@ -122,6 +125,8 @@ func _draw():
 		#draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
 
 func _physics_process(delta):
+	if fsm:
+		fsm.physics_update(delta)
 	if corpse_detection_ray:
 		if !corpse_detection_ray.is_colliding():
 			can_display_corpse_inventory = (player and global_position.distance_to(player.global_position)<=corpse_inventory_can_display_range)

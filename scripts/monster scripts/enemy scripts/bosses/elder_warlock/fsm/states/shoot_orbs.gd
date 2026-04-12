@@ -10,9 +10,9 @@ var orb_mag_size = 5
 
 func enter():
 	#print("entered shoot orbs attack")
-	if parent is ElderWarlock:
-		parent.left_hand.orb_follow = false
-		parent.right_hand.orb_follow = false
+	if body is ElderWarlock:
+		body.left_hand.orb_follow = false
+		body.right_hand.orb_follow = false
 	update_max_shot_count()
 	
 
@@ -29,10 +29,10 @@ func update(delta):
 
 
 func shoot():
-	if parent is ElderWarlock:
-		if !parent.is_detection_ray_blocked():
-			parent.shoot_orb_left_hand(shoot_interval_timer.wait_time)
-			parent.shoot_orb_right_hand(shoot_interval_timer.wait_time)
+	if body is ElderWarlock:
+		if !body.is_detection_ray_blocked():
+			body.shoot_orb_left_hand(shoot_interval_timer.wait_time)
+			body.shoot_orb_right_hand(shoot_interval_timer.wait_time)
 			if shoot_interval_timer.is_stopped():
 				shoot_interval_timer.start()
 			

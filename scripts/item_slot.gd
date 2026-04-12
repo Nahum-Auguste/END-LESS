@@ -31,6 +31,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	queue_redraw()
 	load_item_texture()
 	selected_style.visible = InventoryManager.selected_slot == self if !disabled else selected_style.visible
 	hovered_style.visible = ((InventoryManager.hovered_slot == self) or selected_style.visible or mouse_hovered) if !disabled else hovered_style.visible
@@ -56,6 +57,17 @@ func load_item_texture():
 		if item_texture_rect.texture != item_texture:
 			item_texture_rect.texture = item_texture
 
+
+#func _draw():
+	#draw_item_at_mouse()
+		#
+#func draw_item_at_mouse():
+	#z_index = 0
+	#if self == InventoryManager.selected_slot and item:
+		#item_texture_rect.visible = false
+		#var texture :Texture2D = item.texture
+		#z_index = 15
+		#draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
 
 func _on_mouse_entered():
 	mouse_hovered = true

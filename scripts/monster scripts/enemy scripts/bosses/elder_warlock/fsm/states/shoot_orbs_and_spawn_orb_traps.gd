@@ -8,13 +8,13 @@ func enter():
 	
 	
 func update(delta):
-	if parent is ElderWarlock:
-		if parent.player:
+	if body is ElderWarlock:
+		if body.player:
 			if right_handed:
-				parent.right_hand.do_orb_pool_attack()
-				#if !parent.is_detection_ray_blocked():
-				parent.left_hand.shoot_orb()
+				body.right_hand.do_orb_pool_attack()
+				#if !body.is_detection_ray_blocked():
+				body.left_hand.shoot_orb()
 			else:
-				parent.left_hand.do_orb_pool_attack()
-				#if !parent.is_detection_ray_blocked():
-				parent.right_hand.shoot_orb()
+				body.left_hand.do_orb_pool_attack()
+				#if !body.is_detection_ray_blocked():
+				body.right_hand.shoot_orb()

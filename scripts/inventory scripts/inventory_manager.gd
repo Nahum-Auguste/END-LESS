@@ -3,6 +3,19 @@ extends Control
 
 var selected_slot: ItemSlot
 var hovered_slot: ItemSlot
+var player_hud: PlayerHud
+var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
+
+func _ready():
+	create_inventory()
+
+func create_inventory():
+	player_hud = get_tree().root.find_child("PlayerHud",true,false)
+	if !player_hud:
+		player_hud = player_hud_prefab.instantiate()
+		#player_inventory.visible = false
+		PlayerGuiCanvas.add_child(player_hud)
+		
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -17,16 +30,16 @@ func _input(event):
 func _process(delta):
 	queue_redraw()
 				
-func _draw():
-	draw_item_at_mouse()
-		
-func draw_item_at_mouse():
-	z_index = 0
-	if selected_slot and selected_slot.item:
-		selected_slot.item_texture_rect.visible = false
-		var texture :Texture2D = selected_slot.item.texture
-		z_index = 10
-		draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
+#func _draw():
+	#draw_item_at_mouse()
+		#
+#func draw_item_at_mouse():
+	#z_index = 0
+	#if selected_slot and selected_slot.item:
+		#selected_slot.item_texture_rect.visible = false
+		#var texture :Texture2D = selected_slot.item.texture
+		#z_index = 15
+		#draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
 
 func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 	if !in_slot or !out_slot: return

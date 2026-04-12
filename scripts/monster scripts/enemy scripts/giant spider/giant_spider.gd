@@ -1,8 +1,8 @@
-@tool 
+#@tool 
 class_name GiantSpider extends Enemy
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var fsm: GiantSpiderFSM = $GiantSpiderFSM
+#@onready var fsm: GiantSpiderFSM = $GiantSpiderFSM
 @onready var detection_area_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 @export_range(0,500,1) var base_detection_range:float = 50
 @export_range(0,500,1) var attack_detection_range:float = 150
@@ -19,8 +19,8 @@ func _init(health:float=0,max_health:float=0) -> void:
 	attack_speed = 1
 	attack_damage = 4
 	super(health,max_health)
-	add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.7,1,4)
-	populate_items()
+	#add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.7,1,4)
+	#populate_items()
 
 
 func _ready():

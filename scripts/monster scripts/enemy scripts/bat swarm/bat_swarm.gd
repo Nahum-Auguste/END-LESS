@@ -1,9 +1,9 @@
 #@tool 
 class_name BatSwarm extends Enemy
 
-@onready var fsm: BatSwarmFSM = BatSwarmFSM.new(self)
+#@onready var fsm: BatSwarmFSM = BatSwarmFSM.new(self)
 
-@export_enum("idle","wander","attack") var current_state = "idle"
+#@export_enum("idle","wander","attack") var current_state = "idle"
 
 @export_range(0,1000,1) var base_detection_range: float = 100
 @export var detection_mult: float = 2
@@ -23,7 +23,7 @@ class_name BatSwarm extends Enemy
 
 var detection_range
 
-var sprint_mult := 1.8
+var sprint_mult := 1.2
 
 
 
@@ -36,18 +36,18 @@ func _init(health:float=15,max_health:float=15) -> void:
 func _ready():
 	super._ready()
 	sprite = $Sprite
-	base_speed  = 1500
+	base_speed  = 2500
 	speed = base_speed
 	
 	detection_ray = RayCast2D.new()
 	
-	match (current_state):
-		"idle":
-			fsm.enter_state(fsm.idle_state)
-		"wander":
-			fsm.enter_state(fsm.wander_state)
-		"attack":
-			fsm.enter_state(fsm.attack_state)
+	#match (current_state):
+		#"idle":
+			#fsm.enter_state(fsm.idle_state)
+		#"wander":
+			#fsm.enter_state(fsm.wander_state)
+		#"attack":
+			#fsm.enter_state(fsm.attack_state)
 			
 	set_attack_interval_timer()
 	
@@ -71,7 +71,7 @@ func _process(delta):
 	super._process(delta)
 	detection_shape.radius = detection_range
 	#print(player.health)
-	fsm.update(delta)
+	#fsm.update(delta)
 	queue_redraw()
 	pass
 	
@@ -81,7 +81,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	fsm.physics_update(delta)
+	#fsm.physics_update(delta)
 	if !nav_agent.is_navigation_finished():
 		velocity = (nav_agent.get_next_path_position() - global_position).normalized() * speed * delta
 	else:

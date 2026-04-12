@@ -18,7 +18,7 @@ func _ready():
 	body_area_copy.set_collision_mask_value(LayerConstants.PlayerLayer,true)
 	
 	set_area_copy_collider()
-	parent.add_child.call_deferred(body_area_copy)
+	body.add_child.call_deferred(body_area_copy)
 	
 func set_area_copy_collider():
 	if real_collider_shape:
@@ -27,17 +27,17 @@ func set_area_copy_collider():
 		body_area_copy.add_child(real_collider_polygon.duplicate())
 
 func enter():
-	nav_agent.target_position = parent.global_position
-	if teleport_origin_type == "player" and parent.player:
-		teleport_anchor = parent.player
+	nav_agent.target_position = body.global_position
+	if teleport_origin_type == "player" and body.player:
+		teleport_anchor = body.player
 		
 
 		
 func update(delta):
 	if teleport_origin_type == "self":
-		teleport_anchor = parent
-	elif teleport_origin_type == "player" and parent.player:
-		teleport_anchor = parent.player
+		teleport_anchor = body
+	elif teleport_origin_type == "player" and body.player:
+		teleport_anchor = body.player
 		
 func physics_update(delta):
 	
@@ -49,17 +49,17 @@ func physics_update(delta):
 		if dist < min_teleport_range or dist > max_teleport_range:
 			body_area_copy.global_position = get_random_teleport_spot()
 	else:
-		teleport_anchor = parent
+		teleport_anchor = body
 		
 	
 	
 func teleport():
 	if !is_copy_area_colliding():
-		parent.global_position = body_area_copy.global_position
+		body.global_position = body_area_copy.global_position
 		
 
 func get_random_teleport_spot() -> Vector2:
-	if !teleport_anchor: return parent.global_position
+	if !teleport_anchor: return body.global_position
 	var r = randf_range(min_teleport_range,max_teleport_range)
 	var a = randi() % 360
 	var rx = teleport_anchor.global_position.x + cos(deg_to_rad(a)) * r
@@ -69,14 +69,14 @@ func get_random_teleport_spot() -> Vector2:
 	
 func is_copy_area_colliding()-> bool:
 	var bodies = body_area_copy.get_overlapping_bodies()
-	#boides.erase(parent)
+	#boides.erase(body)
 	
 	return bodies.size() > 0
 	
 func draw():
 	if teleport_anchor:
 		var diff = max_teleport_range - min_teleport_range
-		parent.draw_circle((teleport_anchor.global_position - parent.global_position)/parent.scale.x,(min_teleport_range+diff/2)/parent.scale.x,Color(Color.PLUM,0.7),false,diff/parent.scale.x)
+		body.draw_circle((teleport_anchor.global_position - body.global_position)/body.scale.x,(min_teleport_range+diff/2)/body.scale.x,Color(Color.PLUM,0.7),false,diff/body.scale.x)
 
 	
 	

@@ -20,7 +20,7 @@ var clones: Array[ElderWarlock] = []
 var real_warlock: ElderWarlock = self
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
+#@onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
 
 
 var shoot_speed = .5

@@ -19,27 +19,27 @@ func exit():
 func physics_update(delta):
 	super.physics_update(delta)
 	
-	if parent is ElderWarlock:
-		parent.teleport_position = parent.global_position
-		parent.teleport_position = body_area_copy.global_position
+	if body is ElderWarlock:
+		body.teleport_position = body.global_position
+		body.teleport_position = body_area_copy.global_position
 		
 		if teleport_anchor:
-			var dir = parent.global_position.direction_to(teleport_anchor.global_position)
+			var dir = body.global_position.direction_to(teleport_anchor.global_position)
 			
 			if dir.abs().x > dir.abs().y:
 				if dir.x > 0:
-					parent.sprite.animation = "walk_right"
+					body.sprite.animation = "walk_right"
 				elif dir.x < 0:
-					parent.sprite.animation = "walk_left"
+					body.sprite.animation = "walk_left"
 			else:
 				if dir.y > 0:
-					parent.sprite.animation = "walk_down"
+					body.sprite.animation = "walk_down"
 				elif dir.y < 0:
-					parent.sprite.animation = "walk_up"
+					body.sprite.animation = "walk_up"
 					
-		if tp_timer.is_stopped() and parent.player:
+		if tp_timer.is_stopped() and body.player:
 			tp_timer.start()
-			parent.teleport(teleport_speed)
+			body.teleport(teleport_speed)
 			
 			
 func teleport():

@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name Warlock extends Enemy
 
 
@@ -26,13 +26,14 @@ var speed_angle = 0
 @onready var teleport_spot_body_area: Area2D = $TeleportSpotBodyArea
  
 
-var fsm: WarlockFSM = WarlockFSM.new(self)
+#var fsm: WarlockFSM = WarlockFSM.new(self)
 
 func _init(health:float=30,max_health:float=30) -> void:
 	super._init(health,max_health)
 
 func _ready():
 	super._ready()
+	attack_damage = 1.5
 	sprite = $AnimatedSprite2D
 	attack_speed = 1.4
 	player_escape_time = 5
@@ -48,18 +49,18 @@ func _ready():
 	
 	detection_range = base_detection_range
 	
-	match (default_state):
-		"wander":
-			fsm.enter_state(fsm.wander_state)
-		"attack":
-			fsm.enter_state(fsm.attack_state)
+	#match (default_state):
+		#"wander":
+			#fsm.enter_state(fsm.wander_state)
+		#"attack":
+			#fsm.enter_state(fsm.attack_state)
 	
 	setup_player_escape_timer()
 
 func _process(delta: float) -> void:
 	super._process(delta)
 	
-	fsm.update(delta)
+	#fsm.update(delta)
 	
 	#print(teleport_spot_body_area.get_overlapping_bodies())
 	#print(is_teleport_spot_body_area_colliding())
@@ -77,7 +78,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	fsm.physics_update(delta)
+	#fsm.physics_update(delta)
 	speed_angle+=.75
 	
 	if player:

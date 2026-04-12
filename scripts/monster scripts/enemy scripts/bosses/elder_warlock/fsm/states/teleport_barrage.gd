@@ -19,8 +19,8 @@ func _ready():
 func enter():
 	teleport_count = randi_range(min_teleports,max_teleports)
 	tp_timer.wait_time = randf_range(min_teleport_speed,max_teleport_speed)
-	#if parent is ElderWarlock:
-		#parent.teleport(tp_timer.wait_time)
+	#if body is ElderWarlock:
+		#body.teleport(tp_timer.wait_time)
 		
 func exit():
 	tp_timer.stop()
@@ -33,30 +33,30 @@ func update(delta):
 func physics_update(delta):
 	super.physics_update(delta)
 	
-	if parent is ElderWarlock:
-		parent.teleport_position = body_area_copy.global_position
+	if body is ElderWarlock:
+		body.teleport_position = body_area_copy.global_position
 		
-		if parent.player and tp_timer.is_stopped():
+		if body.player and tp_timer.is_stopped():
 			tp_timer.start()
 		
 		if teleport_anchor:
-			var dir = parent.global_position.direction_to(teleport_anchor.global_position)
+			var dir = body.global_position.direction_to(teleport_anchor.global_position)
 			
 			if dir.abs().x > dir.abs().y:
 				if dir.x > 0:
-					parent.sprite.animation = "walk_right"
+					body.sprite.animation = "walk_right"
 				elif dir.x < 0:
-					parent.sprite.animation = "walk_left"
+					body.sprite.animation = "walk_left"
 			else:
 				if dir.y > 0:
-					parent.sprite.animation = "walk_down"
+					body.sprite.animation = "walk_down"
 				elif dir.y < 0:
-					parent.sprite.animation = "walk_up"
+					body.sprite.animation = "walk_up"
 					
 func teleport():
 	if teleport_count > 0:
 			
 		tp_timer.wait_time = randf_range(min_teleport_speed,max_teleport_speed)
-		parent.teleport(tp_timer.wait_time)
+		body.teleport(tp_timer.wait_time)
 		tp_timer.start()
 		teleport_count -= 1

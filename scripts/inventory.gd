@@ -38,6 +38,9 @@ func manage_item_slots()->void:
 		child.queue_free()
 		
 		
+
+		
+		
 func populate_with_random_items(size:float):
 	var rand_items = ItemDatabase.create_random_items(size)
 	for i in range(rand_items.size()):

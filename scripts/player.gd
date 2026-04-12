@@ -4,9 +4,7 @@ class_name Player extends Monster
 
 
 var items: Array[Item] = []
-var player_inventory_scene_prefab: PackedScene = preload("res://scenes/ui/inventory/inventory.tscn")
 var inventory:PlayerInventory
-var is_inventory_open:bool = false
 
 var sprint_mult:= 1.24
 var animation: String
@@ -36,12 +34,7 @@ func _ready() -> void:
 	sprite = $AnimatedSprite2D
 	hand_item_sprite.texture = null
 	attack_effect_sprite.visible = false
-	create_inventory()
-	inventory.create_main_slot_container_slots()
-	inventory.visible = false
-	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
-		PlayerGuiCanvas.add_child(inventory)
-	#display_inventory()
+	inventory = InventoryManager.player_hud.player_inventory
 
 func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	if (global_position-obj.global_position).length()<=range:
@@ -62,7 +55,7 @@ func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	return false
 	
 func _physics_process(delta: float) -> void:
-
+	
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
 	var sprint := Input.is_action_pressed("sprint")
@@ -108,10 +101,12 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	inventory = InventoryManager.player_hud.player_inventory
+	#print(inventory)
 	#print(inventory)
 	
-	if inventory:
-		inventory.player = self
+	#if inventory:
+		#inventory.player = self
 
 	if Input.is_action_pressed("attack") and not attacking:
 		if main_hand_item:
@@ -119,45 +114,25 @@ func _process(delta: float) -> void:
 		else:
 			punch()
 		
-	if Input.is_action_just_pressed("toggle_inventory"):
-		is_inventory_open = !is_inventory_open
-		if !inventory : create_inventory()
 		
-		if is_inventory_open:
-			display_inventory()
-		else:
-			close_inventory()
-		
-	load_usable_inventory_items()
+	#load_usable_inventory_items()
 	#print(animation_player.current_animation_position)
 	sword_swing_hitbox.weapon = main_hand_item
 	
 
-func load_usable_inventory_items():
-	if not inventory:
-		return
-	if main_hand_item != inventory.main_weapon_slot.item:
-		main_hand_item = inventory.main_weapon_slot.item
-		if main_hand_item!=null:
-			#main_hand_scene = load(main_hand_item.scene_path)
-			hand_item_sprite.texture = load(main_hand_item.image_path)
-			#print("loaded weapon scene")
-		else:
-			hand_item_sprite.texture = null
+#func load_usable_inventory_items():
+	#if not inventory:
+		#return
+	#if main_hand_item != inventory.main_weapon_slot.item:
+		#main_hand_item = inventory.main_weapon_slot.item
+		#if main_hand_item!=null:
+			##main_hand_scene = load(main_hand_item.scene_path)
+			#hand_item_sprite.texture = load(main_hand_item.image_path)
+			##print("loaded weapon scene")
+		#else:
+			#hand_item_sprite.texture = null
 
-func create_inventory():
-	if !inventory :
-		inventory = player_inventory_scene_prefab.instantiate()
-	
-func display_inventory():
-	if inventory and inventory.get_parent()!=PlayerGuiCanvas:
-		PlayerGuiCanvas.add_child(inventory)
-	inventory.visible = true
-		
-func close_inventory():
-	#if inventory and inventory.get_parent()==PlayerGuiCanvas:
-		#PlayerGuiCanvas.remove_child(inventory)
-	inventory.visible = false
+
 
 func _exit_tree():
 	if inventory:
