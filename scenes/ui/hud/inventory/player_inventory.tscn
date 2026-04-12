@@ -40,7 +40,7 @@ fill_from = Vector2(0.4940171, 0.31282052)
 fill_to = Vector2(0.4905983, 0.50427353)
 repeat = 2
 
-[node name="PlayerInventory" type="Control" unique_id=263435617 node_paths=PackedStringArray("items_container")]
+[node name="PlayerInventory" type="Control" unique_id=263435617 node_paths=PackedStringArray("weapon_slots_container", "armor_slots_container", "accessory_slots_container", "items_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,6 +48,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ta03")
+weapon_slots_container = NodePath("Display/EquippablesSection/MarginContainer/EquipSlots/Weapons")
+armor_slots_container = NodePath("Display/EquippablesSection/MarginContainer/EquipSlots/Armor")
+accessory_slots_container = NodePath("Display/EquippablesSection/MarginContainer/EquipSlots/Accessories")
 max_item_count = 27
 items_container = NodePath("Display/MarginContainer/GridContainer")
 items_container_slot_prefab = ExtResource("3_ujugo")
@@ -101,37 +104,45 @@ offset_top = -3.0
 offset_right = 43.0
 offset_bottom = 37.0
 
-[node name="HelmetSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=451761978 instance=ExtResource("3_ujugo")]
+[node name="HelmetSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=451761978 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 91.0
 offset_right = 128.0
 offset_bottom = 91.0
 scale = Vector2(1.66, 1.66)
+item_type = 3
+inventory = NodePath("../../../../../..")
 
-[node name="BreastPlateSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=13565140 instance=ExtResource("3_ujugo")]
+[node name="BreastPlateSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=13565140 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 196.0
 offset_right = 128.0
 offset_bottom = 196.0
 scale = Vector2(1.66, 1.66)
+item_type = 3
+inventory = NodePath("../../../../../..")
 
-[node name="GauntletsSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=154683564 instance=ExtResource("3_ujugo")]
+[node name="GauntletsSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=154683564 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 144.0
 offset_right = 128.0
 offset_bottom = 144.0
 scale = Vector2(1.66, 1.66)
+item_type = 3
+inventory = NodePath("../../../../../..")
 
-[node name="BootsSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=954811370 instance=ExtResource("3_ujugo")]
+[node name="BootsSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Armor" unique_id=954811370 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 248.0
 offset_right = 128.0
 offset_bottom = 248.0
 scale = Vector2(1.66, 1.66)
+item_type = 3
+inventory = NodePath("../../../../../..")
 
 [node name="Accessories" type="HBoxContainer" parent="Display/EquippablesSection/MarginContainer/EquipSlots" unique_id=2053370594]
 layout_mode = 1
@@ -142,20 +153,38 @@ offset_bottom = 59.0
 scale = Vector2(1.5, 1.5)
 theme_override_constants/separation = 4
 
-[node name="AccessorySlot1" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=1475314283 instance=ExtResource("3_ujugo")]
+[node name="AccessorySlot1" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=1475314283 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 2
 size_flags_vertical = 0
 item_type = 4
+inventory = NodePath("../../../../../..")
 
-[node name="AccessorySlot2" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=623456074 instance=ExtResource("3_ujugo")]
+[node name="AccessorySlot2" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=623456074 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 2
 size_flags_vertical = 0
 item_type = 4
+inventory = NodePath("../../../../../..")
 
-[node name="AccessorySlot3" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=2013344856 instance=ExtResource("3_ujugo")]
+[node name="AccessorySlot3" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Accessories" unique_id=2013344856 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
 layout_mode = 2
 size_flags_vertical = 0
 item_type = 4
+inventory = NodePath("../../../../../..")
+
+[node name="Weapons" type="Control" parent="Display/EquippablesSection/MarginContainer/EquipSlots" unique_id=1764821810]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WeaponSlot" parent="Display/EquippablesSection/MarginContainer/EquipSlots/Weapons" unique_id=268336001 node_paths=PackedStringArray("inventory") instance=ExtResource("3_ujugo")]
+layout_mode = 0
+offset_left = 25.000008
+offset_top = 144.0
+offset_right = 57.000008
+offset_bottom = 176.0
+scale = Vector2(1.66, 1.66)
+item_type = 1
+inventory = NodePath("../../../../../..")
 
 [node name="MarginContainer" type="MarginContainer" parent="Display" unique_id=1790872195]
 layout_mode = 2
@@ -178,81 +207,81 @@ columns = 9
 [connection signal="gui_input" from="Display/MarginContainer/GridContainer/ItemSlot" to="Display/MarginContainer/GridContainer/ItemSlot" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/ItemSlot" to="Display/MarginContainer/GridContainer/ItemSlot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/ItemSlot" to="Display/MarginContainer/GridContainer/ItemSlot" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579964" to="Display/MarginContainer/GridContainer/@Control@579964" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579964" to="Display/MarginContainer/GridContainer/@Control@579964" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579964" to="Display/MarginContainer/GridContainer/@Control@579964" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579965" to="Display/MarginContainer/GridContainer/@Control@579965" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579965" to="Display/MarginContainer/GridContainer/@Control@579965" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579965" to="Display/MarginContainer/GridContainer/@Control@579965" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579966" to="Display/MarginContainer/GridContainer/@Control@579966" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579966" to="Display/MarginContainer/GridContainer/@Control@579966" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579966" to="Display/MarginContainer/GridContainer/@Control@579966" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579967" to="Display/MarginContainer/GridContainer/@Control@579967" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579967" to="Display/MarginContainer/GridContainer/@Control@579967" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579967" to="Display/MarginContainer/GridContainer/@Control@579967" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579968" to="Display/MarginContainer/GridContainer/@Control@579968" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579968" to="Display/MarginContainer/GridContainer/@Control@579968" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579968" to="Display/MarginContainer/GridContainer/@Control@579968" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579969" to="Display/MarginContainer/GridContainer/@Control@579969" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579969" to="Display/MarginContainer/GridContainer/@Control@579969" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579969" to="Display/MarginContainer/GridContainer/@Control@579969" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579970" to="Display/MarginContainer/GridContainer/@Control@579970" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579970" to="Display/MarginContainer/GridContainer/@Control@579970" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579970" to="Display/MarginContainer/GridContainer/@Control@579970" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579971" to="Display/MarginContainer/GridContainer/@Control@579971" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579971" to="Display/MarginContainer/GridContainer/@Control@579971" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579971" to="Display/MarginContainer/GridContainer/@Control@579971" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579972" to="Display/MarginContainer/GridContainer/@Control@579972" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579972" to="Display/MarginContainer/GridContainer/@Control@579972" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579972" to="Display/MarginContainer/GridContainer/@Control@579972" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579973" to="Display/MarginContainer/GridContainer/@Control@579973" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579973" to="Display/MarginContainer/GridContainer/@Control@579973" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579973" to="Display/MarginContainer/GridContainer/@Control@579973" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579974" to="Display/MarginContainer/GridContainer/@Control@579974" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579974" to="Display/MarginContainer/GridContainer/@Control@579974" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579974" to="Display/MarginContainer/GridContainer/@Control@579974" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579975" to="Display/MarginContainer/GridContainer/@Control@579975" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579975" to="Display/MarginContainer/GridContainer/@Control@579975" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579975" to="Display/MarginContainer/GridContainer/@Control@579975" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579976" to="Display/MarginContainer/GridContainer/@Control@579976" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579976" to="Display/MarginContainer/GridContainer/@Control@579976" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579976" to="Display/MarginContainer/GridContainer/@Control@579976" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579977" to="Display/MarginContainer/GridContainer/@Control@579977" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579977" to="Display/MarginContainer/GridContainer/@Control@579977" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579977" to="Display/MarginContainer/GridContainer/@Control@579977" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579978" to="Display/MarginContainer/GridContainer/@Control@579978" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579978" to="Display/MarginContainer/GridContainer/@Control@579978" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579978" to="Display/MarginContainer/GridContainer/@Control@579978" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579979" to="Display/MarginContainer/GridContainer/@Control@579979" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579979" to="Display/MarginContainer/GridContainer/@Control@579979" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579979" to="Display/MarginContainer/GridContainer/@Control@579979" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579980" to="Display/MarginContainer/GridContainer/@Control@579980" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579980" to="Display/MarginContainer/GridContainer/@Control@579980" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579980" to="Display/MarginContainer/GridContainer/@Control@579980" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579981" to="Display/MarginContainer/GridContainer/@Control@579981" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579981" to="Display/MarginContainer/GridContainer/@Control@579981" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579981" to="Display/MarginContainer/GridContainer/@Control@579981" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579982" to="Display/MarginContainer/GridContainer/@Control@579982" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579982" to="Display/MarginContainer/GridContainer/@Control@579982" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579982" to="Display/MarginContainer/GridContainer/@Control@579982" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579983" to="Display/MarginContainer/GridContainer/@Control@579983" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579983" to="Display/MarginContainer/GridContainer/@Control@579983" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579983" to="Display/MarginContainer/GridContainer/@Control@579983" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579984" to="Display/MarginContainer/GridContainer/@Control@579984" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579984" to="Display/MarginContainer/GridContainer/@Control@579984" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579984" to="Display/MarginContainer/GridContainer/@Control@579984" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579985" to="Display/MarginContainer/GridContainer/@Control@579985" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579985" to="Display/MarginContainer/GridContainer/@Control@579985" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579985" to="Display/MarginContainer/GridContainer/@Control@579985" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579986" to="Display/MarginContainer/GridContainer/@Control@579986" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579986" to="Display/MarginContainer/GridContainer/@Control@579986" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579986" to="Display/MarginContainer/GridContainer/@Control@579986" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579987" to="Display/MarginContainer/GridContainer/@Control@579987" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579987" to="Display/MarginContainer/GridContainer/@Control@579987" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579987" to="Display/MarginContainer/GridContainer/@Control@579987" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579988" to="Display/MarginContainer/GridContainer/@Control@579988" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579988" to="Display/MarginContainer/GridContainer/@Control@579988" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579988" to="Display/MarginContainer/GridContainer/@Control@579988" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@579989" to="Display/MarginContainer/GridContainer/@Control@579989" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@579989" to="Display/MarginContainer/GridContainer/@Control@579989" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@579989" to="Display/MarginContainer/GridContainer/@Control@579989" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139129" to="Display/MarginContainer/GridContainer/@Control@139129" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139129" to="Display/MarginContainer/GridContainer/@Control@139129" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139129" to="Display/MarginContainer/GridContainer/@Control@139129" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139130" to="Display/MarginContainer/GridContainer/@Control@139130" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139130" to="Display/MarginContainer/GridContainer/@Control@139130" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139130" to="Display/MarginContainer/GridContainer/@Control@139130" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139131" to="Display/MarginContainer/GridContainer/@Control@139131" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139131" to="Display/MarginContainer/GridContainer/@Control@139131" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139131" to="Display/MarginContainer/GridContainer/@Control@139131" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139132" to="Display/MarginContainer/GridContainer/@Control@139132" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139132" to="Display/MarginContainer/GridContainer/@Control@139132" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139132" to="Display/MarginContainer/GridContainer/@Control@139132" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139133" to="Display/MarginContainer/GridContainer/@Control@139133" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139133" to="Display/MarginContainer/GridContainer/@Control@139133" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139133" to="Display/MarginContainer/GridContainer/@Control@139133" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139134" to="Display/MarginContainer/GridContainer/@Control@139134" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139134" to="Display/MarginContainer/GridContainer/@Control@139134" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139134" to="Display/MarginContainer/GridContainer/@Control@139134" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139135" to="Display/MarginContainer/GridContainer/@Control@139135" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139135" to="Display/MarginContainer/GridContainer/@Control@139135" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139135" to="Display/MarginContainer/GridContainer/@Control@139135" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139136" to="Display/MarginContainer/GridContainer/@Control@139136" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139136" to="Display/MarginContainer/GridContainer/@Control@139136" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139136" to="Display/MarginContainer/GridContainer/@Control@139136" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139137" to="Display/MarginContainer/GridContainer/@Control@139137" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139137" to="Display/MarginContainer/GridContainer/@Control@139137" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139137" to="Display/MarginContainer/GridContainer/@Control@139137" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139138" to="Display/MarginContainer/GridContainer/@Control@139138" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139138" to="Display/MarginContainer/GridContainer/@Control@139138" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139138" to="Display/MarginContainer/GridContainer/@Control@139138" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139139" to="Display/MarginContainer/GridContainer/@Control@139139" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139139" to="Display/MarginContainer/GridContainer/@Control@139139" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139139" to="Display/MarginContainer/GridContainer/@Control@139139" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139140" to="Display/MarginContainer/GridContainer/@Control@139140" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139140" to="Display/MarginContainer/GridContainer/@Control@139140" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139140" to="Display/MarginContainer/GridContainer/@Control@139140" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139141" to="Display/MarginContainer/GridContainer/@Control@139141" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139141" to="Display/MarginContainer/GridContainer/@Control@139141" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139141" to="Display/MarginContainer/GridContainer/@Control@139141" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139142" to="Display/MarginContainer/GridContainer/@Control@139142" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139142" to="Display/MarginContainer/GridContainer/@Control@139142" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139142" to="Display/MarginContainer/GridContainer/@Control@139142" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139143" to="Display/MarginContainer/GridContainer/@Control@139143" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139143" to="Display/MarginContainer/GridContainer/@Control@139143" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139143" to="Display/MarginContainer/GridContainer/@Control@139143" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139144" to="Display/MarginContainer/GridContainer/@Control@139144" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139144" to="Display/MarginContainer/GridContainer/@Control@139144" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139144" to="Display/MarginContainer/GridContainer/@Control@139144" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139145" to="Display/MarginContainer/GridContainer/@Control@139145" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139145" to="Display/MarginContainer/GridContainer/@Control@139145" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139145" to="Display/MarginContainer/GridContainer/@Control@139145" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139146" to="Display/MarginContainer/GridContainer/@Control@139146" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139146" to="Display/MarginContainer/GridContainer/@Control@139146" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139146" to="Display/MarginContainer/GridContainer/@Control@139146" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139147" to="Display/MarginContainer/GridContainer/@Control@139147" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139147" to="Display/MarginContainer/GridContainer/@Control@139147" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139147" to="Display/MarginContainer/GridContainer/@Control@139147" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139148" to="Display/MarginContainer/GridContainer/@Control@139148" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139148" to="Display/MarginContainer/GridContainer/@Control@139148" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139148" to="Display/MarginContainer/GridContainer/@Control@139148" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139149" to="Display/MarginContainer/GridContainer/@Control@139149" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139149" to="Display/MarginContainer/GridContainer/@Control@139149" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139149" to="Display/MarginContainer/GridContainer/@Control@139149" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139150" to="Display/MarginContainer/GridContainer/@Control@139150" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139150" to="Display/MarginContainer/GridContainer/@Control@139150" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139150" to="Display/MarginContainer/GridContainer/@Control@139150" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139151" to="Display/MarginContainer/GridContainer/@Control@139151" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139151" to="Display/MarginContainer/GridContainer/@Control@139151" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139151" to="Display/MarginContainer/GridContainer/@Control@139151" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139152" to="Display/MarginContainer/GridContainer/@Control@139152" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139152" to="Display/MarginContainer/GridContainer/@Control@139152" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139152" to="Display/MarginContainer/GridContainer/@Control@139152" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139153" to="Display/MarginContainer/GridContainer/@Control@139153" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139153" to="Display/MarginContainer/GridContainer/@Control@139153" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139153" to="Display/MarginContainer/GridContainer/@Control@139153" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Display/MarginContainer/GridContainer/@Control@139154" to="Display/MarginContainer/GridContainer/@Control@139154" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Display/MarginContainer/GridContainer/@Control@139154" to="Display/MarginContainer/GridContainer/@Control@139154" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Display/MarginContainer/GridContainer/@Control@139154" to="Display/MarginContainer/GridContainer/@Control@139154" method="_on_mouse_exited"]

@@ -1,3 +1,51 @@
+@tool 
+extends Control
+
+var selected_slot: ItemSlot
+var hovered_slot: ItemSlot
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if !event.pressed:
+				swap_items(hovered_slot,selected_slot)
+				if selected_slot:
+					selected_slot.item_texture_rect.visible = true
+				selected_slot = null
+				hovered_slot = null
+				
+func _process(delta):
+	queue_redraw()
+				
+func _draw():
+	draw_item_at_mouse()
+		
+func draw_item_at_mouse():
+	z_index = 0
+	if selected_slot and selected_slot.item:
+		selected_slot.item_texture_rect.visible = false
+		var texture :Texture2D = selected_slot.item.texture
+		z_index = 10
+		draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
+
+func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
+	if !in_slot or !out_slot: return
+	if !out_slot.item: return
+	if in_slot.item_type != out_slot.item_type: return
+	#print(out_slot.item," to ", in_slot.item)
+	
+	var tmp :Item = in_slot.item
+	in_slot.item = out_slot.item
+	out_slot.item = tmp
+				
+
+#
+#func _process(delta):
+	#if selected_slot:
+	#
+
+
+
 #@tool
 #extends Node
 #

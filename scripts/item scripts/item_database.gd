@@ -19,3 +19,13 @@ static var item_resources : Dictionary[int, Item] = {
 static func create_item(id: int):
 	var item : Item = item_resources[id].clone()
 	return item
+	
+static func create_random_item() -> Item:
+	var id = randi() % ItemID.size()
+	return create_item(id)
+
+static func create_random_items(size:int=2) -> Array[Item]:
+	var items: Array[Item] = []
+	for i in range(size):
+		items.push_back(create_random_item())
+	return items

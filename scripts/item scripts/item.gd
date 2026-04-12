@@ -5,6 +5,7 @@ class_name Item extends Resource
 @export var name: String
 @export var texture: Texture2D
 @export_range(1,100,1) var max_stack_count: int = 1
+var stack_count: int = 1
 
 func clone()->Resource:
 	var item = self.get_script().new()
