@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HealStatusEffect" format=3 uid="uid://wk6av7mtk3ap"]
+
+[ext_resource type="Script" uid="uid://bofalkef5jofr" path="res://scripts/status effects/heal_status_effect.gd" id="1_22yqn"]
+
+[resource]
+script = ExtResource("1_22yqn")
+heal_per_tick = 3.8
+name = "lasting dense heal"
+max_ticks = 5
+tick_interval = 1.5
+metadata/_custom_type_script = "uid://bofalkef5jofr"

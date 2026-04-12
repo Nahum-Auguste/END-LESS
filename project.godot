@@ -43,7 +43,8 @@ folder_colors={
 "res://assets/": "red",
 "res://resources/": "gray",
 "res://scenes/": "blue",
-"res://scripts/": "green"
+"res://scripts/": "green",
+"res://scripts/tiling scripts/": "green"
 }
 
 [input]
@@ -134,4 +135,4 @@ minimap={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.8601253, 0.8463515, 0.8481337, 1)
+environment/defaults/default_clear_color=Color(0.09923177, 0.09923177, 0.09923176, 1)

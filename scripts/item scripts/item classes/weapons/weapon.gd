@@ -1,4 +1,4 @@
-class_name Weapon extends Item
+extends Item
 
 var damage: float = 0
 

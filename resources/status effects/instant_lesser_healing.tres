@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealStatusEffect" format=3 uid="uid://cs4ssbcfduccy"]
+
+[ext_resource type="Script" uid="uid://bofalkef5jofr" path="res://scripts/status effects/heal_status_effect.gd" id="1_yqhdj"]
+
+[resource]
+script = ExtResource("1_yqhdj")
+heal_per_tick = 5.0
+name = "instant lesser heal"
+metadata/_custom_type_script = "uid://bofalkef5jofr"

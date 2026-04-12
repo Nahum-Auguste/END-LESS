@@ -1,4 +1,4 @@
-class_name Consumable extends Item
+
 
 var status_effects: Array[StatusEffect] = []
 

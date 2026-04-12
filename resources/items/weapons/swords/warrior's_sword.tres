@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Sword" format=3 uid="uid://ou0di6c6c0jf"]
+
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/sword.gd" id="1_uwocf"]
+[ext_resource type="AudioStream" uid="uid://d3048uvpa0psu" path="res://assets/sfx/sword/slash1.wav" id="2_ruow7"]
+[ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="2_uwocf"]
+[ext_resource type="AudioStream" uid="uid://c26bn44vy0q0d" path="res://assets/sfx/sword/slash2.wav" id="3_178mb"]
+
+[resource]
+script = ExtResource("1_uwocf")
+range = 5.0
+damage = 5.0
+crit_chance = 0.05
+sound_effects = Array[AudioStream]([ExtResource("2_ruow7"), ExtResource("3_178mb")])
+name = "Warrior's sword"
+texture = ExtResource("2_uwocf")
+metadata/_custom_type_script = "uid://b2xswthighddu"

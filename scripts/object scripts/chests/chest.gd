@@ -122,9 +122,9 @@ func populate_items():
 		var max_amount = possible_item_drops_data[id].max_amount
 		var drop_chance = possible_item_drops_data[id].drop_chance
 		var count = 0
-		while (count < min_amount or (count < max_amount and randf() < drop_chance) ):
-			items.push_back(ItemData.create_item(id))
-			count+=1
+		#while (count < min_amount or (count < max_amount and randf() < drop_chance) ):
+			#items.push_back(ItemData.create_item(id))
+			#count+=1
 	
 
 func hitbox_hovered():

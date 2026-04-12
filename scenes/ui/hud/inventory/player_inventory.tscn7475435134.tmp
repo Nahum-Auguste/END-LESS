@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cw32uxj8k4nry"]
+
+[ext_resource type="Script" uid="uid://n43xvwcjqev5" path="res://scripts/hud/player_inventory.gd" id="1_4ta03"]
+[ext_resource type="PackedScene" uid="uid://dy51o0d56utat" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="2_5w0ga"]
+
+[sub_resource type="Gradient" id="Gradient_4ta03"]
+offsets = PackedFloat32Array(0, 0.86263734)
+colors = PackedColorArray(0.56100136, 0.24825072, 0.41526118, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4ta03"]
+noise_type = 2
+frequency = 0.0524
+fractal_octaves = 4
+fractal_lacunarity = 4.7
+fractal_gain = -0.235
+fractal_ping_pong_strength = 3.03
+cellular_distance_function = 2
+cellular_jitter = -0.065
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5w0ga"]
+noise = SubResource("FastNoiseLite_4ta03")
+color_ramp = SubResource("Gradient_4ta03")
+
+[sub_resource type="Gradient" id="Gradient_ujugo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3763k"]
+gradient = SubResource("Gradient_ujugo")
+
+[node name="PlayerInventory" type="Control" unique_id=263435617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ta03")
+
+[node name="Display" type="VBoxContainer" parent="." unique_id=1671799543]
+clip_contents = true
+layout_mode = 0
+offset_left = 903.0
+offset_top = 149.0
+offset_right = 1227.0
+offset_bottom = 620.0
+
+[node name="Background" type="Control" parent="Display" unique_id=1255477286]
+layout_mode = 2
+
+[node name="bgtexture" type="TextureRect" parent="Display/Background" unique_id=380926508]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+texture = SubResource("NoiseTexture2D_5w0ga")
+
+[node name="EquippablesSection" type="PanelContainer" parent="Display" unique_id=436044809]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bgcolor" type="ColorRect" parent="Display/EquippablesSection" unique_id=297577749]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Display" unique_id=1790872195]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Display/MarginContainer" unique_id=1674289612]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_3763k")
+
+[node name="GridContainer" type="GridContainer" parent="Display/MarginContainer" unique_id=1667897917]
+layout_mode = 2
+columns = 3
+
+[node name="HotBarSlot" parent="Display/MarginContainer/GridContainer" unique_id=176156144 instance=ExtResource("2_5w0ga")]
+layout_mode = 2
+
+[node name="HotBarSlot2" parent="Display/MarginContainer/GridContainer" unique_id=1224899202 instance=ExtResource("2_5w0ga")]
+layout_mode = 2

@@ -1,0 +1,31 @@
+@tool
+
+class_name Item extends Resource
+
+@export var name: String
+@export var texture: Texture2D
+@export_range(1,100,1) var max_stack_count: int = 1
+
+func clone()->Resource:
+	var item = self.get_script().new()
+	
+	var props: Array[Dictionary] = get_property_list()
+	
+	for prop in props:
+		if !(prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE) : continue 
+		var prop_name = prop.name
+		var val = self[prop_name]
+		item[prop_name] = val
+	
+	return item
+	
+func print(primatives_only:bool = true) -> void:
+	var props: Array[Dictionary] = get_property_list()
+	
+	for prop in props:
+		if !(prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE) : continue 
+		var prop_name = prop.name
+		var val = self[prop_name]
+		if primatives_only and (val is Object or val is Array): continue
+		print(prop_name,": ",val)
+		

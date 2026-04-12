@@ -19,7 +19,7 @@ func add_status_effect(effect: StatusEffect):
 	effect = effect.duplicate()
 	for i in range(status_effects.size()):
 		var e = status_effects[i]
-		if e.get_class() == effect.get_class():
+		if e.name == effect.name:
 			status_effects[i] = effect
 			e.finish()
 			return
@@ -44,9 +44,8 @@ func _process(delta: float) -> void:
 func apply_status_effects():
 	for e in status_effects:
 		if e:
-			e.user = self
-			e.apply()
-		else:
+			e.apply(self)
+		if !e or e.is_finished():
 			status_effects.erase(e)
 	
 func inflict_damage(dmg: float):
@@ -57,6 +56,10 @@ func inflict_damage(dmg: float):
 func handle_death():
 	alive = false
 	pass
+	
+func use_consummable(item: Consumable):
+	for e in item.status_effects:
+		add_status_effect(e)
 	
 func get_sprite_size()->Vector2:
 	var size : Vector2

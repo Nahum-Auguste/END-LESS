@@ -1,6 +1,6 @@
 @tool
 
-class_name PlayerInventory extends Inventory
+extends Inventory
 
 var player: Player
 @export var main_weapon_slot: ItemSlot
@@ -16,14 +16,14 @@ func _ready():
 	populate_main_slots_randomized()
 	
 	var equippables = [main_weapon_slot,helmet_slot,chest_slot,accessory_slot1,accessory_slot2,accessory_slot3]
-	main_weapon_slot.input_type = Weapon
-	helmet_slot.input_type = HelmetArmor
-	chest_slot.input_type = ChestArmor
-	accessory_slot1.input_type = Accessory
-	accessory_slot2.input_type = Accessory
-	accessory_slot3.input_type = Accessory
+	#main_weapon_slot.input_type = Weapon
+	#helmet_slot.input_type = HelmetArmor
+	#chest_slot.input_type = ChestArmor
+	#accessory_slot1.input_type = Accessory
+	#accessory_slot2.input_type = Accessory
+	#accessory_slot3.input_type = Accessory
 	
-	main_weapon_slot.item = ItemData.create_item(2)
+	#main_weapon_slot.item = ItemData.create_item(2)
 	main_weapon_slot.sync_item_texture()
 	
 	

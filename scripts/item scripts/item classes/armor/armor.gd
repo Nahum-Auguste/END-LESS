@@ -4,9 +4,9 @@ var defense: int = 0
 var speed: int = 0
 var user: Monster
 
-func _init(_id :int, _name: String, _max_stack_count :int, defense:float = 0):
-	super(_id,_name,_max_stack_count)
-	self.defense = defense
+#func _init(_id :int, _name: String, _max_stack_count :int, defense:float = 0):
+	#super(_id,_name,_max_stack_count)
+	#self.defense = defense
 	
 func set_speed(speed: int):
 	self.speed = speed

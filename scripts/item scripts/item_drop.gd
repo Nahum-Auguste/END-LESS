@@ -13,8 +13,8 @@ var can_display_context_menu:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !slot: slot = ItemSlot.new()
-	if item_id>=0:
-		slot.item = ItemData.create_item(item_id,999)
+	#if item_id>=0:
+		#slot.item = ItemData.create_item(item_id,999)
 	if slot.item:
 		sprite.texture = load(slot.item.image_path)
 	#player = get_tree().root.find_child("Player",true,false)

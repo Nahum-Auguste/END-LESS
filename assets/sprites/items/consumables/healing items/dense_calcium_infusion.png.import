@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkv5282rhyot8"
-path="res://.godot/imported/dense_calcium_infusion.png-4a26f41e1238d087acb926319c5881bc.ctex"
+path="res://.godot/imported/dense_calcium_infusion.png-859e841ed8b8122c5385fba501c79861.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/consumables/dense_calcium_infusion/dense_calcium_infusion.png"
-dest_files=["res://.godot/imported/dense_calcium_infusion.png-4a26f41e1238d087acb926319c5881bc.ctex"]
+source_file="res://assets/sprites/items/consumables/healing items/dense_calcium_infusion.png"
+dest_files=["res://.godot/imported/dense_calcium_infusion.png-859e841ed8b8122c5385fba501c79861.ctex"]
 
 [params]
 

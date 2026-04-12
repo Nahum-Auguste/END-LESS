@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://n7fyckwrukag"
-path="res://.godot/imported/small_bottle_of_calcium_ointment.png-a240e8029aca7ed1b7ee224e736e4133.ctex"
+path="res://.godot/imported/small_bottle_of_calcium_ointment.png-eb9165ee1b980357422c684a293a69c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/small_bottle_of_calcium_ointment.png"
-dest_files=["res://.godot/imported/small_bottle_of_calcium_ointment.png-a240e8029aca7ed1b7ee224e736e4133.ctex"]
+source_file="res://assets/sprites/items/consumables/healing items/small_bottle_of_calcium_ointment.png"
+dest_files=["res://.godot/imported/small_bottle_of_calcium_ointment.png-eb9165ee1b980357422c684a293a69c4.ctex"]
 
 [params]
 
