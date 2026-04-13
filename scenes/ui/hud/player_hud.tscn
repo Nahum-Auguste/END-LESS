@@ -9,11 +9,7 @@
 
 [node name="PlayerHud" type="Control" unique_id=764259258 node_paths=PackedStringArray("player_inventory")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_5cnp3")
 player_inventory = NodePath("PlayerInventory")
 
@@ -37,19 +33,22 @@ offset_bottom = 338.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StaminaBar" parent="." unique_id=188713738 instance=ExtResource("1_6k60i")]
-layout_mode = 1
-offset_left = 23.000002
-offset_top = 92.0
-offset_right = -839.9268
-offset_bottom = -576.12195
-
 [node name="HealthContainer" parent="." unique_id=669422447 instance=ExtResource("2_cmdvl")]
-layout_mode = 1
-offset_left = 23.0
-offset_top = 22.0
-offset_right = -1057.0
-offset_bottom = -666.0
+layout_mode = 0
+offset_left = 31.0
+offset_top = 17.0
+offset_right = 135.0
+offset_bottom = 49.0
+
+[node name="StaminaBar" parent="." unique_id=188713738 instance=ExtResource("1_6k60i")]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 0
+offset_left = 33.0
+offset_top = 119.0
+offset_right = 339.0
+offset_bottom = 147.0
+scale = Vector2(1, 1)
+size_flags_horizontal = 1
 
 [node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=227969146]
 layout_mode = 0

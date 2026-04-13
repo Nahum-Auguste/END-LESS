@@ -88,9 +88,8 @@ func display_context_menu():
 	context_menu.visible = true
 	
 
-	if context_menu.get_parent() != PlayerGuiCanvas.get_parent():
-		context_menu.z_index = 100
-		PlayerGuiCanvas.get_parent().add_child(context_menu)
+	if context_menu.get_parent() != PlayerGuiCanvas:
+		PlayerGuiCanvas.add_child(context_menu)
 		
 
 func close_context_menu():

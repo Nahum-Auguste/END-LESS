@@ -369,6 +369,7 @@ animations = [{
 custom_minimum_size = Vector2(32, 32)
 size_flags_horizontal = 0
 size_flags_vertical = 0
+expand_mode = 2
 
 [node name="FlameAnimation" type="AnimatedSprite2D" parent="." unique_id=417914833]
 sprite_frames = SubResource("SpriteFrames_uypfd")

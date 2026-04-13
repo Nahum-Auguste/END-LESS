@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://gsstaw55s01d"]
+
+[ext_resource type="Script" uid="uid://b2xswthighddu" path="res://scripts/item scripts/item.gd" id="1_5h2k1"]
+[ext_resource type="Texture2D" uid="uid://bwq6uyb5wxxne" path="res://assets/sprites/items/weapons/bow/arrow.png" id="2_skegd"]
+
+[resource]
+script = ExtResource("1_5h2k1")
+name = "arrow"
+texture = ExtResource("2_skegd")
+max_stack_count = 22
+metadata/_custom_type_script = "uid://b2xswthighddu"

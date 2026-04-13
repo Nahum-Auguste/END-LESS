@@ -5,25 +5,32 @@ var selected_slot: ItemSlot
 var hovered_slot: ItemSlot
 var player_hud: PlayerHud
 var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
+var item_drop_prefab: PackedScene = preload("res://scenes/objects/item_drop.tscn")
+var player: Player
 
 func _ready():
-	create_inventory()
-
-func create_inventory():
+	create_hud()
+	
+func create_hud():
+	player = get_tree().root.find_child("Player",true,false)
 	player_hud = get_tree().root.find_child("PlayerHud",true,false)
+	
 	if !player_hud:
 		player_hud = player_hud_prefab.instantiate()
-		#player_inventory.visible = false
-		#PlayerGuiCanvas.add_child(player_hud)
+		if player:
+			PlayerGuiCanvas.add_child(player_hud)
 		
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if !event.pressed:
-				swap_items(hovered_slot,selected_slot)
+				if hovered_slot and selected_slot and selected_slot.item:
+					swap_items(hovered_slot,selected_slot)
 				if selected_slot:
 					selected_slot.item_texture_rect.visible = true
+				if selected_slot and selected_slot.item and !hovered_slot and player:
+					drop_item(selected_slot)
 				selected_slot = null
 				hovered_slot = null
 				
@@ -148,3 +155,19 @@ func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 				#else:
 					#ini.on_unequip()
 	#
+
+func pick_up_item_drop(item_drop: ItemDrop):
+	if player_hud and player_hud.player_inventory:
+		var inv = player_hud.player_inventory
+		inv.pick_up_item_drop(item_drop)
+
+func drop_item(selected_slot:ItemSlot):
+	var inventory : Inventory = selected_slot.inventory
+	if inventory.is_mouse_hovered: return
+	var item_drop :ItemDrop = item_drop_prefab.instantiate()
+	item_drop.item = selected_slot.item
+	selected_slot.item = null
+	selected_slot = null
+	player.add_sibling(item_drop)
+	player.get_parent().move_child(item_drop,player.get_index())
+	item_drop.global_position = player.global_position

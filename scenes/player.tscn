@@ -2,15 +2,20 @@
 
 [ext_resource type="Script" uid="uid://bt5gv82yfwv1e" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="1_st07s"]
+[ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_handler.gd" id="2_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c3ub08y24iikn" path="res://assets/sprites/player/revenant_punching_sprite_sheet.png" id="4_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://d1f8dqsrghkif" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_body_spritesheet.png" id="4_jej6c"]
 [ext_resource type="Texture2D" uid="uid://diq8ou4kw6yqd" path="res://assets/sprites/player/revenant_right_attack_spritesheet.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://pgy0u6a7rjbh" path="res://assets/sprites/player/revenant_front_attack_spritesheet.png" id="4_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/revenant_back_attack_spritesheet.png" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://dmvny51aqsbmm" path="res://assets/sprites/player/attacks/revenant_sword_swing_spritesheet.png" id="8_smehm"]
-[ext_resource type="Texture2D" uid="uid://du2jrmlfhyek8" path="res://assets/sprites/items/weapons/in_game_warrior's_sword.png" id="8_ur7pv"]
 [ext_resource type="Script" uid="uid://bdaarxf2dt06e" path="res://scripts/player scripts/sword_swing_hit_box.gd" id="9_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://cptcc0m7ropxn" path="res://assets/sprites/items/weapons/bow/bow.png" id="10_jej6c"]
+[ext_resource type="Texture2D" uid="uid://d38qe4nhl1jsv" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_arms_spritesheet.png" id="13_f1ej7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
 atlas = ExtResource("2_qhqgy")
@@ -51,6 +56,22 @@ region = Rect2(160, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_st07s")
 region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2ulf"]
+atlas = ExtResource("4_jej6c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e8lb"]
+atlas = ExtResource("4_jej6c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gdjj"]
+atlas = ExtResource("4_jej6c")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc3ue"]
+atlas = ExtResource("4_jej6c")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5jhy"]
 atlas = ExtResource("4_d2wvv")
@@ -276,6 +297,38 @@ animations = [{
 }],
 "loop": true,
 "name": &"left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2ulf")
+}],
+"loop": true,
+"name": &"no_arms_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e8lb")
+}],
+"loop": true,
+"name": &"no_arms_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gdjj")
+}],
+"loop": true,
+"name": &"no_arms_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc3ue")
+}],
+"loop": true,
+"name": &"no_arms_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -517,7 +570,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hand:position")
+tracks/0/path = NodePath("Arms/Node2D/Hand:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -529,7 +582,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand:rotation")
+tracks/1/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -565,7 +618,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -585,6 +638,442 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bow_draw_down"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Arms/Node2D/Hand:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_jej6c"]
+resource_name = "bow_draw_down"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"no_arms_down"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bow_draw_down"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arms/Node2D/Hand:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arms/Node2D/Hand:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arms/Node2D/Hand:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 7), Vector2(0, 8), Vector2(1, 9)]
+}
+
+[sub_resource type="Animation" id="Animation_oprun"]
+resource_name = "bow_draw_left"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"no_arms_left"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bow_draw_left"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arms/Node2D/Hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5707964]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arms/Node2D/Hand:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-8, 1), Vector2(-9, 1), Vector2(-9.765, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arms/Node2D/Hand:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arms/Node2D/Hand:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_a8ls1"]
+resource_name = "bow_draw_right"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"no_arms_right"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bow_draw_right"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arms/Node2D/Hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707964]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arms/Node2D/Hand:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(5, -0.1), Vector2(5, 0), Vector2(6, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arms/Node2D/Hand:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arms/Node2D/Hand:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_f1ej7"]
+resource_name = "bow_draw_up"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"no_arms_up"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bow_draw_up"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arms/Node2D/ArmsAnimatedSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arms/Node2D/Hand:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arms/Node2D/Hand:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -2), Vector2(0, -3), Vector2(0, -4)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arms/Node2D/Hand:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.001908794),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_wnwbv"]
@@ -617,7 +1106,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:position")
+tracks/2/path = NodePath("Arms/Node2D/Hand:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -629,7 +1118,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:rotation")
+tracks/3/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -645,7 +1134,7 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hand:position")
+tracks/0/path = NodePath("Arms/Node2D/Hand:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -657,7 +1146,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand:rotation")
+tracks/1/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -669,7 +1158,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:visible")
+tracks/2/path = NodePath("Arms/Node2D/Hand:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -705,7 +1194,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Hand:scale")
+tracks/5/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -721,7 +1210,7 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hand:position")
+tracks/0/path = NodePath("Arms/Node2D/Hand:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -733,7 +1222,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand:rotation")
+tracks/1/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -745,7 +1234,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:visible")
+tracks/2/path = NodePath("Arms/Node2D/Hand:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -821,7 +1310,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -833,7 +1322,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -872,7 +1361,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -884,7 +1373,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -896,7 +1385,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -947,7 +1436,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -959,7 +1448,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -971,7 +1460,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1022,7 +1511,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1034,7 +1523,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1046,7 +1535,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1097,7 +1586,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1109,7 +1598,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1121,7 +1610,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1172,7 +1661,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1184,7 +1673,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1196,7 +1685,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1247,7 +1736,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:rotation")
+tracks/2/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1259,7 +1748,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hand:position")
+tracks/3/path = NodePath("Arms/Node2D/Hand:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1271,7 +1760,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1310,7 +1799,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand:rotation")
+tracks/1/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1322,7 +1811,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:position")
+tracks/2/path = NodePath("Arms/Node2D/Hand:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1346,7 +1835,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1385,7 +1874,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hand:rotation")
+tracks/1/path = NodePath("Arms/Node2D/Hand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1397,7 +1886,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hand:position")
+tracks/2/path = NodePath("Arms/Node2D/Hand:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1421,7 +1910,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Hand:scale")
+tracks/4/path = NodePath("Arms/Node2D/Hand:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1446,6 +1935,10 @@ tracks/5/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujl30"]
 _data = {
 &"RESET": SubResource("Animation_l71n6"),
+&"bow_draw_down": SubResource("Animation_jej6c"),
+&"bow_draw_left": SubResource("Animation_oprun"),
+&"bow_draw_right": SubResource("Animation_a8ls1"),
+&"bow_draw_up": SubResource("Animation_f1ej7"),
 &"sword_slash_down_old": SubResource("Animation_wnwbv"),
 &"sword_slash_left_old": SubResource("Animation_fjrip"),
 &"sword_slash_right_old": SubResource("Animation_ke2ow"),
@@ -1460,19 +1953,137 @@ _data = {
 &"sword_swing_up_right": SubResource("Animation_mx1m4")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxlsd"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha2mi"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apa73"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8svfe"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a3c5"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42b1b"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7ic4"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au7lq"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nubpm"]
+atlas = ExtResource("13_f1ej7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ua5cf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxlsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha2mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apa73")
+}],
+"loop": false,
+"name": &"bow_draw_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74r1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74r1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74r1k")
+}],
+"loop": false,
+"name": &"bow_draw_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8svfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a3c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42b1b")
+}],
+"loop": false,
+"name": &"bow_draw_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7ic4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au7lq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nubpm")
+}],
+"loop": false,
+"name": &"bow_draw_up",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
 size = Vector2(60, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 30.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
-
-[node name="Player" type="CharacterBody2D" unique_id=806514]
+[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite")]
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
 script = ExtResource("1_g2els")
+hand_item_sprite = NodePath("Arms/Node2D/Hand/HandItemSprite")
+
+[node name="AttackHandler" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite")]
+script = ExtResource("2_f1ej7")
+player = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+animation_player = NodePath("../AnimatedSprite2D/AnimationPlayer")
+hand_sprite = NodePath("../Arms/Node2D/Hand/HandItemSprite")
+arms_sprite = NodePath("../Arms/Node2D/ArmsAnimatedSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675146412]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_jej6c")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1462812389]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=161785613]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_jej6c")
+debug_color = Color(0.92156863, 0, 0.6862745, 0.13725491)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=864978702]
 sprite_frames = SubResource("SpriteFrames_yf5mx")
@@ -1483,14 +2094,22 @@ frame = 1
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_ujl30")
 
-[node name="Hand" type="Node2D" parent="." unique_id=1376405668]
+[node name="Arms" type="Node2D" parent="." unique_id=348350858]
+
+[node name="Node2D" type="Node2D" parent="Arms" unique_id=627960997]
+
+[node name="Hand" type="Node2D" parent="Arms/Node2D" unique_id=1376405668]
+z_index = -1
 scale = Vector2(1, -1)
 
-[node name="HandItemSprite" type="Sprite2D" parent="Hand" unique_id=660973790]
+[node name="HandItemSprite" type="Sprite2D" parent="Arms/Node2D/Hand" unique_id=660973790]
 visible = false
-position = Vector2(-0.39438546, -7.8002863)
-scale = Vector2(0.59, 0.59)
-texture = ExtResource("8_ur7pv")
+texture = ExtResource("10_jej6c")
+
+[node name="ArmsAnimatedSprite" type="AnimatedSprite2D" parent="Arms/Node2D" unique_id=1274555454]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ua5cf")
+animation = &"bow_draw_down"
 
 [node name="SwordSwingHitBox" type="Node2D" parent="." unique_id=585961415 node_paths=PackedStringArray("attack_effect_sprite")]
 visible = false
@@ -1517,10 +2136,6 @@ shape = SubResource("CircleShape2D_smehm")
 disabled = true
 debug_color = Color(0.9764706, 0.07450981, 0.33333334, 0.3372549)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675146412]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_jej6c")
-
 [node name="AttackEffectSprite" type="Sprite2D" parent="." unique_id=1218859863]
 visible = false
 modulate = Color(1, 1, 1, 0.56078434)
@@ -1533,13 +2148,8 @@ texture = ExtResource("3_y4r1p")
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1979280808]
 current = true
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1462812389]
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=161785613]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_jej6c")
-debug_color = Color(0.92156863, 0, 0.6862745, 0.13725491)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1855752815]
+zoom = Vector2(2.69, 2.69)
 
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]

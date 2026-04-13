@@ -4,6 +4,7 @@ class_name Inventory extends Control
 @export_range(0,50,1) var max_item_count: int = 0
 @export var items_container: Container
 @export var items_container_slot_prefab: PackedScene
+var is_mouse_hovered:bool = false
 var item_slots: Array[ItemSlot]
 
 func _ready():
@@ -47,6 +48,13 @@ func populate_with_random_items(size:float):
 		item_slots[i].item = rand_items[i]
 		 
 	
+func pick_up_item_drop(item_drop:ItemDrop):
+	for i in range(item_slots.size()):
+		var s = item_slots[i]
+		if !s.item:
+			s.item = item_drop.item
+			item_drop.item = null
+			
 	
 func shuffle_items():
 	for i in range(item_slots.size()):

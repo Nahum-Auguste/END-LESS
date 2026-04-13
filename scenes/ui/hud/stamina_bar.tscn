@@ -13,27 +13,17 @@ bg_color = Color(0.45452422, 0.45452428, 0.45452416, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug0v8"]
 bg_color = Color(1, 0, 1, 1)
 
-[node name="StaminaBar" type="Control" unique_id=188713738]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 1.7300003
-offset_right = -859.9268
-offset_bottom = -666.39197
-grow_horizontal = 2
-grow_vertical = 2
+[node name="StaminaBar" type="PanelContainer" unique_id=224333491]
+custom_minimum_size = Vector2(100, 50)
+offset_right = 765.8537
+offset_bottom = 80.48781
 scale = Vector2(0.41, 0.41)
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("1_ug0v8")
 
 [node name="BarBackground" type="Panel" parent="." unique_id=1152867570]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vy3py")
 
 [node name="StaminaMeter" type="ProgressBar" parent="BarBackground" unique_id=1246932218]

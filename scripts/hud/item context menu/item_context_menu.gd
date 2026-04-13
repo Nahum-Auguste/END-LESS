@@ -77,3 +77,11 @@ func _on_mouse_exited():
 
 func _on_unhover_timer_timeout():
 	pass # Replace with function body.
+
+
+func _on_drop_button_pressed():
+	InventoryManager.drop_item(item_slot)
+
+
+func _on_pick_up_button_pressed():
+	InventoryManager.pick_up_item_drop(item_drop)

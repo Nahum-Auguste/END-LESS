@@ -20,7 +20,7 @@ var last_attack_animation:String = ""
 @onready var animation_player:AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
 @onready var hand:Node2D = $Hand
 @onready var sword_swing_hitbox: SwordSwingHitBox = $SwordSwingHitBox
-@onready var hand_item_sprite: Sprite2D = $Hand/HandItemSprite
+@export var hand_item_sprite: Sprite2D
 @onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
 @onready var hurtbox: Area2D = $HurtBox
 
@@ -108,11 +108,11 @@ func _process(delta: float) -> void:
 	#if inventory:
 		#inventory.player = self
 
-	if Input.is_action_pressed("attack") and not attacking:
-		if main_hand_item:
-			attack()
-		else:
-			punch()
+	#if Input.is_action_pressed("attack") and not attacking:
+		#if main_hand_item:
+			#attack()
+		#else:
+			#punch()
 		
 		
 	#load_usable_inventory_items()
