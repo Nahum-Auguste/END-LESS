@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://vh56n317o3h3"]
+
+[ext_resource type="Script" uid="uid://dq5wfurwmr5my" path="res://scripts/object scripts/statues/elder_warlock_statue.gd" id="1_oiyn8"]
+[ext_resource type="Texture2D" uid="uid://kqnx8ba80a2b" path="res://assets/sprites/objects/statues/elder warlock/elder_warlock_statue_left.png" id="2_26pqw"]
+
+[node name="ElderWarlockStatue" type="StaticBody2D" unique_id=985681132]
+script = ExtResource("1_oiyn8")
+min_spawn_range = 51
+max_spawn_range = 51
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=54738919]
+polygon = PackedVector2Array(2, 0, 9, 0, 12, -1, 12, 4, 14, 10, 6, 13, -10, 11, -7, 1, -18, -5, -3, -1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=984103171]
+collision_layer = 16
+collision_mask = 256
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=841259647]
+polygon = PackedVector2Array(-4, -32, 6, -28, 16, -14, 18, -2, 31, 12, 28, 26, 15, 33, -28, 29, -30, 15, -28, 1, -23, -12, -14, -14, -13, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=457455916]
+texture = ExtResource("2_26pqw")
+
+[node name="TeleportSpotArea" type="Area2D" parent="." unique_id=1434678800]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

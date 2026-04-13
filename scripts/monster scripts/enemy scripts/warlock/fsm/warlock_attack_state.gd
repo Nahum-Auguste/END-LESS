@@ -20,7 +20,7 @@ var orb_attack_prefab = preload("res://scenes/enemies/warlock/warlock_orb_attack
 func enter():
 	body = fsm.body
 	player = body.player
-	print("attack state entered")
+	#print("attack state entered")
 	
 	body.sprite.play()
 	
@@ -101,7 +101,7 @@ func teleport():
 	
 	if !body.is_teleport_spot_body_area_colliding():
 		body.global_position = body.teleport_spot_body_area.global_position
-		print("teleported")
+		#print("teleported")
 		body.teleport_spot_body_area.global_position = get_new_teleport_position()
 
 func get_new_teleport_position()->Vector2:

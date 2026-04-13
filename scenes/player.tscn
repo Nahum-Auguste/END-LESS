@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bt5gv82yfwv1e" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="1_st07s"]
-[ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_handler.gd" id="2_f1ej7"]
+[ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_manager.gd" id="2_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c3ub08y24iikn" path="res://assets/sprites/player/revenant_punching_sprite_sheet.png" id="4_d2wvv"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/revenant_back_attack_spritesheet.png" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://dmvny51aqsbmm" path="res://assets/sprites/player/attacks/revenant_sword_swing_spritesheet.png" id="8_smehm"]
 [ext_resource type="Script" uid="uid://bdaarxf2dt06e" path="res://scripts/player scripts/sword_swing_hit_box.gd" id="9_ur7pv"]
-[ext_resource type="Texture2D" uid="uid://cptcc0m7ropxn" path="res://assets/sprites/items/weapons/bow/bow.png" id="10_jej6c"]
+[ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="11_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://d38qe4nhl1jsv" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_arms_spritesheet.png" id="13_f1ej7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
@@ -2053,10 +2053,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
-size = Vector2(60, 30)
+size = Vector2(40, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
-radius = 30.0
+radius = 20.0
 
 [node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite")]
 collision_mask = 15
@@ -2065,13 +2065,15 @@ platform_floor_layers = 0
 script = ExtResource("1_g2els")
 hand_item_sprite = NodePath("Arms/Node2D/Hand/HandItemSprite")
 
-[node name="AttackHandler" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite")]
+[node name="AttackManager" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite", "attack_effect_sprite", "sword_hitbox_container")]
 script = ExtResource("2_f1ej7")
 player = NodePath("..")
 sprite = NodePath("../AnimatedSprite2D")
 animation_player = NodePath("../AnimatedSprite2D/AnimationPlayer")
 hand_sprite = NodePath("../Arms/Node2D/Hand/HandItemSprite")
 arms_sprite = NodePath("../Arms/Node2D/ArmsAnimatedSprite")
+attack_effect_sprite = NodePath("../AttackEffectSprite")
+sword_hitbox_container = NodePath("../SwordSwingHitBox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675146412]
 position = Vector2(0, -1)
@@ -2104,25 +2106,25 @@ scale = Vector2(1, -1)
 
 [node name="HandItemSprite" type="Sprite2D" parent="Arms/Node2D/Hand" unique_id=660973790]
 visible = false
-texture = ExtResource("10_jej6c")
+texture = ExtResource("11_f1ej7")
 
 [node name="ArmsAnimatedSprite" type="AnimatedSprite2D" parent="Arms/Node2D" unique_id=1274555454]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ua5cf")
 animation = &"bow_draw_down"
 
-[node name="SwordSwingHitBox" type="Node2D" parent="." unique_id=585961415 node_paths=PackedStringArray("attack_effect_sprite")]
-visible = false
+[node name="SwordSwingHitBox" type="Node2D" parent="." unique_id=585961415 node_paths=PackedStringArray("attack_manager", "attack_effect_sprite")]
 script = ExtResource("9_ur7pv")
+attack_manager = NodePath("../AttackManager")
 attack_effect_sprite = NodePath("../AttackEffectSprite")
-added_range = 10.0
+added_range = 0.0
 
 [node name="RectArea" type="Area2D" parent="SwordSwingHitBox" unique_id=686574378]
 collision_layer = 256
 collision_mask = 18
 
 [node name="RectCollsionShape" type="CollisionShape2D" parent="SwordSwingHitBox/RectArea" unique_id=1508400630]
-position = Vector2(0, 15)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_ur7pv")
 disabled = true
 debug_color = Color(0.49824357, 0.5822027, 0, 0.41960785)
@@ -2140,7 +2142,7 @@ debug_color = Color(0.9764706, 0.07450981, 0.33333334, 0.3372549)
 visible = false
 modulate = Color(1, 1, 1, 0.56078434)
 rotation = 1.5707964
-scale = Vector2(1.875, -1.875)
+scale = Vector2(1.25, -1.25)
 texture = ExtResource("3_y4r1p")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=985882029]

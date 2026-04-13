@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dn6tjd568lh8r" path="res://assets/sprites/enemies/warlock/warlock_spritesheet.png" id="2_mj2cs"]
 [ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_47hsy"]
 [ext_resource type="Script" uid="uid://bjivga5mf183i" path="res://scripts/monster scripts/enemy scripts/warlock/fsm/warlock_attack_state.gd" id="4_hcf2u"]
+[ext_resource type="Script" uid="uid://dreskkqtrnwdj" path="res://scripts/finite state machine scripts/common states/teleport.gd" id="5_grfga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4l7h"]
 size = Vector2(34, 34)
@@ -69,10 +70,11 @@ teleport_interval = 3.5
 fsm = NodePath("WarlockFSM")
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
-[node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "body", "nav_agent", "detection_area")]
+[node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "teleport_state", "body", "nav_agent", "detection_area")]
 script = ExtResource("2_acp8c")
 wander_state = NodePath("WanderState")
 attack_state = NodePath("WarlockAttackState")
+teleport_state = NodePath("TeleportState")
 body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent2D")
 detection_area = NodePath("../DetectionArea")
@@ -91,9 +93,16 @@ script = ExtResource("4_hcf2u")
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://bjivga5mf183i"
 
+[node name="TeleportState" type="Node" parent="WarlockFSM" unique_id=99548046 node_paths=PackedStringArray("real_collider_shape", "fsm")]
+script = ExtResource("5_grfga")
+real_collider_shape = NodePath("../../CollisionShape2D")
+max_teleport_range = 143.0
+fsm = NodePath("..")
+metadata/_custom_type_script = "uid://dreskkqtrnwdj"
+
 [node name="HurtBox" type="Area2D" parent="." unique_id=665940647]
 collision_layer = 2
-collision_mask = 8
+collision_mask = 264
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=426207971]
 shape = SubResource("RectangleShape2D_s4l7h")

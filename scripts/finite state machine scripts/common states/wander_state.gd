@@ -32,9 +32,9 @@ func exit():
 	wander_timer.stop()
 	
 func update(delta):
-	print(wander_timer.time_left)
+	#print(wander_timer.time_left)
 	if nav_agent.is_navigation_finished() and wander_timer.is_stopped():
-		print("next")
+		#print("next")
 		wander_timer.start()
 
 	

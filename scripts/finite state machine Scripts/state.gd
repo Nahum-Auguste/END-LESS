@@ -24,4 +24,4 @@ func draw():
 	pass
 	
 func exit():
-	pass
+	fsm.current_state = null

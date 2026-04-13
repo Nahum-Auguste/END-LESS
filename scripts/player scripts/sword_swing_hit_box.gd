@@ -1,6 +1,7 @@
 @tool
 class_name SwordSwingHitBox extends Node2D
 
+@export var attack_manager: PlayerAttackManager
 @onready var rect_area: Area2D = $RectArea
 @onready var circle_area: Area2D = $CircleArea
 @onready var rect_collider: CollisionShape2D = $RectArea/RectCollsionShape
@@ -9,11 +10,11 @@ class_name SwordSwingHitBox extends Node2D
 @onready var circle_collision_shape: CircleShape2D = $CircleArea/CircleCollisionShape.shape
 @export var attack_effect_sprite: Sprite2D
 var base_range:float = 20
-@export var added_range: float = 16
+@export_range(0,1000,1) var added_range: float = 16
 var is_colliding: bool = false
 var rect_colliding:bool = false
 var circle_colliding:bool = false
-var weapon:Item
+var weapon:MeleeWeapon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	
+	weapon = attack_manager.weapon if "weapon" in attack_manager and attack_manager.weapon is MeleeWeapon else null
+	added_range = weapon.range if weapon else 0
 	rect_collider.position = Vector2(0,base_range+added_range)/2
 	circle_collision_shape.radius = base_range + added_range
 	rect_collision_shape.size = Vector2(2,1) * (base_range + added_range)
@@ -36,7 +41,7 @@ func _physics_process(delta):
 	
 
 func handle_attack(area:Area2D):
-	#print(weapon)
+	print(weapon)
 	if !weapon: return
 	#print(area.get_parent())
 	var min_knockback_strength = 108
@@ -61,6 +66,7 @@ func handle_attack(area:Area2D):
 
 
 func _on_rect_area_area_entered(area):
+	#print(area)
 	rect_colliding = true
 	if circle_colliding and circle_area.get_overlapping_areas().has(area):
 		handle_attack(area)

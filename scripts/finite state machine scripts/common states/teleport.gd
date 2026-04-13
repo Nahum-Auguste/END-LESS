@@ -34,6 +34,8 @@ func enter():
 
 		
 func update(delta):
+	teleport()
+	#print(teleport_anchor)
 	if teleport_origin_type == "self":
 		teleport_anchor = body
 	elif teleport_origin_type == "player" and body.player:
@@ -56,6 +58,7 @@ func physics_update(delta):
 func teleport():
 	if !is_copy_area_colliding():
 		body.global_position = body_area_copy.global_position
+		exit()
 		
 
 func get_random_teleport_spot() -> Vector2:
