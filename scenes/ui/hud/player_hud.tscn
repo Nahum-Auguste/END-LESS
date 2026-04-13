@@ -14,9 +14,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_5cnp3")
 player_inventory = NodePath("PlayerInventory")
+
+[node name="PlayerInventory" parent="." unique_id=263435617 instance=ExtResource("5_ful6q")]
+visible = false
+layout_mode = 1
+mouse_filter = 0
 
 [node name="HUDArea" type="ColorRect" parent="." unique_id=541279629]
 visible = false
@@ -55,6 +59,7 @@ offset_right = 1136.0
 offset_bottom = 82.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 0
 theme_override_constants/separation = 10
 
 [node name="HotBarSlot" parent="ConsumablesContainer" unique_id=176156144 instance=ExtResource("3_x7jc0")]
@@ -89,6 +94,7 @@ offset_right = 1255.0
 offset_bottom = 137.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 0
 
 [node name="MainWeaponSlot" parent="WeaponSlots" unique_id=1863084595 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(70, 70)
@@ -100,10 +106,6 @@ size_flags_vertical = 3
 visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
-
-[node name="PlayerInventory" parent="." unique_id=263435617 instance=ExtResource("5_ful6q")]
-visible = false
-layout_mode = 1
 
 [node name="DrawingNode" type="Control" parent="." unique_id=1732735798]
 anchors_preset = 0

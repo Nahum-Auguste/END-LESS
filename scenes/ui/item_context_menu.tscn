@@ -15,7 +15,7 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[node name="ItemContextMenu" type="PanelContainer" unique_id=122916026 node_paths=PackedStringArray("item_name_label", "properties_container", "pick_up_button", "equip_button", "split_button", "use_button", "drop_button")]
+[node name="ItemContextMenu" type="PanelContainer" unique_id=122916026 node_paths=PackedStringArray("unhover_timer", "item_name_label", "properties_container", "pick_up_button", "equip_button", "split_button", "use_button", "drop_button")]
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 133.0
@@ -24,6 +24,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 1
 script = ExtResource("1_uer55")
+unhover_timer = NodePath("UnhoverTimer")
 item_name_label = NodePath("PanelContainer2/MarginContainer/PanelContainer/PanelContainer2/ItemNameLabel")
 properties_container = NodePath("PanelContainer2/MarginContainer/PanelContainer/PanelContainer")
 pick_up_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/PickUpButton")
@@ -108,5 +109,11 @@ layout_mode = 2
 mouse_filter = 1
 text = "Drop"
 
+[node name="UnhoverTimer" type="Timer" parent="." unique_id=89643700]
+wait_time = 0.52
+one_shot = true
+autostart = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="UnhoverTimer" to="." method="_on_unhover_timer_timeout"]

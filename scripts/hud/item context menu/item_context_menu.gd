@@ -2,7 +2,9 @@
 class_name ItemContextMenu extends Control
 
 var item_drop: ItemDrop
+var item_slot: ItemSlot
 var is_mouse_hovering:bool = false
+@export var unhover_timer: Timer
 @export var item_name_label: RichTextLabel
 @export var properties_container: Container
 @export var pick_up_button: Button
@@ -30,9 +32,17 @@ func _process(delta):
 	use_button.visible = item is Consumable
 	parse_item_data()
 	
-	
-	if item_drop and !item_drop.is_mouse_hovering and !is_mouse_hovering:
-		visible = false
+	#print(item_slot)
+	#print(item_slot.mouse_hovered)
+	#print(is_mouse_hovering)
+
+	if $UnhoverTimer.is_stopped():
+		if item_drop and !item_drop.item:
+			visible = false
+		if item_slot and (!item_slot.item or InventoryManager.selected_slot == item_slot):
+			visible = false
+		if ((item_drop and !item_drop.is_mouse_hovering and !is_mouse_hovering) or (item_slot and !item_slot.mouse_hovered and !is_mouse_hovering)) :
+			visible = false
 	
 func parse_item_data():
 	if ! item: 
@@ -63,3 +73,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	is_mouse_hovering = false
+
+
+func _on_unhover_timer_timeout():
+	pass # Replace with function body.

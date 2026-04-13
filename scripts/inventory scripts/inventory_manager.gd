@@ -1,5 +1,5 @@
 @tool 
-extends Node
+extends CanvasLayer
 
 var selected_slot: ItemSlot
 var hovered_slot: ItemSlot
@@ -33,8 +33,8 @@ func _process(delta):
 func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 	if !in_slot or !out_slot: return
 	if !out_slot.item: return
-	if in_slot.item_type != out_slot.item_type: return
-	#print(out_slot.item," to ", in_slot.item)
+	if !is_instance_of(out_slot.item,in_slot.item_type): return
+	##print(out_slot.item," to ", in_slot.item)
 	
 	var tmp :Item = in_slot.item
 	in_slot.item = out_slot.item

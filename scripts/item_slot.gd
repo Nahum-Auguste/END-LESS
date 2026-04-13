@@ -1,14 +1,8 @@
 @tool
 class_name ItemSlot extends Control
 
-enum ItemType {
-	Item,
-	Weapon,
-	Sword,
-	Armor,
-	Accessory
-}
-@export var item_type: ItemType = ItemType.Item
+
+@export var item_type: Resource = Item
 @export var item: Item
 @export var item_texture_rect: TextureRect
 @export var hovered_style: Control
@@ -17,6 +11,10 @@ enum ItemType {
 @export var disabled: bool = false
 @export var inventory: Inventory
 var mouse_hovered: bool = false
+
+var context_menu: ItemContextMenu
+var context_menu_prefab:PackedScene = preload("res://scenes/ui/item_context_menu.tscn")
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +25,7 @@ func _ready():
 		if selected_style:
 			selected_style.visible = false
 	load_item_texture()
+	create_context_menu()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +37,7 @@ func _process(delta):
 	
 	if item and mouse_hovered:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		
 		
 	#if item and self == InventoryManager.selected_slot and (item is not Armor or item is not Weapon or item is not Accessory):
 		#if inventory:
@@ -69,6 +69,40 @@ func load_item_texture():
 		#z_index = 15
 		#draw_texture(texture,get_local_mouse_position() - texture.get_size()/2)
 
+func create_context_menu():
+	if context_menu or !item: return
+	context_menu = context_menu_prefab.instantiate()
+	context_menu.context = "item slot"
+	context_menu.item = item
+	context_menu.item_slot = self
+	
+
+func display_context_menu():
+	if !item: return
+	if !context_menu:
+		create_context_menu()
+	context_menu.item = item
+	context_menu.global_position = get_viewport().get_mouse_position() + Vector2(-context_menu.size.x + 12,-16)
+	if context_menu.visible == false:
+		context_menu.unhover_timer.start()
+	context_menu.visible = true
+	
+
+	if context_menu.get_parent() != PlayerGuiCanvas.get_parent():
+		context_menu.z_index = 100
+		PlayerGuiCanvas.get_parent().add_child(context_menu)
+		
+
+func close_context_menu():
+	if context_menu:
+		context_menu.visible = false
+
+
+func _exit_tree():
+	if context_menu:
+		context_menu.queue_free()
+		context_menu = null
+
 func _on_mouse_entered():
 	mouse_hovered = true
 	InventoryManager.hovered_slot = self
@@ -90,3 +124,5 @@ func _on_gui_input(event):
 			else:
 				if InventoryManager.selected_slot == self:
 					InventoryManager.selected_slot = null
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			display_context_menu()
