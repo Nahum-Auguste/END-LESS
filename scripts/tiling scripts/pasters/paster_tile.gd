@@ -67,9 +67,9 @@ func paste_pattern(pattern_path: String, check_overlap: bool = true):
 					var atlas_pos = tile_layer.get_cell_atlas_coords(pos)
 					var is_ceiling:bool = source_id == 0 and atlas_pos == Vector2i(0,0)
 						
-					if source_id!=-1 and !is_ceiling:
+					if source_id!=-1: #and !is_ceiling:
 						overlap_count+=1
-						if (float(overlap_count)/cell_count) > cancel_threshold_percent:
+						if overlap_count > 10:#(float(overlap_count)/cell_count) > cancel_threshold_percent:
 							#print("overlap percent: ",float(overlap_count)/cell_count)
 							return
 			

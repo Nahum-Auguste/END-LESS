@@ -24,9 +24,22 @@ var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
 
 #@export_tool_button("clear console") var clear_console = func(): print("\u001b")
 @export_tool_button("clear tiles","CurveDelete") var clear_button = clear
-@export_tool_button("generate level","Edit") var gen_button = generate_level
-@export_tool_button("add boss room") var add_boss_room_button = add_boss_room
+@export_tool_button("clear nav","CurveDelete") var clear_nav_button = clear_nav_region
 @export_tool_button("paste generated level","Edit") var paste_gen_button = paste_generated_level
+@export_tool_button("generate floors","Edit") var gen_floor_button = func():
+	clear()
+	paste_generated_level()
+	add_spawn_room()
+	add_rooms()
+	
+@export_tool_button("find nodes") var find_nodes_button = draw_at_nodes
+@export_tool_button("draw walls") var walls_button = draw_walls 
+@export_tool_button("bake") var bake = bake_nav
+@export_tool_button("add rooms") var add_rooms_button = add_rooms
+@export_tool_button("generate level","Edit") var gen_button = generate_level
+
+
+
 @export var path_steps: int = 130
 @export var nodes: int = clamp(3,1,10)
 @export var max_paths_closed: int = 3
@@ -36,6 +49,7 @@ var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
 @export_range(0,200,1) var enemies: int = 30
 @onready var max_length_area_shape: CircleShape2D = $MaxLengthArea/CollisionShape2D.shape 
 @export var level_theme_player: AudioStreamPlayer
+@onready var nav_region: NavigationRegion2D = $NavigationRegion2D
 
 var level_center: Vector2 = Vector2.ZERO
 var floor_cells: Array[Vector2i]
@@ -43,7 +57,7 @@ var node_positions: Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_level()
+	#generate_level()
 	pass
 	
 func _process(delta):
@@ -61,6 +75,9 @@ func draw_ceilings():
 			#print(pos)
 			draw_tile(pos,"ceiling")
 			
+func draw_at_nodes():
+	for c in node_positions:
+		draw_tile_circle(c,"wall",path_width,true)
 
 			
 func draw_walls():
@@ -109,11 +126,15 @@ func generate_level():
 	add_rooms()
 	draw_walls()
 	
-	add_boss_room()
+	#add_boss_room()
 	add_spawn_room()
 	spawn_enemies()
 	#set_level_theme()
 	#tile_layer.update_internals()
+	bake_nav()
+	
+	
+func bake_nav():
 	$NavigationRegion2D.bake_navigation_polygon()
 	
 func set_level_theme():
@@ -143,29 +164,29 @@ func spawn_enemies():
 		$Enemies.add_child.call_deferred(enemy)
 		enemy.global_position = pos
 		print(enemy.global_position)
-	
-func add_boss_room():
-	var nodes = node_positions.duplicate()
-	nodes.erase(level_center)
-	print(nodes)
-	
-	var node :Vector2
-	
-	if nodes.size()==0:
-		node = level_center
-	else:
-		node = nodes[randi() % nodes.size()]
+	#
+#func add_boss_room():
+	#var nodes = node_positions.duplicate()
+	#nodes.erase(level_center)
+	#print(nodes)
+	#
+	#var node :Vector2
+	#
+	#if nodes.size()==0:
+		#node = level_center
+	#else:
+		#node = nodes[randi() % nodes.size()]
+		#
+	#var path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
+		#
+	#if node:
+		#paste_pattern(node, path)
 		
-	var path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
-		
-	if node:
-		paste_pattern(node, path)
-		
 	
-func paste_pattern(position: Vector2i, path: String):
+func paste_pattern(position: Vector2i, path: String, check_overlap:bool = false) -> bool:
 	if not path or DirAccess.dir_exists_absolute(path) or !FileAccess.file_exists(path):
 		printerr("Error: Invalid Loaded Pattern Path.")
-		return
+		return false
 	
 	var pattern: TileMapPattern = load(path)
 	
@@ -184,6 +205,20 @@ func paste_pattern(position: Vector2i, path: String):
 				if instance is TilePatternOrigin:			
 					origin = -cell + position
 				instance.free()
+				
+	var overlap_count = 0
+	var max_overlap_count = 10
+	if check_overlap:
+		for cell in pattern.get_used_cells():
+			var pos = origin + cell
+			var source_id = tile_layer.get_cell_source_id(pos)
+			var atlas_pos = tile_layer.get_cell_atlas_coords(pos)
+			var is_ceiling:bool = source_id == 0 and atlas_pos == Vector2i(0,0)
+				
+			if source_id!=-1:
+				overlap_count+=1
+				if overlap_count > max_overlap_count:
+					return false
 	
 	# paste pattern tiles
 	for cell in pattern.get_used_cells():
@@ -194,6 +229,7 @@ func paste_pattern(position: Vector2i, path: String):
 		tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 		#floor_cells.erase(pos)
 
+	return true
 	
 func add_spawn_room():
 	tile_layer.set_cell(level_center,1,Vector2.ZERO,8)
@@ -207,12 +243,23 @@ func add_rooms():
 	var potential_cells: Array = []
 	var potential_cell_datas : Array = []
 	
+	print(floor_cells.size())
 	for cell in floor_cells:
 		var lv = Vector2i(-1,0)
 		var rv = Vector2i(1,0)
 		var tv = Vector2i(0,-1)
 		var bv = Vector2i(0,1)
-
+		
+		var surrounding_cells = tile_layer.get_surrounding_cells(cell)
+		var sur_count = 0
+		for c in surrounding_cells:
+			if is_floor.call(tile_layer.get_cell_source_id(c),tile_layer.get_cell_atlas_coords(c)):
+				sur_count += 1
+		
+		if sur_count >=4: continue
+		
+		#
+		#
 		var surrounding_cell_displacements = [
 			lv + tv,
 			tv,
@@ -231,8 +278,8 @@ func add_rooms():
 			var pos2 = cell + next_disp
 			var sid1 = tile_layer.get_cell_source_id(pos1)
 			var sid2 = tile_layer.get_cell_source_id(pos2)
-			var src1 = tile_layer.tile_set.get_source(sid1)
-			var src2 = tile_layer.tile_set.get_source(sid2)
+			var src1 = tile_layer.tile_set.get_source(sid1) if sid1!=-1 else null
+			var src2 = tile_layer.tile_set.get_source(sid2) if sid2!=-1 else null
 			
 			# down chest index
 			var dci = 3
@@ -269,20 +316,62 @@ func add_rooms():
 	#print(floor_cells.size())
 	#print(potential_cell_datas.size())
 	
-	for i in potential_cell_datas.size():
+	
+	#for data in potential_cell_datas:
+		#draw_tile(data[0],"wall")
+	
+
+	for i in range(potential_cell_datas.size()):
+		var ri = randi_range(0,potential_cell_datas.size()-1)
+		var data = potential_cell_datas[ri]
+		var cell: Vector2i = data[0]
+
+		var path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
+		var dir = "up"
+		var axis = "x" if randi() % 2 else "y"
+		dir = "right" if cell.x > level_center.x and axis == "x" else dir
+		dir = "left" if cell.x < level_center.x and axis == "x" else dir
+		dir = "up" if cell.y < level_center.y and axis == "y" else dir
+		dir = "down" if cell.y > level_center.y and axis == "y" else dir
+		
+		match (dir):
+			"down":
+				path = "res://assets/tile patterns/world1/boss rooms/down/boss_room_down_1.tres"
+			"left":
+				path = "res://assets/tile patterns/world1/boss rooms/left/boss_room_left_1.tres"
+			"right":
+				path = "res://assets/tile patterns/world1/boss rooms/right/boss_room_right_1.tres"
+			"up":
+				path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
+			_:
+				path = "res://assets/tile patterns/world1/boss rooms/up/boss_room_1.tres"
+			
+		#draw_tile_circle(cell,"floor",7,true)
+		if paste_pattern(cell,path,true):
+			draw_tile_circle(cell,"floor",4,true)
+			potential_cell_datas.pop_at(ri)
+			break
+	
+	for i in range(0,potential_cell_datas.size()):
 		if pasters >= max_pasters and max_pasters>=0: return
 		
-		var data = potential_cell_datas[randi_range(0,potential_cell_datas.size()-1)]
-		var cell: Vector2i = data[0]
-		var ci = data[1]
-		tile_layer.set_cell(cell,1,Vector2i.ZERO,ci)
+			
+		var ri = randi_range(0,potential_cell_datas.size()-1)
+		var data = potential_cell_datas[ri]
+		var cell: Vector2i = data[0] # position
+		var ci = data[1] # direction indicator
 		
-		
-		pasters+=1
+		var source: TileSetScenesCollectionSource = tile_layer.tile_set.get_source(1)
+		var scene:PackedScene = source.get_scene_tile_scene(ci)
+		if scene:
+			tile_layer.set_cell(cell,1,Vector2i.ZERO,ci)
+			potential_cell_datas.pop_at(ri)
+			pasters+=1
 		
 			
 	
 func paste_generated_level():
+	clear_nav_region()
 	node_positions = [level_center]
 	
 	# start n nodes
@@ -412,10 +501,19 @@ func draw_random_path(start_pos:Vector2, tile:String = "floor", steps:= 10, widt
 	
 	return paste_positions
 	
+func clear_nav_region():
+	var nav_poly = nav_region.navigation_polygon
+	nav_poly.clear()
+	nav_poly.clear_outlines()
+	nav_region.navigation_polygon = nav_poly
+	
 func clear():
 	#print("cleared tiles")
 	tile_layer.clear()
+	
+	clear_nav_region()
 	$NavigationRegion2D/ObjectsTileMapLayer.clear()
+	
 	var player = get_tree().root.find_child("Player",true,false)
 	var tries = 20
 	while (player and tries):
