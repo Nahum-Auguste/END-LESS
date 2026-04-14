@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Sword" format=3 uid="uid://b2walcwmb6d6n"]
+
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="1_6ak3s"]
+[ext_resource type="Texture2D" uid="uid://dekb3u8ild5vr" path="res://assets/sprites/items/weapons/broadsword/sword.png" id="2_nsoqu"]
+
+[resource]
+script = ExtResource("1_6ak3s")
+range = 12.0
+damage = 8.0
+attack_speed = 2.0
+crit_chance = 0.2
+name = "Sturdy Broadsword"
+texture = ExtResource("2_nsoqu")
+metadata/_custom_type_script = "uid://b0dywa8sx54m3"

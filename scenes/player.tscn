@@ -1383,6 +1383,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_smehm"]
 resource_name = "sword_swing_down_left"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1458,6 +1459,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_ur7pv"]
 resource_name = "sword_swing_down_right"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1533,6 +1535,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_g5jhy"]
 resource_name = "sword_swing_left_down"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1608,6 +1611,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_y4r1p"]
 resource_name = "sword_swing_left_up"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1683,6 +1687,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_holxr"]
 resource_name = "sword_swing_right_down"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1758,6 +1763,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_d2wvv"]
 resource_name = "sword_swing_right_up"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1833,6 +1839,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_3v2ag"]
 resource_name = "sword_swing_up_left"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1908,6 +1915,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_mx1m4"]
 resource_name = "sword_swing_up_right"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

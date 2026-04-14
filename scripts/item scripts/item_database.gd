@@ -6,14 +6,16 @@ enum ItemID {
 	WarriorsSword,
 	SmallBottleOfCalciumOintment,
 	DenseCalciumInfusion,
-	JeremiahsLongbow
+	JeremiahsLongbow,
+	SturdyBroadSword
 }
 
 static var item_resources : Dictionary[int, Item] = {
 	ItemID.WarriorsSword: preload("res://resources/items/weapons/swords/warrior's_sword.tres"),
 	ItemID.SmallBottleOfCalciumOintment: preload("res://resources/items/consumables/healing items/small_bottle_of_calcium_ointment.tres"),
 	ItemID.DenseCalciumInfusion: preload("res://resources/items/consumables/healing items/dense_calcium_infusion.tres"),
-	ItemID.JeremiahsLongbow: preload("res://resources/items/weapons/bows/jeremiah's_longbow.tres")
+	ItemID.JeremiahsLongbow: preload("res://resources/items/weapons/bows/jeremiah's_longbow.tres"),
+	ItemID.SturdyBroadSword: preload("res://resources/items/weapons/swords/sturdy_broadsword.tres")
 } 
 
 

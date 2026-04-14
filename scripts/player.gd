@@ -51,7 +51,7 @@ func get_direction()->String:
 	return dir	
 	
 func _input(event):
-	if event.is_action_pressed("dodge") and !is_dodging():
+	if event.is_action_pressed("dodge") and !is_dodging() and !attacking:
 		on_dodge()
 
 		

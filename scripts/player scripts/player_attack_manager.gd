@@ -14,13 +14,12 @@ var previous_attack_animation: String = ""
 func _process(delta):
 	set_inventory()
 	
-	if Input.is_action_pressed("attack"):
-		if !player.attacking and weapon:
-			player.attacking = true
-			if weapon is Sword:
-				do_sword_attack()
-			elif weapon is Bow:
-				do_bow_attack()
+	if Input.is_action_pressed("attack") and weapon and !player.attacking and !player.is_dodging():
+		player.attacking = true
+		if weapon is Sword:
+			do_sword_attack()
+		elif weapon is Bow:
+			do_bow_attack()
 
 	if inventory:
 		weapon = inventory.weapon_slot.item
