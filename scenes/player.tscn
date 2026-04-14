@@ -3,19 +3,36 @@
 [ext_resource type="Script" uid="uid://bt5gv82yfwv1e" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="1_st07s"]
 [ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_manager.gd" id="2_f1ej7"]
-[ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/attacks/sword_swing/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://0iawogcy623w" path="res://assets/sprites/player/revenant_dodge_spritesheet.png" id="3_oprun"]
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c3ub08y24iikn" path="res://assets/sprites/player/revenant_punching_sprite_sheet.png" id="4_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://d1f8dqsrghkif" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_body_spritesheet.png" id="4_jej6c"]
-[ext_resource type="Texture2D" uid="uid://diq8ou4kw6yqd" path="res://assets/sprites/player/revenant_right_attack_spritesheet.png" id="4_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://pgy0u6a7rjbh" path="res://assets/sprites/player/revenant_front_attack_spritesheet.png" id="4_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/revenant_back_attack_spritesheet.png" id="7_fjrip"]
-[ext_resource type="Texture2D" uid="uid://dmvny51aqsbmm" path="res://assets/sprites/player/attacks/revenant_sword_swing_spritesheet.png" id="8_smehm"]
+[ext_resource type="Texture2D" uid="uid://diq8ou4kw6yqd" path="res://assets/sprites/player/attacks/sword_swing/revenant_right_attack_spritesheet.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://pgy0u6a7rjbh" path="res://assets/sprites/player/attacks/sword_swing/revenant_front_attack_spritesheet.png" id="4_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/attacks/sword_swing/revenant_back_attack_spritesheet.png" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://dmvny51aqsbmm" path="res://assets/sprites/player/attacks/sword_swing/revenant_sword_swing_spritesheet.png" id="8_smehm"]
 [ext_resource type="Script" uid="uid://bdaarxf2dt06e" path="res://scripts/player scripts/sword_swing_hit_box.gd" id="9_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="11_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://d38qe4nhl1jsv" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_arms_spritesheet.png" id="13_f1ej7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua5cf"]
+atlas = ExtResource("3_oprun")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51ujp"]
+atlas = ExtResource("3_oprun")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuw3a"]
+atlas = ExtResource("3_oprun")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk41t"]
+atlas = ExtResource("3_oprun")
+region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
 atlas = ExtResource("2_qhqgy")
@@ -243,6 +260,38 @@ region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yf5mx"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua5cf")
+}],
+"loop": true,
+"name": &"dodge_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51ujp")
+}],
+"loop": true,
+"name": &"dodge_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuw3a")
+}],
+"loop": true,
+"name": &"dodge_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk41t")
+}],
+"loop": true,
+"name": &"dodge_up",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jej6c")
@@ -2058,12 +2107,15 @@ size = Vector2(40, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite")]
+[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider")]
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
 script = ExtResource("1_g2els")
 hand_item_sprite = NodePath("Arms/Node2D/Hand/HandItemSprite")
+dodge_timer = NodePath("DodgeTimer")
+collider = NodePath("CollisionShape2D")
+hurt_box_collider = NodePath("HurtBox/CollisionShape2D")
 
 [node name="AttackManager" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite", "attack_effect_sprite", "sword_hitbox_container")]
 script = ExtResource("2_f1ej7")
@@ -2090,7 +2142,6 @@ debug_color = Color(0.92156863, 0, 0.6862745, 0.13725491)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=864978702]
 sprite_frames = SubResource("SpriteFrames_yf5mx")
 animation = &"down_walk"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=156087631]
 root_node = NodePath("../..")
@@ -2153,7 +2204,11 @@ current = true
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1855752815]
 zoom = Vector2(2.69, 2.69)
 
+[node name="DodgeTimer" type="Timer" parent="." unique_id=1444177253]
+one_shot = true
+
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]
 [connection signal="area_entered" from="SwordSwingHitBox/CircleArea" to="SwordSwingHitBox" method="_on_circle_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/CircleArea" to="SwordSwingHitBox" method="_on_circle_area_area_exited"]
+[connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]

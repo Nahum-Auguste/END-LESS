@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diq8ou4kw6yqd"
-path="res://.godot/imported/revenant_right_attack_spritesheet.png-03b55c97247d9d38ada2151218a5f758.ctex"
+uid="uid://dcdxc4rmyiw4e"
+path="res://.godot/imported/revenant_sword_attack_sprite_sheet_template.png-8b5e86db41f805b1c77a5fee4ec40b71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/revenant_right_attack_spritesheet.png"
-dest_files=["res://.godot/imported/revenant_right_attack_spritesheet.png-03b55c97247d9d38ada2151218a5f758.ctex"]
+source_file="res://assets/sprites/player/attacks/sword_swing/revenant_sword_attack_sprite_sheet_template.png"
+dest_files=["res://.godot/imported/revenant_sword_attack_sprite_sheet_template.png-8b5e86db41f805b1c77a5fee4ec40b71.ctex"]
 
 [params]
 

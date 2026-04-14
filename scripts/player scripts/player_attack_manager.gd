@@ -35,15 +35,7 @@ func set_inventory():
 	if !inventory:
 		inventory = InventoryManager.player_hud.player_inventory
 		
-func get_player_direction()->String:
-	var dir:String
-	var tmp = sprite.animation.to_lower()
-	for s in ["down","left","up","right"]:
-		if s in tmp:
-			dir = s
-			return dir
-			
-	return dir
+
 	
 func turn_off_area_colliders(area:Area2D):
 	var children = area.get_children()
@@ -70,7 +62,7 @@ func do_sword_attack():
 	sprite.pause()
 	
 	
-	var dir = get_player_direction()
+	var dir = player.get_direction()
 	var prefix: String = "sword_swing_" + dir + "_"
 	var animation = prefix
 	if ("down" in prefix) or ("up" in prefix): animation += "left" if "left" not in previous_attack_animation else "right"

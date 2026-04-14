@@ -42,14 +42,16 @@ func follow_target():
 	if !target || !following: return
 	direction = (target.global_position - global_position).normalized()
 
-func _on_hurt_box_body_entered(body):
-	if body is Player:
-		body.inflict_damage(attack_damage)
-	queue_free()
-
 
 func _on_audio_stream_player_2d_finished():
 	queue_free()
 
 func _on_speed_up_timer_timeout():
 	if speed_up: speeding = true
+
+
+func _on_hurt_box_area_entered(area: Area2D):
+	var body = area.owner
+	if body is Player:
+		body.inflict_damage(attack_damage)
+	queue_free()

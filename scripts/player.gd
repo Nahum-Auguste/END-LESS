@@ -23,6 +23,10 @@ var last_attack_animation:String = ""
 @export var hand_item_sprite: Sprite2D
 @onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
 @onready var hurtbox: Area2D = $HurtBox
+@export_range(.05,3,.05) var dodge_duration :float = .35
+@export var dodge_timer: Timer
+@export var collider: CollisionShape2D
+@export var hurt_box_collider: CollisionShape2D
 
 func _init(health:float=0,max_health:float=0) -> void:
 	max_health = 25
@@ -35,6 +39,33 @@ func _ready() -> void:
 	hand_item_sprite.texture = null
 	attack_effect_sprite.visible = false
 	inventory = InventoryManager.player_hud.player_inventory
+	
+func get_direction()->String:
+	var dir:String
+	var tmp = sprite.animation.to_lower()
+	for s in ["down","left","up","right"]:
+		if s in tmp:
+			dir = s
+			return dir
+			
+	return dir	
+	
+func _input(event):
+	if event.is_action_pressed("dodge") and !is_dodging():
+		on_dodge()
+
+		
+func on_dodge():
+	dodge_timer.wait_time = dodge_duration
+	var dir = get_direction()
+	sprite.animation = "dodge_" + dir
+	dodge_timer.start()
+	velocity += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down")) * base_speed * 4.5
+	move_and_slide()
+		
+func is_dodging()->bool:
+	return !dodge_timer.is_stopped()
+
 
 func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	if (global_position-obj.global_position).length()<=range:
@@ -55,6 +86,8 @@ func can_interact_with(obj:Node2D,range:float = 50)->bool:
 	return false
 	
 func _physics_process(delta: float) -> void:
+	
+	hurt_box_collider.disabled = is_dodging()
 	
 	var horizontalMoveInput := Input.get_axis("left", "right")
 	var verticalMoveInput := Input.get_axis("up", "down")
@@ -85,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		movement_velocity.y = move_toward(velocity.y,0,speed)
 		
-	if !attacking:
+	if !attacking and !is_dodging():
 		sprite.play(animation)
 		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
@@ -102,35 +135,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	inventory = InventoryManager.player_hud.player_inventory
-	#print(inventory)
-	#print(inventory)
-	
-	#if inventory:
-		#inventory.player = self
 
-	#if Input.is_action_pressed("attack") and not attacking:
-		#if main_hand_item:
-			#attack()
-		#else:
-			#punch()
-		
-		
-	#load_usable_inventory_items()
-	#print(animation_player.current_animation_position)
-	sword_swing_hitbox.weapon = main_hand_item
-	
-
-#func load_usable_inventory_items():
-	#if not inventory:
-		#return
-	#if main_hand_item != inventory.main_weapon_slot.item:
-		#main_hand_item = inventory.main_weapon_slot.item
-		#if main_hand_item!=null:
-			##main_hand_scene = load(main_hand_item.scene_path)
-			#hand_item_sprite.texture = load(main_hand_item.image_path)
-			##print("loaded weapon scene")
-		#else:
-			#hand_item_sprite.texture = null
 
 
 
@@ -253,3 +258,7 @@ func handle_death():
 	
 
 		
+
+
+func _on_dodge_timer_timeout():
+	sprite.animation = get_direction() + "_" + "walk"

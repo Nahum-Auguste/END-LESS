@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pgy0u6a7rjbh"
-path="res://.godot/imported/revenant_front_attack_spritesheet.png-f0153a0cabe626ce5a7893ff429f19ac.ctex"
+uid="uid://0iawogcy623w"
+path="res://.godot/imported/revenant_dodge_spritesheet.png-84956582ee30bddf728c8cf6085dbb2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/revenant_front_attack_spritesheet.png"
-dest_files=["res://.godot/imported/revenant_front_attack_spritesheet.png-f0153a0cabe626ce5a7893ff429f19ac.ctex"]
+source_file="res://assets/sprites/player/revenant_dodge_spritesheet.png"
+dest_files=["res://.godot/imported/revenant_dodge_spritesheet.png-84956582ee30bddf728c8cf6085dbb2a.ctex"]
 
 [params]
 
