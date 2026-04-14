@@ -16,6 +16,35 @@ radius = 50.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mj2cs"]
 size = Vector2(24.19494, 26)
 
+[sub_resource type="Shader" id="Shader_grfga"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	vec4 color = texture(TEXTURE,UV);
+	if (active) {
+		COLOR = vec4( mix(color.rgb,vec3(1.0,1.0,1.0),.8) ,color.a);
+	} else {
+		COLOR = color;
+	}
+	
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2egk"]
+shader = SubResource("Shader_grfga")
+shader_parameter/active = false
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i8k0"]
 atlas = ExtResource("2_mj2cs")
 region = Rect2(0, 0, 32, 32)
@@ -62,12 +91,14 @@ animations = [{
 [node name="Warlock" type="CharacterBody2D" unique_id=777216955 node_paths=PackedStringArray("fsm")]
 collision_layer = 2
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_s4l7h")
 wander_range = 141.0
 min_teleportation_range = 61.0
 max_teleportation_range = 118.0
 teleport_interval = 3.5
 fsm = NodePath("WarlockFSM")
+eye_frame_duration = 0.25
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
 [node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "teleport_state", "body", "nav_agent", "detection_area")]
@@ -110,6 +141,7 @@ debug_color = Color(0.7591134, 0.16996804, 2.8878452e-07, 0.41568628)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=268806689]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1295009768]
 shape = SubResource("CircleShape2D_s4l7h")
@@ -118,6 +150,7 @@ debug_color = Color(0.7764706, 0.6862745, 0, 0.1764706)
 [node name="TeleportSpotBodyArea" type="Area2D" parent="." unique_id=308405185]
 collision_layer = 0
 collision_mask = 23
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportSpotBodyArea" unique_id=349742675]
 shape = SubResource("RectangleShape2D_mj2cs")
@@ -128,6 +161,7 @@ position = Vector2(0, -1.2570477)
 shape = SubResource("RectangleShape2D_mj2cs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=633032348]
+material = SubResource("ShaderMaterial_i2egk")
 sprite_frames = SubResource("SpriteFrames_xqole")
 animation = &"primed"
 

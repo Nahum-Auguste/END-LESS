@@ -2,6 +2,35 @@
 
 [ext_resource type="Script" uid="uid://dq5wfurwmr5my" path="res://scripts/object scripts/statues/elder_warlock_statue.gd" id="1_oiyn8"]
 [ext_resource type="Texture2D" uid="uid://kqnx8ba80a2b" path="res://assets/sprites/objects/statues/elder warlock/elder_warlock_statue_left.png" id="2_26pqw"]
+[ext_resource type="Texture2D" uid="uid://bkrxltqlt4frt" path="res://assets/sprites/vfx/enemies/warlock/warlock_energy_particles_spritesheet.png" id="3_26pqw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ui0bn"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7h5v3"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 61.39
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+spread = 13.944
+initial_velocity_min = 445.65
+initial_velocity_max = 445.65
+angular_velocity_min = -109.280014
+angular_velocity_max = 719.99994
+radial_velocity_min = 111.10998
+radial_velocity_max = 592.58997
+gravity = Vector3(0, 98, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 5.859
+turbulence_influence_min = 0.19800001
+turbulence_influence_max = 0.19800001
+turbulence_initial_displacement_min = -6.7999988
+turbulence_initial_displacement_max = -6.7999988
 
 [node name="ElderWarlockStatue" type="StaticBody2D" unique_id=985681132]
 script = ExtResource("1_oiyn8")
@@ -22,5 +51,13 @@ polygon = PackedVector2Array(-4, -32, 6, -28, 16, -14, 18, -2, 31, 12, 28, 26, 1
 texture = ExtResource("2_26pqw")
 
 [node name="TeleportSpotArea" type="Area2D" parent="." unique_id=1434678800]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=656084365]
+material = SubResource("CanvasItemMaterial_ui0bn")
+amount = 3
+texture = ExtResource("3_26pqw")
+lifetime = 1.36
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7h5v3")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

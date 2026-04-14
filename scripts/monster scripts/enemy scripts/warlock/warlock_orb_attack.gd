@@ -52,6 +52,8 @@ func _on_speed_up_timer_timeout():
 
 func _on_hurt_box_area_entered(area: Area2D):
 	var body = area.owner
+	#print(area.get_parent())
+
 	if body is Player:
 		body.inflict_damage(attack_damage)
-	queue_free()
+	#queue_free()

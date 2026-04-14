@@ -124,17 +124,19 @@ func get_orb_burst_attack_current_orb_offset_angle():
 func get_orb_burst_attack_current_orb_direction():
 	var a = get_orb_burst_attack_current_orb_offset_angle()
 	var ia = rad_to_deg(orb_burst_attack_initial_direction.angle())
-	print(ia)
+	#print(ia)
 	a += ia + body.orb_burst_attack_cone * -sign(a)
 	return Vector2(cos(deg_to_rad(a)),sin(deg_to_rad(a))).normalized()
 	
 func do_orb_burst_attack():
 	var orb: WarlockOrbAttack = orb_attack_prefab.instantiate()
 	if body is Warlock:
+		if !body.eye_frame_timer.is_stopped():
+			return
 		orb.attack_damage = body.attack_damage
 	orb.direction = get_orb_burst_attack_current_orb_direction()
 	orb.global_position = body.global_position
-	body.get_tree().root.add_child(orb)
+	#body.owner.add_child(orb)
 	attack_orbs_spawned_count += 1
 	
 	

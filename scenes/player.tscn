@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="1_st07s"]
 [ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_manager.gd" id="2_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/attacks/sword_swing/revenant_sword_attack_sprite_sheet_template.png" id="2_qhqgy"]
+[ext_resource type="Shader" uid="uid://bycis4bg71wwx" path="res://assets/shaders/entity_hit.gdshader" id="3_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://0iawogcy623w" path="res://assets/sprites/player/revenant_dodge_spritesheet.png" id="3_oprun"]
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c3ub08y24iikn" path="res://assets/sprites/player/revenant_punching_sprite_sheet.png" id="4_d2wvv"]
@@ -11,12 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://diq8ou4kw6yqd" path="res://assets/sprites/player/attacks/sword_swing/revenant_right_attack_spritesheet.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://pgy0u6a7rjbh" path="res://assets/sprites/player/attacks/sword_swing/revenant_front_attack_spritesheet.png" id="4_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://t0tt81dxwxbr" path="res://assets/sprites/player/attacks/sword_swing/revenant_back_attack_spritesheet.png" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://bc5gpx4jnpv3c" path="res://assets/sprites/player/revenant_hurt_spritesheet.png" id="7_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://jmnk6r6khna5" path="res://assets/sprites/player/revenant_killed_spritesheet.png" id="8_fulsm"]
 [ext_resource type="Texture2D" uid="uid://dmvny51aqsbmm" path="res://assets/sprites/player/attacks/sword_swing/revenant_sword_swing_spritesheet.png" id="8_smehm"]
 [ext_resource type="Script" uid="uid://bdaarxf2dt06e" path="res://scripts/player scripts/sword_swing_hit_box.gd" id="9_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="11_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://d38qe4nhl1jsv" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_arms_spritesheet.png" id="13_f1ej7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfm1y"]
+shader = ExtResource("3_a8ls1")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ua5cf"]
 atlas = ExtResource("3_oprun")
@@ -53,6 +60,38 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_atnxb"]
 atlas = ExtResource("1_st07s")
 region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8txt3"]
+atlas = ExtResource("7_qfm1y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w11d"]
+atlas = ExtResource("7_qfm1y")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_770dr"]
+atlas = ExtResource("7_qfm1y")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f1cb"]
+atlas = ExtResource("7_qfm1y")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdulj"]
+atlas = ExtResource("8_fulsm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vau08"]
+atlas = ExtResource("8_fulsm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsb7e"]
+atlas = ExtResource("8_fulsm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjsmb"]
+atlas = ExtResource("8_fulsm")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("2_qhqgy")
@@ -318,6 +357,70 @@ animations = [{
 }],
 "loop": true,
 "name": &"down_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8txt3")
+}],
+"loop": true,
+"name": &"hurt_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w11d")
+}],
+"loop": true,
+"name": &"hurt_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_770dr")
+}],
+"loop": true,
+"name": &"hurt_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f1cb")
+}],
+"loop": true,
+"name": &"hurt_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdulj")
+}],
+"loop": true,
+"name": &"killed_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vau08")
+}],
+"loop": true,
+"name": &"killed_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsb7e")
+}],
+"loop": true,
+"name": &"killed_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjsmb")
+}],
+"loop": true,
+"name": &"killed_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -2148,6 +2251,7 @@ shape = SubResource("CapsuleShape2D_jej6c")
 debug_color = Color(0.92156863, 0, 0.6862745, 0.13725491)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=864978702]
+material = SubResource("ShaderMaterial_qfm1y")
 sprite_frames = SubResource("SpriteFrames_yf5mx")
 animation = &"down_walk"
 

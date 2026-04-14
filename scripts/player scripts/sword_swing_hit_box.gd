@@ -41,15 +41,13 @@ func _physics_process(delta):
 	
 
 func handle_attack(area:Area2D):
-	print(weapon)
+
 	if !weapon: return
-	#print(area.get_parent())
+
 	var min_knockback_strength = 108
 	var max_knockback_strength = 10000
 	var entity:PhysicsBody2D= area.get_parent()
-	#print(area)
-	#print(entity)
-	#print("Entity attacked: ",entity)
+
 	
 	if entity is Enemy:
 		var knockdir :Vector2 = (entity.global_position - global_position)
@@ -57,10 +55,10 @@ func handle_attack(area:Area2D):
 		var min_abs_knockback = knockdir.abs() * min_knockback_strength
 		var max_abs_knockback = knockdir.abs() * max_knockback_strength
 		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
-		#print(knockback)
+
 		entity.velocity += knockback
 		entity.inflict_damage(weapon.damage)
-		#print(enemy.health," ",enemy.max_health)
+
 	if entity is Chest:
 		entity.on_hit()
 

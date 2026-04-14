@@ -32,9 +32,11 @@ func _init(health:float=30,max_health:float=30) -> void:
 	super._init(health,max_health)
 
 func _ready():
+	
 	super._ready()
 	attack_damage = 1.5
 	sprite = $AnimatedSprite2D
+
 	attack_speed = 1.4
 	player_escape_time = 5
 	detection_area= $DetectionArea
@@ -59,6 +61,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	
 	
 	#fsm.update(delta)
 	

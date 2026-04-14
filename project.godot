@@ -25,6 +25,7 @@ InventoryManager="*uid://bkhc40jsxthe5"
 GroundGuiCanvas="*uid://del2ua8ddsqph"
 PlayerGuiCanvas="*uid://4lh87uosaaxa"
 LayerConstants="*uid://005smirbv4k"
+LevelManager="*uid://dyo2tqdf1ir37"
 
 [debug]
 

@@ -33,12 +33,16 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 
 func _ready() -> void:
-	base_speed= 50.0
+	super._ready()
+	LevelManager.player = self
+	#health = .1
+	base_speed= 4000.0
 	speed = base_speed
 	sprite = $AnimatedSprite2D
 	hand_item_sprite.texture = null
 	attack_effect_sprite.visible = false
 	inventory = InventoryManager.player_hud.player_inventory
+	#eye
 	
 func get_direction()->String:
 	var dir:String
@@ -51,7 +55,7 @@ func get_direction()->String:
 	return dir	
 	
 func _input(event):
-	if event.is_action_pressed("dodge") and !is_dodging() and !attacking:
+	if event.is_action_pressed("dodge") and !is_dodging() and !attacking and eye_frame_timer.is_stopped():
 		on_dodge()
 
 		
@@ -60,7 +64,7 @@ func on_dodge():
 	var dir = get_direction()
 	sprite.animation = "dodge_" + dir
 	dodge_timer.start()
-	velocity += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down")) * base_speed * 4.5
+	velocity += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down")) * 300 * sprint_mult
 	move_and_slide()
 		
 func is_dodging()->bool:
@@ -89,8 +93,8 @@ func _physics_process(delta: float) -> void:
 	
 	hurt_box_collider.disabled = is_dodging()
 	
-	var horizontalMoveInput := Input.get_axis("left", "right")
-	var verticalMoveInput := Input.get_axis("up", "down")
+	var horizontalMoveInput :int= Input.get_axis("left", "right") 
+	var verticalMoveInput :int= Input.get_axis("up", "down")
 	var sprint := Input.is_action_pressed("sprint")
 	
 	speed = base_speed * (sprint_mult if sprint else 1)
@@ -118,15 +122,25 @@ func _physics_process(delta: float) -> void:
 	else:
 		movement_velocity.y = move_toward(velocity.y,0,speed)
 		
-	if !attacking and !is_dodging():
+	if !eye_frame_timer.is_stopped():
+		sprite.pause()
+		
+	if !attacking and !is_dodging() and eye_frame_timer.is_stopped():
 		sprite.play(animation)
 		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
 			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
+			
+	movement_velocity = movement_velocity.normalized() * speed
+	
+	#print(movement_velocity.length())
+		
+	movement_velocity *= .3 if !eye_frame_timer.is_stopped() else 1
 		
 	velocity = movement_velocity + knockback_velocity
+	velocity *= delta
 	
-	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,50)
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,500)
 	#print(knockback_velocity)
 		
 	move_and_slide()
@@ -135,7 +149,9 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	inventory = InventoryManager.player_hud.player_inventory
-
+	if !alive:
+		#print("hi")
+		eye_frame_timer.stop()
 
 
 
@@ -254,11 +270,23 @@ func attack():
 	
 func handle_death():
 	super.handle_death()
-	get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
+	#get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
+	sprite.pause()
+	sprite.animation = "killed_" + get_direction()
+	sprite.material.set_shader_parameter("active",false)
+	process_mode = Node.PROCESS_MODE_DISABLED
+	#queue_free()
 	
 
+func inflict_damage(dmg: float):
+	if is_dodging():
+		return
+	super.inflict_damage(dmg)
+	
+	sprite.animation = "hurt_" + get_direction()
 		
 
 
 func _on_dodge_timer_timeout():
 	sprite.animation = get_direction() + "_" + "walk"
+	

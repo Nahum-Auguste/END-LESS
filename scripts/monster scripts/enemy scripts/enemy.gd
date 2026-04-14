@@ -31,6 +31,7 @@ func _init(health:float=0,max_health:float=0) -> void:
 	
 	
 func _ready():
+	super._ready()
 	#hitbox = get_node("./HitBox")
 	#if (hitbox):
 		#hitbox.connect("mouse_entered",hitbox_hovered)
