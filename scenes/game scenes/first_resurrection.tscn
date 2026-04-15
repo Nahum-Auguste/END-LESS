@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dd53c5gsxd7gy"]
 
 [ext_resource type="TileSet" uid="uid://dp3ety8uq0nfc" path="res://tilesets/new_tile_set.tres" id="1_hh6hw"]
+[ext_resource type="Script" uid="uid://cjjcyslgfjm4a" path="res://scripts/cutscene scripts/first_resurrection.gd" id="1_w0ibr"]
 [ext_resource type="Script" uid="uid://bt5gv82yfwv1e" path="res://scripts/player.gd" id="2_4p3wt"]
 [ext_resource type="Script" uid="uid://ddy7vrwj7tl1l" path="res://scripts/player scripts/player_attack_manager.gd" id="3_uetox"]
 [ext_resource type="Texture2D" uid="uid://cmbj1j337ah7h" path="res://assets/sprites/enemies/necromancer/necromancer_spritesheet.png" id="3_yunid"]
@@ -2275,10 +2276,285 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0ibr"]
+size = Vector2(41.183258, 48.712044)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2ajb"]
 size = Vector2(54, 148)
 
-[node name="Node2D" type="Node2D" unique_id=1033610926]
+[sub_resource type="Animation" id="Animation_w0ibr"]
+resource_name = "1"
+length = 7.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Necro:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Necro:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4, 5.866667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -39), Vector2(82, 0), Vector2(385, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Necro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6.4049015),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4.266667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_animation_finish"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3bbsu"]
+resource_name = "2"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Necro2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36951354),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Necro2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.107596, 4.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 45), Vector2(94, 4), Vector2(197, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../NecroToKill:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3685687, 3.982535),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-53, 4), Vector2(2, 51), Vector2(111, 4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../NecroToKill:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_gv0wa"]
+resource_name = "3"
+length = 3.9666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Necro2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5333333, 3.4333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(197, 3), Vector2(197, 3), Vector2(650, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Necro2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.72534144, 2.5333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 3, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Necro2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"last_step_pause"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_p2tv1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Necro:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Necro:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -39)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Necro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Necro2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Necro2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 45)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../NecroToKill:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-53, 4)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../NecroToKill:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Necro2:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bbsu"]
+_data = {
+&"1": SubResource("Animation_w0ibr"),
+&"2": SubResource("Animation_3bbsu"),
+&"3": SubResource("Animation_gv0wa"),
+&"RESET": SubResource("Animation_p2tv1")
+}
+
+[node name="FirstResurrectionCutscene" type="Node2D" unique_id=1033610926 node_paths=PackedStringArray("animator", "dialogue_box", "necro_to_kill", "wall_collider")]
+script = ExtResource("1_w0ibr")
+animator = NodePath("AnimationPlayer")
+dialogue_box = NodePath("CanvasLayer/DialogueBox")
+necro_to_kill = NodePath("NecroToKill")
+wall_collider = NodePath("InvisibleWall/CollisionShape2D")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=610595448]
 y_sort_enabled = true
@@ -2310,7 +2586,7 @@ scale = Vector2(0.99999994, 0.99999994)
 item = ExtResource("24_5doj3")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider")]
-position = Vector2(0, 12)
+position = Vector2(732, -162)
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
@@ -2412,14 +2688,23 @@ zoom = Vector2(2.69, 2.69)
 [node name="DodgeTimer" type="Timer" parent="Player" unique_id=1444177253]
 one_shot = true
 
-[node name="NecroToKill" type="AnimatedSprite2D" parent="." unique_id=1486624614]
+[node name="Necro" type="AnimatedSprite2D" parent="." unique_id=1486624614]
 position = Vector2(0, -39)
 sprite_frames = SubResource("SpriteFrames_abgne")
 
-[node name="Necro1" type="AnimatedSprite2D" parent="." unique_id=410370810]
+[node name="NecroToKill" type="AnimatedSprite2D" parent="." unique_id=410370810]
 position = Vector2(-53, 4)
 sprite_frames = SubResource("SpriteFrames_abgne")
 frame = 1
+
+[node name="Area2D" type="Area2D" parent="NecroToKill" unique_id=144732645]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NecroToKill/Area2D" unique_id=919177625]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_w0ibr")
+debug_color = Color(0.8211325, 0.34146294, 0.5575657, 0.41960785)
 
 [node name="Necro2" type="AnimatedSprite2D" parent="." unique_id=145564771]
 position = Vector2(0, 45)
@@ -2439,6 +2724,7 @@ target = NodePath("../Player")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=113706247]
 root_node = NodePath("../TileMapLayer")
+libraries/ = SubResource("AnimationLibrary_3bbsu")
 
 [node name="LevelDoor" parent="." unique_id=1277415400 instance=ExtResource("26_s2ajb")]
 position = Vector2(720, -240)
@@ -2447,15 +2733,16 @@ locked = false
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=822296034]
 
 [node name="DialogueBox" parent="CanvasLayer" unique_id=1149130560 instance=ExtResource("27_ycobs")]
-offset_left = 261.5
+visible = false
+offset_left = 161.5
 offset_top = 474.0
-offset_right = 987.5
+offset_right = 887.5
 offset_bottom = 700.0
 paragraphs = Array[String](["Since this soldier is ready now, we should quickly move on to the next batch of candidates to resurrect.", "We need to meet our quota before our next onslaught on the villages in Maqel, or else we'll be the ones needing a resurrection. ", "Any more mishaps with you two will NOT be accepted.", "Before we move on to the next round of bodies, I will need to gather some more supplies for our trip, so you two can wait here until I get back. "])
-base_text_speed = null
 
 [connection signal="area_entered" from="Player/SwordSwingHitBox/RectArea" to="Player/SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="Player/SwordSwingHitBox/RectArea" to="Player/SwordSwingHitBox" method="_on_rect_area_area_exited"]
 [connection signal="area_entered" from="Player/SwordSwingHitBox/CircleArea" to="Player/SwordSwingHitBox" method="_on_circle_area_area_entered"]
 [connection signal="area_exited" from="Player/SwordSwingHitBox/CircleArea" to="Player/SwordSwingHitBox" method="_on_circle_area_area_exited"]
 [connection signal="timeout" from="Player/DodgeTimer" to="Player" method="_on_dodge_timer_timeout"]
+[connection signal="area_entered" from="NecroToKill/Area2D" to="." method="_on_area_2d_area_entered"]

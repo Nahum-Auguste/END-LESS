@@ -52,6 +52,7 @@ size = Vector2(50, 88)
 size = Vector2(30, 40)
 
 [node name="LevelDoor" type="StaticBody2D" unique_id=1277415400]
+z_index = -1
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_fx3ej")

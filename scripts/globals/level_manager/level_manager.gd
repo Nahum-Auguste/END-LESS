@@ -14,6 +14,7 @@ func _ready():
 	layer = 0
 	black_screen.color = Color.BLACK
 	black_screen.set_anchors_preset(Control.PRESET_FULL_RECT)
+	black_screen.visible = false
 	black_screen.modulate.a = 0
 	add_child(black_screen)
 	
@@ -61,6 +62,7 @@ func end_game():
 	game.process_mode = Node.PROCESS_MODE_DISABLED
 	drawer_node.drawing_dead_player = true
 	var tween = create_tween()
+	black_screen.visible = true
 	tween.tween_property(black_screen, "modulate:a", 1.0, 5)
 	var t2 = create_tween()
 	t2.tween_property(drawer_node,"dead_player_texture_opacity",1,6)
