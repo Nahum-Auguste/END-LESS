@@ -40,7 +40,9 @@ func _ready():
 	attack_speed = 1.4
 	player_escape_time = 5
 	detection_area= $DetectionArea
-	speed = 3000
+	
+	base_speed = 3000
+	speed = base_speed
 	
 	detection_ray = RayCast2D.new()
 	detection_ray.enabled = true
@@ -70,6 +72,7 @@ func _process(delta: float) -> void:
 	
 	detection_shape.radius = detection_range
 	
+	
 	#if player_seen:
 		#sprite.speed_scale = 1
 		#if sprite.frame==0:
@@ -90,9 +93,14 @@ func _physics_process(delta):
 		detection_ray.target_position = Vector2.ZERO
 		
 	if !nav_agent.is_navigation_finished():
-		velocity = (nav_agent.get_next_path_position() - global_position).normalized() * abs(cos(deg_to_rad(speed_angle))) * speed * delta
+		movement_velocity = (nav_agent.get_next_path_position() - global_position).normalized() * abs(cos(deg_to_rad(speed_angle))) * speed
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO,30)
+		movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed)
+		
+	velocity = movement_velocity + knockback_velocity
+	velocity *= delta
+	
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,1500)
 	
 	move_and_slide()
 

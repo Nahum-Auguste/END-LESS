@@ -12,8 +12,8 @@ func _ready():
 
 func enter():
 	if body is GiantSpider:
-		if body.player:
-			nav_agent.target_position = body.player.global_position
+		if InventoryManager.player:
+			nav_agent.target_position = InventoryManager.player.global_position
 		body.detection_range = body.attack_detection_range
 		body.speed = body.base_speed * body.sprint_mult
 		body.sprite.speed_scale = body.sprint_mult
@@ -27,24 +27,27 @@ func enter():
 func attack():
 	#print("attack")
 	if body is GiantSpider:
-		if body.player:
-			var dir = body.hitbox.global_position.direction_to(body.player.global_position)
-			var knockback_strength = 170
+		if InventoryManager.player:
+			var dir = body.hitbox.global_position.direction_to(InventoryManager.player.global_position)
+			var knockback_strength = 11470 if body.is_mother else 100
+			print(body.is_mother)
+			#print(knockback_strength)
 			var knockback = dir * knockback_strength
-			body.player.knockback_velocity += knockback
-			body.player.inflict_damage(body.attack_damage)
+			InventoryManager.player.knockback_velocity += knockback
+			InventoryManager.player.inflict_damage(body.attack_damage if body.is_mother else .4)
 			
 func update(delta):
 	if body is GiantSpider:
-		if attack_timer.is_stopped() and body.player and body.player.hurtbox in body.hitbox.get_overlapping_areas():
+		
+		if attack_timer.is_stopped() and InventoryManager.player and InventoryManager.player.hurtbox in body.hitbox.get_overlapping_areas():
 			attack()
 			attack_timer.start()
 	
 func physics_update(delta):
 	if body is GiantSpider:
 		body.detection_range = body.attack_detection_range
-		if body.is_player_in_detection_area() and !body.is_detection_ray_blocked():
-			nav_agent.target_position = body.player.global_position
+		#if body.is_player_in_detection_area() and !body.is_detection_ray_blocked():
+			#nav_agent.target_position = InventoryManager.player.global_position
 	
 	
 func exit():

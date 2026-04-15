@@ -52,9 +52,6 @@ visible = false
 modulate = Color(1, 1, 1, 0.45490196)
 texture = SubResource("NoiseTexture2D_5w47u")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=971013763]
-zoom = Vector2(2.4, 2.4)
-
 [node name="RayCastChecker" parent="." unique_id=950979621 instance=ExtResource("4_jm2bc")]
 
 [connection signal="mouse_entered" from="MouseDetectionArea" to="." method="_on_mouse_detection_area_mouse_entered"]

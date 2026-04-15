@@ -9,7 +9,8 @@ var nav_agent: NavigationAgent2D
 func _ready():
 	if fsm:
 		body = fsm.body
-	nav_agent = fsm.nav_agent
+		print(body)
+		nav_agent = fsm.nav_agent
 
 func enter():
 	pass

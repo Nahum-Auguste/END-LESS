@@ -1,7 +1,7 @@
 
 class_name WarlockOrbAttack extends AnimatedSprite2D
 
-var base_speed:float = .7
+var base_speed:float = 100
 @onready var speed:float = base_speed
 var attack_damage = 4
 @export var direction:Vector2 = Vector2.ZERO
@@ -12,6 +12,7 @@ var following: bool = false
 var follow_time = 1
 var rotate_speed = 0
 var speed_mult = 1.01
+@export var life_timer: Timer
 
 func _ready() -> void:
 	if following:
@@ -27,9 +28,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	modulate.a = life_timer.time_left/life_timer.wait_time
+	attack_damage = life_timer.time_left/life_timer.wait_time if life_timer.time_left/life_timer.wait_time > .5 else 0
+	if attack_damage == 0:
+		$HurtBox/CollisionShape2D.disabled = true
+
 	if following:
 		follow_target()
-	global_position += direction * speed
+	
 	
 	rotation += deg_to_rad(rotate_speed)
 	
@@ -37,6 +43,8 @@ func _process(delta):
 		speed = clamp(speed*speed_mult,0,30)
 		rotation += deg_to_rad(10)
 		$AudioStreamPlayer2D.pitch_scale = base_speed/speed
+		
+	global_position += direction * speed * delta
 
 func follow_target():
 	if !target || !following: return
@@ -57,3 +65,7 @@ func _on_hurt_box_area_entered(area: Area2D):
 	if body is Player:
 		body.inflict_damage(attack_damage)
 	#queue_free()
+
+
+func _on_life_timer_timeout():
+	queue_free()

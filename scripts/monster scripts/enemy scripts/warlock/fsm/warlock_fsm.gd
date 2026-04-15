@@ -1,37 +1,54 @@
+@tool
 class_name WarlockFSM extends FSM
 
 #@export var attack_state: WarlockAttackState = WarlockAttackState.new(self)
 @export var wander_state: WanderState
 @export var attack_state: AttackState
 @export var teleport_state: TeleportState
+@export var ray_checker: RayCastChecker
+
+@export_range(0,400,1) var base_detection_range :float = 100
+@export_range(0,400,1) var max_detection_range :float = 150
+var detection_range :float
 
 
 var warlock: Warlock
 
 func _ready():
 	super._ready()
+	ray_checker.target = InventoryManager.player
+	detection_range = base_detection_range
+	warlock = body
 	wander_state.fsm = self
+	
 	
 	if !current_state:
 		enter_state(wander_state)
+		
+func _process(delta):
+	detection_range = base_detection_range if current_state==wander_state else max_detection_range
+	ray_checker.max_range = detection_range
 	
 func physics_update(delta):
 	super.physics_update(delta)
 	
+	#print(is_player_detected())
+	
 	if current_state != teleport_state:
-		if body.is_player_in_detection_range() and !body.is_detection_ray_blocked():
+		if is_player_detected():
 			enter_state(attack_state)
-		else:
+		elif nav_agent.is_navigation_finished():
 			enter_state(wander_state)
-	
-	
-	#print(current_state)
-	
+			
+		
+func is_player_detected():
+	return ray_checker.colliding		
+		
+func draw():
+	super.draw()
+			
 
-	#if parent.is_player_in_detection_range() and !parent.is_detection_ray_blocked():
-		#enter_state(attack_state)
-	#else:
-		#enter_state(wander_state)
+	
 		
 	
 	

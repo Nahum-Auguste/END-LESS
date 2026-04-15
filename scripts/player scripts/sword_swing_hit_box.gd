@@ -44,8 +44,8 @@ func handle_attack(area:Area2D):
 
 	if !weapon: return
 
-	var min_knockback_strength = 108
-	var max_knockback_strength = 10000
+	var min_knockback_strength = 9008
+	var max_knockback_strength = 100000
 	var entity:PhysicsBody2D= area.get_parent()
 
 	
@@ -54,9 +54,9 @@ func handle_attack(area:Area2D):
 		knockdir = knockdir.normalized()
 		var min_abs_knockback = knockdir.abs() * min_knockback_strength
 		var max_abs_knockback = knockdir.abs() * max_knockback_strength
-		var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
-
-		entity.velocity += knockback
+		#var knockback: Vector2 =  Vector2(clamp(0,min_abs_knockback.x,max_abs_knockback.x)*sign(knockdir.x),clamp(0,min_abs_knockback.y,max_abs_knockback.y)*sign(knockdir.y))
+		var knockback = knockdir * min_knockback_strength
+		entity.knockback_velocity += knockback
 		entity.inflict_damage(weapon.damage)
 
 	if entity is Chest:

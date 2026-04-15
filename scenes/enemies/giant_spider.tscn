@@ -1,19 +1,25 @@
 [gd_scene format=3 uid="uid://dilt05yq14axw"]
 
+[ext_resource type="Shader" uid="uid://bycis4bg71wwx" path="res://assets/shaders/entity_hit.gdshader" id="1_1gcji"]
 [ext_resource type="Script" uid="uid://dqp2ilnxvqya7" path="res://scripts/monster scripts/enemy scripts/giant spider/giant_spider.gd" id="1_j3pyh"]
 [ext_resource type="Texture2D" uid="uid://7ymbwacpcpmr" path="res://assets/sprites/enemies/giant_spider/giant_spider_spritesheet.png" id="2_j3pyh"]
 [ext_resource type="Script" uid="uid://bcnbrnhwnfq7x" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_fsm.gd" id="2_rk4hc"]
 [ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="2_svrsm"]
 [ext_resource type="Script" uid="uid://cy0ejmea03wwo" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_attack_state.gd" id="4_8wk86"]
+[ext_resource type="PackedScene" uid="uid://4jxucksd3mvr" path="res://scenes/utility/ray_cast_checker.tscn" id="5_56y82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
 size = Vector2(32, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3pyh"]
-size = Vector2(24, 15)
+size = Vector2(14, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_svrsm"]
 radius = 96.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gcji"]
+shader = ExtResource("1_1gcji")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svrsm"]
 atlas = ExtResource("2_j3pyh")
@@ -57,16 +63,18 @@ radius = 9.0
 [node name="GiantSpider" type="CharacterBody2D" unique_id=147954774 node_paths=PackedStringArray("fsm")]
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
 platform_floor_layers = 0
 script = ExtResource("1_j3pyh")
 base_detection_range = 96.0
 attack_detection_range = 163.0
 fsm = NodePath("GiantSpiderFSM")
 
-[node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "body", "nav_agent", "detection_area")]
+[node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "ray_checker", "body", "nav_agent", "detection_area")]
 script = ExtResource("2_rk4hc")
 wander_state = NodePath("WanderState")
 attack_state = NodePath("GiantSpiderAttackState")
+ray_checker = NodePath("../RayCastChecker")
 body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent2D")
 detection_area = NodePath("../DetectionArea")
@@ -74,6 +82,7 @@ metadata/_custom_type_script = "uid://bcnbrnhwnfq7x"
 
 [node name="WanderState" type="Node" parent="GiantSpiderFSM" unique_id=849795966 node_paths=PackedStringArray("fsm")]
 script = ExtResource("2_svrsm")
+min_wander_range = 73.0
 max_wander_range = 143.0
 min_wander_interval = 2.75
 max_wander_interval = 6.5
@@ -83,6 +92,10 @@ fsm = NodePath("..")
 script = ExtResource("4_8wk86")
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://cy0ejmea03wwo"
+
+[node name="RayCastChecker" parent="." unique_id=950979621 instance=ExtResource("5_56y82")]
+max_range = 104
+check_other_bodies = true
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1639478681]
 collision_layer = 2
@@ -96,7 +109,7 @@ debug_color = Color(0.99357957, 0, 0.26555803, 0.18039216)
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=143155321]
-position = Vector2(0, 11.5)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_j3pyh")
 debug_color = Color(1, 0.09411765, 0.23137255, 0.5294118)
 
@@ -108,6 +121,7 @@ shape = SubResource("CircleShape2D_svrsm")
 debug_color = Color(0.531573, 0.5491353, 0.44196907, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1032049861]
+material = SubResource("ShaderMaterial_1gcji")
 sprite_frames = SubResource("SpriteFrames_svrsm")
 animation = &"walk"
 
@@ -117,11 +131,13 @@ shape = SubResource("CircleShape2D_j3pyh")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1899232312]
 target_position = Vector2(56.44943, -78.05417)
-path_desired_distance = 3.0
-target_desired_distance = 3.0
-path_postprocessing = 1
+path_desired_distance = 10.0
+path_max_distance = 200.0
+path_postprocessing = 2
 avoidance_enabled = true
 debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.36078432, 1, 1)
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

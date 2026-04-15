@@ -13,23 +13,29 @@ var orb_spawn_timer: Timer = Timer.new()
 var orb_burst_attack_orb_spawn_interval :float = .04
 var attack_orbs_spawned_count = 0
 var orb_burst_starting_angle = 0
-var orb_burst_attack_max_orb_count = 8
+var orb_burst_attack_max_orb_count = 4
 var orb_burst_attack_initial_direction: Vector2 = Vector2.ZERO
 var orb_attack_prefab = preload("res://scenes/enemies/warlock/warlock_orb_attack.tscn")
 
 func enter():
 	body = fsm.body
-	player = body.player
+	player = InventoryManager.player
+	body.speed = body.base_speed 
 	#print("attack state entered")
+	
+	if !player: exit()
 	
 	body.sprite.play()
 	
-	body.nav_agent.target_position = body.global_position
+	#body.nav_agent.target_position = body.global_position
 	
 	setup_timer(tp_timer,body.teleport_interval,true)
 	setup_timer(orb_spawn_timer,orb_burst_attack_orb_spawn_interval,false)
 	setup_timer(attack_timer,2,true)
+	attack_timer.start()
+	tp_timer.start()
 	#print(orb_spawn_timer.wait_time)
+	
 	
 	orb_burst_attack_initial_direction = (player.global_position - body.global_position).normalized()
 		
@@ -40,12 +46,14 @@ func exit():
 	
 	release_timer(tp_timer)
 	release_timer(orb_spawn_timer)
+	release_timer(attack_timer)
 		
 	body.detection_range = body.base_detection_range
 	
 	body.sprite.speed_scale = -1
 	body.sprite.play()
 	await body.sprite.animation_finished
+	body.speed = body.base_speed
 	body.sprite.speed_scale = 1
 	
 func setup_timer(timer:Timer, wait_time: float, start: bool):
@@ -61,9 +69,13 @@ func setup_timer(timer:Timer, wait_time: float, start: bool):
 func release_timer(timer:Timer):
 	if timer.get_parent() == body:
 		body.remove_child(timer)
+		
+
 	
 func update(delta):
-	player = body.player
+	
+	body.nav_agent.target_position = player.global_position
+	
 	
 	if attack_orbs_spawned_count >= orb_burst_attack_max_orb_count:
 		attack_orbs_spawned_count = 0
@@ -93,16 +105,15 @@ func physics_update(delta):
 		teleport()
 		tp_timer.start()
 
-func draw():
-	body.draw_line(Vector2.ZERO,(get_orb_burst_attack_current_orb_direction())*50,Color.YELLOW,1)
-	body.draw_line(Vector2.ZERO,orb_burst_attack_initial_direction*50,Color.WHITE,1)
+
 
 func teleport():
-	
-	if !body.is_teleport_spot_body_area_colliding():
-		body.global_position = body.teleport_spot_body_area.global_position
-		#print("teleported")
-		body.teleport_spot_body_area.global_position = get_new_teleport_position()
+	if fsm is WarlockFSM:
+		fsm.enter_state(fsm.teleport_state)
+	#if !body.is_teleport_spot_body_area_colliding():
+		#body.global_position = body.teleport_spot_body_area.global_position
+		##print("teleported")
+		#body.teleport_spot_body_area.global_position = get_new_teleport_position()
 
 func get_new_teleport_position()->Vector2:
 	
@@ -135,8 +146,11 @@ func do_orb_burst_attack():
 			return
 		orb.attack_damage = body.attack_damage
 	orb.direction = get_orb_burst_attack_current_orb_direction()
+	#orb.speed = 300
+	orb.speed_up = true
+	orb.speed_scale = .9
 	orb.global_position = body.global_position
-	#body.owner.add_child(orb)
+	body.get_parent().add_child(orb)
 	attack_orbs_spawned_count += 1
 	
 	

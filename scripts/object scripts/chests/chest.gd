@@ -2,6 +2,7 @@ class_name Chest extends StaticBody2D
 @onready var sprite:AnimatedSprite2D = $Sprite
 var open:bool = false
 @export var player: Player
+@export var interactable_overlay: Sprite2D
 var player_detection_range = 50
 const inventory_scene = preload("res://scenes/ui/inventory/chest_inventory.tscn")
 var inventory: ChestInventory
@@ -45,6 +46,7 @@ func _physics_process(delta):
 	
 	if open and player and (player.global_position - global_position).length()<=player_detection_range:
 		can_display_inventory = true
+
 		#print("within range")
 		if !ray:
 			ray = RayCast2D.new()
@@ -65,6 +67,8 @@ func _physics_process(delta):
 		can_display_inventory = false
 		if ray:
 			ray.queue_free()
+			
+	interactable_overlay.visible = can_display_inventory
 		
 	#print(can_display_inventory)
 		
@@ -135,6 +139,9 @@ func _input(event):
 				display_inventory()
 			elif player and !player.inventory.is_mouse_hovered:
 				close_inventory()
+	if event.is_action_pressed("interact") and can_display_inventory and !inventory.visible:
+		display_inventory()
+	
 
 	
 func create_inventory():

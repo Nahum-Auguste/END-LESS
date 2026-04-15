@@ -9,6 +9,8 @@ class_name TeleportState extends State
 var teleport_anchor: Monster
 @export_range(0,1000,1) var min_teleport_range: float = 75
 @export_range(0,1000,1) var max_teleport_range: float = 200
+var timer: Timer = Timer.new()
+@export_range(0.1,10,.25) var wait_time: float = 1
 
 func _ready():
 	super._ready()
@@ -17,7 +19,13 @@ func _ready():
 	body_area_copy.set_collision_mask_value(LayerConstants.EnemyLayer,true)
 	body_area_copy.set_collision_mask_value(LayerConstants.PlayerLayer,true)
 	
+	timer.wait_time = wait_time
+	timer.one_shot = true
+	timer.autostart = false
+	add_child(timer)
+	
 	set_area_copy_collider()
+	#print(fsm)
 	body.add_child.call_deferred(body_area_copy)
 	
 func set_area_copy_collider():
@@ -27,28 +35,43 @@ func set_area_copy_collider():
 		body_area_copy.add_child(real_collider_polygon.duplicate())
 
 func enter():
+	super.enter()
 	nav_agent.target_position = body.global_position
 	if teleport_origin_type == "player" and body.player:
-		teleport_anchor = body.player
+		teleport_anchor = InventoryManager.player
+	timer.start()
+	await timer.timeout 
+	teleport()
 		
+func exit():
+	timer.stop()
+	super.exit()
+	
 
 		
 func update(delta):
-	teleport()
+	#print(timer.time_left)
+	#teleport()
 	#print(teleport_anchor)
 	if teleport_origin_type == "self":
 		teleport_anchor = body
-	elif teleport_origin_type == "player" and body.player:
-		teleport_anchor = body.player
+	elif teleport_origin_type == "player":
+		teleport_anchor = InventoryManager.player
 		
 func physics_update(delta):
 	
 	if is_copy_area_colliding():
 		body_area_copy.global_position = get_random_teleport_spot()
 		
+	if teleport_origin_type == "player":
+		teleport_anchor = InventoryManager.player
+		
 	if teleport_anchor:
+		#print("hi")
 		var dist = body_area_copy.global_position.distance_to(teleport_anchor.global_position)
+		#print(dist)
 		if dist < min_teleport_range or dist > max_teleport_range:
+			#print("new spot")
 			body_area_copy.global_position = get_random_teleport_spot()
 	else:
 		teleport_anchor = body

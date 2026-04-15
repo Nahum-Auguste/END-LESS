@@ -18,11 +18,26 @@
 [ext_resource type="AudioStream" uid="uid://c26bn44vy0q0d" path="res://assets/sfx/sword/slash2.wav" id="16_6blhq"]
 [ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="17_wvf3s"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="18_k0dhc"]
-[ext_resource type="PackedScene" uid="uid://m3bj7e5v3b3j" path="res://scenes/enemies/bat_swarm.tscn" id="19_6blhq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdv1v"]
 vertices = PackedVector2Array(234, -86, 266, -10, 214, -10, -150, -22, 54, -86, 150, 138, 266, 138, 374, 214, -150, 214, -150, 150, 374, -214, 22, -214, 22, -118, -150, -106, -214, -118, -214, -202, -342, -214, -298, -202, -298, -170, -330, -170, -342, 214, -330, -86, 54, -118, 234, -202, 106, -202, 106, -214, -266, -106, -278, -118, -278, -86, -266, -74, -298, -74, -182, 118, -214, 10, -214, -22, 150, -10, 214, 22, 202, 22, 202, -10, -182, 150, -330, 202, -234, 202, -234, 214, -330, 118, -298, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 7, 6, 1), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 11, 15, 17), PackedInt32Array(17, 18, 19, 16), PackedInt32Array(20, 16, 19, 21), PackedInt32Array(12, 22, 4, 3, 13), PackedInt32Array(23, 24, 25, 10), PackedInt32Array(23, 10, 1, 0), PackedInt32Array(14, 13, 26, 27), PackedInt32Array(28, 27, 26, 29), PackedInt32Array(28, 29, 30, 21), PackedInt32Array(5, 9, 31, 32, 33, 3, 34), PackedInt32Array(2, 35, 36, 37), PackedInt32Array(3, 2, 37), PackedInt32Array(3, 37, 34), PackedInt32Array(9, 38, 31), PackedInt32Array(39, 40, 41, 20), PackedInt32Array(32, 31, 42, 43), PackedInt32Array(21, 30, 43, 42), PackedInt32Array(42, 39, 20), PackedInt32Array(42, 20, 21)])
+
+[sub_resource type="Resource" id="Resource_k0dhc"]
+script = ExtResource("9_1crd7")
+status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
+name = "dense calcium infusion"
+texture = ExtResource("13_k0dhc")
+max_stack_count = 3
+stack_count = 2
+
+[sub_resource type="Resource" id="Resource_6blhq"]
+script = ExtResource("9_1crd7")
+status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
+name = "dense calcium infusion"
+texture = ExtResource("13_k0dhc")
+max_stack_count = 3
+stack_count = 2
 
 [sub_resource type="Resource" id="Resource_wvf3s"]
 script = ExtResource("9_1crd7")
@@ -57,22 +72,6 @@ max_stack_count = 3
 stack_count = 2
 
 [sub_resource type="Resource" id="Resource_sxrv1"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_ff1sh"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_7idy4"]
 script = ExtResource("14_a4txv")
 range = 7.0
 damage = 4.0
@@ -104,9 +103,8 @@ tile_set = ExtResource("2_lht80")
 navigation_enabled = false
 
 [node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_m6wgr")]
-position = Vector2(315, 34)
+position = Vector2(-34, -243)
 orb_burst_attack_cone = 95.0
-eye_frame_duration = 0.15
 
 [node name="BasicChest" parent="." unique_id=1341061286 instance=ExtResource("6_3u6m8")]
 position = Vector2(-176, 142)
@@ -116,35 +114,32 @@ max_items = 8.0
 
 [node name="ItemDrop" parent="ItemDrops" unique_id=1852501480 instance=ExtResource("8_wlx7i")]
 position = Vector2(-104, 141)
-item = SubResource("Resource_wvf3s")
+item = SubResource("Resource_k0dhc")
 
 [node name="ItemDrop3" parent="ItemDrops" unique_id=436886291 instance=ExtResource("8_wlx7i")]
 position = Vector2(-93, 125)
-item = SubResource("Resource_irmdm")
+item = SubResource("Resource_6blhq")
 
 [node name="ItemDrop4" parent="ItemDrops" unique_id=341032595 instance=ExtResource("8_wlx7i")]
 position = Vector2(-128, 128)
-item = SubResource("Resource_88vtx")
+item = SubResource("Resource_wvf3s")
 
 [node name="ItemDrop5" parent="ItemDrops" unique_id=451056324 instance=ExtResource("8_wlx7i")]
 position = Vector2(-116, 110)
-item = SubResource("Resource_i7xa1")
+item = SubResource("Resource_irmdm")
 
 [node name="ItemDrop6" parent="ItemDrops" unique_id=54053548 instance=ExtResource("8_wlx7i")]
 position = Vector2(-79, 133)
-item = SubResource("Resource_sxrv1")
+item = SubResource("Resource_88vtx")
 
 [node name="ItemDrop7" parent="ItemDrops" unique_id=1802527532 instance=ExtResource("8_wlx7i")]
 position = Vector2(-88, 104)
-item = SubResource("Resource_ff1sh")
+item = SubResource("Resource_i7xa1")
 
 [node name="ItemDrop2" parent="ItemDrops" unique_id=1291563243 instance=ExtResource("8_wlx7i")]
 position = Vector2(-83, 158)
 rotation = 1.8678042
-item = SubResource("Resource_7idy4")
+item = SubResource("Resource_sxrv1")
 
 [node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("18_k0dhc")]
-position = Vector2(-141, -181)
-
-[node name="BatSwarm" parent="." unique_id=1469739853 instance=ExtResource("19_6blhq")]
-position = Vector2(-111, 62)
+position = Vector2(-15, -12)

@@ -55,16 +55,19 @@ func do_clone_spell():
 	
 	clone.real_warlock = real_warlock
 	real_warlock.max_health = real_warlock.health
+	clone.base_speed = real_warlock.base_speed/2
 	#print(real_warlock.max_clones)
 	#clone.set_collision_layer_value(LayerConstants.EnemyLayer,false)
 	#clone.set_collision_mask_value(LayerConstants.EnemyLayer,false)
 	#clone.set_collision_mask_value(LayerConstants.PlayerLayer,false)
 	clone.max_health = real_warlock.max_health/7.0
 	clone.orb_damage = real_warlock.orb_damage/7.0
+	#clone.col
+	clone.orb_speed = 50
 	clone.pool_attack_damage = real_warlock.pool_attack_damage/7.0
 	clone.health = clone.max_health
 	real_warlock.clones.push_back(clone)
-	real_warlock.get_tree().root.add_child(clone)
+	real_warlock.get_parent().add_child(clone)
 	clone.global_position = real_warlock.global_position
 	clone.fsm.player = real_warlock.player
 	clone.player = real_warlock.player
@@ -94,7 +97,7 @@ func spawn_orb_pool():
 	var pos: Vector2 = global_position + Vector2(0,40)
 	pool.damage = body.pool_attack_damage
 	var player: Player = body.player
-	if player:
+	if player and player.sprite and player.sprite.sprite_frames.get_frame_texture(player.sprite.animation,player.sprite.frame):
 		pos = player.global_position + player.scale * Vector2(0,player.sprite.sprite_frames.get_frame_texture(player.sprite.animation,player.sprite.frame).get_height()/2)
 	get_tree().root.add_child(pool);
 	pool.global_position = pos
@@ -123,6 +126,7 @@ func spawn_orb_attack():
 	orb.follow_time = body.orb_follow_time
 	orb.target = body.player
 	orb.attack_damage = body.orb_damage
+	
 	
 	orb.base_speed = body.orb_speed
 	orb.speed_up = true

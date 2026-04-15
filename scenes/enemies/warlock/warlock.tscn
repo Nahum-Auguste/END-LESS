@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_47hsy"]
 [ext_resource type="Script" uid="uid://bjivga5mf183i" path="res://scripts/monster scripts/enemy scripts/warlock/fsm/warlock_attack_state.gd" id="4_hcf2u"]
 [ext_resource type="Script" uid="uid://dreskkqtrnwdj" path="res://scripts/finite state machine scripts/common states/teleport.gd" id="5_grfga"]
+[ext_resource type="PackedScene" uid="uid://4jxucksd3mvr" path="res://scenes/utility/ray_cast_checker.tscn" id="6_vrd2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4l7h"]
 size = Vector2(34, 34)
@@ -96,16 +97,20 @@ script = ExtResource("1_s4l7h")
 wander_range = 141.0
 min_teleportation_range = 61.0
 max_teleportation_range = 118.0
-teleport_interval = 3.5
+teleport_interval = 4.0
+orb_burst_attack_cone = 170.0
 fsm = NodePath("WarlockFSM")
 eye_frame_duration = 0.25
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
 
-[node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "teleport_state", "body", "nav_agent", "detection_area")]
+[node name="WarlockFSM" type="Node" parent="." unique_id=752345524 node_paths=PackedStringArray("wander_state", "attack_state", "teleport_state", "ray_checker", "body", "nav_agent", "detection_area")]
 script = ExtResource("2_acp8c")
 wander_state = NodePath("WanderState")
 attack_state = NodePath("WarlockAttackState")
 teleport_state = NodePath("TeleportState")
+ray_checker = NodePath("../RayCastChecker")
+base_detection_range = 75.0
+max_detection_range = 265.0
 body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent2D")
 detection_area = NodePath("../DetectionArea")
@@ -127,9 +132,14 @@ metadata/_custom_type_script = "uid://bjivga5mf183i"
 [node name="TeleportState" type="Node" parent="WarlockFSM" unique_id=99548046 node_paths=PackedStringArray("real_collider_shape", "fsm")]
 script = ExtResource("5_grfga")
 real_collider_shape = NodePath("../../CollisionShape2D")
-max_teleport_range = 143.0
+min_teleport_range = 81.0
+max_teleport_range = 103.0
+wait_time = 0.6
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://dreskkqtrnwdj"
+
+[node name="RayCastChecker" parent="." unique_id=950979621 instance=ExtResource("6_vrd2l")]
+max_range = 75.0
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=665940647]
 collision_layer = 2
@@ -148,6 +158,7 @@ shape = SubResource("CircleShape2D_s4l7h")
 debug_color = Color(0.7764706, 0.6862745, 0, 0.1764706)
 
 [node name="TeleportSpotBodyArea" type="Area2D" parent="." unique_id=308405185]
+visible = false
 collision_layer = 0
 collision_mask = 23
 monitorable = false

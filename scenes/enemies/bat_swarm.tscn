@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c6axqw3skm5db" path="res://assets/sprites/enemies/bat_swarm/bat_swarm_spritesheet.png" id="2_kluhc"]
 [ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_3r6ku"]
 [ext_resource type="Script" uid="uid://ccv1dt2r6y52h" path="res://scripts/monster scripts/enemy scripts/bat swarm/finite state machine/bat_swarm_attack_state.gd" id="4_m05pn"]
+[ext_resource type="Shader" uid="uid://bycis4bg71wwx" path="res://assets/shaders/entity_hit.gdshader" id="5_3r6ku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_somum"]
 radius = 100.0
@@ -17,6 +18,10 @@ radius = 11.045361
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2deps"]
 radius = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m05pn"]
+shader = ExtResource("5_3r6ku")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bni26"]
 atlas = ExtResource("2_kluhc")
@@ -220,6 +225,7 @@ debug_color = Color(0.7591134, 0.16996804, 2.8878452e-07, 0.41568628)
 shape = SubResource("CircleShape2D_2deps")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=193403651]
+material = SubResource("ShaderMaterial_m05pn")
 sprite_frames = SubResource("SpriteFrames_7nik6")
 autoplay = "default"
 frame = 19

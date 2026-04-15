@@ -12,6 +12,8 @@ func _ready():
 	tp_timer.autostart = false
 	tp_timer.wait_time = teleport_speed
 	tp_timer.timeout.connect(teleport)
+	timer.wait_time = 4
+	timer.stop()
 	
 func exit():
 	tp_timer.stop()

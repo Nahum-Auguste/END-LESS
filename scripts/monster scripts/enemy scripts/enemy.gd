@@ -126,6 +126,7 @@ func _draw():
 		#draw_line(corpse_detection_ray.position,corpse_detection_ray.target_position,Color.BLUE_VIOLET,2)
 
 func _physics_process(delta):
+	#super._physics_process(detla)
 	if fsm:
 		fsm.physics_update(delta)
 	if corpse_detection_ray:

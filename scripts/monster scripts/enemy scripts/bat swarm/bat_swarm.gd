@@ -83,9 +83,16 @@ func _physics_process(delta):
 	super._physics_process(delta)
 	#fsm.physics_update(delta)
 	if !nav_agent.is_navigation_finished():
-		velocity = (nav_agent.get_next_path_position() - global_position).normalized() * speed * delta
+		movement_velocity = (nav_agent.get_next_path_position() - global_position).normalized() * speed 
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO,30)
+		movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed)
+	
+	
+	
+	velocity = movement_velocity + knockback_velocity 
+	velocity *= delta
+	
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,200)
 	
 	move_and_slide()
 	

@@ -21,10 +21,11 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eklif"]
 
-[node name="WarlockOrbAttack" type="AnimatedSprite2D" unique_id=1295167047]
+[node name="WarlockOrbAttack" type="AnimatedSprite2D" unique_id=1295167047 node_paths=PackedStringArray("life_timer")]
 scale = Vector2(0.615, 0.615)
 sprite_frames = SubResource("SpriteFrames_tesvw")
 script = ExtResource("2_h56ha")
+life_timer = NodePath("LifeTimer")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1170333245]
 collision_layer = 8
@@ -43,7 +44,12 @@ pitch_scale = 0.2
 one_shot = true
 autostart = true
 
+[node name="LifeTimer" type="Timer" parent="." unique_id=1227858080]
+wait_time = 6.925000000000001
+autostart = true
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="timeout" from="SpeedUpTimer" to="." method="_on_speed_up_timer_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

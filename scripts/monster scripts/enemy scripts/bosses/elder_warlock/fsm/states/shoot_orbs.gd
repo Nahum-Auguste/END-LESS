@@ -3,7 +3,7 @@ extends ElderWarlockAttackState
 
 var min_orb_mag_size = 3
 var max_orb_mag_size = 10
-var orb_mag_size = 5
+var orb_mag_size = 0
 @onready var reload_timer: Timer = $ReloadTimer
 @onready var shoot_interval_timer: Timer = $ShootIntervalTimer
 

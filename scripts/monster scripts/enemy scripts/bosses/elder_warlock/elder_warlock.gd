@@ -1,4 +1,4 @@
-@tool 
+#@tool 
 class_name ElderWarlock extends Enemy
 
 #@export_tool_button("teleport") var tp_button = teleport
@@ -25,8 +25,8 @@ var real_warlock: ElderWarlock = self
 
 var shoot_speed = .5
 var orb_damage = 1
-var orb_speed = 1
-var orb_follow_time = .75
+var orb_speed = 100
+var orb_follow_time = .4
 var pool_attack_damage = 5
 var pool_attack_speed = 3
 var speed_angle = 0
@@ -37,7 +37,7 @@ func _init(health:float=200,max_health:float=200) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	base_speed = 1500
+	base_speed = 3500
 	base_scale = scale
 	detection_area = $DetectionArea
 	sprite = $BodySprite
@@ -95,7 +95,7 @@ func _physics_process(delta):
 	
 	if !nav_agent.is_navigation_finished():
 		var movement_dir = global_position.direction_to(nav_agent.get_next_path_position())
-		movement_velocity = movement_dir * speed * clamp(abs(sin(deg_to_rad(speed_angle))),.5,1) * delta
+		movement_velocity = movement_dir * speed * clamp(abs(sin(deg_to_rad(speed_angle))),.5,1)
 		
 		if movement_velocity.abs().x > movement_velocity.abs().y:
 			if movement_dir.x > 0:
@@ -110,10 +110,13 @@ func _physics_process(delta):
 	
 	
 	velocity = movement_velocity + knockback_velocity
+	velocity*=delta
 
 	move_and_slide()
 	
-	movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed * delta)
+	movement_velocity = movement_velocity.move_toward(Vector2.ZERO,speed)
+	
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO,4000)
 	
 func _draw():
 	super._draw()

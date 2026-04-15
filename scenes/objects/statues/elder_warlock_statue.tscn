@@ -34,6 +34,8 @@ turbulence_initial_displacement_max = -6.7999988
 
 [node name="ElderWarlockStatue" type="StaticBody2D" unique_id=985681132]
 script = ExtResource("1_oiyn8")
+min_enemies = 2
+max_enemies = 5
 min_spawn_range = 51
 max_spawn_range = 51
 

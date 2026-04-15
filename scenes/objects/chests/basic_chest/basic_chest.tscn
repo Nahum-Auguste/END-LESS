@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://b36tmpcx4rk7o" path="res://scripts/object scripts/chests/chest.gd" id="1_e8xit"]
 [ext_resource type="Texture2D" uid="uid://bdhuny7l4lrh1" path="res://assets/sprites/objects/chests/basic_chest_spritesheet.png" id="1_v0mtj"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8xit"]
+size = Vector2(32, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdykb"]
+size = Vector2(22, 5)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt2o7"]
 atlas = ExtResource("1_v0mtj")
 region = Rect2(0, 0, 32, 32)
@@ -102,25 +108,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdykb"]
-size = Vector2(22, 5)
+[sub_resource type="Gradient" id="Gradient_jm2bc"]
+offsets = PackedFloat32Array(0.12248322, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.90952736, 0.7624681, 0.22737393, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8xit"]
-size = Vector2(32, 27)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xpirl"]
+noise_type = 2
+fractal_type = 3
+fractal_octaves = 4
+fractal_lacunarity = 2.72
+fractal_gain = 1.165
+fractal_weighted_strength = 0.6
+fractal_ping_pong_strength = 3.865
+cellular_jitter = 2.695
+domain_warp_enabled = true
+domain_warp_frequency = 0.295
+domain_warp_fractal_octaves = 4
 
-[node name="BasicChest" type="StaticBody2D" unique_id=1341061286]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e8xit"]
+width = 16
+height = 16
+noise = SubResource("FastNoiseLite_xpirl")
+color_ramp = SubResource("Gradient_jm2bc")
+
+[node name="BasicChest" type="StaticBody2D" unique_id=1341061286 node_paths=PackedStringArray("interactable_overlay")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_e8xit")
+interactable_overlay = NodePath("InteractableOverlay")
 max_items = 7.0
-
-[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=921225391]
-sprite_frames = SubResource("SpriteFrames_rbhtf")
-animation = &"closed_down"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167080516]
-position = Vector2(0, -8.5)
-shape = SubResource("RectangleShape2D_bdykb")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=288322957]
 collision_layer = 16
@@ -130,6 +146,20 @@ collision_mask = 8
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_e8xit")
 debug_color = Color(0.65882355, 0.4745098, 0.3764706, 0.26666668)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1167080516]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_bdykb")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=921225391]
+sprite_frames = SubResource("SpriteFrames_rbhtf")
+animation = &"closed_down"
+
+[node name="InteractableOverlay" type="Sprite2D" parent="." unique_id=1010706467]
+modulate = Color(1, 1, 1, 0.23137255)
+position = Vector2(0, 2.5000002)
+scale = Vector2(2, 1.6875)
+texture = SubResource("NoiseTexture2D_e8xit")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="mouse_entered" from="HitBox" to="." method="_on_hit_box_mouse_entered"]

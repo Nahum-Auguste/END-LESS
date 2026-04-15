@@ -25,7 +25,7 @@ var last_attack_animation:String = ""
 @export var hand_item_sprite: Sprite2D
 @onready var attack_effect_sprite: Sprite2D = $AttackEffectSprite
 @onready var hurtbox: Area2D = $HurtBox
-@export_range(.05,3,.05) var dodge_duration :float = .35
+@export_range(.05,3,.05) var dodge_duration :float = .55
 @export var dodge_timer: Timer
 @export var collider: CollisionShape2D
 @export var hurt_box_collider: CollisionShape2D
@@ -141,7 +141,7 @@ func _physics_process(delta: float) -> void:
 	
 	#print(movement_velocity.length())
 		
-	movement_velocity *= .3 if !eye_frame_timer.is_stopped() else 1
+	movement_velocity *= .8 if !eye_frame_timer.is_stopped() else 1
 		
 	velocity = movement_velocity + knockback_velocity
 	velocity *= delta

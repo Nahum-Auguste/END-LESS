@@ -11,7 +11,7 @@ var speed: float = 0
 var defense: int = 0
 var base_defense: int = 0
 var base_speed: float = 0
-@export_range(.05,3,.01) var eye_frame_duration = .5
+@export_range(.05,3,.01) var eye_frame_duration = .15
 var eye_frame_timer: Timer = Timer.new()
 var shaders_set: bool = false
 
@@ -56,8 +56,8 @@ func _process(delta: float) -> void:
 	if sprite and sprite.material and eye_frame_timer.is_stopped():
 		sprite.material.set_shader_parameter("active",false)
 		
-	if !eye_frame_timer.is_stopped():
-		speed = base_speed * .3	
+	#if !eye_frame_timer.is_stopped():
+		#speed = base_speed * .3	
 		
 	apply_status_effects()
 	if (killable and self.health<=0 and self.max_health): handle_death()
