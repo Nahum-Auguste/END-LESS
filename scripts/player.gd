@@ -5,6 +5,8 @@ class_name Player extends Monster
 
 var items: Array[Item] = []
 var inventory:PlayerInventory
+var pickupable_item_drops: Array[ItemDrop] = []
+var pickupable_item_drop: ItemDrop
 
 var sprint_mult:= 1.35
 var animation: String
@@ -154,6 +156,18 @@ func _process(delta: float) -> void:
 	if !alive:
 		#print("hi")
 		eye_frame_timer.stop()
+		
+	#print(pickupable_item_drop)
+	#print(pickupable_item_drops)
+		
+	if pickupable_item_drops.size():
+		pickupable_item_drop = pickupable_item_drops[0] if !pickupable_item_drop else pickupable_item_drop
+		for p in pickupable_item_drops:
+			if p.global_position.distance_to(global_position) < pickupable_item_drop.global_position.distance_to(global_position):
+				pickupable_item_drop = p
+	else:
+		pickupable_item_drop = null
+		
 
 
 

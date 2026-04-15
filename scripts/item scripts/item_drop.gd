@@ -3,12 +3,15 @@ class_name ItemDrop extends Node2D
 
 @export var sprite: Sprite2D
 @export var mouse_detection_area: Area2D
+@export var ray_checker: RayCastChecker
+@export var interactable_overlay: Sprite2D
 
 @export var item: Item
+var player: Player
 var is_mouse_hovering:bool = false
 
 var context_menu: ItemContextMenu
-var player: Player
+
 var context_menu_prefab:PackedScene = preload("res://scenes/ui/item_context_menu.tscn")
 var can_display_context_menu:bool = false
 
@@ -21,8 +24,25 @@ func _ready():
 func _process(delta):
 	load_texture()
 	
-	if is_mouse_hovering and (Input.is_action_just_released("right_click") or Input.is_action_just_released("left_click")):
+	player = InventoryManager.player
+	
+	if "colliding" in ray_checker and ray_checker.colliding and is_mouse_hovering and (Input.is_action_just_released("right_click") or Input.is_action_just_released("left_click")):
 		display_context_menu()
+		
+	if "colliding" in ray_checker and !ray_checker.colliding:
+		close_context_menu()
+		if player:
+			if self in player.pickupable_item_drops:
+				player.pickupable_item_drops.erase(self)
+	else:
+		if player:
+			if not (self in player.pickupable_item_drops):
+				player.pickupable_item_drops.push_back(self)
+		
+	interactable_overlay.visible = "colliding" in ray_checker and ray_checker.colliding and player and player.pickupable_item_drop == self
+	
+	
+		
 		
 	if item == null:
 		queue_free()

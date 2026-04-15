@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://vh56n317o3h3" path="res://scenes/objects/statues/elder_warlock_statue.tscn" id="4_tdv1v"]
 [ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="5_m6wgr"]
 [ext_resource type="PackedScene" uid="uid://b320ukcejjdwo" path="res://scenes/objects/chests/basic_chest/basic_chest.tscn" id="6_3u6m8"]
+[ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="8_wlx7i"]
+[ext_resource type="Resource" uid="uid://ou0di6c6c0jf" path="res://resources/items/weapons/swords/warrior's_sword.tres" id="9_cd2y3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdv1v"]
 vertices = PackedVector2Array(234, -86, 266, -10, 214, -10, -150, -22, 54, -86, 150, 138, 266, 138, 374, 214, -150, 214, -150, 150, 374, -214, 22, -214, 22, -118, -150, -106, -214, -118, -214, -202, -342, -214, -298, -202, -298, -170, -330, -170, -342, 214, -330, -86, 54, -118, 234, -202, 106, -202, 106, -214, -266, -106, -278, -118, -278, -86, -266, -74, -298, -74, -182, 118, -214, 10, -214, -22, 150, -10, 214, 22, 202, 22, 202, -10, -182, 150, -330, 202, -234, 202, -234, 214, -330, 118, -298, 10)
@@ -38,3 +40,11 @@ position = Vector2(-75, -156)
 [node name="BasicChest" parent="." unique_id=1341061286 instance=ExtResource("6_3u6m8")]
 position = Vector2(-176, 142)
 max_items = 8.0
+
+[node name="ItemDrop" parent="." unique_id=1852501480 instance=ExtResource("8_wlx7i")]
+position = Vector2(-104, 141)
+
+[node name="ItemDrop2" parent="." unique_id=1291563243 instance=ExtResource("8_wlx7i")]
+position = Vector2(-83, 158)
+rotation = 1.8678042
+item = ExtResource("9_cd2y3")

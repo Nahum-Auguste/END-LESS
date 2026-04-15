@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://4jxucksd3mvr"]
+
+[ext_resource type="Script" uid="uid://cg3llxobc3uli" path="res://scripts/utility/ray_cast_checker.gd" id="1_26gkx"]
+
+[node name="RayCastChecker" type="Node2D" unique_id=950979621]
+script = ExtResource("1_26gkx")

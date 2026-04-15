@@ -3,26 +3,59 @@
 [ext_resource type="Script" uid="uid://bnboaif2tmtmy" path="res://scripts/item scripts/item_drop.gd" id="1_sdob7"]
 [ext_resource type="Resource" uid="uid://cvuttsiyestwo" path="res://resources/items/consumables/healing items/dense_calcium_infusion.tres" id="2_0olvh"]
 [ext_resource type="Texture2D" uid="uid://bkv5282rhyot8" path="res://assets/sprites/items/consumables/healing items/dense_calcium_infusion.png" id="3_0olvh"]
+[ext_resource type="PackedScene" uid="uid://4jxucksd3mvr" path="res://scenes/utility/ray_cast_checker.tscn" id="4_jm2bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0olvh"]
 
-[node name="ItemDrop" type="Node2D" unique_id=1852501480 node_paths=PackedStringArray("sprite", "mouse_detection_area")]
+[sub_resource type="Gradient" id="Gradient_jm2bc"]
+offsets = PackedFloat32Array(0.12248322, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.90952736, 0.7624681, 0.22737393, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xpirl"]
+noise_type = 2
+fractal_type = 3
+fractal_octaves = 4
+fractal_lacunarity = 2.72
+fractal_gain = 1.165
+fractal_weighted_strength = 0.6
+fractal_ping_pong_strength = 3.865
+cellular_jitter = 2.695
+domain_warp_enabled = true
+domain_warp_frequency = 0.295
+domain_warp_fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5w47u"]
+width = 16
+height = 16
+noise = SubResource("FastNoiseLite_xpirl")
+color_ramp = SubResource("Gradient_jm2bc")
+
+[node name="ItemDrop" type="Node2D" unique_id=1852501480 node_paths=PackedStringArray("sprite", "mouse_detection_area", "ray_checker", "interactable_overlay")]
 script = ExtResource("1_sdob7")
 sprite = NodePath("Sprite")
 mouse_detection_area = NodePath("MouseDetectionArea")
+ray_checker = NodePath("RayCastChecker")
+interactable_overlay = NodePath("InteractableOverlay")
 item = ExtResource("2_0olvh")
-
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1796764567]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_0olvh")
 
 [node name="MouseDetectionArea" type="Area2D" parent="." unique_id=75805211]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetectionArea" unique_id=1043606373]
 shape = SubResource("RectangleShape2D_0olvh")
 
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1796764567]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_0olvh")
+
+[node name="InteractableOverlay" type="Sprite2D" parent="." unique_id=268841690]
+visible = false
+modulate = Color(1, 1, 1, 0.24705882)
+texture = SubResource("NoiseTexture2D_5w47u")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=971013763]
 zoom = Vector2(2.4, 2.4)
+
+[node name="RayCastChecker" parent="." unique_id=950979621 instance=ExtResource("4_jm2bc")]
 
 [connection signal="mouse_entered" from="MouseDetectionArea" to="." method="_on_mouse_detection_area_mouse_entered"]
 [connection signal="mouse_entered" from="MouseDetectionArea" to="MouseDetectionArea" method="_on_mouse_entered"]
