@@ -6,7 +6,7 @@ class_name Player extends Monster
 var items: Array[Item] = []
 var inventory:PlayerInventory
 
-var sprint_mult:= 1.24
+var sprint_mult:= 1.35
 var animation: String
 #var time_between_melee_attack = 1000 
 
@@ -131,7 +131,9 @@ func _physics_process(delta: float) -> void:
 		if !horizontalMoveInput and !verticalMoveInput:
 			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
 			
-	movement_velocity = movement_velocity.normalized() * speed
+	#movement_velocity = movement_velocity.normalized() * speed
+	if horizontalMoveInput and verticalMoveInput:
+		movement_velocity = movement_velocity.normalized() * speed * 1.15
 	
 	#print(movement_velocity.length())
 		

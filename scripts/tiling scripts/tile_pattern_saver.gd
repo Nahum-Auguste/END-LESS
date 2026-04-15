@@ -9,7 +9,7 @@ extends Node2D
 
 @export_category("Pattern Saving")
 @export_enum("world1") var level_theme: String = "world1"
-@export_enum("standard room","spawn room","boss room") var pattern_type: String = "standard room"
+@export_enum("standard room","spawn room","boss room","game scene room") var pattern_type: String = "standard room"
 @export_enum("left","down","up","right") var direction: String = "left"
 @export var pattern_name: String = ""
 @export_tool_button("save pattern","Save") var save_button = save
@@ -24,6 +24,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if pattern_type == "game scene room":
+		direction = ""
+
 	pass
 	
 func get_save_path() -> String:
@@ -35,8 +38,13 @@ func get_save_path() -> String:
 			dir = "spawn rooms"
 		"boss room":
 			dir = "boss rooms"
+		"game scene room":
+			dir = "game scene rooms"
+			direction = ""
 			
-	if dir : dir += "/"
+			
+			
+	if dir : dir += ("/" if direction else "")
 	return "res://assets/tile patterns/" + level_theme + "/" + dir + direction
 	
 func load_pattern():

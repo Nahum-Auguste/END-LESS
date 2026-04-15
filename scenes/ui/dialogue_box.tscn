@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ccfwix6jnvno5"]
+
+[ext_resource type="Script" uid="uid://g1eipti4rcev" path="res://scripts/gui scripts/dialogue_box.gd" id="1_xg44k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg44k"]
+bg_color = Color(0.120242216, 0.06817838, 0.1265586, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.8943643, 0.89456224, 1)
+
+[node name="DialogueBox" type="PanelContainer" unique_id=1149130560 node_paths=PackedStringArray("text_label")]
+offset_left = 281.0
+offset_top = 414.0
+offset_right = 1007.0
+offset_bottom = 640.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xg44k")
+script = ExtResource("1_xg44k")
+text_label = NodePath("MarginContainer/RichTextLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1301488432]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=269710525]
+custom_minimum_size = Vector2(700, 200)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Text..."

@@ -1,7 +1,8 @@
+@tool
 class_name LevelDoor extends StaticBody2D
 
 @onready var interact_box: Area2D = $Sprite/InteractBox
-@onready var locked := true
+@export var locked := true
 @onready var sprite: AnimatedSprite2D = $Sprite
 var is_exit: = false
 
@@ -9,11 +10,12 @@ var is_exit: = false
 func _ready():
 	if sprite.animation == "closed":
 		is_exit = true
-	pass # Replace with function body.
+	sprite.animation = "closed" if locked else "open"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	sprite.animation = "closed" if locked else "open"
 	pass
 	
 func _physics_process(delta):
