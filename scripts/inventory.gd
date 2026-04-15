@@ -5,11 +5,12 @@ class_name Inventory extends Control
 @export var items_container: Container
 @export var items_container_slot_prefab: PackedScene
 var is_mouse_hovered:bool = false
-var item_slots: Array[ItemSlot]
+var item_slots: Array[ItemSlot] = []
 
 func _ready():
 	item_slots.resize(max_item_count)
 	manage_item_slots()
+	
 	#populate_with_random_items(max_item_count/2.5)
 	#shuffle_items()
 
@@ -28,6 +29,7 @@ func manage_item_slots()->void:
 			printerr("ERROR: Please Provide a Valid Container Control Node.")
 			return
 		items_container.add_child(slot)
+		#print(item_slots)
 		item_slots[i] = slot
 		slot.inventory = self
 			
@@ -37,10 +39,16 @@ func manage_item_slots()->void:
 		#print("Inventory Items Container children count exceeds the max items count. Deleting the excess.")
 		var child : Control = items_container.get_child(i)
 		child.queue_free()
+	
+	#item_slots.assign(items_container.get_children())
 		
 		
 
-		
+func populate_with_items(items:Array[Item]):
+	for i in range(items.size()):
+		if i >= max_item_count:
+			break
+		item_slots[i].item = items[i]
 		
 func populate_with_random_items(size:float):
 	var rand_items = ItemDatabase.create_random_items(size)

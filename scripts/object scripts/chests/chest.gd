@@ -12,20 +12,31 @@ var possible_item_drops_data: Dictionary[int,Dictionary] = {
 	
 }
 var items: Array[Item] = []
+@export_range(0,30,1) var min_items: float = 1
+@export_range(0,30,1) var max_items: float = 14
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if !player:
-		player = get_tree().root.find_child("Player",true,false)
-	add_possible_item_drop_data(0,.75,5)
-	add_possible_item_drop_data(1,.75,5)
-	add_possible_item_drop_data(2,.75,5)
-	populate_items()
+	items.resize(randi_range(min_items,max_items))
+	#print(items.size())
+	#if !player:
+		#player = get_tree().root.find_child("Player",true,false)
+	#add_possible_item_drop_data(0,.75,5)
+	#add_possible_item_drop_data(1,.75,5)
+	#add_possible_item_drop_data(2,.75,5)
+	#populate_items()
 	create_inventory()
 
 func _process(delta):
-	pass
-	#queue_redraw()
+	
+	player = InventoryManager.player
+	if mouse_is_hovering and can_display_inventory:
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+		
+	
+
+		
+	
 	
 
 
@@ -88,26 +99,9 @@ func on_hit():
 	open = true
 
 func _on_hit_box_area_entered(area):
-	return
-	#print(area)
-	var animation:String = sprite.animation
-	
-	match(animation.to_lower()):
-		"closed_down":
-			animation = "open_down"
-		"closed_up":
-			animation = "open_up"
-		"closed_left":
-			animation = "open_left"
-		"closed_right":
-			animation = "open_right"
-			
-	sprite.animation = animation
-	open = true
+	on_hit()
 	
 
-
-	
 func add_possible_item_drop_data (id:int,drop_chance:float=1,min_amount:int=0,max_amount:int=1):
 	possible_item_drops_data[id] = {
 		"drop_chance":drop_chance,
@@ -137,15 +131,47 @@ func hitbox_exited():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if mouse_is_hovering and can_display_inventory:
+			if (mouse_is_hovering or inventory.is_mouse_hovered) and can_display_inventory:
 				display_inventory()
+			else:
+				close_inventory()
 
 	
 func create_inventory():
 	if !inventory: 
 		inventory = inventory_scene.instantiate()
-		inventory.main_slot_container_slot_count = items.size()
-		inventory.populate_main_slots(items)
+		inventory.visible = false
+		if !inventory.get_parent()==GroundGuiCanvas:
+			GroundGuiCanvas.add_child(inventory)
+		inventory.manage_item_slots()
+		#inventory.max_item_count = items.size()
+		#inventory.populate_with_items(items)
+		
+		#print("chest: ",inventory.item_slots.size())
+		
+		var tries = 0
+		var max_tries = 400
+		var added = 0
+		var table : = LevelManager.loot_table.loot_data
+		#print(items)
+		while added < items.size() and table.size() and tries<max_tries:
+			var data := table[randi_range(0,table.size()-1)]
+			var item : Item = data.item
+			var chance = data.drop_chance
+			
+			if randf_range(0,.9) <= chance:
+				items[added] = item.clone()
+				added += 1
+				continue
+				
+			tries+=1
+		
+		#print(items)
+				
+		inventory.populate_with_items(items)
+		inventory.shuffle_items()
+			
+			
 		
 func display_inventory():
 	if !can_display_inventory : return
@@ -153,9 +179,12 @@ func display_inventory():
 		create_inventory()
 	if !inventory.get_parent()==GroundGuiCanvas:
 		GroundGuiCanvas.add_child(inventory)
+	if inventory:
+		inventory.visible = true
 	
 func close_inventory():
-	if inventory and inventory.get_parent()==GroundGuiCanvas : GroundGuiCanvas.remove_child(inventory)
+	if inventory:
+		inventory.visible = false
 	
 
 

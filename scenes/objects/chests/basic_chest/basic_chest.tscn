@@ -112,6 +112,7 @@ size = Vector2(32, 27)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_e8xit")
+max_items = 7.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=921225391]
 sprite_frames = SubResource("SpriteFrames_rbhtf")

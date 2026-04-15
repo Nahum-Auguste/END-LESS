@@ -6,14 +6,23 @@ var pause_after_player_death_timer: Timer = Timer.new()
 var pause_after_player_death_wait_time:float = 3
 var continue_after_death_timer: Timer = Timer.new()
 var continue_after_death_timer_wait_time: float = 2
-var game: Node
+var game_level: Node
 var black_screen: ColorRect = ColorRect.new()
 var drawer_node: LevelManagerDrawerNode = LevelManagerDrawerNode.new()
 
+
 var deaths: int = 0
+var level: int = 0
+
+var loot_table: LootTable
+
+var loot_tables: Array[LootTable] = [
+	load("res://resources/loot tables/loot_table_1.tres")
+]
 
 func _ready():
-	layer = 0
+	loot_table = loot_tables[0]
+	layer = 5
 	black_screen.color = Color.BLACK
 	black_screen.set_anchors_preset(Control.PRESET_FULL_RECT)
 	black_screen.visible = false
@@ -36,11 +45,36 @@ func _ready():
 	continue_after_death_timer.timeout.connect(display_continue_screen)
 	add_child(continue_after_death_timer)
 	
-
+func display_black_screen():
+	black_screen.modulate.a = 1
+	black_screen.visible = true
+	
+func close_black_screen():
+	black_screen.modulate.a = 0
+	black_screen.visible = true
+	
+func fade_out_black_screen(time:float):
+	black_screen.modulate.a = 1
+	black_screen.visible = true
+	var tween : = create_tween()
+	tween.tween_property(black_screen,"modulate:a",0,time)
+	await tween.finished
+	black_screen.visible = false
+	black_screen_finished.emit()
+	
+func fade_in_black_screen(time:float):
+	black_screen.modulate.a = 0
+	black_screen.visible = true
+	var tween : = create_tween()
+	tween.tween_property(black_screen,"modulate:a",1,time)
+	await tween.finished
+	black_screen_finished.emit()
+	
+signal black_screen_finished()
 
 func _process(delta):
 	if player:
-		game = player.owner
+		game_level = player.owner
 		
 	if player and !player.alive and is_level_finished == false:
 		is_level_finished = true
@@ -56,13 +90,13 @@ func handle_player_death():
 	pause_after_player_death_timer.start()
 	
 func pause_level():
-	game.process_mode = Node.PROCESS_MODE_DISABLED
+	game_level.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	
 func end_game():
 	
 	var rect = get_viewport().get_visible_rect()
-	game.process_mode = Node.PROCESS_MODE_DISABLED
+	game_level.process_mode = Node.PROCESS_MODE_DISABLED
 	drawer_node.drawing_dead_player = true
 	var tween = create_tween()
 	black_screen.visible = true
@@ -78,5 +112,5 @@ func display_continue_screen():
 	tween.tween_property(drawer_node,"dead_player_texture_opacity",0,2)
 	await  tween.finished
 	drawer_node.drawing_dead_player = false
-	game.queue_free()
+	game_level.queue_free()
 	

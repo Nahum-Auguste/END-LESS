@@ -4,6 +4,7 @@ class_name TilePaster extends Node2D
 
 @export_enum("left","down","up","right") var direction: String = "left"
 var tile_layer :TileMapLayer
+var ceilings_layer: TileMapLayer
 var map_pos: Vector2i
 
 func _ready():
@@ -12,6 +13,13 @@ func _ready():
 	if parent is TileMapLayer:
 		tile_layer = get_parent()
 		map_pos = tile_layer.local_to_map(position)
+		
+		var cl = parent.get_tree().root.find_child("CeilingsLayer",true,false)
+		if cl is TileMapLayer:
+			ceilings_layer = cl
+			
+		#print(cl,tile_layer)
+			
 		
 
 func handle_direction():
@@ -81,8 +89,40 @@ func paste_pattern(pattern_path: String, check_overlap: bool = true):
 				var source_id = pattern.get_cell_source_id(cell)
 				var atlas_pos = pattern.get_cell_atlas_coords(cell)
 				var alt_id = pattern.get_cell_alternative_tile(cell)
+				if source_id==0 and atlas_pos==Vector2i(0,0) and ceilings_layer:
+					draw_ceiling_tile_circle(pos,15,true)
+					
 				tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 				
 	else:
 		printerr("Tile Pattern Originator Failed to Paste. No tile layer parent set.")
 	
+	
+	
+func draw_ceiling_tile_circle(pos: Vector2, size: float = 1, filled:=true):
+	if size<=0: return
+	
+	var angles = []
+	var subdivisions = size #size * 4 * 2
+	
+	for i in range(0,clamp(subdivisions,0,360)):
+		angles.push_back(i * (360/subdivisions))
+	
+	for r in range(0 if filled else size-1,size):
+		
+		for a in angles:
+			var rad = deg_to_rad(a)
+			var x = cos(rad) * r
+			var y = sin(rad) * r
+			draw_ceiling_tile(pos + Vector2(x,y))
+			
+func draw_ceiling_tile(pos:Vector2i):
+	var tile_data = {
+		"atlas_id":0,
+		"atlas_pos":Vector2i(0,0)
+	}
+	
+	var tl = ceilings_layer
+	
+	if tl.get_cell_source_id(pos)!=tile_data.atlas_id or tl.get_cell_atlas_coords(pos)!=tile_data.atlas_pos:
+		tl.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)

@@ -10,4 +10,5 @@ script = ExtResource("1_janim")
 status_effects = Array[ExtResource("2_pp1bv")]([ExtResource("3_kbfvn")])
 name = "small bottle of calcium ointment"
 texture = ExtResource("4_23twm")
+max_stack_count = 3
 metadata/_custom_type_script = "uid://qcwnfmt1c1yc"

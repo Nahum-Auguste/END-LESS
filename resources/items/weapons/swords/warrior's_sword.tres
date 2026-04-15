@@ -7,10 +7,10 @@
 
 [resource]
 script = ExtResource("1_uwocf")
-range = 5.0
-damage = 2.5
+range = 7.0
+damage = 4.0
 attack_speed = 3.5
-crit_chance = 0.05
+crit_chance = 0.2
 sound_effects = Array[AudioStream]([ExtResource("2_ruow7"), ExtResource("3_178mb")])
 name = "Warrior's sword"
 texture = ExtResource("2_uwocf")

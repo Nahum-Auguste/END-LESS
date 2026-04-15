@@ -1,7 +1,12 @@
 @tool
 class_name LevelGenerator extends Node2D
 
+@export var ceilings_layer: TileMapLayer
 @export var tile_layer: TileMapLayer
+@export var border_width: int = 10
+@export var enemies_container: Node2D
+@export var nav_region: NavigationRegion2D
+@export var timer: Timer
 
 class TD: 
 	var atlas_id: int
@@ -33,6 +38,7 @@ var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
 	add_rooms()
 	
 @export_tool_button("find nodes") var find_nodes_button = draw_at_nodes
+#@export_tool_button("draw ceilings") var ceilings_button = draw_ceilings
 @export_tool_button("draw walls") var walls_button = draw_walls 
 @export_tool_button("bake") var bake = bake_nav
 @export_tool_button("add rooms") var add_rooms_button = add_rooms
@@ -49,7 +55,6 @@ var giant_spider_prefab = preload("res://scenes/enemies/giant_spider.tscn")
 @export_range(0,200,1) var enemies: int = 30
 @onready var max_length_area_shape: CircleShape2D = $MaxLengthArea/CollisionShape2D.shape 
 @export var level_theme_player: AudioStreamPlayer
-@onready var nav_region: NavigationRegion2D = $NavigationRegion2D
 
 var level_center: Vector2 = Vector2.ZERO
 var floor_cells: Array[Vector2i]
@@ -64,15 +69,17 @@ func _process(delta):
 	max_length_area_shape.radius = max_path_length * 32
 	
 func draw_ceilings():
-	var size = max_path_length * 1.3
+	print("drawing ceilings...")
+	var size = 1#max_path_length * 1.3
 	var start = Vector2(-size,-size)
-	
-	for x in range(size*2):
+	var gap = 1
+	for x in range(0,size*2,gap):
 		
-		for y in range(size*2):
-			
+		for y in range(0,size*2,gap):
+
 			var pos = start + Vector2(x,y)
-			#print(pos)
+			print(pos)
+			
 			draw_tile(pos,"ceiling")
 			
 func draw_at_nodes():
@@ -121,21 +128,26 @@ func draw_walls():
 
 func generate_level():
 	clear()
-	draw_ceilings()
+	#draw_ceilings()
 	paste_generated_level()
 	add_rooms()
 	draw_walls()
 	
 	#add_boss_room()
 	add_spawn_room()
+	timer.wait_time = 2
+	timer.start()
+	await timer.timeout
+	bake_nav()
 	spawn_enemies()
+	generation_finished.emit()
 	#set_level_theme()
 	#tile_layer.update_internals()
-	bake_nav()
+	
 	
 	
 func bake_nav():
-	$NavigationRegion2D.bake_navigation_polygon()
+	nav_region.bake_navigation_polygon()
 	
 func set_level_theme():
 	var sound : AudioStreamWAV = load("res://assets/music/ghost_house_test.wav")
@@ -161,7 +173,7 @@ func spawn_enemies():
 		var enemy_list :Array[PackedScene]  = [giant_spider_prefab,warlock_prefab,bat_swarm_prefab]
 		var enemy : Enemy = (enemy_list[randi_range(0,enemy_list.size()-1)]).instantiate()
 		
-		$Enemies.add_child.call_deferred(enemy)
+		enemies_container.add_child.call_deferred(enemy)
 		enemy.global_position = pos
 		print(enemy.global_position)
 	#
@@ -226,6 +238,9 @@ func paste_pattern(position: Vector2i, path: String, check_overlap:bool = false)
 		var source_id = pattern.get_cell_source_id(cell)
 		var atlas_pos = pattern.get_cell_atlas_coords(cell)
 		var alt_id = pattern.get_cell_alternative_tile(cell)
+		if source_id==0 and atlas_pos==Vector2i(0,0):
+			draw_tile_circle(pos,"ceiling",border_width)
+		#draw_tile_circle(cell,"ceiling",border_width * 4,true)
 		tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 		#floor_cells.erase(pos)
 
@@ -364,6 +379,7 @@ func add_rooms():
 		var source: TileSetScenesCollectionSource = tile_layer.tile_set.get_source(1)
 		var scene:PackedScene = source.get_scene_tile_scene(ci)
 		if scene:
+			draw_tile_circle(cell,"ceiling",border_width,true)
 			tile_layer.set_cell(cell,1,Vector2i.ZERO,ci)
 			potential_cell_datas.pop_at(ri)
 			pasters+=1
@@ -400,9 +416,12 @@ func paste_generated_level():
 func draw_tile(pos:Vector2, tile:String = "floor"):
 	var tile_data: TD = tiles[tile]
 	
+	var tl = tile_layer
+	if tile == "ceiling":
+		tl = ceilings_layer
 	
-	if tile_layer.get_cell_source_id(pos)!=tile_data.atlas_id or tile_layer.get_cell_atlas_coords(pos)!=tile_data.atlas_pos:
-		tile_layer.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)
+	if tl.get_cell_source_id(pos)!=tile_data.atlas_id or tl.get_cell_atlas_coords(pos)!=tile_data.atlas_pos:
+		tl.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)
 		if tile=="floor" :
 			floor_cells.push_back(pos)
 		#else:
@@ -509,6 +528,7 @@ func clear_nav_region():
 	
 func clear():
 	#print("cleared tiles")
+	ceilings_layer.clear()
 	tile_layer.clear()
 	
 	clear_nav_region()
@@ -521,9 +541,10 @@ func clear():
 		player = get_tree().root.find_child("Player",true,false)
 		tries -= 1
 		
-	for child in get_parent().get_children():
-		if child is Enemy:
-			
-			child.queue_free()
+	for e in enemies_container.get_children():
+		e.queue_free()
 		
 	floor_cells = []
+
+
+signal generation_finished()

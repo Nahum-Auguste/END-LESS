@@ -1,17 +1,21 @@
 [gd_scene format=4 uid="uid://rgen6618bouq"]
 
+[ext_resource type="Script" uid="uid://cxibm1spppg8u" path="res://scripts/testing/enemy_testing_scene.gd" id="1_eis8o"]
 [ext_resource type="TileSet" uid="uid://dp3ety8uq0nfc" path="res://tilesets/new_tile_set.tres" id="2_lht80"]
 [ext_resource type="PackedScene" uid="uid://g8oort1yt05r" path="res://scenes/player.tscn" id="3_lht80"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="4_0fqcd"]
 [ext_resource type="PackedScene" uid="uid://vh56n317o3h3" path="res://scenes/objects/statues/elder_warlock_statue.tscn" id="4_tdv1v"]
 [ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="5_m6wgr"]
+[ext_resource type="PackedScene" uid="uid://b320ukcejjdwo" path="res://scenes/objects/chests/basic_chest/basic_chest.tscn" id="6_3u6m8"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdv1v"]
 vertices = PackedVector2Array(234, -86, 266, -10, 214, -10, -150, -22, 54, -86, 150, 138, 266, 138, 374, 214, -150, 214, -150, 150, 374, -214, 22, -214, 22, -118, -150, -106, -214, -118, -214, -202, -342, -214, -298, -202, -298, -170, -330, -170, -342, 214, -330, -86, 54, -118, 234, -202, 106, -202, 106, -214, -266, -106, -278, -118, -278, -86, -266, -74, -298, -74, -182, 118, -214, 10, -214, -22, 150, -10, 214, 22, 202, 22, 202, -10, -182, 150, -330, 202, -234, 202, -234, 214, -330, 118, -298, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 7, 6, 1), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 11, 15, 17), PackedInt32Array(17, 18, 19, 16), PackedInt32Array(20, 16, 19, 21), PackedInt32Array(12, 22, 4, 3, 13), PackedInt32Array(23, 24, 25, 10), PackedInt32Array(23, 10, 1, 0), PackedInt32Array(14, 13, 26, 27), PackedInt32Array(28, 27, 26, 29), PackedInt32Array(28, 29, 30, 21), PackedInt32Array(5, 9, 31, 32, 33, 3, 34), PackedInt32Array(2, 35, 36, 37), PackedInt32Array(3, 2, 37), PackedInt32Array(3, 37, 34), PackedInt32Array(9, 38, 31), PackedInt32Array(39, 40, 41, 20), PackedInt32Array(32, 31, 42, 43), PackedInt32Array(21, 30, 43, 42), PackedInt32Array(42, 39, 20), PackedInt32Array(42, 20, 21)])
 
-[node name="EnemyTestingScene" type="Node2D" unique_id=2065702540]
+[node name="EnemyTestingScene" type="Node2D" unique_id=2065702540 node_paths=PackedStringArray("player")]
 y_sort_enabled = true
+script = ExtResource("1_eis8o")
+player = NodePath("Player")
 
 [node name="ElderWarlockStatue" parent="." unique_id=985681132 instance=ExtResource("4_tdv1v")]
 
@@ -29,4 +33,8 @@ tile_set = ExtResource("2_lht80")
 navigation_enabled = false
 
 [node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_m6wgr")]
-position = Vector2(-190, 54)
+position = Vector2(-75, -156)
+
+[node name="BasicChest" parent="." unique_id=1341061286 instance=ExtResource("6_3u6m8")]
+position = Vector2(-176, 142)
+max_items = 8.0

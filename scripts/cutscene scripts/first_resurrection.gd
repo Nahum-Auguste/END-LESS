@@ -38,6 +38,14 @@ func _ready():
 		timer.autostart = false
 		timer.one_shot = true
 		add_child(timer)
+		
+		
+		
+		LevelManager.fade_out_black_screen(4)
+		await LevelManager.black_screen_finished
+		timer.wait_time = 2
+		timer.start()
+		await timer.timeout
 		dialogue_box.play(d1)
 		await dialogue_box.dialogue_finished
 		# first animation, the first guy walks away

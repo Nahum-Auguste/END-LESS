@@ -5,6 +5,7 @@ extends Node2D
 @export var active: bool = true
 @export var player: Player
 @export var necro: AnimatedSprite2D
+@export var timer: Timer = Timer.new()
 
 
 var d1 :Array[String] = [
@@ -47,12 +48,23 @@ var d
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	timer.autostart = false
+	timer.one_shot = true
+	add_child(timer)
+		
+		
 	var ds = [d1,d2,d3]
 	var d = clamp(LevelManager.deaths-1,0,2)
 	if active:
 		InventoryManager.player_hud.visible = false
 		player.sprite.animation = "laying_down"
 		player.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		LevelManager.fade_out_black_screen(4)
+		await LevelManager.black_screen_finished
+		timer.wait_time = 2
+		timer.start()
+		await timer.timeout
 		dialogue_box.play(ds[d])
 		await dialogue_box.dialogue_finished
 		player.process_mode = Node.PROCESS_MODE_ALWAYS
