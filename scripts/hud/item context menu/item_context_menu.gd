@@ -9,10 +9,13 @@ var is_mouse_hovering:bool = false
 @export var properties_container: Container
 @export var pick_up_button: Button
 @export var equip_button: Button
+@export var unequip_button: Button
 @export var split_button: Button
 @export var use_button: Button
 @export var drop_button: Button
 @export_enum("item drop","item slot") var context = "item drop" 
+var player: Player
+var player_inventory: PlayerInventory
 
 @export var item :Item
 
@@ -25,18 +28,26 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	player = InventoryManager.player
+	player_inventory = player.inventory if player else null
+	
 	pick_up_button.visible = context == "item drop"
-	split_button.visible = context == "item slot"
+	split_button.visible = context == "item slot" and item.stack_count>1
 	drop_button.visible = context == "item slot"
-	equip_button.visible = item is InteractableItem
+	equip_button.visible = item is InteractableItem and player_inventory and !player_inventory.is_item_equipped(item)
+	unequip_button.visible = context == "item slot" and item is InteractableItem and player_inventory and player_inventory.is_item_equipped(item)
 	use_button.visible = item is Consumable
 	parse_item_data()
+	
+	#print(context == "item slot" and item is InteractableItem and player_inventory and player_inventory.is_item_equipped(item))
 	
 	#print(item_slot)
 	#print(item_slot.mouse_hovered)
 	#print(is_mouse_hovering)
 
 	if $UnhoverTimer.is_stopped():
+		if item_slot and !item_slot.inventory.visible:
+			visible = false
 		if item_drop and !item_drop.item:
 			visible = false
 		if item_slot and (!item_slot.item or InventoryManager.selected_slot == item_slot):
@@ -85,3 +96,28 @@ func _on_drop_button_pressed():
 
 func _on_pick_up_button_pressed():
 	InventoryManager.pick_up_item_drop(item_drop)
+
+
+func _on_split_button_button_up():
+	InventoryManager.split_item(item_slot)
+
+
+func _on_equip_button_button_up():
+	if item_slot:
+		InventoryManager.equip_item_from_slot(item_slot)
+	else:
+		InventoryManager.equip_item_from_drop(item_drop)
+
+
+func _on_unequip_button_button_up():
+	if player_inventory:
+		for s in player_inventory.item_slots:
+			if !s.item:
+				s.item = item
+				item_slot.item = null
+				visible = false
+				return
+
+
+func _on_use_button_button_up():
+	pass # Replace with function body.

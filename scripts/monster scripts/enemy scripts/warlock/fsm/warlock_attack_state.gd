@@ -29,7 +29,7 @@ func enter():
 	setup_timer(tp_timer,body.teleport_interval,true)
 	setup_timer(orb_spawn_timer,orb_burst_attack_orb_spawn_interval,false)
 	setup_timer(attack_timer,2,true)
-	print(orb_spawn_timer.wait_time)
+	#print(orb_spawn_timer.wait_time)
 	
 	orb_burst_attack_initial_direction = (player.global_position - body.global_position).normalized()
 		

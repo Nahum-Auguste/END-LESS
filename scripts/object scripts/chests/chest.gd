@@ -1,7 +1,7 @@
 class_name Chest extends StaticBody2D
 @onready var sprite:AnimatedSprite2D = $Sprite
 var open:bool = false
-@export var player: CharacterBody2D
+@export var player: Player
 var player_detection_range = 50
 const inventory_scene = preload("res://scenes/ui/inventory/chest_inventory.tscn")
 var inventory: ChestInventory
@@ -133,7 +133,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if (mouse_is_hovering or inventory.is_mouse_hovered) and can_display_inventory:
 				display_inventory()
-			else:
+			elif player and !player.inventory.is_mouse_hovered:
 				close_inventory()
 
 	

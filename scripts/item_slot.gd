@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name ItemSlot extends Control
 
 
@@ -10,6 +10,7 @@ class_name ItemSlot extends Control
 @export var invalid_style: Control
 @export var disabled: bool = false
 @export var inventory: Inventory
+@export var item_count_label: RichTextLabel
 var mouse_hovered: bool = false
 
 var context_menu: ItemContextMenu
@@ -24,14 +25,14 @@ func _ready():
 			hovered_style.visible = false
 		if selected_style:
 			selected_style.visible = false
-	load_item_texture()
+	load_item_data()
 	create_context_menu()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	queue_redraw()
-	load_item_texture()
+	#queue_redraw()
+	load_item_data()
 	selected_style.visible = InventoryManager.selected_slot == self if !disabled else selected_style.visible
 	hovered_style.visible = ((InventoryManager.hovered_slot == self) or selected_style.visible or mouse_hovered) if !disabled else hovered_style.visible
 	
@@ -48,14 +49,16 @@ func _process(delta):
 						#s.invalid_style.visible = true
 
 
-func load_item_texture():
+func load_item_data():
 	if disabled: return
 	if !item:
 		item_texture_rect.texture = null
+		item_count_label.text = ""
 	else:
 		var item_texture: Texture2D = item.texture
 		if item_texture_rect.texture != item_texture:
 			item_texture_rect.texture = item_texture
+		item_count_label.text = str(item.stack_count) if item.stack_count > 1 else ""
 
 
 #func _draw():

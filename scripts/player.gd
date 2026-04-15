@@ -59,6 +59,8 @@ func get_direction()->String:
 func _input(event):
 	if event.is_action_pressed("dodge") and !is_dodging() and !attacking and eye_frame_timer.is_stopped():
 		on_dodge()
+	if event.is_action_pressed("interact") and pickupable_item_drop:
+		inventory.pick_up_item_drop(pickupable_item_drop)
 
 		
 func on_dodge():
@@ -162,7 +164,12 @@ func _process(delta: float) -> void:
 		
 	if pickupable_item_drops.size():
 		pickupable_item_drop = pickupable_item_drops[0] if !pickupable_item_drop else pickupable_item_drop
+		
 		for p in pickupable_item_drops:
+			if !p:
+				pickupable_item_drops.erase(p)
+				continue
+				
 			if p.global_position.distance_to(global_position) < pickupable_item_drop.global_position.distance_to(global_position):
 				pickupable_item_drop = p
 	else:

@@ -49,7 +49,7 @@ texture = ExtResource("3_0olvh")
 
 [node name="InteractableOverlay" type="Sprite2D" parent="." unique_id=268841690]
 visible = false
-modulate = Color(1, 1, 1, 0.24705882)
+modulate = Color(1, 1, 1, 0.45490196)
 texture = SubResource("NoiseTexture2D_5w47u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=971013763]

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://7b6nwwr42xfx"]
 
 [ext_resource type="Script" uid="uid://cbbnfnblku5ny" path="res://scripts/item_slot.gd" id="1_awn2n"]
+[ext_resource type="Script" uid="uid://b2xswthighddu" path="res://scripts/item scripts/item.gd" id="2_ihqt6"]
 [ext_resource type="Texture2D" uid="uid://ceh3pec6mujsb" path="res://assets/sprites/ui/boneframe.png" id="2_p78wi"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="4_mkpm6"]
 
 [sub_resource type="Gradient" id="Gradient_ihqt6"]
 offsets = PackedFloat32Array(0, 0.5933544)
@@ -20,7 +22,7 @@ noise = SubResource("FastNoiseLite_mkpm6")
 color_ramp = SubResource("Gradient_ihqt6")
 as_normal_map = true
 
-[node name="ItemSlot" type="Control" unique_id=451761978 node_paths=PackedStringArray("item_texture_rect", "hovered_style", "selected_style", "invalid_style")]
+[node name="ItemSlot" type="Control" unique_id=451761978 node_paths=PackedStringArray("item_texture_rect", "hovered_style", "selected_style", "invalid_style", "item_count_label")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
@@ -28,10 +30,12 @@ offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 1
 script = ExtResource("1_awn2n")
+item_type = ExtResource("2_ihqt6")
 item_texture_rect = NodePath("Background/CenterContainer/ItemTextureRect")
 hovered_style = NodePath("Background/CenterContainer/HoveredStyle")
 selected_style = NodePath("Background/CenterContainer/SelectedStyle")
 invalid_style = NodePath("Background/CenterContainer/InvalidStyle")
+item_count_label = NodePath("RichTextLabel")
 
 [node name="Background" type="TextureRect" parent="." unique_id=855334482]
 custom_minimum_size = Vector2(32, 32)
@@ -75,6 +79,25 @@ custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 mouse_filter = 1
 color = Color(0.76862746, 0, 0, 0.34901962)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=205018548]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 27.0
+offset_bottom = 29.0
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.8124056, 0.8124056, 0.8124054, 0.63529414)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("4_mkpm6")
+theme_override_font_sizes/normal_font_size = 13
+text = "12"
+autowrap_mode = 0
+horizontal_alignment = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

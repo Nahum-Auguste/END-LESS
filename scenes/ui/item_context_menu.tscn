@@ -15,7 +15,7 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[node name="ItemContextMenu" type="PanelContainer" unique_id=122916026 node_paths=PackedStringArray("unhover_timer", "item_name_label", "properties_container", "pick_up_button", "equip_button", "split_button", "use_button", "drop_button")]
+[node name="ItemContextMenu" type="PanelContainer" unique_id=122916026 node_paths=PackedStringArray("unhover_timer", "item_name_label", "properties_container", "pick_up_button", "equip_button", "unequip_button", "split_button", "use_button", "drop_button")]
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 133.0
@@ -29,6 +29,7 @@ item_name_label = NodePath("PanelContainer2/MarginContainer/PanelContainer/Panel
 properties_container = NodePath("PanelContainer2/MarginContainer/PanelContainer/PanelContainer")
 pick_up_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/PickUpButton")
 equip_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/EquipButton")
+unequip_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/UnequipButton")
 split_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/SplitButton")
 use_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/UseButton")
 drop_button = NodePath("PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/DropButton")
@@ -91,6 +92,12 @@ layout_mode = 2
 mouse_filter = 1
 text = "Equip"
 
+[node name="UnequipButton" parent="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer" unique_id=40457748 instance=ExtResource("1_gxn8o")]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "Unequip"
+
 [node name="SplitButton" parent="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer" unique_id=942554249 instance=ExtResource("1_gxn8o")]
 visible = false
 layout_mode = 2
@@ -117,5 +124,9 @@ autostart = true
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/PickUpButton" to="." method="_on_pick_up_button_pressed"]
+[connection signal="button_up" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/EquipButton" to="." method="_on_equip_button_button_up"]
+[connection signal="button_up" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/UnequipButton" to="." method="_on_unequip_button_button_up"]
+[connection signal="button_up" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/SplitButton" to="." method="_on_split_button_button_up"]
+[connection signal="button_up" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/UseButton" to="." method="_on_use_button_button_up"]
 [connection signal="pressed" from="PanelContainer2/MarginContainer/PanelContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="timeout" from="UnhoverTimer" to="." method="_on_unhover_timer_timeout"]

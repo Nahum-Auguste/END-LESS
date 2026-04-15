@@ -18,6 +18,7 @@ var can_display_context_menu:bool = false
 func _ready():
 	create_context_menu()
 	load_texture()
+	item = item.clone()
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -83,6 +84,12 @@ func _exit_tree():
 	if context_menu:
 		context_menu.queue_free()
 		context_menu = null
+	if player:
+		if self in player.pickupable_item_drops:
+			player.pickupable_item_drops.erase(self)
+		if self == player.pickupable_item_drop:
+			player.pickupable_item_drop = null
+		
 
 
 func _on_mouse_detection_area_mouse_entered():
@@ -91,3 +98,4 @@ func _on_mouse_detection_area_mouse_entered():
 
 func _on_mouse_detection_area_mouse_exited():
 	is_mouse_hovering = false
+	

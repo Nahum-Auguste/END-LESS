@@ -57,12 +57,32 @@ func populate_with_random_items(size:float):
 		 
 	
 func pick_up_item_drop(item_drop:ItemDrop):
+	var empty_slot: ItemSlot = null
+	
 	for i in range(item_slots.size()):
 		var s = item_slots[i]
-		if !s.item:
-			s.item = item_drop.item
+		var ii : Item = s.item
+		var oi : Item = item_drop.item
+		
+		if !ii and !empty_slot:
+			empty_slot = s
+		
+		var tries = 0
+		
+		if ii and ItemDatabase.check_items_relatively_same(oi,ii):
+			while ii.stack_count<ii.max_stack_count and oi.stack_count>1 and tries <20:
+				ii.stack_count += 1
+				oi.stack_count -=1
+				tries+=1
+		if oi.stack_count <= 0:
 			item_drop.item = null
-			
+			return
+	
+	if empty_slot:
+		empty_slot.item = item_drop.item
+		item_drop.item = null
+	
+
 	
 func shuffle_items():
 	for i in range(item_slots.size()):

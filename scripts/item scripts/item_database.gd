@@ -32,3 +32,19 @@ static func create_random_items(size:int=2) -> Array[Item]:
 	for i in range(size):
 		items.push_back(create_random_item())
 	return items
+	
+static func check_items_relatively_same(item1:Item,item2:Item)->bool:
+	if !item1 || !item2 : return false
+	
+	for p in (item1.get_property_list()):
+		if !(p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE) : continue
+		var name = p.name
+		#print(name)
+		var value = item1[name]
+		if (name=="stack_count") : continue
+		if !(name in item2) : return false
+		#print(value," vs ",item2[name], " for ",name)
+		#print("passed?: ", value==item2[name])
+		if value!=item2[name] : return false
+		
+	return true

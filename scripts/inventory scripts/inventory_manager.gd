@@ -7,6 +7,7 @@ var player_hud: PlayerHud
 var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
 var item_drop_prefab: PackedScene = preload("res://scenes/objects/item_drop.tscn")
 var player: Player
+var player_inventory: PlayerInventory
 
 func _ready():
 	create_hud()
@@ -15,10 +16,13 @@ func create_hud():
 	player = get_tree().root.find_child("Player",true,false)
 	player_hud = get_tree().root.find_child("PlayerHud",true,false)
 	
+	
 	if !player_hud:
 		player_hud = player_hud_prefab.instantiate()
 		if player:
 			PlayerGuiCanvas.add_child(player_hud)
+			
+	player_inventory = player_hud.player_inventory
 		
 
 func _input(event):
@@ -29,6 +33,7 @@ func _input(event):
 					swap_items(hovered_slot,selected_slot)
 				if selected_slot:
 					selected_slot.item_texture_rect.visible = true
+					selected_slot.item_count_label.visible = true
 				if selected_slot and selected_slot.item and !hovered_slot and player:
 					drop_item(selected_slot)
 				selected_slot = null
@@ -37,16 +42,136 @@ func _input(event):
 func _process(delta):
 	pass
 	
+func split_item(slot:ItemSlot):
+	var inv = slot.inventory
+	var idx = inv.item_slots.find(slot)
+	var oi : Item = slot.item
+	
+	for i in range(idx+1,inv.item_slots.size()):
+		var inslot : ItemSlot = inv.item_slots[i]
+		if !inslot.item and oi.stack_count>1:
+			var clone :Item= oi.clone()
+			slot.item.stack_count -= 1
+			clone.stack_count = 1
+			inslot.item = clone
+			return
+			
+	for i in range(0,inv.item_slots.size()):
+		var inslot : ItemSlot = inv.item_slots[i]
+		if !inslot.item and oi.stack_count>1:
+			var clone :Item= oi.clone()
+			slot.item.stack_count -= 1
+			clone.stack_count = 1
+			inslot.item = clone
+			return
+	
+	
+func equip_item_from_slot(outslot:ItemSlot):
+	var item = outslot.item
+	if !item: return
+	
+	var inslot: ItemSlot
+	
+	
+	
+	var find_inslot = func (container: Control)->ItemSlot: 
+		var occupied_slot: ItemSlot = null
+		for s in container.get_children():
+			if is_instance_of(outslot.item,s.item_type):
+				if !s.item:
+					return s
+				if s.item and !occupied_slot:
+					occupied_slot = s
+		return occupied_slot
+	
+	
+	if item is Weapon:
+		inslot = find_inslot.call(player_inventory.weapon_slots_container)
+	elif item is Armor:
+		inslot = find_inslot.call(player_inventory.armor_slots_container)
+	elif item is Accessory:
+		inslot = find_inslot.call(player_inventory.accessory_slots_container)
+	elif item is Consumable:
+		inslot = find_inslot.call(player_inventory.consumable_slots_container)
+		
+	if inslot:
+		var tmp = inslot.item
+		inslot.item = outslot.item
+		outslot.item = tmp
+	
+func equip_item_from_drop(drop:ItemDrop):
+	var item = drop.item
+	if !item: return
+	
+	var inslot: ItemSlot
+	
+	
+	
+	var find_inslot = func (container: Control)->ItemSlot: 
+		for s in container.get_children():
+			if is_instance_of(drop.item,s.item_type):
+				if !s.item:
+					return s
+		return null
+	
+	
+	if item is Weapon:
+		inslot = find_inslot.call(player_inventory.weapon_slots_container)
+	elif item is Armor:
+		inslot = find_inslot.call(player_inventory.armor_slots_container)
+	elif item is Accessory:
+		inslot = find_inslot.call(player_inventory.accessory_slots_container)
+	elif item is Consumable:
+		inslot = find_inslot.call(player_inventory.consumable_slots_container)
+		
+	if inslot:
+		#var ii = inslot.item
+		#
+		#if ii and ii.stack_count < ii.max_stack_count:
+			#try_stack_items()
+		
+		inslot.item = drop.item
+		drop.item = null
+	
+	
 func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 	if !in_slot or !out_slot: return
 	if !out_slot.item: return
 	if !is_instance_of(out_slot.item,in_slot.item_type): return
-	##print(out_slot.item," to ", in_slot.item)
 	
+	if try_stack_items(out_slot,in_slot): return
+
 	var tmp :Item = in_slot.item
 	in_slot.item = out_slot.item
 	out_slot.item = tmp
 				
+func try_stack_items(outslot:ItemSlot,inslot:ItemSlot)->bool:
+	var initial_out = outslot.item.stack_count
+	var outitem:Item = outslot.item
+	var initem:Item = inslot.item
+	if !initem || !outitem : return false
+	if initem.stack_count==initem.max_stack_count : return false
+	var is_same =  ItemDatabase.check_items_relatively_same(outitem,initem)
+
+	if !is_same : return false
+	
+	if initem.stack_count<initem.max_stack_count:
+		var tries = 0
+		
+		if ItemDatabase.check_items_relatively_same(outitem,initem):
+			while initem.stack_count<initem.max_stack_count and outitem.stack_count>0 and tries <20:
+				initem.stack_count += 1
+				outitem.stack_count -=1
+				tries+=1
+
+		if !outitem.stack_count:
+			outslot.item = null
+			return true
+		
+		if initial_out != outitem.stack_count:
+			return true
+	
+	return false
 
 #
 #func _process(delta):
