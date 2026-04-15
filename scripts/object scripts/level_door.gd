@@ -4,6 +4,7 @@ class_name LevelDoor extends StaticBody2D
 @onready var interact_box: Area2D = $Sprite/InteractBox
 @export var locked := true
 @onready var sprite: AnimatedSprite2D = $Sprite
+@export var destination: PackedScene = preload("res://scenes/testing/test_game.tscn")
 var is_exit: = false
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +22,9 @@ func _process(delta):
 func _physics_process(delta):
 	if !locked and interact_box.has_overlapping_bodies():
 		if Input.is_action_just_released("interact"):
-			var generator :LevelGenerator = get_tree().root.find_child("LevelGenerator",true,false)
-			if generator:
-				generator.generate_level()
+			get_tree().change_scene_to_packed(destination)
+			#pribt
+			queue_free()
+			#var generator :LevelGenerator = get_tree().root.find_child("LevelGenerator",true,false)
+			#if generator:
+				#generator.generate_level()

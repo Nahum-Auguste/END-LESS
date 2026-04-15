@@ -4,6 +4,8 @@ extends Node2D
 @export var dialogue_box: DialogueBox
 @export var necro_to_kill: AnimatedSprite2D
 @export var wall_collider: CollisionShape2D
+@export var player: Player
+@export var active: bool = true
 var timer: Timer = Timer.new()
 
 var d1 :Array[String]= [
@@ -28,12 +30,18 @@ var step = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	timer.autostart = false
-	timer.one_shot = true
-	add_child(timer)
-	dialogue_box.play(d1)
-	await dialogue_box.dialogue_finished
-	animator.play(str(step))
+	if active:
+		InventoryManager.player_hud.visible = false
+		player.sprite.animation = "laying_down"
+		player.global_position = Vector2(0,6)
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+		timer.autostart = false
+		timer.one_shot = true
+		add_child(timer)
+		dialogue_box.play(d1)
+		await dialogue_box.dialogue_finished
+		# first animation, the first guy walks away
+		animator.play(str(step))
 
 func on_animation_finish():
 	step+=1
@@ -42,9 +50,18 @@ func on_animation_finish():
 		timer.wait_time = 3
 		timer.start()
 		await timer.timeout
+		# second animation, the two guys walk up and talk
 		animator.play(str(step))
 		await animator.animation_finished
 		dialogue_box.play(d2)
+		await dialogue_box.dialogue_finished
+		timer.wait_time = 2
+		timer.start()
+		await timer.timeout
+		InventoryManager.player_hud.visible = true
+		player.process_mode = Node.PROCESS_MODE_PAUSABLE
+		player.sprite.animation = "down_walk"
+		player.sprite.frame = -1
 		
 	
 
@@ -56,7 +73,13 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area):
 	necro_to_kill.queue_free()
+	
+	# third animation, the guy runs away
 	animator.play(str(3))
+	timer.wait_time = 1
+	timer.start()
+	await timer.timeout
+	player.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	
 func last_step_pause():
@@ -65,6 +88,7 @@ func last_step_pause():
 	await dialogue_box.dialogue_finished
 	animator.play()
 	await animator.animation_finished
+	player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	wall_collider.disabled = true
 	
 	
