@@ -35,7 +35,7 @@ func _init(health:float=0,max_health:float=0) -> void:
 func _ready() -> void:
 	super._ready()
 	LevelManager.player = self
-	#health = .1
+	health = .1
 	base_speed= 4000.0
 	speed = base_speed
 	sprite = $AnimatedSprite2D
@@ -93,9 +93,11 @@ func _physics_process(delta: float) -> void:
 	
 	hurt_box_collider.disabled = is_dodging()
 	
-	var horizontalMoveInput :int= Input.get_axis("left", "right") 
-	var verticalMoveInput :int= Input.get_axis("up", "down")
+	var horizontalMoveInput :float= Input.get_axis("left", "right") 
+	var verticalMoveInput :float= Input.get_axis("up", "down")
 	var sprint := Input.is_action_pressed("sprint")
+	
+	print (horizontalMoveInput)
 	
 	speed = base_speed * (sprint_mult if sprint else 1)
 	
@@ -109,7 +111,7 @@ func _physics_process(delta: float) -> void:
 			animation = "left_walk"
 			movement_velocity.x = -speed
 	else:
-		movement_velocity.x = move_toward(velocity.x,0,speed*10)
+		movement_velocity.x = move_toward(velocity.x,0,speed)
 			
 	if verticalMoveInput:
 		if verticalMoveInput>0:

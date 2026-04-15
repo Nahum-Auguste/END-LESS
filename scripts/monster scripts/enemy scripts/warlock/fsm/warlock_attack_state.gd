@@ -136,7 +136,7 @@ func do_orb_burst_attack():
 		orb.attack_damage = body.attack_damage
 	orb.direction = get_orb_burst_attack_current_orb_direction()
 	orb.global_position = body.global_position
-	#body.owner.add_child(orb)
+	body.get_parent().add_child(orb)
 	attack_orbs_spawned_count += 1
 	
 	

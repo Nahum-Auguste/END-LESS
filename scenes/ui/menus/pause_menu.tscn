@@ -172,6 +172,7 @@ libraries/ = SubResource("AnimationLibrary_sn3bg")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=416926672]
 
 [node name="settings_screen" parent="CanvasLayer" unique_id=597405885 instance=ExtResource("4_idy5m")]
+visible = false
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]

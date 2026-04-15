@@ -1,4 +1,4 @@
-@tool 
+#@tool 
 class_name ElderWarlockFSM extends FSM
 
 var parent: ElderWarlock

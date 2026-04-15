@@ -57,7 +57,7 @@ func pause_level():
 	
 func end_game():
 	
-	var rect = get_viewport().get_visible_rect()
+
 	game.process_mode = Node.PROCESS_MODE_DISABLED
 	drawer_node.drawing_dead_player = true
 	var tween = create_tween()

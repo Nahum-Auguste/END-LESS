@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dxtuqkt7psslq" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/elder_warlock.gd" id="1_0c6lq"]
 [ext_resource type="Texture2D" uid="uid://bi7p1nu3i0d2f" path="res://assets/sprites/enemies/bosses/elder_warlock/elder_warlock_spritesheet.png" id="1_ibwrd"]
 [ext_resource type="Script" uid="uid://eep0mvs0akaa" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/elder_warlock_fsm.gd" id="2_0n1ll"]
-[ext_resource type="Script" uid="uid://b132a0ekmwa4s" path="res://scripts/finite state machine scripts/common states/idle_state.gd" id="3_1n53j"]
-[ext_resource type="Script" uid="uid://ch20l083cmvr8" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_ep43u"]
+[ext_resource type="Script" uid="uid://cj786be8t850a" path="res://scripts/finite state machine scripts/common states/idle_state.gd" id="3_1n53j"]
+[ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="3_ep43u"]
 [ext_resource type="Script" uid="uid://blvpf4a8n3u1w" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/states/shoot_orbs.gd" id="4_ep43u"]
 [ext_resource type="Script" uid="uid://d4a5l4fmhqpyb" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/states/teleport.gd" id="5_1n53j"]
 [ext_resource type="Script" uid="uid://bby64d7nid8rr" path="res://scripts/monster scripts/enemy scripts/bosses/elder_warlock/fsm/states/shoot_orbs_and_spawn_orb_traps.gd" id="5_dxdn7"]
@@ -71,14 +71,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655]
+[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655 node_paths=PackedStringArray("fsm")]
 scale = Vector2(1.53, 1.53)
 collision_layer = 2
 collision_mask = 23
 motion_mode = 1
 script = ExtResource("1_0c6lq")
+fsm = NodePath("ElderWarlockFSM")
 
-[node name="ElderWarlockFSM" type="Node" parent="." unique_id=1151658549 node_paths=PackedStringArray("idle_state", "wander_state", "close_range_attack", "mid_range_attack", "far_range_attack", "teleport", "teleport_barrage", "clone_state", "nav_agent")]
+[node name="ElderWarlockFSM" type="Node" parent="." unique_id=1151658549 node_paths=PackedStringArray("idle_state", "wander_state", "close_range_attack", "mid_range_attack", "far_range_attack", "teleport", "teleport_barrage", "clone_state", "body", "nav_agent")]
 script = ExtResource("2_0n1ll")
 idle_state = NodePath("IdleState")
 wander_state = NodePath("WanderState")
@@ -91,32 +92,33 @@ clone_state = NodePath("CloneState")
 close_range_attack_range = 73.0
 mid_range_attack_range = 123.0
 far_range_attack_range = 165.0
+body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent2D")
 metadata/_custom_type_script = "uid://eep0mvs0akaa"
 
 [node name="IdleState" type="Node" parent="ElderWarlockFSM" unique_id=295384007]
 script = ExtResource("3_1n53j")
-metadata/_custom_type_script = "uid://b132a0ekmwa4s"
 
-[node name="WanderState" type="Node" parent="ElderWarlockFSM" unique_id=36214007]
+[node name="WanderState" type="Node" parent="ElderWarlockFSM" unique_id=36214007 node_paths=PackedStringArray("fsm")]
 script = ExtResource("3_ep43u")
 max_wander_range = 151.0
-metadata/_custom_type_script = "uid://ch20l083cmvr8"
+fsm = NodePath("..")
 
-[node name="Teleport" type="Node" parent="ElderWarlockFSM" unique_id=914800660 node_paths=PackedStringArray("real_collider_polygon")]
+[node name="Teleport" type="Node" parent="ElderWarlockFSM" unique_id=914800660 node_paths=PackedStringArray("real_collider_polygon", "fsm")]
 script = ExtResource("5_1n53j")
 real_collider_polygon = NodePath("../../CollisionShape")
 min_teleport_range = 117.0
-metadata/_custom_type_script = "uid://crhh1ot37r2ko"
+fsm = NodePath("..")
 
-[node name="TeleportBarrage" type="Node" parent="ElderWarlockFSM" unique_id=594277691 node_paths=PackedStringArray("real_collider_polygon")]
+[node name="TeleportBarrage" type="Node" parent="ElderWarlockFSM" unique_id=594277691 node_paths=PackedStringArray("real_collider_polygon", "fsm")]
 script = ExtResource("6_7j4af")
 max_teleport_speed = 0.7
 real_collider_polygon = NodePath("../../CollisionShape")
-metadata/_custom_type_script = "uid://crhh1ot37r2ko"
+fsm = NodePath("..")
 
-[node name="ShootOrbs" type="Node" parent="ElderWarlockFSM" unique_id=1795509346]
+[node name="ShootOrbs" type="Node" parent="ElderWarlockFSM" unique_id=1795509346 node_paths=PackedStringArray("fsm")]
 script = ExtResource("4_ep43u")
+fsm = NodePath("..")
 metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
 
 [node name="ReloadTimer" type="Timer" parent="ElderWarlockFSM/ShootOrbs" unique_id=990076445]
@@ -127,20 +129,23 @@ one_shot = true
 wait_time = 0.164
 one_shot = true
 
-[node name="ShootOrbsAndSpawnTraps" type="Node" parent="ElderWarlockFSM" unique_id=1493763290]
+[node name="ShootOrbsAndSpawnTraps" type="Node" parent="ElderWarlockFSM" unique_id=1493763290 node_paths=PackedStringArray("fsm")]
 script = ExtResource("5_dxdn7")
+fsm = NodePath("..")
 metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
 
-[node name="SpawnOrbTraps" type="Node" parent="ElderWarlockFSM" unique_id=711893090]
+[node name="SpawnOrbTraps" type="Node" parent="ElderWarlockFSM" unique_id=711893090 node_paths=PackedStringArray("fsm")]
 script = ExtResource("6_tj8l3")
+fsm = NodePath("..")
 metadata/_custom_type_script = "uid://cuqfj5ta8awe6"
 
 [node name="SwitchHandTimer" type="Timer" parent="ElderWarlockFSM/SpawnOrbTraps" unique_id=856398687]
 wait_time = 3.481
 one_shot = true
 
-[node name="CloneState" type="Node" parent="ElderWarlockFSM" unique_id=386699479]
+[node name="CloneState" type="Node" parent="ElderWarlockFSM" unique_id=386699479 node_paths=PackedStringArray("fsm")]
 script = ExtResource("10_3xp4a")
+fsm = NodePath("..")
 metadata/_custom_type_script = "uid://dbx6g35tejlfx"
 
 [node name="FleeTimer" type="Timer" parent="ElderWarlockFSM" unique_id=533391615]

@@ -74,9 +74,6 @@ metadata/_custom_type_script = "uid://bcnbrnhwnfq7x"
 
 [node name="WanderState" type="Node" parent="GiantSpiderFSM" unique_id=849795966 node_paths=PackedStringArray("fsm")]
 script = ExtResource("2_svrsm")
-max_wander_range = 143.0
-min_wander_interval = 2.75
-max_wander_interval = 6.5
 fsm = NodePath("..")
 
 [node name="GiantSpiderAttackState" type="Node" parent="GiantSpiderFSM" unique_id=1824551949 node_paths=PackedStringArray("fsm")]
