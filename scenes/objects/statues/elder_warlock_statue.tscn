@@ -53,6 +53,7 @@ texture = ExtResource("2_26pqw")
 [node name="TeleportSpotArea" type="Area2D" parent="." unique_id=1434678800]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=656084365]
+visible = false
 material = SubResource("CanvasItemMaterial_ui0bn")
 amount = 3
 texture = ExtResource("3_26pqw")

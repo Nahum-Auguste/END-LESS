@@ -10,8 +10,8 @@ var item_slots: Array[ItemSlot]
 func _ready():
 	item_slots.resize(max_item_count)
 	manage_item_slots()
-	populate_with_random_items(max_item_count/2.5)
-	shuffle_items()
+	#populate_with_random_items(max_item_count/2.5)
+	#shuffle_items()
 
 func _process(delta):
 	manage_item_slots()

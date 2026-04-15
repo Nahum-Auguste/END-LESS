@@ -10,6 +10,8 @@ var game: Node
 var black_screen: ColorRect = ColorRect.new()
 var drawer_node: LevelManagerDrawerNode = LevelManagerDrawerNode.new()
 
+var deaths: int = 0
+
 func _ready():
 	layer = 0
 	black_screen.color = Color.BLACK
@@ -50,6 +52,7 @@ func _process(delta):
 
 
 func handle_player_death():
+	deaths+=1
 	pause_after_player_death_timer.start()
 	
 func pause_level():

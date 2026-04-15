@@ -16,9 +16,10 @@ func play(dialogue:Array[String]):
 	visible = true
 	playing = true
 	paragraphs = dialogue
-	text_timer.start()
 	paragraph_step = 0
 	text_step = 0
+	text_timer.start()
+	
 
 func stop():
 	visible = false

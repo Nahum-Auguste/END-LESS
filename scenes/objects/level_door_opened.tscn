@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bxf5lmevd67uq" path="res://scenes/objects/level_door.tscn" id="1_ysobq"]
 
 [node name="SpawnDoor" unique_id=364485319 instance=ExtResource("1_ysobq")]
+locked = false
 
 [node name="Sprite" parent="." index="0" unique_id=121311376]
 animation = &"open"
