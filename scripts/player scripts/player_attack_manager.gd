@@ -9,6 +9,7 @@ var weapon: Weapon
 @export var arms_sprite: AnimatedSprite2D
 @export var attack_effect_sprite: Sprite2D
 @export var sword_hitbox_container: SwordSwingHitBox
+@export var audio_player: AudioStreamPlayer
 var previous_attack_animation: String = ""
 
 func _process(delta):
@@ -56,6 +57,9 @@ func turn_on_area_colliders(area:Area2D):
 			c.disabled = false
 		
 func do_sword_attack():
+	if audio_player and weapon is Sword:
+		audio_player.stream = load("res://assets/sfx/sword/slash1.wav") if randi()%2 else load("res://assets/sfx/sword/slash2.wav")
+		audio_player.play()
 	hand_sprite.visible = true
 	attack_effect_sprite.visible = true
 	sprite.pause()

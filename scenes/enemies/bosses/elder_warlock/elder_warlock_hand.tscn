@@ -56,8 +56,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ElderWarlockHand" type="Node2D" unique_id=1698720337]
+[node name="ElderWarlockHand" type="Node2D" unique_id=1698720337 node_paths=PackedStringArray("audio_player")]
 script = ExtResource("1_6in8d")
+audio_player = NodePath("AudioPlayer")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1455788506]
 sprite_frames = SubResource("SpriteFrames_1n53j")
@@ -70,3 +71,5 @@ libraries/rot = ExtResource("3_7t3da")
 
 [node name="HandCenter" type="Node2D" parent="Sprite" unique_id=1805783440]
 position = Vector2(-7, -2)
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1133853909]

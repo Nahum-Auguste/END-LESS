@@ -9,6 +9,9 @@ class_name SwordSwingHitBox extends Node2D
 @onready var circle_collider: CollisionShape2D = $CircleArea/CircleCollisionShape
 @onready var circle_collision_shape: CircleShape2D = $CircleArea/CircleCollisionShape.shape
 @export var attack_effect_sprite: Sprite2D
+
+@export var audio_player: AudioStreamPlayer
+
 var base_range:float = 20
 @export_range(0,1000,1) var added_range: float = 16
 var is_colliding: bool = false
@@ -43,6 +46,8 @@ func _physics_process(delta):
 func handle_attack(area:Area2D):
 
 	if !weapon: return
+	
+	
 
 	var min_knockback_strength = 9008
 	var max_knockback_strength = 100000

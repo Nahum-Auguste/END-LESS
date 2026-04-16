@@ -89,7 +89,7 @@ animations = [{
 "speed": 17.0
 }]
 
-[node name="Warlock" type="CharacterBody2D" unique_id=777216955 node_paths=PackedStringArray("fsm")]
+[node name="Warlock" type="CharacterBody2D" unique_id=777216955 node_paths=PackedStringArray("audio_player", "fsm")]
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
@@ -99,6 +99,7 @@ min_teleportation_range = 61.0
 max_teleportation_range = 118.0
 teleport_interval = 4.0
 orb_burst_attack_cone = 170.0
+audio_player = NodePath("AudioStreamPlayer2D")
 fsm = NodePath("WarlockFSM")
 eye_frame_duration = 0.25
 metadata/_custom_type_script = "uid://bl344pnrj1ehp"
@@ -124,17 +125,19 @@ max_wander_interval = 5.25
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://bcbn8tpdufhq7"
 
-[node name="WarlockAttackState" type="Node" parent="WarlockFSM" unique_id=508926870 node_paths=PackedStringArray("fsm")]
+[node name="WarlockAttackState" type="Node" parent="WarlockFSM" unique_id=508926870 node_paths=PackedStringArray("audio_player", "fsm")]
 script = ExtResource("4_hcf2u")
+audio_player = NodePath("../../AudioStreamPlayer2D")
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://bjivga5mf183i"
 
-[node name="TeleportState" type="Node" parent="WarlockFSM" unique_id=99548046 node_paths=PackedStringArray("real_collider_shape", "fsm")]
+[node name="TeleportState" type="Node" parent="WarlockFSM" unique_id=99548046 node_paths=PackedStringArray("real_collider_shape", "audio_player", "fsm")]
 script = ExtResource("5_grfga")
 real_collider_shape = NodePath("../../CollisionShape2D")
 min_teleport_range = 81.0
 max_teleport_range = 103.0
 wait_time = 0.6
+audio_player = NodePath("../../AudioStreamPlayer2D")
 fsm = NodePath("..")
 metadata/_custom_type_script = "uid://dreskkqtrnwdj"
 
@@ -184,6 +187,9 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 67.69
 debug_enabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1758513333]
+max_distance = 230.0
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

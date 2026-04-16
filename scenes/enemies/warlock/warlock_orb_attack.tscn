@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b7jguuar4tw16" path="res://assets/sprites/enemies/warlock/warlock_orb_attack.png" id="1_eklif"]
 [ext_resource type="Script" uid="uid://bgfxaggnjqsg2" path="res://scripts/monster scripts/enemy scripts/warlock/warlock_orb_attack.gd" id="2_h56ha"]
-[ext_resource type="AudioStream" uid="uid://dveafqbbqa1ks" path="res://assets/sfx/enemies/warlock/orb_attack.wav" id="3_tesvw"]
+[ext_resource type="AudioStream" uid="uid://bmvvdl5x4hsl3" path="res://assets/sfx/enemies/warlock/some_kind_of_magic.wav" id="3_tesvw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h56ha"]
 atlas = ExtResource("1_eklif")
@@ -38,8 +38,8 @@ debug_color = Color(0.99607843, 0, 0.20392157, 0.18431373)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1691815993]
 stream = ExtResource("3_tesvw")
-volume_db = -8.356
-pitch_scale = 0.2
+volume_db = -17.141
+autoplay = true
 
 [node name="SpeedUpTimer" type="Timer" parent="." unique_id=825041025]
 one_shot = true

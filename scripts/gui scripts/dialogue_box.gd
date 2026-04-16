@@ -4,6 +4,7 @@ class_name DialogueBox extends PanelContainer
 @export var paragraphs: Array[String] = []
 @export var paragraph_step: int = 0
 @export var text_label: RichTextLabel
+@export var audio_player: AudioStreamPlayer
 @export_range(.25,10,.25) var base_text_speed: float = 1
 var text_speed
 var visible_text: String = ""
@@ -49,6 +50,7 @@ func _ready():
 				text_step = clamp(text_step+1,0,paragraph.length())	
 				visible_text += paragraph[text_step]
 			
+			
 	)
 	
 	if OS.has_feature("standalone") or OS.is_debug_build():
@@ -86,5 +88,9 @@ func _process(delta):
 		text_label.text = visible_text
 	if get_canvas_layer_node():
 		position.x = get_canvas_layer_node().get_viewport().get_visible_rect().size.x/2 - size.x/2
+		
+	if audio_player and !text_timer.is_stopped() and visible_text.length()>1 and visible_text.length() < paragraphs[paragraph_step].length():
+			audio_player.stream = load("res://assets/sfx/ui/text.wav")
+			audio_player.play()
 	
 	

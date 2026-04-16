@@ -22,6 +22,7 @@ var real_warlock: ElderWarlock = self
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 #@onready var fsm: ElderWarlockFSM = $ElderWarlockFSM
 
+@export var audio_player: AudioStreamPlayer2D
 
 var shoot_speed = .5
 var orb_damage = 1
@@ -145,7 +146,11 @@ func shoot_orb_right_hand(shoot_speed:float = shoot_speed):
 func shoot_orb(hand: ElderWarlockHand, shoot_speed:float = shoot_speed):
 	hand.shoot_orb(shoot_speed)
 	
-
+func inflict_damage(dmg: float):
+	super.inflict_damage(dmg)
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/warlock/warlock_cry.wav")
+		audio_player.play()
 
 func _on_detection_area_area_entered(area):
 	var body = area.get_parent() 

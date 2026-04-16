@@ -76,12 +76,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655 node_paths=PackedStringArray("fsm")]
+[node name="ElderWarlock" type="CharacterBody2D" unique_id=1843472655 node_paths=PackedStringArray("audio_player", "fsm")]
 scale = Vector2(1.53, 1.53)
 collision_layer = 2
 collision_mask = 21
 motion_mode = 1
 script = ExtResource("1_0c6lq")
+audio_player = NodePath("AudioPlayer")
 fsm = NodePath("ElderWarlockFSM")
 
 [node name="ElderWarlockFSM" type="Node" parent="." unique_id=1151658549 node_paths=PackedStringArray("idle_state", "wander_state", "close_range_attack", "mid_range_attack", "far_range_attack", "teleport", "teleport_barrage", "clone_state", "body", "nav_agent")]
@@ -200,6 +201,8 @@ body = NodePath("..")
 [node name="LeftHand" parent="." unique_id=1989761050 node_paths=PackedStringArray("body") instance=ExtResource("6_5frxb")]
 scale = Vector2(-1, 1)
 body = NodePath("..")
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1506873564]
 
 [connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ReloadTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="ElderWarlockFSM/ShootOrbs/ShootIntervalTimer" to="ElderWarlockFSM/ShootOrbs" method="_on_shoot_interval_timer_timeout"]

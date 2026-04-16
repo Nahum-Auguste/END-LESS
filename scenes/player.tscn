@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://bdaarxf2dt06e" path="res://scripts/player scripts/sword_swing_hit_box.gd" id="9_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="11_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://d38qe4nhl1jsv" path="res://assets/sprites/player/attacks/bow_draw/bow_draw_arms_spritesheet.png" id="13_f1ej7"]
+[ext_resource type="PackedScene" uid="uid://ccpwpuoblpote" path="res://scenes/utility/walk_audio_player.tscn" id="20_i4ail"]
+[ext_resource type="AudioStream" uid="uid://b5jln036uwfm8" path="res://assets/sfx/player/dual_footsteps.wav" id="21_a38lo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
 
@@ -2231,18 +2233,19 @@ size = Vector2(40, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider", "stamina_regen_timer")]
+[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("audio_player", "hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider", "stamina_regen_timer")]
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
 script = ExtResource("1_g2els")
+audio_player = NodePath("AudioStreamPlayer")
 hand_item_sprite = NodePath("Arms/Node2D/Hand/HandItemSprite")
 dodge_timer = NodePath("DodgeTimer")
 collider = NodePath("CollisionShape2D")
 hurt_box_collider = NodePath("HurtBox/CollisionShape2D")
 stamina_regen_timer = NodePath("StaminaRegenTimer")
 
-[node name="AttackManager" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite", "attack_effect_sprite", "sword_hitbox_container")]
+[node name="AttackManager" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite", "attack_effect_sprite", "sword_hitbox_container", "audio_player")]
 script = ExtResource("2_f1ej7")
 player = NodePath("..")
 sprite = NodePath("../AnimatedSprite2D")
@@ -2251,6 +2254,7 @@ hand_sprite = NodePath("../Arms/Node2D/Hand/HandItemSprite")
 arms_sprite = NodePath("../Arms/Node2D/ArmsAnimatedSprite")
 attack_effect_sprite = NodePath("../AttackEffectSprite")
 sword_hitbox_container = NodePath("../SwordSwingHitBox")
+audio_player = NodePath("../AudioStreamPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675146412]
 position = Vector2(0, -1)
@@ -2337,6 +2341,10 @@ one_shot = true
 [node name="StaminaRegenTimer" type="Timer" parent="." unique_id=72159049]
 wait_time = 2.0
 one_shot = true
+
+[node name="WalkAudioPlayer" parent="." unique_id=1156980005 node_paths=PackedStringArray("body") instance=ExtResource("20_i4ail")]
+body = NodePath("..")
+walks = Array[AudioStreamWAV]([ExtResource("21_a38lo")])
 
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]

@@ -20,6 +20,8 @@ var sprint_mult:= 1.35
 var animation: String
 #var time_between_melee_attack = 1000 
 
+@export var audio_player: AudioStreamPlayer
+
 var attacking = false
 var default_attack_duration: float = .335
 @onready var attack_duration: float = default_attack_duration
@@ -52,7 +54,7 @@ func _ready() -> void:
 	dodges = max_dodges
 	super._ready()
 	LevelManager.player = self
-	health = .1
+	#health = .1
 	base_speed= 4000.0
 	speed = base_speed
 	sprite = $AnimatedSprite2D
@@ -61,6 +63,11 @@ func _ready() -> void:
 	inventory = InventoryManager.player_hud.player_inventory
 	#eye
 	
+func use_consummable(item: Consumable):
+	super.use_consummable(item)
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/player/Consumible.wav")
+		audio_player.play()
 	
 func get_direction()->String:
 	var dir:String
@@ -92,6 +99,10 @@ func _input(event):
 		
 func on_dodge():
 	stamina_regen_timer.stop()
+		
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/player/dodge.wav")
+		audio_player.play()
 		
 	stamina_points = clamp(0,stamina_points-1,max_stamina_points)
 	dodge_timer.wait_time = dodge_duration
@@ -181,6 +192,15 @@ func _physics_process(delta: float) -> void:
 			#else:
 				#sprite.animation = "up_walk"
 				#sprite.play(animation)
+				
+		if sprint:
+			if audio_player:
+				#audio_player.play()
+				audio_player.pitch_scale = 1.2
+				
+				#print("a")
+		elif audio_player:
+			audio_player.pitch_scale=1
 		
 		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
@@ -386,6 +406,10 @@ func inflict_damage(dmg: float):
 	if is_dodging():
 		return
 	super.inflict_damage(dmg)
+	
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/player/Hurt.wav")
+		audio_player.play()
 	
 	sprite.animation = "hurt_" + get_direction()
 		

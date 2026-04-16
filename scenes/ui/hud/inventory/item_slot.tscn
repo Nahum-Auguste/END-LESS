@@ -22,7 +22,7 @@ noise = SubResource("FastNoiseLite_mkpm6")
 color_ramp = SubResource("Gradient_ihqt6")
 as_normal_map = true
 
-[node name="ItemSlot" type="Control" unique_id=451761978 node_paths=PackedStringArray("item_texture_rect", "hovered_style", "selected_style", "invalid_style", "item_count_label")]
+[node name="ItemSlot" type="Control" unique_id=451761978 node_paths=PackedStringArray("item_texture_rect", "hovered_style", "selected_style", "invalid_style", "item_count_label", "audio_player")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
@@ -36,6 +36,7 @@ hovered_style = NodePath("Background/CenterContainer/HoveredStyle")
 selected_style = NodePath("Background/CenterContainer/SelectedStyle")
 invalid_style = NodePath("Background/CenterContainer/InvalidStyle")
 item_count_label = NodePath("RichTextLabel")
+audio_player = NodePath("AudioStreamPlayer")
 
 [node name="Background" type="TextureRect" parent="." unique_id=855334482]
 custom_minimum_size = Vector2(32, 32)
@@ -98,6 +99,10 @@ theme_override_font_sizes/normal_font_size = 13
 text = "12"
 autowrap_mode = 0
 horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=335642320]
+volume_db = -10.23
+pitch_scale = 0.67
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

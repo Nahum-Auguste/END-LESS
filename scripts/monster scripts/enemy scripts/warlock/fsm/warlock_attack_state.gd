@@ -17,11 +17,18 @@ var orb_burst_attack_max_orb_count = 5
 var orb_burst_attack_initial_direction: Vector2 = Vector2.ZERO
 var orb_attack_prefab = preload("res://scenes/enemies/warlock/warlock_orb_attack.tscn")
 
+@export var audio_player: AudioStreamPlayer2D
+
+
 func enter():
 	body = fsm.body
 	player = InventoryManager.player
 	body.speed = body.base_speed 
 	#print("attack state entered")
+	
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/alerted.wav")
+		audio_player.play()
 	
 	if !player: exit()
 	

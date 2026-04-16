@@ -31,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bxf5lmevd67uq" path="res://scenes/objects/level_door.tscn" id="26_s2ajb"]
 [ext_resource type="PackedScene" uid="uid://ccfwix6jnvno5" path="res://scenes/ui/dialogue_box.tscn" id="27_ycobs"]
 
-[sub_resource type="Resource" id="Resource_gv0wa"]
+[sub_resource type="Resource" id="Resource_3bbsu"]
 script = ExtResource("5_p2tv1")
 range = 5.0
 damage = 4.0
@@ -2600,7 +2600,7 @@ z_index = -1
 position = Vector2(-80, 82)
 rotation = 1.2742105
 scale = Vector2(0.99999994, 0.99999994)
-item = SubResource("Resource_gv0wa")
+item = SubResource("Resource_3bbsu")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider")]
 position = Vector2(726, -158)
@@ -2751,9 +2751,9 @@ locked = false
 
 [node name="DialogueBox" parent="CanvasLayer" unique_id=1149130560 instance=ExtResource("27_ycobs")]
 visible = false
-offset_left = 124.0
+offset_left = 218.5
 offset_top = 474.0
-offset_right = 850.0
+offset_right = 944.5
 offset_bottom = 710.0
 paragraphs = Array[String](["Since this soldier is ready now, we should quickly move on to the next batch of candidates to resurrect.", "We need to meet our quota before our next onslaught on the villages in Maqel, or else we'll be the ones needing a resurrection. ", "Any more mishaps with you two will NOT be accepted.", "Before we move on to the next round of bodies, I will need to gather some more supplies for our trip, so you two can wait here until I get back. "])
 paragraph_step = 0

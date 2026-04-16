@@ -9,6 +9,9 @@ class_name GiantSpider extends Enemy
 @export_range(0,10,1) var min_spiderlings:float = 3
 @export_range(0,30,1) var max_spiderlings:float = 10
 @onready var is_mother: bool = true
+
+@export var audio_player: AudioStreamPlayer2D
+
 var spiderlings : int = 0
 var sprint_mult = 1.7
 var detection_range
@@ -21,7 +24,12 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 	#add_possible_item_drop_data(ItemData.get_item_id_by_name("giant spider fangs"),.7,1,4)
 	#populate_items()
-
+	
+func inflict_damage(dmg: float):
+	super.inflict_damage(dmg)
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/spider/spider_cry2.wav") if randi() % 2 else load("res://assets/sfx/enemies/spider/spider_cry.wav")
+		audio_player.play()
 
 func _ready():
 	
@@ -60,6 +68,9 @@ func _physics_process(delta):
 	if movement_velocity:
 		sprite.rotation = rotate_toward(sprite.rotation, movement_velocity.angle() - deg_to_rad(90), deg_to_rad(250) * delta)
 		hitbox.rotation = sprite.rotation
+		#if audio_player:
+			#audio_player.stream = load("res://assets/sfx/enemies/spider/spider_footstep1.wav") if randi()%2 else load("res://assets/sfx/enemies/spider/spider_footstep2.wav")
+			#audio_player.play()
 		sprite.play()
 	else:
 		sprite.stop()

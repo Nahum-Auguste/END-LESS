@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="8_wlx7i"]
 [ext_resource type="Resource" uid="uid://c6hmq57qv6xrq" path="res://resources/items/armor/chests/soldier_breastplate.tres" id="9_vh1xd"]
 [ext_resource type="Resource" uid="uid://ca1v8po2dp3tr" path="res://resources/items/armor/helmets/soldiers_helm.tres" id="10_a4txv"]
-[ext_resource type="Resource" uid="uid://bkbml5gixq17b" path="res://resources/items/drops/essence_of_warlock_power.tres" id="10_wvf3s"]
+[ext_resource type="Script" uid="uid://b2xswthighddu" path="res://scripts/item scripts/item.gd" id="10_irmdm"]
+[ext_resource type="Texture2D" uid="uid://dl3l2xbkrd1hl" path="res://assets/sprites/items/drops/warlock/essense_of_warlock_power.png" id="11_88vtx"]
 [ext_resource type="Resource" uid="uid://c2t8ebljnm51i" path="res://resources/items/accessories/elder_warlock_collar.tres" id="11_irmdm"]
-[ext_resource type="Resource" uid="uid://bht3yq0ob73g7" path="res://resources/items/drops/giant_spider_fangs.tres" id="11_k0dhc"]
 [ext_resource type="Resource" uid="uid://cw0vlq3qgnr8w" path="res://resources/items/accessories/promise_ring.tres" id="12_6blhq"]
 [ext_resource type="Resource" uid="uid://c7h378qbqqjkx" path="res://resources/items/accessories/giant_bat_wing.tres" id="13_wvf3s"]
+[ext_resource type="Texture2D" uid="uid://0ywmbhfx74xx" path="res://assets/sprites/items/drops/giant_spider/giant_spider_fangs.png" id="14_i7xa1"]
 [ext_resource type="Resource" uid="uid://dedhhn0x05a1y" path="res://resources/items/accessories/tattered_scarf.tres" id="14_k0dhc"]
 [ext_resource type="Resource" uid="uid://rv8l0xq62be8" path="res://resources/items/accessories/severed_elder_warlock_finger.tres" id="15_6blhq"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="18_k0dhc"]
@@ -24,6 +25,19 @@
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdv1v"]
 vertices = PackedVector2Array(234, -86, 266, -10, 214, -10, -150, -22, 54, -86, 150, 138, 266, 138, 374, 214, -150, 214, -150, 150, 374, -214, 22, -214, 22, -118, -150, -106, -214, -118, -214, -202, -342, -214, -298, -202, -298, -170, -330, -170, -342, 214, -330, -86, 54, -118, 234, -202, 106, -202, 106, -214, -266, -106, -278, -118, -278, -86, -266, -74, -298, -74, -182, 118, -214, 10, -214, -22, 150, -10, 214, 22, 202, 22, 202, -10, -182, 150, -330, 202, -234, 202, -234, 214, -330, 118, -298, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 7, 6, 1), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 11, 15, 17), PackedInt32Array(17, 18, 19, 16), PackedInt32Array(20, 16, 19, 21), PackedInt32Array(12, 22, 4, 3, 13), PackedInt32Array(23, 24, 25, 10), PackedInt32Array(23, 10, 1, 0), PackedInt32Array(14, 13, 26, 27), PackedInt32Array(28, 27, 26, 29), PackedInt32Array(28, 29, 30, 21), PackedInt32Array(5, 9, 31, 32, 33, 3, 34), PackedInt32Array(2, 35, 36, 37), PackedInt32Array(3, 2, 37), PackedInt32Array(3, 37, 34), PackedInt32Array(9, 38, 31), PackedInt32Array(39, 40, 41, 20), PackedInt32Array(32, 31, 42, 43), PackedInt32Array(21, 30, 43, 42), PackedInt32Array(42, 39, 20), PackedInt32Array(42, 20, 21)])
+
+[sub_resource type="Resource" id="Resource_irmdm"]
+script = ExtResource("10_irmdm")
+name = "Essence of Warlock Power"
+texture = ExtResource("11_88vtx")
+max_stack_count = 23
+stack_count = 3
+
+[sub_resource type="Resource" id="Resource_88vtx"]
+script = ExtResource("10_irmdm")
+name = "Giant Spider Fangs"
+texture = ExtResource("14_i7xa1")
+max_stack_count = 4
 
 [node name="EnemyTestingScene" type="Node2D" unique_id=2065702540 node_paths=PackedStringArray("player")]
 y_sort_enabled = true
@@ -47,7 +61,7 @@ tile_set = ExtResource("2_lht80")
 navigation_enabled = false
 
 [node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_m6wgr")]
-position = Vector2(492, -2)
+position = Vector2(157, 221)
 orb_burst_attack_cone = 95.0
 eye_frame_duration = 0.15
 
@@ -63,7 +77,7 @@ item = ExtResource("9_vh1xd")
 
 [node name="ItemDrop9" parent="ItemDrops" unique_id=523665962 instance=ExtResource("8_wlx7i")]
 position = Vector2(-108, 195)
-item = ExtResource("10_wvf3s")
+item = SubResource("Resource_irmdm")
 
 [node name="ItemDrop8" parent="ItemDrops" unique_id=366432455 instance=ExtResource("8_wlx7i")]
 position = Vector2(-66, 223)
@@ -75,7 +89,7 @@ item = ExtResource("10_a4txv")
 
 [node name="ItemDrop3" parent="ItemDrops" unique_id=31801872 instance=ExtResource("8_wlx7i")]
 position = Vector2(-140, 246)
-item = ExtResource("11_k0dhc")
+item = SubResource("Resource_88vtx")
 
 [node name="ItemDrop4" parent="ItemDrops" unique_id=274687931 instance=ExtResource("8_wlx7i")]
 position = Vector2(-59, 293)
@@ -102,3 +116,5 @@ position = Vector2(-398, -23)
 [node name="LevelDoor" parent="." unique_id=1277415400 instance=ExtResource("20_wvf3s")]
 position = Vector2(67, 124)
 locked = false
+
+[node name="GiantSpider2" parent="." unique_id=78834954 instance=ExtResource("18_k0dhc")]

@@ -12,6 +12,8 @@ var teleport_anchor: Monster
 var timer: Timer = Timer.new()
 @export_range(0.1,10,.25) var wait_time: float = 1
 
+@export var audio_player: AudioStreamPlayer2D
+
 func _ready():
 	super._ready()
 	body_area_copy.set_collision_mask_value(LayerConstants.AttackableObjectsLayer,true)
@@ -40,7 +42,11 @@ func enter():
 	if teleport_origin_type == "player" and body.player:
 		teleport_anchor = InventoryManager.player
 	timer.start()
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/misc/teleport.wav")
+		audio_player.play()
 	await timer.timeout 
+	
 	teleport()
 		
 func exit():

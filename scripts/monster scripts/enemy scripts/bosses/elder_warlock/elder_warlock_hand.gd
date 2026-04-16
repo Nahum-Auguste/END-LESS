@@ -1,6 +1,7 @@
 @tool
 class_name ElderWarlockHand extends Node2D
 
+@export var audio_player: AudioStreamPlayer2D
 @onready var emitter_node: Node2D = $Sprite/HandCenter
 @onready var animator: AnimationPlayer = $Sprite/AnimationPlayer
 @export var body: ElderWarlock
@@ -47,9 +48,13 @@ func play_animation(animation: String, speed: float = 1, on_finish: Callable = f
 	
 	
 func do_clone_spell():
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/warlock/clone.wav")
+		audio_player.play()
 	var real_warlock = body.real_warlock
 	if body != real_warlock: return
 	if real_warlock.clones.size() >= real_warlock.max_clones: return
+	
 	
 	var clone: ElderWarlock = elder_warlock_prefab.instantiate()
 	
@@ -104,6 +109,9 @@ func spawn_orb_pool():
 	
 	
 func teleport(speed:float = body.teleport_speed):
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/misc/teleport.wav")
+		audio_player.play()
 	body.is_teleporting = false
 	play_animation("teleport",speed)
 	

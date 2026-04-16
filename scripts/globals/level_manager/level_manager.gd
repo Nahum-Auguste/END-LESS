@@ -148,7 +148,8 @@ func fade_in_black_screen(time:float):
 signal black_screen_finished()
 
 func _process(delta):
-	InventoryManager.player = player
+	if player:
+		InventoryManager.player = player
 	player_inventory = player_hud.player_inventory
 	if audio_player:
 		audio_player.volume_db = linear_to_db(music_volume )
@@ -176,6 +177,9 @@ func handle_player_death():
 	pause_after_player_death_timer.start()
 	level = clamp(level-1,0,1000)
 	audio_player.stop()
+	audio_player.stream = load("res://assets/sfx/player/death.wav")
+	audio_player.play()
+	#audio_player.stop()
 	
 func pause_level():
 	game_level.process_mode = Node.PROCESS_MODE_DISABLED
@@ -208,6 +212,9 @@ func display_continue_screen():
 	#await  tween.finished
 	#drawer_node.drawing_dead_player = false
 	fade_out_black_screen(2)
+	var t2 = create_tween()
+	t2.tween_property(drawer_node,"dead_player_texture_opacity",0,2)
+	await t2.finished
 	transition_to_scene(game_level,Scene.ContinueScreen)
 	#if game_level:
 		#game_level.queue_free()

@@ -25,6 +25,7 @@ var detection_range
 
 var sprint_mult := 1.2
 
+@export var audio_player: AudioStreamPlayer2D
 
 
 func _init(health:float=15,max_health:float=15) -> void:
@@ -143,7 +144,11 @@ func attack(body: Player):
 	attack_interval_timer.start()
 	body.inflict_damage(attack_damage)
 
-
+func inflict_damage(dmg: float):
+	super.inflict_damage(dmg)
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/bat_swarm/bat_swarm_cry1.wav") if randi() %2 else load("res://assets/sfx/enemies/bat_swarm/bat_swarm_cry2.wav")
+		audio_player.play()
 func is_player_in_detection_area()->bool:
 	var bodies : Array = $DetectionArea.get_overlapping_bodies()
 	return player and player in bodies

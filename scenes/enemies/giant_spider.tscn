@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://bcbn8tpdufhq7" path="res://scripts/finite state machine scripts/common states/wander_state.gd" id="2_svrsm"]
 [ext_resource type="Script" uid="uid://cy0ejmea03wwo" path="res://scripts/monster scripts/enemy scripts/giant spider/fsm/giant_spider_attack_state.gd" id="4_8wk86"]
 [ext_resource type="PackedScene" uid="uid://4jxucksd3mvr" path="res://scenes/utility/ray_cast_checker.tscn" id="5_56y82"]
+[ext_resource type="PackedScene" uid="uid://ccpwpuoblpote" path="res://scenes/utility/walk_audio_player.tscn" id="8_nfrcs"]
+[ext_resource type="AudioStream" uid="uid://csgmkmkhh0me5" path="res://assets/sfx/enemies/spider/spider_walk.wav" id="9_4g0ci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvp8k"]
 size = Vector2(32, 29)
@@ -60,7 +62,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3pyh"]
 radius = 9.0
 
-[node name="GiantSpider" type="CharacterBody2D" unique_id=147954774 node_paths=PackedStringArray("fsm")]
+[node name="GiantSpider" type="CharacterBody2D" unique_id=147954774 node_paths=PackedStringArray("audio_player", "fsm")]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
@@ -68,6 +70,7 @@ platform_floor_layers = 0
 script = ExtResource("1_j3pyh")
 base_detection_range = 96.0
 attack_detection_range = 163.0
+audio_player = NodePath("AudioStreamPlayer2D")
 fsm = NodePath("GiantSpiderFSM")
 
 [node name="GiantSpiderFSM" type="Node" parent="." unique_id=2054793489 node_paths=PackedStringArray("wander_state", "attack_state", "ray_checker", "body", "nav_agent", "detection_area")]
@@ -138,6 +141,17 @@ avoidance_enabled = true
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0.36078432, 1, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1637979673]
+max_distance = 112.0
+
+[node name="WalkAudioPlayer" parent="." unique_id=1156980005 node_paths=PackedStringArray("body") instance=ExtResource("8_nfrcs")]
+volume_db = -16.269
+max_distance = 327.0
+interval = 0.2
+body = NodePath("..")
+walks = Array[AudioStreamWAV]([ExtResource("9_4g0ci")])
+velocity_threshold = 100.0
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

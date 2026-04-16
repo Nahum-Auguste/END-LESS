@@ -80,27 +80,31 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="WeaponSlots" type="VBoxContainer" parent="." unique_id=142993711]
-layout_mode = 0
-offset_left = 1089.0001
-offset_top = -37.0
-offset_right = 1203.0001
-offset_bottom = 77.0
+[node name="WeaponSlots" type="Control" parent="." unique_id=216770996]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 1147.0001
+offset_top = 20.000004
+offset_right = 1147.0001
+offset_bottom = 20.000004
 scale = Vector2(2.455, 2.455)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 0
 
 [node name="MainWeaponSlot" parent="WeaponSlots" unique_id=1863084595 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
+layout_mode = 0
+offset_left = 1.2219462
+offset_top = -0.40733352
+offset_right = 71.22195
+offset_bottom = 69.59267
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
 [node name="SecondaryWeaponSlot" parent="WeaponSlots" unique_id=1538624252 instance=ExtResource("3_x7jc0")]
 visible = false
 custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
+layout_mode = 0
 
 [node name="DrawingNode" type="Control" parent="." unique_id=1732735798]
 anchors_preset = 0

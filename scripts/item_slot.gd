@@ -11,6 +11,7 @@ class_name ItemSlot extends Control
 @export var disabled: bool = false
 @export var inventory: Inventory
 @export var item_count_label: RichTextLabel
+@export var audio_player: AudioStreamPlayer
 var equipped:bool = false
 var last_equipped: Armor
 var mouse_hovered: bool = false
@@ -119,6 +120,9 @@ func _exit_tree():
 func _on_mouse_entered():
 	mouse_hovered = true
 	InventoryManager.hovered_slot = self
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/misc/hover_or_select.wav")
+		audio_player.play()
 		
 
 

@@ -22,6 +22,7 @@ func _ready():
 	parent = get_parent()
 	nav_agent.target_position = parent.global_position
 	enter_state(idle_state)
+	#
 	#if !parent.is_clone():
 		#enter_state(clone_state)
 	

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ccpwpuoblpote"]
+
+[ext_resource type="Script" uid="uid://367c0205aeit" path="res://scripts/utility/walk_audio_player.gd" id="1_vhgbx"]
+
+[node name="WalkAudioPlayer" type="AudioStreamPlayer2D" unique_id=1156980005]
+volume_db = -8.425
+max_distance = 181.0
+script = ExtResource("1_vhgbx")
+velocity_threshold = 2010.0
+
+[node name="Timer" type="Timer" parent="." unique_id=577431982]
+wait_time = 0.4
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -3,6 +3,7 @@ class_name ElderWarlockCloneState extends ElderWarlockAttackState
 
 @export_range(1,7,1) var max_clones: = 5
 
+@export var audio_player: AudioStreamPlayer2D
 
 @onready var clone_timer: Timer = Timer.new()
 
@@ -15,6 +16,9 @@ func _ready():
 	clone_timer.wait_time = .5
 	
 func enter():
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/warlock/clone.wav")
+		audio_player.play()
 	clone_timer.start()
 	if body is ElderWarlock:
 		body.real_warlock.max_clones = max_clones

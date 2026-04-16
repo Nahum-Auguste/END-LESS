@@ -13,6 +13,7 @@ class_name Warlock extends Enemy
 @export_range(0,500,1) var max_teleportation_range:float = 150
 @export_range(0,10,.5) var teleport_interval :float = 1.5
 @export_range(0,180,5) var orb_burst_attack_cone :float = 145
+@export var audio_player: AudioStreamPlayer2D
 
 @onready var detection_shape: CircleShape2D = $DetectionArea/CollisionShape2D.shape
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -30,6 +31,12 @@ var speed_angle = 0
 
 func _init(health:float=30,max_health:float=30) -> void:
 	super._init(health,max_health)
+	
+func inflict_damage(dmg: float):
+	super.inflict_damage(dmg)
+	if audio_player:
+		audio_player.stream = load("res://assets/sfx/enemies/warlock/warlock_cry.wav")
+		audio_player.play()
 
 func _ready():
 	
