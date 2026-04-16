@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_qe0jy")
+stamina_points = 2
 defense = 10
 speed = 5
 name = "Elder Warlock Collar"

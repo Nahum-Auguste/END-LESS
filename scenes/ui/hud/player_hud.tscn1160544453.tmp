@@ -47,15 +47,14 @@ offset_bottom = 49.0
 
 [node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=227969146]
 layout_mode = 0
-offset_left = 814.00006
+offset_left = 866.0
 offset_top = 22.0
-offset_right = 1084.0
+offset_right = 1136.0
 offset_bottom = 82.0
-scale = Vector2(1.445, 1.445)
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 0
-theme_override_constants/separation = -3
+theme_override_constants/separation = 10
 
 [node name="HotBarSlot" parent="ConsumablesContainer" unique_id=176156144 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(60, 60)
@@ -83,11 +82,10 @@ size_flags_vertical = 8
 
 [node name="WeaponSlots" type="VBoxContainer" parent="." unique_id=142993711]
 layout_mode = 0
-offset_left = 1089.0001
-offset_top = -37.0
-offset_right = 1203.0001
-offset_bottom = 77.0
-scale = Vector2(2.455, 2.455)
+offset_left = 1141.0
+offset_top = 23.0
+offset_right = 1255.0
+offset_bottom = 137.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 0
@@ -95,8 +93,8 @@ mouse_filter = 0
 [node name="MainWeaponSlot" parent="WeaponSlots" unique_id=1863084595 instance=ExtResource("3_x7jc0")]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_horizontal = 1
+size_flags_vertical = 3
 
 [node name="SecondaryWeaponSlot" parent="WeaponSlots" unique_id=1538624252 instance=ExtResource("3_x7jc0")]
 visible = false

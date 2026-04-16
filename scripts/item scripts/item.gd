@@ -38,7 +38,7 @@ func get_formatted_property_list():
 		if !(prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE) : continue 
 		var prop_name = prop.name
 		var val = self[prop_name]
-		if (val is Object or val is Array or prop_name=="name" or "max" in prop_name): continue
+		if (val is Object or val is Array or prop_name=="name" or "max" in prop_name or "user" in prop_name): continue
 		list.push_back({"name":prop_name})
 	
 	return list

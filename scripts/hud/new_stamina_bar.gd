@@ -21,7 +21,7 @@ func _process(delta):
 		player = LevelManager.player
 		
 	if player:
-		max_stamina_points = player.max_stamina_ppints
+		max_stamina_points = player.max_stamina_points
 		stamina_points = player.stamina_points
 		
 	

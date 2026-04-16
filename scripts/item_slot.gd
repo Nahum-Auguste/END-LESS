@@ -11,6 +11,8 @@ class_name ItemSlot extends Control
 @export var disabled: bool = false
 @export var inventory: Inventory
 @export var item_count_label: RichTextLabel
+var equipped:bool = false
+var last_equipped: Armor
 var mouse_hovered: bool = false
 
 var context_menu: ItemContextMenu
@@ -31,6 +33,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if item_type == Armor or item_type == HelmetArmor or item_type == Accessory or item_type == ChestArmor:
+		if !equipped and item and item is Armor:
+			equipped = true
+			last_equipped = item
+			item.on_equip(LevelManager.player)
+		if !item and equipped:
+			equipped = false
+			last_equipped.on_unequip(LevelManager.player)
+	
 	#queue_redraw()
 	load_item_data()
 	selected_style.visible = InventoryManager.selected_slot == self if !disabled else selected_style.visible

@@ -1,21 +1,45 @@
 [gd_scene format=3 uid="uid://dy51o0d56utat"]
 
 [ext_resource type="Texture2D" uid="uid://ceh3pec6mujsb" path="res://assets/sprites/ui/boneframe.png" id="1_00h0i"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="2_6w6p1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w6p1"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[node name="HotBarSlot" type="PanelContainer" unique_id=176156144]
+[node name="HotBarSlot" type="Control" unique_id=1824803409]
+clip_contents = true
 custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 44.0
 offset_bottom = 44.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_6w6p1")
 
 [node name="TextureRectBackground" type="TextureRect" parent="." unique_id=855334482]
-layout_mode = 2
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 44.0
 texture = ExtResource("1_00h0i")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=642685595]
-layout_mode = 2
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 44.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1023496826]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 23.0
+offset_right = 39.0
+offset_bottom = 39.0
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.8124056, 0.8124056, 0.8124054, 0.63529414)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("2_6w6p1")
+theme_override_font_sizes/normal_font_size = 16
+text = "12"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2

@@ -1,7 +1,8 @@
-class_name Armor extends Item
+class_name Armor extends InteractableItem
 
 @export var defense: int = 0
 @export var speed: int = 0
+
 var user: Monster
 
 @export var imbuements: Array[Imbuement] = []
@@ -18,15 +19,17 @@ func set_defense(def):
 
 func on_equip(user : Monster):
 	self.user = user
-	user.defense += defense
-	user.base_speed += speed
+	user.base_defense += defense
+	user.base_speed += speed * 50
+	print("equipped")
 	#print("user gained ",defense," defense!")
 	#print("user gained ",speed," speed!")
 	
-func on_unequip():
-	user.defense -= defense
-	user.base_speed -= speed
+func on_unequip(user: Monster):
+	if !user: return
+	user.base_defense -= defense
+	user.base_speed -= speed * 100
+	print("unequipped")
 	#print("user lost ",defense," defense!")
 	#print("user lost ",speed," speed!")
-	user = null
 	pass

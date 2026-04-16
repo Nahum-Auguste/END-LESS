@@ -91,10 +91,10 @@ func equip_item_from_slot(outslot:ItemSlot):
 	
 	if item is Weapon:
 		inslot = find_inslot.call(player_inventory.weapon_slots_container)
-	elif item is Armor:
-		inslot = find_inslot.call(player_inventory.armor_slots_container)
 	elif item is Accessory:
 		inslot = find_inslot.call(player_inventory.accessory_slots_container)
+	elif item is Armor:
+		inslot = find_inslot.call(player_inventory.armor_slots_container)
 	elif item is Consumable:
 		inslot = find_inslot.call(player_inventory.consumable_slots_container)
 		
@@ -102,6 +102,8 @@ func equip_item_from_slot(outslot:ItemSlot):
 		var tmp = inslot.item
 		inslot.item = outslot.item
 		outslot.item = tmp
+		#if item is Armor and player:
+			#item.on_equip(player)
 	
 func equip_item_from_drop(drop:ItemDrop):
 	var item = drop.item
@@ -119,14 +121,16 @@ func equip_item_from_drop(drop:ItemDrop):
 		return null
 	
 	
+	
 	if item is Weapon:
 		inslot = find_inslot.call(player_inventory.weapon_slots_container)
-	elif item is Armor:
-		inslot = find_inslot.call(player_inventory.armor_slots_container)
 	elif item is Accessory:
 		inslot = find_inslot.call(player_inventory.accessory_slots_container)
+	elif item is Armor:
+		inslot = find_inslot.call(player_inventory.armor_slots_container)
 	elif item is Consumable:
 		inslot = find_inslot.call(player_inventory.consumable_slots_container)
+		
 		
 	if inslot:
 		#var ii = inslot.item
@@ -136,6 +140,8 @@ func equip_item_from_drop(drop:ItemDrop):
 		
 		inslot.item = drop.item
 		drop.item = null
+		#if item is Armor and player:
+			#item.on_equip(player)
 	
 	
 func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
@@ -144,10 +150,18 @@ func swap_items(in_slot:ItemSlot,out_slot:ItemSlot):
 	if !is_instance_of(out_slot.item,in_slot.item_type): return
 	
 	if try_stack_items(out_slot,in_slot): return
+	
+	#if in_slot.item_type==Armor and in_slot.item and in_slot.item is Armor:
+		#in_slot.item.on_equip(player)
+		#
+	#if out_slot.item_type==Armor and out_slot.item and out_slot.item is Armor:
+		#out_slot.item.on_unequip()
 
 	var tmp :Item = in_slot.item
 	in_slot.item = out_slot.item
 	out_slot.item = tmp
+	
+	
 				
 func try_stack_items(outslot:ItemSlot,inslot:ItemSlot)->bool:
 	var initial_out = outslot.item.stack_count
@@ -294,9 +308,15 @@ func drop_item(selected_slot:ItemSlot):
 	var inventory : Inventory = selected_slot.inventory
 	if inventory.is_mouse_hovered: return
 	var item_drop :ItemDrop = item_drop_prefab.instantiate()
+	
+	#if selected_slot.item and selected_slot.item is Armor and selected_slot.item_type==Armor:
+		#selected_slot.item.on_unequip(player)
+	
 	item_drop.item = selected_slot.item
 	selected_slot.item = null
 	selected_slot = null
 	player.add_sibling(item_drop)
 	player.get_parent().move_child(item_drop,player.get_index())
 	item_drop.global_position = player.global_position
+	
+	

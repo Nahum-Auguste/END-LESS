@@ -7,8 +7,11 @@ var items: Array[Item] = []
 var inventory:PlayerInventory
 var pickupable_item_drops: Array[ItemDrop] = []
 var pickupable_item_drop: ItemDrop
-@export_range(0,30,1) var max_stamina_ppints = 4
+@export_range(0,30,1) var max_stamina_points = 4
 var stamina_points
+
+var bonus_speed :float = 0
+var bonus_stamina_points = 0
 
 @export var max_dodges = 3
 var dodges
@@ -41,7 +44,7 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 
 func _ready() -> void:
-	stamina_points = max_stamina_ppints
+	stamina_points = max_stamina_points
 	dodges = max_dodges
 	super._ready()
 	LevelManager.player = self
@@ -86,7 +89,7 @@ func _input(event):
 func on_dodge():
 	stamina_regen_timer.stop()
 		
-	stamina_points = clamp(0,stamina_points-1,max_stamina_ppints)
+	stamina_points = clamp(0,stamina_points-1,max_stamina_points)
 	dodge_timer.wait_time = dodge_duration
 	var dir = get_direction()
 	sprite.animation = "dodge_" + dir
@@ -197,16 +200,37 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	inventory = InventoryManager.player_hud.player_inventory
+	
+	print(base_speed)
+	print(base_defense)
+	
+	
+	#bonus_speed = 0
+	#defense = 0
+	#bonus_stamina_points = 0
+	#if inventory:
+		#for item in [inventory.get_slots_container_items(inventory.armor_slots_container) + inventory.get_slots_container_items(inventory.accessory_slots_container)]:
+			#if item is Armor:
+				#bonus_speed += item.speed
+				#defense += item.defense
+				#
+			#if item is Accessory:
+				#bonus_stamina_points += item.stamina_points
+				#
+	#print(bonus_speed)
+	#print(defense)
+	#print(bonus_stamina_points)
+	
 	if !alive:
 		#print("hi")
 		eye_frame_timer.stop()
 		
-	if stamina_points < max_stamina_ppints and stamina_regen_timer.is_stopped():
+	if stamina_points < max_stamina_points and stamina_regen_timer.is_stopped():
 		#print("started")
 		stamina_regen_timer.start()
 		
 		
-	if stamina_points >= max_stamina_ppints and !stamina_regen_timer.is_stopped():
+	if stamina_points >= max_stamina_points and !stamina_regen_timer.is_stopped():
 		stamina_regen_timer.stop()
 		
 	#print(pickupable_item_drop)
@@ -367,5 +391,5 @@ func _on_dodge_timer_timeout():
 
 
 func _on_stamina_regen_timer_timeout():
-	stamina_points = clamp(stamina_points+1,0,max_stamina_ppints)
+	stamina_points = clamp(stamina_points+1,0,max_stamina_points)
 	#print(stamina_points)

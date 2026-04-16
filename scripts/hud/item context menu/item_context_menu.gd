@@ -39,6 +39,9 @@ func _process(delta):
 	use_button.visible = item is Consumable
 	parse_item_data()
 	
+	#if player_inventory:
+		#print(player_inventory.is_item_equipped(item))
+	#
 	#print(context == "item slot" and item is InteractableItem and player_inventory and player_inventory.is_item_equipped(item))
 	
 	#print(item_slot)
@@ -116,6 +119,8 @@ func _on_unequip_button_button_up():
 				s.item = item
 				item_slot.item = null
 				visible = false
+				if item is Armor:
+					item.on_unequip()
 				return
 
 

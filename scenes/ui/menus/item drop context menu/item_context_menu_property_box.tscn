@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ig1oewb2vkm2"]
 
 [ext_resource type="Script" uid="uid://c73nyn5oltg5v" path="res://scripts/hud/item context menu/item_context_menu_property_box.gd" id="1_gtdfr"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="2_67b4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxn8o"]
 bg_color = Color(0.093160845, 0.093160845, 0.0931608, 1)
@@ -46,8 +47,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ms50r")
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 7
-text = "prop name"
+theme_override_fonts/normal_font = ExtResource("2_67b4r")
+theme_override_font_sizes/normal_font_size = 10
 fit_content = true
 scroll_active = false
 vertical_alignment = 1
@@ -56,8 +57,9 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 7
-text = "value"
+theme_override_fonts/normal_font = ExtResource("2_67b4r")
+theme_override_font_sizes/normal_font_size = 10
+text = "<null>"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

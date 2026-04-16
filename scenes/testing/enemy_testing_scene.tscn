@@ -47,7 +47,7 @@ tile_set = ExtResource("2_lht80")
 navigation_enabled = false
 
 [node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_m6wgr")]
-position = Vector2(315, 34)
+position = Vector2(492, -2)
 orb_burst_attack_cone = 95.0
 eye_frame_duration = 0.15
 
@@ -58,37 +58,46 @@ max_items = 8.0
 [node name="ItemDrops" type="Node2D" parent="." unique_id=521893213]
 
 [node name="ItemDrop" parent="ItemDrops" unique_id=1852501480 instance=ExtResource("8_wlx7i")]
+position = Vector2(-124, 164)
 item = ExtResource("9_vh1xd")
 
 [node name="ItemDrop9" parent="ItemDrops" unique_id=523665962 instance=ExtResource("8_wlx7i")]
+position = Vector2(-108, 195)
 item = ExtResource("10_wvf3s")
 
 [node name="ItemDrop8" parent="ItemDrops" unique_id=366432455 instance=ExtResource("8_wlx7i")]
+position = Vector2(-66, 223)
 item = ExtResource("11_irmdm")
 
 [node name="ItemDrop2" parent="ItemDrops" unique_id=1275624557 instance=ExtResource("8_wlx7i")]
+position = Vector2(-12, 228)
 item = ExtResource("10_a4txv")
 
 [node name="ItemDrop3" parent="ItemDrops" unique_id=31801872 instance=ExtResource("8_wlx7i")]
+position = Vector2(-140, 246)
 item = ExtResource("11_k0dhc")
 
 [node name="ItemDrop4" parent="ItemDrops" unique_id=274687931 instance=ExtResource("8_wlx7i")]
+position = Vector2(-59, 293)
 item = ExtResource("12_6blhq")
 
 [node name="ItemDrop5" parent="ItemDrops" unique_id=1829310849 instance=ExtResource("8_wlx7i")]
+position = Vector2(58, 268)
 item = ExtResource("13_wvf3s")
 
 [node name="ItemDrop6" parent="ItemDrops" unique_id=1555619431 instance=ExtResource("8_wlx7i")]
+position = Vector2(80, 202)
 item = ExtResource("14_k0dhc")
 
 [node name="ItemDrop7" parent="ItemDrops" unique_id=1890328110 instance=ExtResource("8_wlx7i")]
+position = Vector2(-53, 163)
 item = ExtResource("15_6blhq")
 
 [node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("18_k0dhc")]
 position = Vector2(-141, -181)
 
 [node name="BatSwarm" parent="." unique_id=1469739853 instance=ExtResource("19_6blhq")]
-position = Vector2(-111, 62)
+position = Vector2(-398, -23)
 
 [node name="LevelDoor" parent="." unique_id=1277415400 instance=ExtResource("20_wvf3s")]
 position = Vector2(67, 124)
