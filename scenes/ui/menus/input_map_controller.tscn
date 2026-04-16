@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://uxkne111lkf1"]
+[gd_scene format=3 uid="uid://daorunfnmyihe"]
 
 [node name="InputButton" type="Button" unique_id=1242320189]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 42)
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 8.0
+offset_top = 20.0
+offset_bottom = 62.0
 grow_horizontal = 2
 focus_mode = 0
 
@@ -34,9 +35,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="Input" type="Label" parent="MarginContainer/HBoxContainer" unique_id=19032126]
+[node name="Input" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1166478608]
+clip_contents = true
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "input bind"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://uxkne111lkf1" path="res://scenes/ui/menus/input_map.tscn" id="1_jqri8"]
 [ext_resource type="Script" uid="uid://yt271dg6ec4q" path="res://scenes/ui/menus/kbmcontrols.gd" id="1_nke8k"]
 [ext_resource type="Script" uid="uid://fnktjjrhlu84" path="res://scenes/ui/menus/nintendo_controls.gd" id="3_lbh2v"]
+[ext_resource type="PackedScene" uid="uid://daorunfnmyihe" path="res://scenes/ui/menus/input_map_controller.tscn" id="4_libdt"]
 
 [node name="Controls" type="Control" unique_id=1495023173]
 layout_mode = 3
@@ -76,19 +77,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="InputButton" parent="NintendoControls/ActionList" unique_id=421928565 instance=ExtResource("1_jqri8")]
+[node name="InputButton" parent="NintendoControls/ActionList" unique_id=1901161374 instance=ExtResource("4_libdt")]
 layout_mode = 2
 
-[node name="InputButton2" parent="NintendoControls/ActionList" unique_id=916257257 instance=ExtResource("1_jqri8")]
+[node name="InputButton2" parent="NintendoControls/ActionList" unique_id=1172552155 instance=ExtResource("4_libdt")]
 layout_mode = 2
 
-[node name="InputButton3" parent="NintendoControls/ActionList" unique_id=1246226954 instance=ExtResource("1_jqri8")]
+[node name="InputButton3" parent="NintendoControls/ActionList" unique_id=733401862 instance=ExtResource("4_libdt")]
 layout_mode = 2
 
-[node name="InputButton4" parent="NintendoControls/ActionList" unique_id=934222379 instance=ExtResource("1_jqri8")]
+[node name="InputButton4" parent="NintendoControls/ActionList" unique_id=492625622 instance=ExtResource("4_libdt")]
 layout_mode = 2
 
-[node name="InputButton5" parent="NintendoControls/ActionList" unique_id=1116006247 instance=ExtResource("1_jqri8")]
+[node name="InputButton5" parent="NintendoControls/ActionList" unique_id=1954523033 instance=ExtResource("4_libdt")]
 layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="NintendoControls" unique_id=723391433]
