@@ -21,11 +21,12 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eklif"]
 
-[node name="WarlockOrbAttack" type="AnimatedSprite2D" unique_id=1295167047 node_paths=PackedStringArray("life_timer")]
+[node name="WarlockOrbAttack" type="AnimatedSprite2D" unique_id=1295167047 node_paths=PackedStringArray("life_timer", "hurt_box")]
 scale = Vector2(0.615, 0.615)
 sprite_frames = SubResource("SpriteFrames_tesvw")
 script = ExtResource("2_h56ha")
 life_timer = NodePath("LifeTimer")
+hurt_box = NodePath("HurtBox")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1170333245]
 collision_layer = 8

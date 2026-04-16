@@ -7,7 +7,16 @@ enum ItemID {
 	SmallBottleOfCalciumOintment,
 	DenseCalciumInfusion,
 	JeremiahsLongbow,
-	SturdyBroadSword
+	SturdyBroadSword,
+	SeveredElderWarlockFinger,
+	GiantBatWing,
+	SoldiersHelm,
+	SoldierBreastplate,
+	ElderWarlockCollar,
+	TatteredScarf,
+	GiantSpiderFangs,
+	EssenceOfWarlockPower,
+	PromiseRing,
 }
 
 static var item_resources : Dictionary[int, Item] = {
@@ -15,7 +24,16 @@ static var item_resources : Dictionary[int, Item] = {
 	ItemID.SmallBottleOfCalciumOintment: preload("res://resources/items/consumables/healing items/small_bottle_of_calcium_ointment.tres"),
 	ItemID.DenseCalciumInfusion: preload("res://resources/items/consumables/healing items/dense_calcium_infusion.tres"),
 	ItemID.JeremiahsLongbow: preload("res://resources/items/weapons/bows/jeremiah's_longbow.tres"),
-	ItemID.SturdyBroadSword: preload("res://resources/items/weapons/swords/sturdy_broadsword.tres")
+	ItemID.SturdyBroadSword: preload("res://resources/items/weapons/swords/sturdy_broadsword.tres"),
+	ItemID.GiantBatWing: preload("res://resources/items/accessories/giant_bat_wing.tres"),
+	ItemID.GiantSpiderFangs: preload("res://resources/items/drops/giant_spider_fangs.tres"),
+	ItemID.ElderWarlockCollar: preload("res://resources/items/accessories/elder_warlock_collar.tres"),
+	ItemID.PromiseRing: preload("res://resources/items/accessories/promise_ring.tres"),
+	ItemID.EssenceOfWarlockPower: preload("res://resources/items/drops/essence_of_warlock_power.tres"),
+	ItemID.SoldiersHelm: preload("res://resources/items/armor/helmets/soldiers_helm.tres"),
+	ItemID.SoldierBreastplate: preload("res://resources/items/armor/chests/soldier_breastplate.tres"),
+	ItemID.TatteredScarf: preload("res://resources/items/accessories/tattered_scarf.tres"),
+	ItemID.SeveredElderWarlockFinger: preload("res://resources/items/accessories/severed_elder_warlock_finger.tres")
 } 
 
 

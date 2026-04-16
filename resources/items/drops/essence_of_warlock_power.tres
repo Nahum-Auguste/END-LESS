@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bkbml5gixq17b"]
+
+[ext_resource type="Script" uid="uid://b2xswthighddu" path="res://scripts/item scripts/item.gd" id="1_4oid4"]
+[ext_resource type="Texture2D" uid="uid://dl3l2xbkrd1hl" path="res://assets/sprites/items/drops/warlock/essense_of_warlock_power.png" id="2_gfv4g"]
+
+[resource]
+script = ExtResource("1_4oid4")
+name = "Essence of Warlock Power"
+texture = ExtResource("2_gfv4g")
+max_stack_count = 23
+stack_count = 3
+metadata/_custom_type_script = "uid://b2xswthighddu"

@@ -8,15 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://b1wutdb6rxfk1" path="res://scenes/enemies/warlock/warlock.tscn" id="5_m6wgr"]
 [ext_resource type="PackedScene" uid="uid://b320ukcejjdwo" path="res://scenes/objects/chests/basic_chest/basic_chest.tscn" id="6_3u6m8"]
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="8_wlx7i"]
-[ext_resource type="Script" uid="uid://qcwnfmt1c1yc" path="res://scripts/item scripts/item types/consumables/consumable.gd" id="9_1crd7"]
-[ext_resource type="Script" uid="uid://mpib8fdqsv7q" path="res://scripts/status effects/status_effect.gd" id="10_m8kig"]
-[ext_resource type="Resource" uid="uid://cs4ssbcfduccy" path="res://resources/status effects/instant_lesser_healing.tres" id="11_vh1xd"]
-[ext_resource type="Resource" uid="uid://wk6av7mtk3ap" path="res://resources/status effects/lasting_dense_healing.tres" id="12_a4txv"]
-[ext_resource type="Texture2D" uid="uid://bkv5282rhyot8" path="res://assets/sprites/items/consumables/healing items/dense_calcium_infusion.png" id="13_k0dhc"]
-[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="14_a4txv"]
-[ext_resource type="AudioStream" uid="uid://d3048uvpa0psu" path="res://assets/sfx/sword/slash1.wav" id="15_k0dhc"]
-[ext_resource type="AudioStream" uid="uid://c26bn44vy0q0d" path="res://assets/sfx/sword/slash2.wav" id="16_6blhq"]
-[ext_resource type="Texture2D" uid="uid://diqwmaumwiu3e" path="res://assets/sprites/items/weapons/warrior's_sword.png" id="17_wvf3s"]
+[ext_resource type="Resource" uid="uid://c6hmq57qv6xrq" path="res://resources/items/armor/chests/soldier_breastplate.tres" id="9_vh1xd"]
+[ext_resource type="Resource" uid="uid://ca1v8po2dp3tr" path="res://resources/items/armor/helmets/soldiers_helm.tres" id="10_a4txv"]
+[ext_resource type="Resource" uid="uid://bkbml5gixq17b" path="res://resources/items/drops/essence_of_warlock_power.tres" id="10_wvf3s"]
+[ext_resource type="Resource" uid="uid://c2t8ebljnm51i" path="res://resources/items/accessories/elder_warlock_collar.tres" id="11_irmdm"]
+[ext_resource type="Resource" uid="uid://bht3yq0ob73g7" path="res://resources/items/drops/giant_spider_fangs.tres" id="11_k0dhc"]
+[ext_resource type="Resource" uid="uid://cw0vlq3qgnr8w" path="res://resources/items/accessories/promise_ring.tres" id="12_6blhq"]
+[ext_resource type="Resource" uid="uid://c7h378qbqqjkx" path="res://resources/items/accessories/giant_bat_wing.tres" id="13_wvf3s"]
+[ext_resource type="Resource" uid="uid://dedhhn0x05a1y" path="res://resources/items/accessories/tattered_scarf.tres" id="14_k0dhc"]
+[ext_resource type="Resource" uid="uid://rv8l0xq62be8" path="res://resources/items/accessories/severed_elder_warlock_finger.tres" id="15_6blhq"]
 [ext_resource type="PackedScene" uid="uid://dilt05yq14axw" path="res://scenes/enemies/giant_spider.tscn" id="18_k0dhc"]
 [ext_resource type="PackedScene" uid="uid://m3bj7e5v3b3j" path="res://scenes/enemies/bat_swarm.tscn" id="19_6blhq"]
 [ext_resource type="PackedScene" uid="uid://bxf5lmevd67uq" path="res://scenes/objects/level_door.tscn" id="20_wvf3s"]
@@ -24,64 +24,6 @@
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdv1v"]
 vertices = PackedVector2Array(234, -86, 266, -10, 214, -10, -150, -22, 54, -86, 150, 138, 266, 138, 374, 214, -150, 214, -150, 150, 374, -214, 22, -214, 22, -118, -150, -106, -214, -118, -214, -202, -342, -214, -298, -202, -298, -170, -330, -170, -342, 214, -330, -86, 54, -118, 234, -202, 106, -202, 106, -214, -266, -106, -278, -118, -278, -86, -266, -74, -298, -74, -182, 118, -214, 10, -214, -22, 150, -10, 214, 22, 202, 22, 202, -10, -182, 150, -330, 202, -234, 202, -234, 214, -330, 118, -298, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 7, 6, 1), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 11, 15, 17), PackedInt32Array(17, 18, 19, 16), PackedInt32Array(20, 16, 19, 21), PackedInt32Array(12, 22, 4, 3, 13), PackedInt32Array(23, 24, 25, 10), PackedInt32Array(23, 10, 1, 0), PackedInt32Array(14, 13, 26, 27), PackedInt32Array(28, 27, 26, 29), PackedInt32Array(28, 29, 30, 21), PackedInt32Array(5, 9, 31, 32, 33, 3, 34), PackedInt32Array(2, 35, 36, 37), PackedInt32Array(3, 2, 37), PackedInt32Array(3, 37, 34), PackedInt32Array(9, 38, 31), PackedInt32Array(39, 40, 41, 20), PackedInt32Array(32, 31, 42, 43), PackedInt32Array(21, 30, 43, 42), PackedInt32Array(42, 39, 20), PackedInt32Array(42, 20, 21)])
-
-[sub_resource type="Resource" id="Resource_wvf3s"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_irmdm"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_88vtx"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_i7xa1"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_sxrv1"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_ff1sh"]
-script = ExtResource("9_1crd7")
-status_effects = Array[ExtResource("10_m8kig")]([ExtResource("11_vh1xd"), ExtResource("12_a4txv")])
-name = "dense calcium infusion"
-texture = ExtResource("13_k0dhc")
-max_stack_count = 3
-stack_count = 2
-
-[sub_resource type="Resource" id="Resource_7idy4"]
-script = ExtResource("14_a4txv")
-range = 7.0
-damage = 4.0
-attack_speed = 3.5
-crit_chance = 0.2
-sound_effects = Array[AudioStream]([ExtResource("15_k0dhc"), ExtResource("16_6blhq")])
-name = "Warrior's sword"
-texture = ExtResource("17_wvf3s")
 
 [node name="EnemyTestingScene" type="Node2D" unique_id=2065702540 node_paths=PackedStringArray("player")]
 y_sort_enabled = true
@@ -116,33 +58,31 @@ max_items = 8.0
 [node name="ItemDrops" type="Node2D" parent="." unique_id=521893213]
 
 [node name="ItemDrop" parent="ItemDrops" unique_id=1852501480 instance=ExtResource("8_wlx7i")]
-position = Vector2(-104, 141)
-item = SubResource("Resource_wvf3s")
+item = ExtResource("9_vh1xd")
 
-[node name="ItemDrop3" parent="ItemDrops" unique_id=436886291 instance=ExtResource("8_wlx7i")]
-position = Vector2(-93, 125)
-item = SubResource("Resource_irmdm")
+[node name="ItemDrop9" parent="ItemDrops" unique_id=523665962 instance=ExtResource("8_wlx7i")]
+item = ExtResource("10_wvf3s")
 
-[node name="ItemDrop4" parent="ItemDrops" unique_id=341032595 instance=ExtResource("8_wlx7i")]
-position = Vector2(-128, 128)
-item = SubResource("Resource_88vtx")
+[node name="ItemDrop8" parent="ItemDrops" unique_id=366432455 instance=ExtResource("8_wlx7i")]
+item = ExtResource("11_irmdm")
 
-[node name="ItemDrop5" parent="ItemDrops" unique_id=451056324 instance=ExtResource("8_wlx7i")]
-position = Vector2(-116, 110)
-item = SubResource("Resource_i7xa1")
+[node name="ItemDrop2" parent="ItemDrops" unique_id=1275624557 instance=ExtResource("8_wlx7i")]
+item = ExtResource("10_a4txv")
 
-[node name="ItemDrop6" parent="ItemDrops" unique_id=54053548 instance=ExtResource("8_wlx7i")]
-position = Vector2(-79, 133)
-item = SubResource("Resource_sxrv1")
+[node name="ItemDrop3" parent="ItemDrops" unique_id=31801872 instance=ExtResource("8_wlx7i")]
+item = ExtResource("11_k0dhc")
 
-[node name="ItemDrop7" parent="ItemDrops" unique_id=1802527532 instance=ExtResource("8_wlx7i")]
-position = Vector2(-88, 104)
-item = SubResource("Resource_ff1sh")
+[node name="ItemDrop4" parent="ItemDrops" unique_id=274687931 instance=ExtResource("8_wlx7i")]
+item = ExtResource("12_6blhq")
 
-[node name="ItemDrop2" parent="ItemDrops" unique_id=1291563243 instance=ExtResource("8_wlx7i")]
-position = Vector2(-83, 158)
-rotation = 1.8678042
-item = SubResource("Resource_7idy4")
+[node name="ItemDrop5" parent="ItemDrops" unique_id=1829310849 instance=ExtResource("8_wlx7i")]
+item = ExtResource("13_wvf3s")
+
+[node name="ItemDrop6" parent="ItemDrops" unique_id=1555619431 instance=ExtResource("8_wlx7i")]
+item = ExtResource("14_k0dhc")
+
+[node name="ItemDrop7" parent="ItemDrops" unique_id=1890328110 instance=ExtResource("8_wlx7i")]
+item = ExtResource("15_6blhq")
 
 [node name="GiantSpider" parent="." unique_id=147954774 instance=ExtResource("18_k0dhc")]
 position = Vector2(-141, -181)

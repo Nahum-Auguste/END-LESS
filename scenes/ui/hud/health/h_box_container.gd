@@ -22,18 +22,22 @@ func _process(delta):
 		player = get_tree().root.find_child("Player",true,false)
 		
 	if player:
-		for i in range(hpFlames.size()):
-			var flame : AnimatedSprite2D = hpFlames[i].get_node("FlameAnimation")
-			var frac = (player.max_health/hpFlames.size())
-			var thresh = frac * (i+1)
-			var hp = player.health
-			
-			#print(thresh)
-			if hp <= thresh - frac :
-				flame.animation = "empty"
-			elif hp <= thresh - frac + (frac * 2/3):
-				flame.animation = "low"
-			elif hp < thresh:
-				flame.animation = "mid"
-			else:
-				flame.animation = "full"	
+		max_health = player.max_health
+		health = player.health
+		
+
+	for i in range(hpFlames.size()):
+		var flame : AnimatedSprite2D = hpFlames[i].get_node("FlameAnimation")
+		var frac = (max_health/hpFlames.size())
+		var thresh = frac * (i+1)
+		var hp = health
+		
+		#print(thresh)
+		if hp <= thresh - frac :
+			flame.animation = "empty"
+		elif hp <= thresh - frac + (frac * 2/3):
+			flame.animation = "low"
+		elif hp < thresh:
+			flame.animation = "mid"
+		else:
+			flame.animation = "full"	

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Accessory" format=3 uid="uid://dedhhn0x05a1y"]
+
+[ext_resource type="Script" uid="uid://c5mi3a5j78r3f" path="res://scripts/item scripts/item types/armor/accessory.gd" id="1_rbx76"]
+[ext_resource type="Texture2D" uid="uid://bj00vopgfriw2" path="res://assets/sprites/items/accessories/tattered_scarf.png" id="2_j3nt0"]
+
+[resource]
+script = ExtResource("1_rbx76")
+defense = 1
+speed = 2
+name = "Tattered Scarf"
+texture = ExtResource("2_j3nt0")
+max_stack_count = 2
+metadata/_custom_type_script = "uid://c5mi3a5j78r3f"

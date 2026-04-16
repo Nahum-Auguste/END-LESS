@@ -1,0 +1,9 @@
+[gd_resource type="Resource" format=3 uid="uid://dla7ymf2jh1bc"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_663ib"]
+[ext_resource type="Script" uid="uid://chw46gv62ejtx" path="res://scripts/imbuements/warlock_blast_imbuement.gd" id="2_jkrno"]
+
+[resource]
+script = ExtResource("2_jkrno")
+proc_chance = 0.3
+metadata/_custom_type_script = "uid://65ulmj6w0d1i"

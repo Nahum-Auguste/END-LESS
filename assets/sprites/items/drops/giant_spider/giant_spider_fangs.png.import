@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0ywmbhfx74xx"
-path="res://.godot/imported/giant_spider_fangs.png-73eb0c30d9fc042dd0f340dd4e5be9be.ctex"
+path="res://.godot/imported/giant_spider_fangs.png-29976b9ac73da4538614661fe64928a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/giant_spider_fangs.png"
-dest_files=["res://.godot/imported/giant_spider_fangs.png-73eb0c30d9fc042dd0f340dd4e5be9be.ctex"]
+source_file="res://assets/sprites/items/drops/giant_spider/giant_spider_fangs.png"
+dest_files=["res://.godot/imported/giant_spider_fangs.png-29976b9ac73da4538614661fe64928a2.ctex"]
 
 [params]
 

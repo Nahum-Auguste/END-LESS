@@ -71,6 +71,16 @@ func _input(event):
 			on_dodge()
 	if event.is_action_pressed("interact") and pickupable_item_drop:
 		inventory.pick_up_item_drop(pickupable_item_drop)
+	#if !is_dodging() and !attacking and eye_frame_timer.is_stopped():
+		#if event.is_action_pressed("up"):
+			#sprite.animation = "up_walk"
+		#elif event.is_action_pressed("left"):
+			#sprite.animation = "left_walk"
+		#elif event.is_action_pressed("down"):
+			#sprite.animation = "down_walk"
+		#elif event.is_action_pressed("right"):
+			#sprite.animation = "right_walk"
+		#sprite.play(animation)
 
 		
 func on_dodge():
@@ -141,11 +151,28 @@ func _physics_process(delta: float) -> void:
 	else:
 		movement_velocity.y = move_toward(velocity.y,0,speed)
 		
+		
+		
 	if !eye_frame_timer.is_stopped():
 		sprite.pause()
 		
 	if !attacking and !is_dodging() and eye_frame_timer.is_stopped():
 		sprite.play(animation)
+		#if horizontalMoveInput and !verticalMoveInput:
+			#if horizontalMoveInput > 0:
+				#sprite.animation = "right_walk"
+				#sprite.play(animation)	
+			#else:
+				#sprite.animation = "left_walk"
+				#sprite.play(animation)	
+		#if !horizontalMoveInput and verticalMoveInput:
+			#if verticalMoveInput > 0:
+				#sprite.animation = "down_walk"
+				#sprite.play(animation)	
+			#else:
+				#sprite.animation = "up_walk"
+				#sprite.play(animation)
+		
 		sprite.speed_scale = 1 if !sprint else sprint_mult
 		if !horizontalMoveInput and !verticalMoveInput:
 			sprite.frame=sprite.sprite_frames.get_frame_count(sprite.animation)-1
@@ -175,7 +202,7 @@ func _process(delta: float) -> void:
 		eye_frame_timer.stop()
 		
 	if stamina_points < max_stamina_ppints and stamina_regen_timer.is_stopped():
-		print("started")
+		#print("started")
 		stamina_regen_timer.start()
 		
 		
@@ -341,4 +368,4 @@ func _on_dodge_timer_timeout():
 
 func _on_stamina_regen_timer_timeout():
 	stamina_points = clamp(stamina_points+1,0,max_stamina_ppints)
-	print(stamina_points)
+	#print(stamina_points)

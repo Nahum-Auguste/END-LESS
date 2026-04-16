@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Accessory" format=3 uid="uid://rv8l0xq62be8"]
+
+[ext_resource type="Script" uid="uid://c5mi3a5j78r3f" path="res://scripts/item scripts/item types/armor/accessory.gd" id="1_01len"]
+[ext_resource type="Texture2D" uid="uid://h2n3ctl3jryj" path="res://assets/sprites/items/accessories/severed_elder_warlock_finger.png" id="2_psnrx"]
+
+[resource]
+script = ExtResource("1_01len")
+defense = 2
+speed = 4
+name = "Severed Elder Warlock Finger"
+texture = ExtResource("2_psnrx")
+max_stack_count = 20
+metadata/_custom_type_script = "uid://c5mi3a5j78r3f"

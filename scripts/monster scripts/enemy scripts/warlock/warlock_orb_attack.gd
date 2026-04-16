@@ -13,6 +13,7 @@ var follow_time = 1
 var rotate_speed = 0
 var speed_mult = 1.01
 @export var life_timer: Timer
+@export var hurt_box: Area2D
 
 func _ready() -> void:
 	if following:
@@ -62,8 +63,7 @@ func _on_hurt_box_area_entered(area: Area2D):
 	var body = area.owner
 	#print(area.get_parent())
 
-	if body is Player:
-		body.inflict_damage(attack_damage)
+	body.inflict_damage(attack_damage)
 	#queue_free()
 
 

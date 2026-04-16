@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bht3yq0ob73g7"]
+
+[ext_resource type="Script" uid="uid://b2xswthighddu" path="res://scripts/item scripts/item.gd" id="1_jy8xs"]
+[ext_resource type="Texture2D" uid="uid://0ywmbhfx74xx" path="res://assets/sprites/items/drops/giant_spider/giant_spider_fangs.png" id="2_3ym6b"]
+
+[resource]
+script = ExtResource("1_jy8xs")
+name = "Giant Spider Fangs"
+texture = ExtResource("2_3ym6b")
+max_stack_count = 4
+metadata/_custom_type_script = "uid://b2xswthighddu"

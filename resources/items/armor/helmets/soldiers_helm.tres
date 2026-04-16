@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HelmetArmor" format=3 uid="uid://ca1v8po2dp3tr"]
+
+[ext_resource type="Script" uid="uid://cqlh3cb4rq78d" path="res://scripts/item scripts/item types/armor/helmet_armor.gd" id="1_b24vq"]
+[ext_resource type="Texture2D" uid="uid://cm8uradf3sylc" path="res://assets/sprites/items/armor/helmet.png" id="2_0f5j6"]
+
+[resource]
+script = ExtResource("1_b24vq")
+defense = 3
+name = "Soldier's Helm"
+texture = ExtResource("2_0f5j6")
+metadata/_custom_type_script = "uid://cqlh3cb4rq78d"
