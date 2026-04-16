@@ -44,6 +44,10 @@ func _init(health:float=0,max_health:float=0) -> void:
 	super(health,max_health)
 
 func _ready() -> void:
+	if !stamina_regen_timer:
+		stamina_regen_timer = Timer.new()
+		stamina_regen_timer.wait_time = 2
+		add_child(stamina_regen_timer)
 	stamina_points = max_stamina_points
 	dodges = max_dodges
 	super._ready()
@@ -200,9 +204,9 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	inventory = InventoryManager.player_hud.player_inventory
-	
-	print(base_speed)
-	print(base_defense)
+	#
+	#print(base_speed)
+	#print(base_defense)
 	
 	
 	#bonus_speed = 0
@@ -251,10 +255,10 @@ func _process(delta: float) -> void:
 		
 
 
-
-func _exit_tree():
-	if inventory:
-		inventory.queue_free()
+#
+#func _exit_tree():
+	#if inventory:
+		#inventory.queue_free()
 
 func punch():
 	attacking = true

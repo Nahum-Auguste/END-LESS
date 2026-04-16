@@ -18,6 +18,14 @@ var scenes: Dictionary = {
 	Scene.ContinueScreen: "res://scenes/ui/menus/continue_screen.tscn"
 }
 
+var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+var sub_player: AudioStreamPlayer 
+var music_volume:float = .5
+var sfx_volume: float = .5
+var music_muted = false
+var sfx_muted = false
+
+
 var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
 var player_hud: PlayerHud
 
@@ -28,6 +36,11 @@ func transition_to_scene(caller: Node, scene_id: int):
 		level = 0
 		if player_hud and player_hud.player_inventory:
 			player_hud.player_inventory.clear()
+			
+	if scene_id == Scene.GameLevel:
+		audio_player.stream = load("res://assets/music/ghost_house_test.wav")
+		audio_player.play()
+			
 	player_hud.visible = false
 	caller.get_tree().change_scene_to_file(scenes[scene_id])
 	#player = get_tree().root.find_child("Player",true,false)
@@ -45,6 +58,7 @@ var continue_after_death_timer_wait_time: float = 2
 var game_level: Node
 var black_screen: ColorRect = ColorRect.new()
 var drawer_node: LevelManagerDrawerNode = LevelManagerDrawerNode.new()
+var player_inventory: PlayerInventory
 
 
 var deaths: int = 0
@@ -57,11 +71,15 @@ var loot_tables: Array[LootTable] = [
 ]
 
 func _ready():
+	add_child(audio_player)
+	
 	if !player_hud:
 		player_hud = player_hud_prefab.instantiate()
 		PlayerGuiCanvas.add_child(player_hud)
 		InventoryManager.player_hud = player_hud
 		InventoryManager.player_inventory = player_hud.player_inventory
+		player_inventory = player_hud.player_inventory
+		player_hud.visible = false
 		
 	player = get_tree().root.find_child("Player",true,false)
 			
@@ -118,6 +136,15 @@ func fade_in_black_screen(time:float):
 signal black_screen_finished()
 
 func _process(delta):
+	player_inventory = player_hud.player_inventory
+	if audio_player:
+		audio_player.volume_db = linear_to_db(music_volume )
+		
+	if sub_player:
+		sub_player.volume_db = linear_to_db(music_volume )
+		print("hi")
+	
+	#print(music_volume)
 	#print(get_tree().root.get_children())
 	if player:
 		game_level = player.owner

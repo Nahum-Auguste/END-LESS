@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bkxtfyias4f8n" path="res://scenes/ui/menus/settings_screen.gd" id="1_1liky"]
 [ext_resource type="Texture2D" uid="uid://c32ogpm2au2ac" path="res://assets/sprites/ui/flame_bg1.png" id="1_gun7u"]
-[ext_resource type="PackedScene" uid="uid://cobiywn8tw4f6" path="res://scenes/ui/menu_buttons/sound_bar.tscn" id="2_htfmr"]
 [ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="3_pxnl6"]
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_s18c7"]
+[ext_resource type="Script" uid="uid://dkan55ecsevew" path="res://scenes/ui/menu_buttons/sound_bar.gd" id="4_xja0d"]
+[ext_resource type="PackedScene" uid="uid://dkuc3p0qsxc4t" path="res://scenes/ui/menu_buttons/left_arrow_button.tscn" id="5_a1qhj"]
+[ext_resource type="PackedScene" uid="uid://uijad3lf2xsr" path="res://scenes/ui/menu_buttons/right_arrow_button.tscn" id="6_cfpwb"]
+[ext_resource type="PackedScene" uid="uid://bc8rhvg6460wb" path="res://scenes/ui/menu_buttons/progress_bar.tscn" id="7_0en42"]
+[ext_resource type="PackedScene" uid="uid://5mcrdg644o2e" path="res://scenes/ui/menu_buttons/toggle.tscn" id="8_tjx0k"]
 
-[node name="settings_screen" type="Control" unique_id=597405885]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06u7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ksswp"]
+
+[node name="settings_screen" type="Control" unique_id=597405885 node_paths=PackedStringArray("music_bar", "sfx_bar", "music_pbar", "sfx_pbar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +22,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1liky")
+music_bar = NodePath("music/music_bar/bar")
+sfx_bar = NodePath("music/sfx/sfx_bar/bar")
+music_pbar = NodePath("music/music_bar/bar/percent")
+sfx_pbar = NodePath("music/sfx/sfx_bar/bar/percent")
 
 [node name="background" type="TextureRect" parent="." unique_id=488950842]
 layout_mode = 1
@@ -82,10 +94,81 @@ text = "MUSIC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="music_bar" parent="music" unique_id=418467069 instance=ExtResource("2_htfmr")]
+[node name="music_bar" type="Control" parent="music" unique_id=418467069]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_top = 55.5
 offset_bottom = 55.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_xja0d")
+
+[node name="left_arrow" parent="music/music_bar" unique_id=1045118006 instance=ExtResource("5_a1qhj")]
+layout_mode = 0
+offset_left = 249.0
+offset_top = -17.0
+offset_right = 281.0
+offset_bottom = 15.0
+
+[node name="right_arrow" parent="music/music_bar" unique_id=572653011 instance=ExtResource("6_cfpwb")]
+layout_mode = 0
+offset_left = 335.0
+offset_top = -17.0
+offset_right = 367.0
+offset_bottom = 15.0
+
+[node name="bar" parent="music/music_bar" unique_id=1923992776 instance=ExtResource("7_0en42")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -16.0
+offset_right = 242.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="percent" type="ProgressBar" parent="music/music_bar/bar" unique_id=760220618]
+layout_mode = 0
+offset_left = 492.0
+offset_top = -5.0
+offset_right = 538.0
+offset_bottom = 31.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_pxnl6")
+theme_override_font_sizes/font_size = 23
+theme_override_styles/background = SubResource("StyleBoxEmpty_b06u7")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_ksswp")
+step = 10.0
+fill_mode = 3
+
+[node name="mute" parent="music/music_bar" unique_id=925975189 instance=ExtResource("8_tjx0k")]
+layout_mode = 0
+offset_left = -335.0
+offset_top = -16.0
+offset_right = -213.0
+offset_bottom = 16.0
+
+[node name="Label" type="Label" parent="music/music_bar/mute" unique_id=1055120396]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 108.0
+offset_bottom = 34.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_pxnl6")
+theme_override_font_sizes/font_size = 26
+text = "MUTE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="sfx" type="Label" parent="music" unique_id=814150586]
 layout_mode = 1
@@ -107,10 +190,81 @@ text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="sfx_bar" parent="music/sfx" unique_id=262495309 instance=ExtResource("2_htfmr")]
+[node name="sfx_bar" type="Control" parent="music/sfx" unique_id=262495309]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_top = 55.5
 offset_bottom = 55.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_xja0d")
+
+[node name="left_arrow" parent="music/sfx/sfx_bar" unique_id=1982991797 instance=ExtResource("5_a1qhj")]
+layout_mode = 0
+offset_left = 249.0
+offset_top = -17.0
+offset_right = 281.0
+offset_bottom = 15.0
+
+[node name="right_arrow" parent="music/sfx/sfx_bar" unique_id=1185933322 instance=ExtResource("6_cfpwb")]
+layout_mode = 0
+offset_left = 335.0
+offset_top = -17.0
+offset_right = 367.0
+offset_bottom = 15.0
+
+[node name="bar" parent="music/sfx/sfx_bar" unique_id=153698539 instance=ExtResource("7_0en42")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -16.0
+offset_right = 242.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="percent" type="ProgressBar" parent="music/sfx/sfx_bar/bar" unique_id=853715800]
+layout_mode = 0
+offset_left = 492.0
+offset_top = -5.0
+offset_right = 538.0
+offset_bottom = 31.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_pxnl6")
+theme_override_font_sizes/font_size = 23
+theme_override_styles/background = SubResource("StyleBoxEmpty_b06u7")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_ksswp")
+step = 10.0
+fill_mode = 3
+
+[node name="mute" parent="music/sfx/sfx_bar" unique_id=1481935011 instance=ExtResource("8_tjx0k")]
+layout_mode = 0
+offset_left = -335.0
+offset_top = -16.0
+offset_right = -213.0
+offset_bottom = 16.0
+
+[node name="Label" type="Label" parent="music/sfx/sfx_bar/mute" unique_id=356002429]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -2.0
+offset_right = 108.0
+offset_bottom = 34.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_pxnl6")
+theme_override_font_sizes/font_size = 26
+text = "MUTE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="back" parent="." unique_id=1736505248 instance=ExtResource("3_s18c7")]
 layout_mode = 1
@@ -149,4 +303,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[connection signal="pressed" from="music/music_bar/left_arrow" to="." method="_on_left_arrow_pressed_volume"]
+[connection signal="pressed" from="music/music_bar/right_arrow" to="." method="_on_right_arrow_pressed_volume"]
+[connection signal="pressed" from="music/music_bar/right_arrow" to="music/music_bar" method="_on_right_arrow_pressed"]
+[connection signal="value_changed" from="music/music_bar/bar" to="music/music_bar" method="_on_bar_value_changed"]
+[connection signal="value_changed" from="music/music_bar/bar/percent" to="music/music_bar" method="_on_progress_bar_value_changed"]
+[connection signal="toggled" from="music/music_bar/mute" to="." method="_on_mute_toggled_volume"]
+[connection signal="toggled" from="music/music_bar/mute" to="." method="_on_mute_toggled_music"]
+[connection signal="toggled" from="music/music_bar/mute" to="music/music_bar" method="_on_mute_toggled"]
+[connection signal="pressed" from="music/sfx/sfx_bar/left_arrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="music/sfx/sfx_bar/left_arrow" to="music/sfx/sfx_bar" method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="music/sfx/sfx_bar/right_arrow" to="." method="_on_right_arrow_pressed"]
+[connection signal="pressed" from="music/sfx/sfx_bar/right_arrow" to="music/sfx/sfx_bar" method="_on_right_arrow_pressed"]
+[connection signal="value_changed" from="music/sfx/sfx_bar/bar" to="music/sfx/sfx_bar" method="_on_bar_value_changed"]
+[connection signal="value_changed" from="music/sfx/sfx_bar/bar/percent" to="music/sfx/sfx_bar" method="_on_progress_bar_value_changed"]
+[connection signal="toggled" from="music/sfx/sfx_bar/mute" to="." method="_on_mute_toggled_sfx"]
+[connection signal="toggled" from="music/sfx/sfx_bar/mute" to="music/sfx/sfx_bar" method="_on_mute_toggled"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

@@ -1,4 +1,5 @@
 
+#@tool
 class_name ChestPasterTile extends TilePaster
 
 var spawn_chance: float = .5
@@ -7,16 +8,18 @@ var chest_tile_layer: TileMapLayer
 func _ready():
 	#print(get_parent())
 	super._ready()
-	set_chest_tile_layer()
+
 	
-	if randf_range(0,1) < spawn_chance:
-		paste_chest()
-	
-	on_finish()
 
 
 func _process(delta):
 	handle_direction()
+	set_chest_tile_layer()
+	tile_layer.set_cell(map_pos,0,Vector2(0,1))
+	if randf_range(0,1) < spawn_chance:
+		paste_chest()
+	
+	on_finish()
 
 func set_chest_tile_layer():
 	chest_tile_layer = tile_layer.get_node("../ObjectsTileMapLayer")
@@ -38,5 +41,7 @@ func paste_chest():
 		printerr("ERROR: Cannot place chest scene tile without 'ObjectsTileMapLayer' sibling TileMapLayer node.")
 	else:
 		chest_tile_layer.set_cell(map_pos,source_id,Vector2i.ZERO,alt_id)
+		
+		#print(tile_layer)
 		queue_free()
 	

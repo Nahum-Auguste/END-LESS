@@ -16,7 +16,8 @@ var warlock: Warlock
 
 func _ready():
 	super._ready()
-	ray_checker.target = InventoryManager.player
+	if ray_checker:
+		ray_checker.target = InventoryManager.player
 	detection_range = base_detection_range
 	warlock = body
 	wander_state.fsm = self

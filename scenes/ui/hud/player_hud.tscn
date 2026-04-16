@@ -19,7 +19,6 @@ hotbarslot4 = NodePath("ConsumablesContainer/HotBarSlot4")
 weapon_slot = NodePath("WeaponSlots/MainWeaponSlot")
 
 [node name="PlayerInventory" parent="." unique_id=263435617 instance=ExtResource("5_ful6q")]
-visible = false
 layout_mode = 1
 mouse_filter = 0
 

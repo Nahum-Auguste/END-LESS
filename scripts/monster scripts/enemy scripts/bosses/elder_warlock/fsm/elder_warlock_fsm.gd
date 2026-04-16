@@ -44,12 +44,14 @@ func physics_update(delta):
 		parent.detection_area_shape.radius = mid_range_attack_range
 		if playing_theme == false and !parent.is_clone():
 			playing_theme = true
-			var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
-			var music : AudioStreamWAV = load("res://assets/music/early_elder_warlock_battle_theme.wav")
-			music.loop_mode = AudioStreamWAV.LOOP_FORWARD
-			#if theme_player:
-	#A			theme_player.stream = music
-				#theme_player.play()
+			
+			if body.real_warlock == body:
+				var theme_player: AudioStreamPlayer = LevelManager.audio_player
+				var music : AudioStreamWAV = load("res://assets/music/early_elder_warlock_battle_theme.wav")
+				music.loop_mode = AudioStreamWAV.LOOP_FORWARD
+				if theme_player:
+					theme_player.stream = music
+					theme_player.play()
 	
 	if player:
 		if current_state is not TeleportState and current_state is not ElderWarlockCloneState:

@@ -121,7 +121,6 @@ fsm = NodePath("..")
 script = ExtResource("6_7j4af")
 max_teleport_speed = 0.7
 real_collider_polygon = NodePath("../../CollisionShape")
-wait_time = null
 fsm = NodePath("..")
 
 [node name="ShootOrbs" type="Node" parent="ElderWarlockFSM" unique_id=1795509346 node_paths=PackedStringArray("fsm")]

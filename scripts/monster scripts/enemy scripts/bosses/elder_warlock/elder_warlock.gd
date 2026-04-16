@@ -68,7 +68,7 @@ func _exit_tree():
 		exit_door.sprite.animation = "open"
 		
 	if !is_clone():
-		var theme_player: AudioStreamPlayer = get_tree().root.find_child("LevelThemePlayer",true,false)
+		var theme_player: AudioStreamPlayer = LevelManager.audio_player
 		if theme_player:
 			theme_player.stop()
 
