@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Accessory" format=3 uid="uid://b2sqc7ga1altp"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_limld"]
+[ext_resource type="Script" uid="uid://c5mi3a5j78r3f" path="res://scripts/item scripts/item types/armor/accessory.gd" id="2_ds8ss"]
+[ext_resource type="Texture2D" uid="uid://bakdgn6cmqhfw" path="res://assets/sprites/items/accessories/tattered_family_portrait.png" id="3_ds8ss"]
+
+[resource]
+script = ExtResource("2_ds8ss")
+stamina_points = 3
+defense = -2
+speed = 2
+name = "Tattered Family Portrait"
+texture = ExtResource("3_ds8ss")
+metadata/_custom_type_script = "uid://c5mi3a5j78r3f"

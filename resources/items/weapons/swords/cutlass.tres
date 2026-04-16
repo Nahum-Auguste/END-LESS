@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Sword" format=3 uid="uid://ddru4juq2a6xr"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_yl52j"]
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="2_2gw5j"]
+[ext_resource type="Texture2D" uid="uid://bdyrwr3u7f2ah" path="res://assets/sprites/items/weapons/cutlass/cutlass.png" id="3_2gw5j"]
+
+[resource]
+script = ExtResource("2_2gw5j")
+range = 8.0
+damage = 2.0
+attack_speed = 2.1
+crit_chance = 0.41
+name = "Cutlass"
+texture = ExtResource("3_2gw5j")
+metadata/_custom_type_script = "uid://b0dywa8sx54m3"

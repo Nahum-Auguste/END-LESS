@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Sword" format=3 uid="uid://dj1t16dgyog7y"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_fq1j6"]
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="2_1142b"]
+[ext_resource type="Texture2D" uid="uid://cre87kgglkpnr" path="res://assets/sprites/items/weapons/scimitar/scimitar.png" id="3_1142b"]
+
+[resource]
+script = ExtResource("2_1142b")
+range = 12.0
+damage = 6.5
+attack_speed = 0.7
+name = "Scimitar"
+texture = ExtResource("3_1142b")
+metadata/_custom_type_script = "uid://b0dywa8sx54m3"

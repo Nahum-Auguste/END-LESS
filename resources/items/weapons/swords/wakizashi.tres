@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Sword" format=3 uid="uid://dq6oin1exkcoc"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_mewm8"]
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="2_cql0c"]
+[ext_resource type="Texture2D" uid="uid://y5pghleqq1pu" path="res://assets/sprites/items/weapons/wakizashi/wakizashi.png" id="3_cql0c"]
+
+[resource]
+script = ExtResource("2_cql0c")
+range = 4.0
+damage = 2.5
+attack_speed = 2.5
+name = "Wakizashi"
+texture = ExtResource("3_cql0c")
+metadata/_custom_type_script = "uid://b0dywa8sx54m3"

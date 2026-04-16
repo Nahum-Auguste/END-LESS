@@ -17,6 +17,12 @@ enum ItemID {
 	GiantSpiderFangs,
 	EssenceOfWarlockPower,
 	PromiseRing,
+	Cutlass,
+	Scimitar,
+	Wakizashi,
+	BeatenChestplate,
+	BruteHelm,
+	TatteredFamilyPortrait
 }
 
 static var item_resources : Dictionary[int, Item] = {
@@ -33,7 +39,16 @@ static var item_resources : Dictionary[int, Item] = {
 	ItemID.SoldiersHelm: preload("res://resources/items/armor/helmets/soldiers_helm.tres"),
 	ItemID.SoldierBreastplate: preload("res://resources/items/armor/chests/soldier_breastplate.tres"),
 	ItemID.TatteredScarf: preload("res://resources/items/accessories/tattered_scarf.tres"),
-	ItemID.SeveredElderWarlockFinger: preload("res://resources/items/accessories/severed_elder_warlock_finger.tres")
+	ItemID.SeveredElderWarlockFinger: preload("res://resources/items/accessories/severed_elder_warlock_finger.tres"),
+	ItemID.TatteredFamilyPortrait: preload("res://resources/items/accessories/tattered_family_portrait.tres"),
+	ItemID.BeatenChestplate: preload("res://resources/items/armor/chests/beaten_chestplate.tres"),
+	ItemID.BruteHelm: preload("res://resources/items/armor/helmets/brute_helm.tres"),
+	ItemID.Wakizashi: preload("res://resources/items/weapons/swords/wakizashi.tres"),
+	ItemID.Cutlass: preload("res://resources/items/weapons/swords/cutlass.tres"),
+	ItemID.Scimitar: preload("res://resources/items/weapons/swords/scimitar.tres")
+	#ItemID.Cutlass: preload("cutlass")
+	#ItemID.Cutlass: preload("cutlas")
+	#ItemID.Scimitar: preload("scimitar")
 } 
 
 

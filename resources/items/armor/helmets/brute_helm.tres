@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HelmetArmor" format=3 uid="uid://c73hbftxbnlg"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_w5ysn"]
+[ext_resource type="Script" uid="uid://cqlh3cb4rq78d" path="res://scripts/item scripts/item types/armor/helmet_armor.gd" id="2_f2xwi"]
+[ext_resource type="Texture2D" uid="uid://cs7yu77bhxrnl" path="res://assets/sprites/items/armor/brute_helm.png" id="3_f2xwi"]
+
+[resource]
+script = ExtResource("2_f2xwi")
+defense = 5
+speed = 1
+name = "Brute Helm"
+texture = ExtResource("3_f2xwi")
+metadata/_custom_type_script = "uid://cqlh3cb4rq78d"

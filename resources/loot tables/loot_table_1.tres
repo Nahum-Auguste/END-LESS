@@ -8,6 +8,11 @@
 [ext_resource type="Resource" uid="uid://cvuttsiyestwo" path="res://resources/items/consumables/healing items/dense_calcium_infusion.tres" id="5_c1b4c"]
 [ext_resource type="Resource" uid="uid://ca1v8po2dp3tr" path="res://resources/items/armor/helmets/soldiers_helm.tres" id="6_mot6t"]
 [ext_resource type="Resource" uid="uid://c6hmq57qv6xrq" path="res://resources/items/armor/chests/soldier_breastplate.tres" id="7_c1b4c"]
+[ext_resource type="Resource" uid="uid://b2sqc7ga1altp" path="res://resources/items/accessories/tattered_family_portrait.tres" id="8_g86nd"]
+[ext_resource type="Resource" uid="uid://c73hbftxbnlg" path="res://resources/items/armor/helmets/brute_helm.tres" id="9_vs23j"]
+[ext_resource type="Resource" uid="uid://df6ct6pwpyvo5" path="res://resources/items/armor/chests/beaten_chestplate.tres" id="10_o0x1a"]
+[ext_resource type="Resource" uid="uid://dj1t16dgyog7y" path="res://resources/items/weapons/swords/scimitar.tres" id="11_es0pe"]
+[ext_resource type="Resource" uid="uid://ddru4juq2a6xr" path="res://resources/items/weapons/swords/cutlass.tres" id="12_vs23j"]
 
 [sub_resource type="Resource" id="Resource_iptg0"]
 script = ExtResource("1_efeet")
@@ -45,7 +50,43 @@ item = ExtResource("7_c1b4c")
 drop_chance = 0.15
 metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
 
+[sub_resource type="Resource" id="Resource_d07fw"]
+script = ExtResource("1_efeet")
+item = ExtResource("8_g86nd")
+drop_chance = 0.33
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
+[sub_resource type="Resource" id="Resource_yehtt"]
+script = ExtResource("1_efeet")
+item = ExtResource("9_vs23j")
+drop_chance = 0.25
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
+[sub_resource type="Resource" id="Resource_4l7wb"]
+script = ExtResource("1_efeet")
+item = ExtResource("10_o0x1a")
+drop_chance = 0.445
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
+[sub_resource type="Resource" id="Resource_tq8xr"]
+script = ExtResource("1_efeet")
+item = ExtResource("11_es0pe")
+drop_chance = 0.24
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
+[sub_resource type="Resource" id="Resource_ugsj6"]
+script = ExtResource("1_efeet")
+item = ExtResource("12_vs23j")
+drop_chance = 0.26
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
+[sub_resource type="Resource" id="Resource_mj676"]
+script = ExtResource("1_efeet")
+item = ExtResource("11_es0pe")
+drop_chance = 0.575
+metadata/_custom_type_script = "uid://ds3y4cy0du1mh"
+
 [resource]
 script = ExtResource("2_cwjh5")
-loot_data = Array[ExtResource("1_efeet")]([SubResource("Resource_iptg0"), SubResource("Resource_jywc0"), SubResource("Resource_g86nd"), SubResource("Resource_vs23j"), SubResource("Resource_o0x1a"), SubResource("Resource_es0pe")])
+loot_data = Array[ExtResource("1_efeet")]([SubResource("Resource_iptg0"), SubResource("Resource_jywc0"), SubResource("Resource_g86nd"), SubResource("Resource_vs23j"), SubResource("Resource_o0x1a"), SubResource("Resource_es0pe"), SubResource("Resource_d07fw"), SubResource("Resource_yehtt"), SubResource("Resource_4l7wb"), SubResource("Resource_tq8xr"), SubResource("Resource_ugsj6"), SubResource("Resource_mj676")])
 metadata/_custom_type_script = "uid://beo7viotqy0ho"

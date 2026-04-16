@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ChestArmor" format=3 uid="uid://df6ct6pwpyvo5"]
+
+[ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_yhstx"]
+[ext_resource type="Script" uid="uid://ctq7ms048fujd" path="res://scripts/item scripts/item types/armor/chest_armor.gd" id="2_ppfdf"]
+[ext_resource type="Texture2D" uid="uid://b3y77psph2k64" path="res://assets/sprites/items/armor/beaten_chestplate.png" id="3_ppfdf"]
+
+[resource]
+script = ExtResource("2_ppfdf")
+defense = 4
+speed = -2
+name = "Beaten Chestplate"
+texture = ExtResource("3_ppfdf")
+metadata/_custom_type_script = "uid://ctq7ms048fujd"

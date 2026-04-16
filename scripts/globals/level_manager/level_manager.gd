@@ -197,7 +197,9 @@ func handle_player_death():
 	deaths+=1
 	#transition_to_scene(player,Scene.ContinueScreen)
 	player.get_tree().change_scene_to_packed(preload("res://scenes/ui/menus/continue_screen.tscn"))
-	#continue_screen.visible = true
+	player.queue_free()
+	
+	continue_screen.visible = true
 	#pause_after_player_death_timer.start()
 	#level = clamp(level-1,0,1000)
 	#audio_player.stop()
