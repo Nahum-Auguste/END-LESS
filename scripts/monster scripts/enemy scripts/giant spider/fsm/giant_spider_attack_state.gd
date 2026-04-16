@@ -30,7 +30,7 @@ func attack():
 		if InventoryManager.player:
 			var dir = body.hitbox.global_position.direction_to(InventoryManager.player.global_position)
 			var knockback_strength = 11470 if body.is_mother else 100
-			print(body.is_mother)
+			#print(body.is_mother)
 			#print(knockback_strength)
 			var knockback = dir * knockback_strength
 			InventoryManager.player.knockback_velocity += knockback

@@ -92,6 +92,8 @@ func paste_pattern(pattern_path: String, check_overlap: bool = true):
 				if source_id==0 and atlas_pos==Vector2i(0,0) and ceilings_layer:
 					draw_ceiling_tile_circle(pos,15,true)
 					
+				if ceilings_layer.get_cell_source_id(pos)==0 and ceilings_layer.get_cell_atlas_coords(pos)==Vector2i(0,0):
+					ceilings_layer.set_cell(pos,-1)
 				tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 				
 	else:
@@ -103,7 +105,7 @@ func draw_ceiling_tile_circle(pos: Vector2, size: float = 1, filled:=true):
 	if size<=0: return
 	
 	var angles = []
-	var subdivisions = size #size * 4 * 2
+	var subdivisions = size * 4 * 2
 	
 	for i in range(0,clamp(subdivisions,0,360)):
 		angles.push_back(i * (360/subdivisions))
@@ -122,7 +124,12 @@ func draw_ceiling_tile(pos:Vector2i):
 		"atlas_pos":Vector2i(0,0)
 	}
 	
-	var tl = ceilings_layer
+	var tl = tile_layer
+	
+	if tl.get_cell_source_id(pos)!=-1:
+		return
+		
+	tl = ceilings_layer
 	
 	if tl.get_cell_source_id(pos)!=tile_data.atlas_id or tl.get_cell_atlas_coords(pos)!=tile_data.atlas_pos:
 		tl.set_cell(pos,tile_data.atlas_id,tile_data.atlas_pos)

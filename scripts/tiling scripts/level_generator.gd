@@ -63,13 +63,14 @@ var node_positions: Array[Vector2] = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#generate_level()
+	#print(tile_layer.tile_set)
 	pass
 	
 func _process(delta):
 	max_length_area_shape.radius = max_path_length * 32
 	
 func draw_ceilings():
-	print("drawing ceilings...")
+	#print("drawing ceilings...")
 	var size = 1#max_path_length * 1.3
 	var start = Vector2(-size,-size)
 	var gap = 1
@@ -78,7 +79,7 @@ func draw_ceilings():
 		for y in range(0,size*2,gap):
 
 			var pos = start + Vector2(x,y)
-			print(pos)
+			#print(pos)
 			
 			draw_tile(pos,"ceiling")
 			
@@ -91,12 +92,12 @@ func draw_walls():
 	var size = max_path_length * 1.1
 	var start = Vector2(-size,-size)
 	
-	for cell_pos in tile_layer.get_used_cells():
-		var atlas_pos: = tile_layer.get_cell_atlas_coords(cell_pos)
-		var source_id = tile_layer.get_cell_source_id(cell_pos)
-		var source = tile_layer.tile_set.get_source(source_id)
+	for cell_pos in ceilings_layer.get_used_cells():
+		var atlas_pos: = ceilings_layer.get_cell_atlas_coords(cell_pos)
+		var source_id = ceilings_layer.get_cell_source_id(cell_pos)
+		var source = ceilings_layer.tile_set.get_source(source_id)
 		if source is TileSetScenesCollectionSource: continue
-		var above_atlas = tile_layer.get_cell_atlas_coords(cell_pos + Vector2i(0,-1))
+		var above_atlas = ceilings_layer.get_cell_atlas_coords(cell_pos + Vector2i(0,-1))
 		var below_atlas = tile_layer.get_cell_atlas_coords(cell_pos + Vector2i(0,1))
 		if atlas_pos==tiles["ceiling"].atlas_pos:
 			if (below_atlas==tiles["floor"].atlas_pos):
@@ -131,13 +132,14 @@ func generate_level():
 	#draw_ceilings()
 	paste_generated_level()
 	add_rooms()
-	draw_walls()
+	
 	
 	#add_boss_room()
 	add_spawn_room()
 	timer.wait_time = 2
 	timer.start()
 	await timer.timeout
+	draw_walls()
 	bake_nav()
 	spawn_enemies()
 	generation_finished.emit()
@@ -175,7 +177,7 @@ func spawn_enemies():
 		
 		enemies_container.add_child.call_deferred(enemy)
 		enemy.global_position = pos
-		print(enemy.global_position)
+		#print(enemy.global_position)
 	#
 #func add_boss_room():
 	#var nodes = node_positions.duplicate()
@@ -239,8 +241,12 @@ func paste_pattern(position: Vector2i, path: String, check_overlap:bool = false)
 		var atlas_pos = pattern.get_cell_atlas_coords(cell)
 		var alt_id = pattern.get_cell_alternative_tile(cell)
 		if source_id==0 and atlas_pos==Vector2i(0,0):
-			draw_tile_circle(pos,"ceiling",border_width)
+			#print("drawn")
+			#print
+			draw_tile_circle(pos,"ceiling",border_width,true,true)
 		#draw_tile_circle(cell,"ceiling",border_width * 4,true)
+		if ceilings_layer.get_cell_source_id(pos)==0 and ceilings_layer.get_cell_atlas_coords(pos)==Vector2i(0,0):
+					ceilings_layer.set_cell(pos,-1)
 		tile_layer.set_cell(pos,source_id,atlas_pos,alt_id)
 		#floor_cells.erase(pos)
 
@@ -258,7 +264,7 @@ func add_rooms():
 	var potential_cells: Array = []
 	var potential_cell_datas : Array = []
 	
-	print(floor_cells.size())
+	#print(floor_cells.size())
 	for cell in floor_cells:
 		var lv = Vector2i(-1,0)
 		var rv = Vector2i(1,0)
@@ -293,6 +299,8 @@ func add_rooms():
 			var pos2 = cell + next_disp
 			var sid1 = tile_layer.get_cell_source_id(pos1)
 			var sid2 = tile_layer.get_cell_source_id(pos2)
+			#print(tile_layer)
+			#print(tile_layer.tile_set)
 			var src1 = tile_layer.tile_set.get_source(sid1) if sid1!=-1 else null
 			var src2 = tile_layer.tile_set.get_source(sid2) if sid2!=-1 else null
 			
@@ -327,7 +335,7 @@ func add_rooms():
 				potential_cells.push_back(cell)
 				potential_cells.push_back(cell)
 				potential_cell_datas.push_back([cell,ci])
-				#tile_layer.set_cell(pos1,1,Vector2i.ZERO,ci)
+				tile_layer.set_cell(pos1,1,Vector2i.ZERO,ci)
 	#print(floor_cells.size())
 	#print(potential_cell_datas.size())
 	
@@ -363,7 +371,7 @@ func add_rooms():
 			
 		#draw_tile_circle(cell,"floor",7,true)
 		if paste_pattern(cell,path,true):
-			draw_tile_circle(cell,"floor",4,true)
+			draw_tile_circle(cell,"floor",4,true,true)
 			potential_cell_datas.pop_at(ri)
 			break
 	
@@ -379,7 +387,7 @@ func add_rooms():
 		var source: TileSetScenesCollectionSource = tile_layer.tile_set.get_source(1)
 		var scene:PackedScene = source.get_scene_tile_scene(ci)
 		if scene:
-			draw_tile_circle(cell,"ceiling",border_width,true)
+			draw_tile_circle(cell,"ceiling",border_width,true,true)
 			tile_layer.set_cell(cell,1,Vector2i.ZERO,ci)
 			potential_cell_datas.pop_at(ri)
 			pasters+=1
@@ -413,10 +421,19 @@ func paste_generated_level():
 			draw_random_path_ended(node_pos,end_pos, "floor", path_width)
 
 
-func draw_tile(pos:Vector2, tile:String = "floor"):
+func draw_tile(pos:Vector2, tile:String = "floor", empty_spaces_only:bool = false):
 	var tile_data: TD = tiles[tile]
 	
 	var tl = tile_layer
+	#if tile == "ceiling":
+		#tl = ceilings_layer
+	#if tile=="ceiling":
+		#print("ceil")
+	if empty_spaces_only:
+		if tl.get_cell_source_id(pos) != -1:
+			#print("not empty")
+			return
+			
 	if tile == "ceiling":
 		tl = ceilings_layer
 	
@@ -429,7 +446,7 @@ func draw_tile(pos:Vector2, tile:String = "floor"):
 			
 	
 	
-func draw_tile_circle(pos: Vector2, tile:String = "floor", size: float = 1, filled:=true):
+func draw_tile_circle(pos: Vector2, tile:String = "floor", size: float = 1, filled:=true, empty_spaces_only: bool = false):
 	if size<=0: return
 	
 	var angles = []
@@ -444,7 +461,7 @@ func draw_tile_circle(pos: Vector2, tile:String = "floor", size: float = 1, fill
 			var rad = deg_to_rad(a)
 			var x = cos(rad) * r
 			var y = sin(rad) * r
-			draw_tile(pos + Vector2(x,y),tile)
+			draw_tile(pos + Vector2(x,y),tile,empty_spaces_only)
 			
 func draw_random_path_ended(start_pos:Vector2, end_pos:Vector2, tile:String = "floor", width = 5, paste_positions: Array[Vector2] = [start_pos]):
 	var max_tries = int((start_pos - end_pos).length()*10) * width

@@ -16,7 +16,7 @@ func _process(delta):
 
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/testing/test_game.tscn")
+	LevelManager.transition_to_scene(self,LevelManager.Scene.FirstResurrection)
 
 
 func _on_exit_pressed() -> void:

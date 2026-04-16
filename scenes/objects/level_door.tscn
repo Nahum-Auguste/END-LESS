@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bui7tufcqvhag" path="res://scripts/object scripts/level_door.gd" id="1_fx3ej"]
 [ext_resource type="Texture2D" uid="uid://bq4xdsom4c430" path="res://assets/sprites/objects/doors/level_room_doors_spritesheet.png" id="1_fxgtp"]
 
+[sub_resource type="PackedScene" id="PackedScene_fx3ej"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5bto"]
 atlas = ExtResource("1_8kicy")
 region = Rect2(0, 0, 32, 64)
@@ -56,6 +58,7 @@ z_index = -1
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_fx3ej")
+destination = SubResource("PackedScene_fx3ej")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=121311376]
 position = Vector2(0, -16)

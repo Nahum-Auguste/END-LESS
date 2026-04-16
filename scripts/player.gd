@@ -206,9 +206,9 @@ func punch():
 	
 	await sprite.animation_finished
 	attacking = false
-	print(previous_animation)
+	#print(previous_animation)
 	sprite.play(previous_animation,1)
-	print("punch finished!")
+	#print("punch finished!")
 		
 	
 

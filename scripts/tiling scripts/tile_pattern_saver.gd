@@ -90,8 +90,8 @@ func save():
 	var file_path = get_save_path() + "/" +  pattern_name + ".tres"
 	DirAccess.remove_absolute(file_path)
 	ResourceSaver.save(pattern,file_path)
-	print("Pattern saved at: ",file_path)
-	print("Results may take a minute.")
+	#print("Pattern saved at: ",file_path)
+	#print("Results may take a minute.")
 	direction = ""
 	pattern_name = ""
 	pattern_type = "standard room"

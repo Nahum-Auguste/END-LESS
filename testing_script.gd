@@ -5,7 +5,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var item: Consumable = ItemDatabase.create_item(ItemDatabase.ItemID.DenseCalciumInfusion)
-	print(item)
+	#print(item)
 	item.print(false)
 	
 	var monster = Monster.new()

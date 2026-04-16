@@ -20,7 +20,7 @@ func spawn_player():
 	if !player:
 		player = player_prefab.instantiate()
 		get_tree().root.add_child(player)
-	print(global_position)
+	#print(global_position)
 	player.global_position = global_position
 	player.animation = direction + "_walk"
 	

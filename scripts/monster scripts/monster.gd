@@ -33,7 +33,7 @@ func add_status_effect(effect: StatusEffect):
 func _ready():
 	set_up_shaders()
 	eye_frame_timer.wait_time = eye_frame_duration
-	print(eye_frame_timer.wait_time)
+	#print(eye_frame_timer.wait_time)
 	eye_frame_timer.one_shot = true
 	eye_frame_timer.autostart = false
 	add_child(eye_frame_timer)
@@ -78,7 +78,7 @@ func inflict_damage(dmg: float):
 	
 	if sprite and sprite.material:
 		sprite.material.set_shader_parameter("active",true)
-		print(self)
+		#print(self)
 	
 func handle_death():
 	alive = false

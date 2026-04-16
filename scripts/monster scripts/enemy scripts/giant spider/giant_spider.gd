@@ -37,7 +37,7 @@ func _ready():
 	if is_mother:
 		spiderlings = randi_range(min_spiderlings,max_spiderlings)
 	else: spiderlings = 0
-	print(is_mother)
+	#print(is_mother)
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -112,7 +112,7 @@ func spawn_spiderlings():
 			var max_disp = 10
 			var disp = Vector2(randi() % max_disp, randi() % max_disp)
 			spiderling.global_position = global_position + disp
-		print("spawned ", spiderlings)
+		#print("spawned ", spiderlings)
 
 
 func _on_hit_box_body_entered(body):

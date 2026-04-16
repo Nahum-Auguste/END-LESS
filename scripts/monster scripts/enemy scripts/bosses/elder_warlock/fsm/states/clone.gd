@@ -18,7 +18,7 @@ func enter():
 	clone_timer.start()
 	if body is ElderWarlock:
 		body.real_warlock.max_clones = max_clones
-		print(body.real_warlock.max_clones)
+		#print(body.real_warlock.max_clones)
 
 
 

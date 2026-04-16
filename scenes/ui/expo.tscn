@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cb5lyjbrpc4y2"]
+
+[ext_resource type="PackedScene" uid="uid://d17d6y0l5lfeo" path="res://scenes/ui/title_screen.tscn" id="1_fc04u"]
+
+[node name="Expo" type="Control" unique_id=750889081]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreen" parent="." unique_id=977598533 instance=ExtResource("1_fc04u")]
+layout_mode = 1

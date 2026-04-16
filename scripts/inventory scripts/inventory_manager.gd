@@ -10,19 +10,17 @@ var player: Player
 var player_inventory: PlayerInventory
 
 func _ready():
-	create_hud()
+	pass
+	#create_hud()
 	
-func create_hud():
-	player = get_tree().root.find_child("Player",true,false)
-	player_hud = get_tree().root.find_child("PlayerHud",true,false)
-	
-	
-	if !player_hud:
-		player_hud = player_hud_prefab.instantiate()
-		if player:
-			PlayerGuiCanvas.add_child(player_hud)
-			
-	player_inventory = player_hud.player_inventory
+#func create_hud():
+	#player = get_tree().root.find_child("Player",true,false)
+	#player_hud = get_tree().root.find_child("PlayerHud",true,false)
+	#
+	#
+	#
+			#
+	#player_inventory = player_hud.player_inventory
 		
 
 func _input(event):
@@ -40,6 +38,12 @@ func _input(event):
 				hovered_slot = null
 				
 func _process(delta):
+	if "player" in LevelManager:
+		player = LevelManager.player
+	if "player_hud" in LevelManager:
+		player_hud = LevelManager.player_hud
+	if player_hud:
+		player_inventory = player_hud.player_inventory
 	pass
 	
 func split_item(slot:ItemSlot):

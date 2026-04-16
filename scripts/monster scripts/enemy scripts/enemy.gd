@@ -53,7 +53,7 @@ func setup_player_escape_timer():
 	
 func on_player_escape_timer_timeout():
 	player_seen = false
-	print("player_escaped from ",self)
+	#print("player_escaped from ",self)
 	
 func add_possible_item_drop_data (id:int,drop_chance:float=1,min_amount:int=0,max_amount:int=1):
 	possible_item_drops_data[id] = {

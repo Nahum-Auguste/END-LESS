@@ -28,7 +28,7 @@ func print(primatives_only:bool = true) -> void:
 		var prop_name = prop.name
 		var val = self[prop_name]
 		if primatives_only and (val is Object or val is Array): continue
-		print(prop_name,": ",val)
+		#print(prop_name,": ",val)
 		
 func get_formatted_property_list():
 	var list: Array[Dictionary] = []

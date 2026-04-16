@@ -18,13 +18,13 @@ func on_equip(user : Monster):
 	self.user = user
 	user.defense += defense
 	user.base_speed += speed
-	print("user gained ",defense," defense!")
-	print("user gained ",speed," speed!")
+	#print("user gained ",defense," defense!")
+	#print("user gained ",speed," speed!")
 	
 func on_unequip():
 	user.defense -= defense
 	user.base_speed -= speed
-	print("user lost ",defense," defense!")
-	print("user lost ",speed," speed!")
+	#print("user lost ",defense," defense!")
+	#print("user lost ",speed," speed!")
 	user = null
 	pass

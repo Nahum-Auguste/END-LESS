@@ -13,7 +13,7 @@ var tick_count :int = 0
 func apply(user: Monster) -> void:
 	# set up timer and add it to the user
 	if tick_interval and !tick_interval_timer and !finished and user:
-		print("status effect timer created")
+		#print("status effect timer created")
 		tick_interval_timer = Timer.new()
 		tick_interval_timer.one_shot = false
 		tick_interval_timer.wait_time = tick_interval

@@ -160,7 +160,7 @@ func draw_arc(p1:Vector2,p2:Vector2,tile:String,radius=10,divisions=3,i=0):
 	draw_arc(p1,p3,tile,radius/4,divisions-1,i)
 	
 func stack(origin:Vector2i,orientation:String,steps=total_steps,width=3,_length=20):	
-	print(steps)
+	#print(steps)
 	if (steps<=0 or _length==0) :
 		return
 		
@@ -174,7 +174,7 @@ func stack(origin:Vector2i,orientation:String,steps=total_steps,width=3,_length=
 
 	if (orientation=="horizontal"):
 		draw_line(origin,Vector2i(length*direction,1),"floor",width)
-		print(extra_count)
+		#print(extra_count)
 		for i in range(extra_count):
 			var off_x = randi() % length
 			stack(origin +Vector2i(off_x*direction,0),"vertical",steps-1,width,clamp(length-2,1,INF))

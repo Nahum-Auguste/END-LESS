@@ -21,11 +21,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+LevelManager="*uid://dyo2tqdf1ir37"
 InventoryManager="*uid://bkhc40jsxthe5"
 GroundGuiCanvas="*uid://del2ua8ddsqph"
 PlayerGuiCanvas="*uid://4lh87uosaaxa"
 LayerConstants="*uid://005smirbv4k"
-LevelManager="*uid://dyo2tqdf1ir37"
 
 [debug]
 
@@ -141,4 +141,4 @@ dodge={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.09923177, 0.09923177, 0.09923176, 1)
+environment/defaults/default_clear_color=Color(0.31135666, 0.31135654, 0.31135654, 1)

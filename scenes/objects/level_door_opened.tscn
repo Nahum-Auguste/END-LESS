@@ -4,6 +4,7 @@
 
 [node name="SpawnDoor" unique_id=364485319 instance=ExtResource("1_ysobq")]
 locked = false
+is_spawn_door = true
 
 [node name="Sprite" parent="." index="0" unique_id=121311376]
 animation = &"open"

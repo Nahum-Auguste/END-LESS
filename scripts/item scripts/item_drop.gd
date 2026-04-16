@@ -26,6 +26,7 @@ func _process(delta):
 	load_texture()
 	
 	player = InventoryManager.player
+	#print(player)
 	
 	if "colliding" in ray_checker and ray_checker.colliding and is_mouse_hovering and (Input.is_action_just_released("right_click") or Input.is_action_just_released("left_click")):
 		display_context_menu()

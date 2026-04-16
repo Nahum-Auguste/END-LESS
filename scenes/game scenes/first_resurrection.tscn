@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cmbj1j337ah7h" path="res://assets/sprites/enemies/necromancer/necromancer_spritesheet.png" id="3_yunid"]
 [ext_resource type="Shader" uid="uid://bycis4bg71wwx" path="res://assets/shaders/entity_hit.gdshader" id="4_hbhbv"]
 [ext_resource type="Texture2D" uid="uid://0iawogcy623w" path="res://assets/sprites/player/revenant_dodge_spritesheet.png" id="5_jfx54"]
+[ext_resource type="Script" uid="uid://b0dywa8sx54m3" path="res://scripts/item scripts/item types/weapons/melee weapons/sword.gd" id="5_p2tv1"]
+[ext_resource type="Texture2D" uid="uid://dekb3u8ild5vr" path="res://assets/sprites/items/weapons/broadsword/sword.png" id="6_3bbsu"]
 [ext_resource type="Texture2D" uid="uid://dcdxc4rmyiw4e" path="res://assets/sprites/player/attacks/sword_swing/revenant_sword_attack_sprite_sheet_template.png" id="6_5doj3"]
 [ext_resource type="Texture2D" uid="uid://d0mpn1jxwngc0" path="res://assets/sprites/player/revenant_spritesheet.png" id="7_s2ajb"]
 [ext_resource type="Texture2D" uid="uid://bc5gpx4jnpv3c" path="res://assets/sprites/player/revenant_hurt_spritesheet.png" id="8_ycobs"]
@@ -24,10 +26,18 @@
 [ext_resource type="Texture2D" uid="uid://4qk88idghnjv" path="res://assets/sprites/player/attacks/effects/sword_swing_effect.png" id="20_010uw"]
 [ext_resource type="Texture2D" uid="uid://c6kd8ndaqpg06" path="res://assets/sprites/objects/decor/skeleton_body.png" id="22_uetox"]
 [ext_resource type="PackedScene" uid="uid://cnkh2kqa03hny" path="res://scenes/objects/item_drop.tscn" id="23_jfx54"]
-[ext_resource type="Resource" uid="uid://b2walcwmb6d6n" path="res://resources/items/weapons/swords/sturdy_broadsword.tres" id="24_5doj3"]
 [ext_resource type="PackedScene" uid="uid://ceq7n45fx8raa" path="res://scenes/camera.tscn" id="25_5doj3"]
 [ext_resource type="PackedScene" uid="uid://bxf5lmevd67uq" path="res://scenes/objects/level_door.tscn" id="26_s2ajb"]
 [ext_resource type="PackedScene" uid="uid://ccfwix6jnvno5" path="res://scenes/ui/dialogue_box.tscn" id="27_ycobs"]
+
+[sub_resource type="Resource" id="Resource_p2tv1"]
+script = ExtResource("5_p2tv1")
+range = 5.0
+damage = 4.0
+attack_speed = 2.0
+crit_chance = 0.1
+name = "Sturdy Broadsword"
+texture = ExtResource("6_3bbsu")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
 
@@ -2589,10 +2599,10 @@ z_index = -1
 position = Vector2(-80, 82)
 rotation = 1.2742105
 scale = Vector2(0.99999994, 0.99999994)
-item = ExtResource("24_5doj3")
+item = SubResource("Resource_p2tv1")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider")]
-position = Vector2(726, -171)
+position = Vector2(41, 10)
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
@@ -2740,9 +2750,9 @@ locked = false
 
 [node name="DialogueBox" parent="CanvasLayer" unique_id=1149130560 instance=ExtResource("27_ycobs")]
 visible = false
-offset_left = 161.5
+offset_left = 220.5
 offset_top = 474.0
-offset_right = 887.5
+offset_right = 946.5
 offset_bottom = 700.0
 paragraphs = Array[String](["Since this soldier is ready now, we should quickly move on to the next batch of candidates to resurrect.", "We need to meet our quota before our next onslaught on the villages in Maqel, or else we'll be the ones needing a resurrection. ", "Any more mishaps with you two will NOT be accepted.", "Before we move on to the next round of bodies, I will need to gather some more supplies for our trip, so you two can wait here until I get back. "])
 

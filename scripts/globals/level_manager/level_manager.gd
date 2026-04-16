@@ -1,5 +1,30 @@
 extends CanvasLayer
 
+enum Scene {
+	TitleScreen,
+	SettingsScreen,
+	FirstResurrection,
+	GameLevel,
+	DeviantRoom
+}
+
+var scenes: Dictionary = {
+	Scene.TitleScreen: "res://scenes/ui/expo.tscn",
+	Scene.SettingsScreen: "res://scenes/ui/menus/settings_screen.tscn",
+	Scene.FirstResurrection: "res://scenes/game scenes/first_resurrection.tscn",
+	Scene.GameLevel: "res://scenes/testing/test_game.tscn",
+	Scene.DeviantRoom: "res://scenes/game scenes/resurrected_scene.tscn"
+}
+
+var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
+var player_hud: PlayerHud
+
+
+func transition_to_scene(caller: Node, scene_id: int):
+	caller.get_tree().change_scene_to_file(scenes[scene_id])
+	#print(InventoryManager.player_hud)
+
+
 var player: Player
 var is_level_finished:bool = false
 var pause_after_player_death_timer: Timer = Timer.new()
@@ -21,8 +46,15 @@ var loot_tables: Array[LootTable] = [
 ]
 
 func _ready():
+	if !player_hud:
+		player_hud = player_hud_prefab.instantiate()
+		PlayerGuiCanvas.add_child(player_hud)
+		InventoryManager.player_hud = player_hud
+		InventoryManager.player_inventory = player_hud.player_inventory
+			
+	#print(get_tree_string())
 	loot_table = loot_tables[0]
-	layer = 5
+	layer = 0
 	black_screen.color = Color.BLACK
 	black_screen.set_anchors_preset(Control.PRESET_FULL_RECT)
 	black_screen.visible = false
@@ -73,6 +105,7 @@ func fade_in_black_screen(time:float):
 signal black_screen_finished()
 
 func _process(delta):
+	#print(get_tree().root.get_children())
 	if player:
 		game_level = player.owner
 		
@@ -107,7 +140,7 @@ func end_game():
 	continue_after_death_timer.start()
 	
 func display_continue_screen():
-	print("continue")
+	#print("continue")
 	var tween = create_tween()
 	tween.tween_property(drawer_node,"dead_player_texture_opacity",0,2)
 	await  tween.finished

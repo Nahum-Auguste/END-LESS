@@ -1,9 +1,19 @@
 [gd_scene format=3 uid="uid://cnkh2kqa03hny"]
 
 [ext_resource type="Script" uid="uid://bnboaif2tmtmy" path="res://scripts/item scripts/item_drop.gd" id="1_sdob7"]
-[ext_resource type="Resource" uid="uid://cvuttsiyestwo" path="res://resources/items/consumables/healing items/dense_calcium_infusion.tres" id="2_0olvh"]
+[ext_resource type="Script" uid="uid://qcwnfmt1c1yc" path="res://scripts/item scripts/item types/consumables/consumable.gd" id="2_vssh6"]
 [ext_resource type="Texture2D" uid="uid://bkv5282rhyot8" path="res://assets/sprites/items/consumables/healing items/dense_calcium_infusion.png" id="3_0olvh"]
+[ext_resource type="Script" uid="uid://mpib8fdqsv7q" path="res://scripts/status effects/status_effect.gd" id="3_c6h5e"]
+[ext_resource type="Resource" uid="uid://cs4ssbcfduccy" path="res://resources/status effects/instant_lesser_healing.tres" id="4_h3q1x"]
 [ext_resource type="PackedScene" uid="uid://4jxucksd3mvr" path="res://scenes/utility/ray_cast_checker.tscn" id="4_jm2bc"]
+[ext_resource type="Resource" uid="uid://wk6av7mtk3ap" path="res://resources/status effects/lasting_dense_healing.tres" id="5_s3nyv"]
+
+[sub_resource type="Resource" id="Resource_rybo5"]
+script = ExtResource("2_vssh6")
+status_effects = Array[ExtResource("3_c6h5e")]([ExtResource("4_h3q1x"), ExtResource("5_s3nyv")])
+name = "dense calcium infusion"
+texture = ExtResource("3_0olvh")
+max_stack_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0olvh"]
 
@@ -36,7 +46,7 @@ sprite = NodePath("Sprite")
 mouse_detection_area = NodePath("MouseDetectionArea")
 ray_checker = NodePath("RayCastChecker")
 interactable_overlay = NodePath("InteractableOverlay")
-item = ExtResource("2_0olvh")
+item = SubResource("Resource_rybo5")
 
 [node name="MouseDetectionArea" type="Area2D" parent="." unique_id=75805211]
 

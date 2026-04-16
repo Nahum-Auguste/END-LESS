@@ -6,5 +6,5 @@ class_name HealStatusEffect extends StatusEffect
 func _on_apply(user:Monster) -> void:
 	#if !user: return
 	user.health = clamp(user.health + heal_per_tick,0,user.max_health)
-	print(user, " gained ",heal_per_tick," health!")
+	#print(user, " gained ",heal_per_tick," health!")
 	
