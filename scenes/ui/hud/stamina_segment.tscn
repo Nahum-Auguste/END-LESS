@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cc6wr2sll4oik"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74kgl"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=459849893]
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_74kgl")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=579627577]
+layout_mode = 2
+color = Color(0.11627027, 4.094122e-05, 0.14867553, 1)
+
+[node name="StaminaSegment" type="ColorRect" parent="." unique_id=1501249810]
+layout_mode = 2
+color = Color(0.994788, 0.53258836, 1, 1)

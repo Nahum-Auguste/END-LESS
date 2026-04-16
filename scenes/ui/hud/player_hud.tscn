@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bvxc0w4hmr700"]
 
 [ext_resource type="Script" uid="uid://f6syqvjm673e" path="res://scripts/hud/player_hud.gd" id="1_5cnp3"]
-[ext_resource type="PackedScene" uid="uid://23e67hfn8jsm" path="res://scenes/ui/hud/stamina_bar.tscn" id="1_6k60i"]
 [ext_resource type="PackedScene" uid="uid://cwh1y8qsby475" path="res://scenes/ui/hud/health/health_container.tscn" id="2_cmdvl"]
 [ext_resource type="PackedScene" uid="uid://dy51o0d56utat" path="res://scenes/ui/hud/hot_bar_slot.tscn" id="3_x7jc0"]
 [ext_resource type="PackedScene" uid="uid://cw32uxj8k4nry" path="res://scenes/ui/hud/inventory/player_inventory.tscn" id="5_ful6q"]
 [ext_resource type="Script" uid="uid://bagm0ilc33vic" path="res://scripts/hud/player_hud_drawing_node.gd" id="6_b4vbk"]
+[ext_resource type="PackedScene" uid="uid://68j4s17tg0j4" path="res://scenes/ui/hud/new_stamina_bar.tscn" id="6_xx6x1"]
 
 [node name="PlayerHud" type="Control" unique_id=764259258 node_paths=PackedStringArray("player_inventory")]
 layout_mode = 3
@@ -39,16 +39,6 @@ offset_left = 31.0
 offset_top = 17.0
 offset_right = 135.0
 offset_bottom = 49.0
-
-[node name="StaminaBar" parent="." unique_id=188713738 instance=ExtResource("1_6k60i")]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 0
-offset_left = 33.0
-offset_top = 119.0
-offset_right = 339.0
-offset_bottom = 147.0
-scale = Vector2(1, 1)
-size_flags_horizontal = 1
 
 [node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=227969146]
 layout_mode = 0
@@ -111,3 +101,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_b4vbk")
+
+[node name="NewStaminaBar" parent="." unique_id=488731007 instance=ExtResource("6_xx6x1")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 121.0
+offset_right = 348.0
+offset_bottom = 145.0

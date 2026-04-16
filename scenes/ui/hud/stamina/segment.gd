@@ -1,2 +1,1 @@
-extends Panel
-class_name Segment
+class_name StaminaBar extends Panel

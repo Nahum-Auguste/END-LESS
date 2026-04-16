@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://68j4s17tg0j4"]
+
+[ext_resource type="Script" uid="uid://c0kw5461xcsar" path="res://scripts/hud/new_stamina_bar.gd" id="1_74kgl"]
+[ext_resource type="PackedScene" uid="uid://cc6wr2sll4oik" path="res://scenes/ui/hud/stamina_segment.tscn" id="2_b3vx5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3vx5"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="NewStaminaBar" type="PanelContainer" unique_id=488731007 node_paths=PackedStringArray("segments_container")]
+clip_contents = true
+custom_minimum_size = Vector2(100, 20)
+offset_left = 63.0
+offset_top = 178.0
+offset_right = 426.0
+offset_bottom = 202.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3vx5")
+script = ExtResource("1_74kgl")
+segment_prefab = ExtResource("2_b3vx5")
+segments_container = NodePath("HBoxContainer")
+stamina_points = 5
+max_stamina_points = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=979564914]
+layout_mode = 2
+theme_override_constants/separation = 0

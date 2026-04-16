@@ -2231,7 +2231,7 @@ size = Vector2(40, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider")]
+[node name="Player" type="CharacterBody2D" unique_id=806514 node_paths=PackedStringArray("hand_item_sprite", "dodge_timer", "collider", "hurt_box_collider", "stamina_regen_timer")]
 collision_mask = 15
 motion_mode = 1
 platform_floor_layers = 0
@@ -2240,6 +2240,7 @@ hand_item_sprite = NodePath("Arms/Node2D/Hand/HandItemSprite")
 dodge_timer = NodePath("DodgeTimer")
 collider = NodePath("CollisionShape2D")
 hurt_box_collider = NodePath("HurtBox/CollisionShape2D")
+stamina_regen_timer = NodePath("StaminaRegenTimer")
 
 [node name="AttackManager" type="Node" parent="." unique_id=1856847504 node_paths=PackedStringArray("player", "sprite", "animation_player", "hand_sprite", "arms_sprite", "attack_effect_sprite", "sword_hitbox_container")]
 script = ExtResource("2_f1ej7")
@@ -2333,8 +2334,13 @@ zoom = Vector2(2.69, 2.69)
 [node name="DodgeTimer" type="Timer" parent="." unique_id=1444177253]
 one_shot = true
 
+[node name="StaminaRegenTimer" type="Timer" parent="." unique_id=72159049]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="area_entered" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/RectArea" to="SwordSwingHitBox" method="_on_rect_area_area_exited"]
 [connection signal="area_entered" from="SwordSwingHitBox/CircleArea" to="SwordSwingHitBox" method="_on_circle_area_area_entered"]
 [connection signal="area_exited" from="SwordSwingHitBox/CircleArea" to="SwordSwingHitBox" method="_on_circle_area_area_exited"]
 [connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]
+[connection signal="timeout" from="StaminaRegenTimer" to="." method="_on_stamina_regen_timer_timeout"]
