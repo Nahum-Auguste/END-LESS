@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bkxtfyias4f8n" path="res://scenes/ui/menus/settings_screen.gd" id="1_1liky"]
 [ext_resource type="Texture2D" uid="uid://c32ogpm2au2ac" path="res://assets/sprites/ui/flame_bg1.png" id="1_gun7u"]
 [ext_resource type="PackedScene" uid="uid://cobiywn8tw4f6" path="res://scenes/ui/menu_buttons/sound_bar.tscn" id="2_htfmr"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="3_pxnl6"]
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_s18c7"]
 
 [node name="settings_screen" type="Control" unique_id=597405885]
@@ -57,6 +58,7 @@ offset_right = 142.5
 offset_bottom = -254.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_pxnl6")
 theme_override_font_sizes/font_size = 62
 text = "SETTINGS"
 
@@ -74,6 +76,7 @@ offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("3_pxnl6")
 theme_override_font_sizes/font_size = 40
 text = "MUSIC"
 horizontal_alignment = 1
@@ -98,6 +101,7 @@ offset_bottom = 167.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("3_pxnl6")
 theme_override_font_sizes/font_size = 40
 text = "SFX"
 horizontal_alignment = 1
@@ -138,6 +142,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_pxnl6")
 theme_override_font_sizes/font_size = 31
 text = "RETURN"
 horizontal_alignment = 1

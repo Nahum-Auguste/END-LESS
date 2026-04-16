@@ -5,7 +5,7 @@ extends Node2D
 @export var active: bool = true
 @export var player: Player
 @export var necro: AnimatedSprite2D
-@export var timer: Timer = Timer.new()
+@onready var timer: Timer = Timer.new()
 
 
 var d1 :Array[String] = [

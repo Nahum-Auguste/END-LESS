@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="1_5p30d"]
 [ext_resource type="Script" uid="uid://dph2sdawf2jqu" path="res://scenes/ui/menus/pause_menu.gd" id="1_n4ldv"]
 [ext_resource type="Shader" uid="uid://sqfdxmtjbnpk" path="res://scenes/ui/menus/pause_menu.gdshader" id="2_idy5m"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="4_hf471"]
 [ext_resource type="PackedScene" uid="uid://c80bhyv5au1u5" path="res://scenes/ui/menus/settings_screen.tscn" id="4_idy5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hf471"]
@@ -102,6 +103,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 3
 theme_override_constants/paragraph_spacing = 0
 theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_hf471")
 theme_override_font_sizes/font_size = 10
 text = "resume"
 horizontal_alignment = 1
@@ -131,6 +133,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 3
 theme_override_constants/paragraph_spacing = 0
 theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_hf471")
 theme_override_font_sizes/font_size = 10
 text = "settings"
 horizontal_alignment = 1
@@ -160,6 +163,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 3
 theme_override_constants/paragraph_spacing = 0
 theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_hf471")
 theme_override_font_sizes/font_size = 10
 text = "quit"
 horizontal_alignment = 1
@@ -170,6 +174,7 @@ uppercase = true
 libraries/ = SubResource("AnimationLibrary_sn3bg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=416926672]
+visible = false
 
 [node name="settings_screen" parent="CanvasLayer" unique_id=597405885 instance=ExtResource("4_idy5m")]
 

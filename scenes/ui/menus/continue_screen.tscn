@@ -1,12 +1,11 @@
-[gd_scene format=3 uid="uid://d17d6y0l5lfeo"]
+[gd_scene format=3 uid="uid://2ftmwnxat2gi"]
 
-[ext_resource type="Script" uid="uid://bt8b0hi1kn132" path="res://scripts/gui scripts/title_screen.gd" id="1_aqpy5"]
-[ext_resource type="AudioStream" uid="uid://cuavgrchov8tv" path="res://assets/music/Tenacity.wav" id="1_eb34j"]
-[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="2_r23qo"]
-[ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="3_w8uqo"]
-[ext_resource type="PackedScene" uid="uid://c80bhyv5au1u5" path="res://scenes/ui/menus/settings_screen.tscn" id="4_a4ium"]
+[ext_resource type="Script" uid="uid://boncjqu5hk54e" path="res://scripts/gui scripts/continue_screen.gd" id="1_2b6x1"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="2_ryh3x"]
+[ext_resource type="AudioStream" uid="uid://cuavgrchov8tv" path="res://assets/music/Tenacity.wav" id="3_g6jwa"]
+[ext_resource type="PackedScene" uid="uid://billmxpo0h0xf" path="res://scenes/ui/menu_buttons/short_bone_button.tscn" id="4_valqh"]
 
-[node name="TitleScreen" type="Control" unique_id=977598533]
+[node name="ContinueScreen" type="Control" unique_id=977598533]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -14,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_aqpy5")
+script = ExtResource("1_2b6x1")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=670125012]
 layout_mode = 1
@@ -23,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.10224319, 0.10224321, 0.10224321, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1444443771]
 layout_mode = 1
@@ -32,24 +31,25 @@ anchor_right = 1.0
 offset_top = 169.0
 offset_bottom = 252.0
 grow_horizontal = 2
-theme_override_fonts/normal_font = ExtResource("2_r23qo")
+theme_override_fonts/normal_font = ExtResource("2_ryh3x")
 theme_override_font_sizes/normal_font_size = 60
 text = "ENDLESS"
 fit_content = true
 horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2134222111]
-stream = ExtResource("1_eb34j")
+stream = ExtResource("3_g6jwa")
+pitch_scale = 0.47
 autoplay = true
 
-[node name="play" parent="." unique_id=1736505248 instance=ExtResource("3_w8uqo")]
+[node name="continue" parent="." unique_id=1736505248 instance=ExtResource("4_valqh")]
 layout_mode = 0
 offset_left = 480.0
-offset_top = 355.0
+offset_top = 431.0
 offset_right = 799.2
-offset_bottom = 439.0
+offset_bottom = 515.0
 
-[node name="Label" type="Label" parent="play" unique_id=1202561929]
+[node name="Label" type="Label" parent="continue" unique_id=1202561929]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.51100004
@@ -62,14 +62,15 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_r23qo")
+theme_override_fonts/font = ExtResource("2_ryh3x")
 theme_override_font_sizes/font_size = 26
-text = "PLAY"
+text = "CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="settings" parent="." unique_id=1001627785 instance=ExtResource("3_w8uqo")]
+[node name="settings" parent="." unique_id=1001627785 instance=ExtResource("4_valqh")]
+visible = false
 layout_mode = 0
 offset_left = 480.0
 offset_top = 439.0
@@ -89,14 +90,14 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_r23qo")
+theme_override_fonts/font = ExtResource("2_ryh3x")
 theme_override_font_sizes/font_size = 26
 text = "SETTINGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="exit" parent="." unique_id=160822897 instance=ExtResource("3_w8uqo")]
+[node name="exit" parent="." unique_id=160822897 instance=ExtResource("4_valqh")]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 523.0
@@ -116,17 +117,13 @@ offset_right = 114.88878
 offset_bottom = 19.479996
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_r23qo")
+theme_override_fonts/font = ExtResource("2_ryh3x")
 theme_override_font_sizes/font_size = 26
 text = "exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=908666615]
-
-[node name="settings_screen" parent="CanvasLayer" unique_id=597405885 instance=ExtResource("4_a4ium")]
-
-[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

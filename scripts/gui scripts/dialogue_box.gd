@@ -26,6 +26,9 @@ func stop():
 	playing = false
 	paragraph_step = 0
 	text_step = 0
+	var paragraph :String= paragraphs[paragraph_step]
+	if paragraph:
+		visible_text[0] = paragraph[0]
 	
 
 # Called when the node enters the scene tree for the first time.

@@ -40,5 +40,13 @@ func get_slots_container_items(container: Control):
 	return items
 	
 	
+func clear():
+	for s in item_slots:
+		s.item = null
+	for c in [accessory_slots_container,armor_slots_container,consumable_slots_container,weapon_slots_container]:
+		for cc in c.get_children():
+			if cc is ItemSlot:
+				cc.item = null
+	
 func is_item_equipped(item:Item) -> bool:
 	return item in get_slots_container_items(consumable_slots_container) or item in get_slots_container_items(accessory_slots_container) or item in get_slots_container_items(weapon_slots_container) or item in get_slots_container_items(armor_slots_container)

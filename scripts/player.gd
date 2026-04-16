@@ -298,6 +298,7 @@ func handle_death():
 	sprite.animation = "killed_" + get_direction()
 	sprite.material.set_shader_parameter("active",false)
 	process_mode = Node.PROCESS_MODE_DISABLED
+	LevelManager.handle_player_death()
 	#queue_free()
 	
 

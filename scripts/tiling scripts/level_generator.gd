@@ -172,6 +172,9 @@ func spawn_enemies():
 		var pos = tile_layer.to_global(tile_layer.map_to_local(cell))
 		spots.erase(cell)
 		
+		if pos.distance_to(level_center) <= 400:
+			continue
+		
 		var enemy_list :Array[PackedScene]  = [giant_spider_prefab,warlock_prefab,bat_swarm_prefab]
 		var enemy : Enemy = (enemy_list[randi_range(0,enemy_list.size()-1)]).instantiate()
 		

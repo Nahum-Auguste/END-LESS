@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dkan55ecsevew" path="res://scenes/ui/menu_buttons/sound_bar.gd" id="1_ksswp"]
 [ext_resource type="PackedScene" uid="uid://bc8rhvg6460wb" path="res://scenes/ui/menu_buttons/progress_bar.tscn" id="2_ksswp"]
 [ext_resource type="PackedScene" uid="uid://uijad3lf2xsr" path="res://scenes/ui/menu_buttons/right_arrow_button.tscn" id="4_vnkmm"]
+[ext_resource type="FontFile" uid="uid://b4lpunf5x8b1b" path="res://assets/fonts/Jersey25-Regular.ttf" id="5_ksswp"]
 [ext_resource type="PackedScene" uid="uid://5mcrdg644o2e" path="res://scenes/ui/menu_buttons/toggle.tscn" id="5_xscud"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06u7"]
@@ -56,6 +57,7 @@ offset_top = -5.0
 offset_right = 538.0
 offset_bottom = 31.0
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_ksswp")
 theme_override_font_sizes/font_size = 23
 theme_override_styles/background = SubResource("StyleBoxEmpty_b06u7")
 theme_override_styles/fill = SubResource("StyleBoxEmpty_ksswp")
@@ -76,6 +78,7 @@ offset_top = -2.0
 offset_right = 108.0
 offset_bottom = 34.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_ksswp")
 theme_override_font_sizes/font_size = 26
 text = "MUTE"
 horizontal_alignment = 1
