@@ -4,6 +4,9 @@ var enemies = []
 var positions = []
 @export var marker_color = Color("red")
 @export var enemy_container: Node2D
+@export var camera: Camera2D
+@export var sub_view_camera: Camera2D
+@export var player_marker: TextureRect
 
 
 
@@ -17,7 +20,8 @@ func init_enemy_positions():
 
 func update_enemy_positions():
 	for i in len(enemies):
-		positions[i] = (enemies[i].position - $"../../../../Camera2D".position) * $"../../SubViewport/Camera2D".zoom.x + $"../PlayerMarker".position * $"../../SubViewport/Camera2D".zoom.x
+		if enemies[i]:
+			positions[i] = (enemies[i].position - camera.position) * sub_view_camera.zoom.x + player_marker.position * sub_view_camera.zoom.x
 
 func create_marker():
 	update_enemy_positions()

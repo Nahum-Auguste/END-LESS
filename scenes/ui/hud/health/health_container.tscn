@@ -3,11 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://d28mu2iss4nx6" path="res://scenes/ui/hud/flame_hp.tscn" id="1_386ty"]
 [ext_resource type="Script" uid="uid://c3kruatxwtd5p" path="res://scenes/ui/hud/health/h_box_container.gd" id="1_bkfwm"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bkfwm"]
+bg_color = Color(0, 0, 0, 0)
+
 [node name="HealthContainer" type="PanelContainer" unique_id=9276153]
 offset_right = 104.0
 offset_bottom = 32.0
 scale = Vector2(2.86, 2.86)
 size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bkfwm")
 
 [node name="FlamesContainer" type="HBoxContainer" parent="." unique_id=1553192720]
 layout_mode = 2

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://uijad3lf2xsr" path="res://scenes/ui/menu_buttons/right_arrow_button.tscn" id="6_cfpwb"]
 [ext_resource type="PackedScene" uid="uid://bc8rhvg6460wb" path="res://scenes/ui/menu_buttons/progress_bar.tscn" id="7_0en42"]
 [ext_resource type="PackedScene" uid="uid://5mcrdg644o2e" path="res://scenes/ui/menu_buttons/toggle.tscn" id="8_tjx0k"]
+[ext_resource type="PackedScene" uid="uid://c24stgqnqw5xc" path="res://scenes/ui/menus/controls.tscn" id="5_pxnl6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06u7"]
 
@@ -75,6 +76,7 @@ theme_override_font_sizes/font_size = 62
 text = "SETTINGS"
 
 [node name="music" type="Label" parent="." unique_id=685821062]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -319,4 +321,8 @@ uppercase = true
 [connection signal="value_changed" from="music/sfx/sfx_bar/bar/percent" to="music/sfx/sfx_bar" method="_on_progress_bar_value_changed"]
 [connection signal="toggled" from="music/sfx/sfx_bar/mute" to="." method="_on_mute_toggled_sfx"]
 [connection signal="toggled" from="music/sfx/sfx_bar/mute" to="music/sfx/sfx_bar" method="_on_mute_toggled"]
+[node name="Controls" parent="." unique_id=1495023173 instance=ExtResource("5_pxnl6")]
+layout_mode = 1
+offset_bottom = -227.0
+
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

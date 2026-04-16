@@ -14,5 +14,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !player:
 		player = get_tree().root.find_child("Player",true,false)
-	#if camera_2d:
-		#camera_2d.position = player.position
+	if camera_2d:
+		camera_2d.position = player.position
