@@ -17,7 +17,8 @@ func _process(delta):
 func _input(event):
 	if InputMap.has_action("toggle_inventory") and event.is_action_pressed("toggle_inventory"):
 		visible = !visible
-	
+	#if LevelManager.player_hud.visible:
+		#if event.is_action_pressed("")
 
 func _on_display_mouse_entered():
 	is_mouse_hovered = true

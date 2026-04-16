@@ -16,7 +16,7 @@ var warlock: Warlock
 
 func _ready():
 	super._ready()
-	if ray_checker:
+	if ray_checker and InventoryManager.player:
 		ray_checker.target = InventoryManager.player
 	detection_range = base_detection_range
 	warlock = body
@@ -27,6 +27,8 @@ func _ready():
 		enter_state(wander_state)
 		
 func _process(delta):
+	if ray_checker and InventoryManager.player:
+		ray_checker.target = InventoryManager.player
 	detection_range = base_detection_range if current_state==wander_state else max_detection_range
 	ray_checker.max_range = detection_range
 	

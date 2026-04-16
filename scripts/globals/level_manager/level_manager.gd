@@ -29,6 +29,9 @@ var sfx_muted = false
 var player_hud_prefab: PackedScene = preload("res://scenes/ui/hud/player_hud.tscn")
 var player_hud: PlayerHud
 
+var pause_screem_prefab: PackedScene = preload("res://scenes/ui/menus/pause_menu.tscn")
+var pause_screen: Control
+
 
 func transition_to_scene(caller: Node, scene_id: int):
 	if scene_id == Scene.TitleScreen:
@@ -42,7 +45,10 @@ func transition_to_scene(caller: Node, scene_id: int):
 		audio_player.play()
 			
 	player_hud.visible = false
-	caller.get_tree().change_scene_to_file(scenes[scene_id])
+	if caller:
+		caller.get_tree().change_scene_to_file(scenes[scene_id])
+	elif player:
+		player.get_tree().change_scene_to_file(scenes[scene_id])
 	#player = get_tree().root.find_child("Player",true,false)
 	#if player:
 		#print("have player")
@@ -71,6 +77,10 @@ var loot_tables: Array[LootTable] = [
 ]
 
 func _ready():
+	pause_screen = pause_screem_prefab.instantiate()
+	add_child(pause_screen)
+	#pause_screen.visible = false
+	
 	add_child(audio_player)
 	
 	if !player_hud:
@@ -79,9 +89,11 @@ func _ready():
 		InventoryManager.player_hud = player_hud
 		InventoryManager.player_inventory = player_hud.player_inventory
 		player_inventory = player_hud.player_inventory
-		player_hud.visible = false
+		#player_hud.visible = false
 		
 	player = get_tree().root.find_child("Player",true,false)
+	
+	InventoryManager.player = player
 			
 	#print(get_tree_string())
 	loot_table = loot_tables[0]
@@ -136,6 +148,7 @@ func fade_in_black_screen(time:float):
 signal black_screen_finished()
 
 func _process(delta):
+	InventoryManager.player = player
 	player_inventory = player_hud.player_inventory
 	if audio_player:
 		audio_player.volume_db = linear_to_db(music_volume )
@@ -162,6 +175,7 @@ func handle_player_death():
 	deaths+=1
 	pause_after_player_death_timer.start()
 	level = clamp(level-1,0,1000)
+	audio_player.stop()
 	
 func pause_level():
 	game_level.process_mode = Node.PROCESS_MODE_DISABLED

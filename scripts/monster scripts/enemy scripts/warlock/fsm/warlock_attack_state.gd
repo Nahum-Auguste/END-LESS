@@ -13,7 +13,7 @@ var orb_spawn_timer: Timer = Timer.new()
 var orb_burst_attack_orb_spawn_interval :float = .04
 var attack_orbs_spawned_count = 0
 var orb_burst_starting_angle = 0
-var orb_burst_attack_max_orb_count = 4
+var orb_burst_attack_max_orb_count = 5
 var orb_burst_attack_initial_direction: Vector2 = Vector2.ZERO
 var orb_attack_prefab = preload("res://scenes/enemies/warlock/warlock_orb_attack.tscn")
 

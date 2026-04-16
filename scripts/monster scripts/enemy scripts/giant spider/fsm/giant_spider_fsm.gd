@@ -20,7 +20,8 @@ func _ready():
 
 func physics_update(delta):
 	super.physics_update(delta)
-	ray_checker.target = InventoryManager.player
+	if InventoryManager.player:
+		ray_checker.target = InventoryManager.player
 	
 	#print(is_player_detected())
 	

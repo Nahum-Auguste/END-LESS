@@ -13,13 +13,14 @@ agent_radius = 19.57
 [sub_resource type="CircleShape2D" id="CircleShape2D_dsg28"]
 radius = 1856.0
 
-[node name="TestGame" type="Node2D" unique_id=2085051502 node_paths=PackedStringArray("gen", "timer", "tile_layer", "objects_layer", "ceilings_layer")]
+[node name="TestGame" type="Node2D" unique_id=2085051502 node_paths=PackedStringArray("gen", "timer", "tile_layer", "objects_layer", "ceilings_layer", "enemies_container")]
 script = ExtResource("1_5elm7")
 gen = NodePath("LevelGenerator")
 timer = NodePath("LevelGenerator/Timer")
 tile_layer = NodePath("LevelGenerator/NavigationRegion2D/TileMapLayer")
 objects_layer = NodePath("LevelGenerator/NavigationRegion2D/ObjectsTileMapLayer")
 ceilings_layer = NodePath("LevelGenerator/CeilingsLayer")
+enemies_container = NodePath("LevelGenerator/NavigationRegion2D/Enemies")
 
 [node name="LevelGenerator" type="Node2D" parent="." unique_id=577514634 node_paths=PackedStringArray("ceilings_layer", "tile_layer", "enemies_container", "nav_region", "timer", "level_theme_player")]
 script = ExtResource("2_nsx7x")

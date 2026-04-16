@@ -125,4 +125,11 @@ func _on_unequip_button_button_up():
 
 
 func _on_use_button_button_up():
-	pass # Replace with function body.
+	if player:
+		player.use_consummable(item)
+		item.stack_count -=1
+		if item.stack_count<=0:
+			if item_slot:
+				item_slot.item = null
+			item = null
+			queue_free()

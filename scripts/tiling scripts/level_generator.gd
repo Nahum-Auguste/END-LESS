@@ -131,11 +131,12 @@ func generate_level():
 	clear()
 	#draw_ceilings()
 	paste_generated_level()
+	add_spawn_room()
 	add_rooms()
 	
 	
 	#add_boss_room()
-	add_spawn_room()
+	
 	timer.wait_time = 2
 	timer.start()
 	await timer.timeout

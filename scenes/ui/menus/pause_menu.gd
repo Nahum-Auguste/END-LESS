@@ -12,9 +12,10 @@ func resume():
 	hide()
 
 func pause():
-	get_tree().paused = true
-	$AnimationPlayer.play("blur")
-	show()
+	if LevelManager.player_hud and LevelManager.player_hud.player and LevelManager.player.process_mode != ProcessMode.PROCESS_MODE_DISABLED:
+		get_tree().paused = true
+		$AnimationPlayer.play("blur")
+		show()
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and !get_tree().paused:
@@ -30,7 +31,8 @@ func _on_resume_pressed():
 
 func _on_quit_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
+	visible = false
+	LevelManager.transition_to_scene(self,LevelManager.Scene.TitleScreen)
 
 func _on_settings_pressed():
 	$CanvasLayer/settings_screen.show()

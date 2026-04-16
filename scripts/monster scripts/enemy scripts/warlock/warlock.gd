@@ -34,7 +34,7 @@ func _init(health:float=30,max_health:float=30) -> void:
 func _ready():
 	
 	super._ready()
-	attack_damage = 1.5
+	attack_damage = 2.5
 	sprite = $AnimatedSprite2D
 
 	attack_speed = 1.4

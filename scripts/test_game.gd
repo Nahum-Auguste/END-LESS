@@ -5,10 +5,12 @@ extends Node2D
 @export var tile_layer: TileMapLayer
 @export var objects_layer: TileMapLayer
 @export var ceilings_layer: TileMapLayer
+@export var enemies_container: Node2D
 var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	enemies_container.process_mode = Node.PROCESS_MODE_DISABLED
 	LevelManager.display_black_screen()
 	player = LevelManager.player
 	
@@ -43,4 +45,5 @@ func _on_level_generator_generation_finished():
 	LevelManager.fade_out_black_screen(4)
 	await LevelManager.black_screen_finished
 	LevelManager.player_hud.visible = true
-	gen.process_mode = Node.PROCESS_MODE_ALWAYS
+	enemies_container.process_mode = Node.PROCESS_MODE_ALWAYS
+	#gen.process_mode = Node.PROCESS_MODE_ALWAYS
