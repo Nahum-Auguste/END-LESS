@@ -237,7 +237,6 @@ path_desired_distance = 5.0
 target_desired_distance = 5.0
 avoidance_enabled = true
 radius = 50.16
-debug_enabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=316454355]
 

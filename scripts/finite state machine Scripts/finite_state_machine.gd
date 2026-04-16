@@ -20,8 +20,9 @@ func physics_update(delta):
 		current_state.physics_update(delta)
 		
 func draw():
-	if current_state:
-		current_state.draw()
+	pass
+	#if current_state:
+		#current_state.draw()
 
 func enter_state(state: State):
 	if current_state!=state:

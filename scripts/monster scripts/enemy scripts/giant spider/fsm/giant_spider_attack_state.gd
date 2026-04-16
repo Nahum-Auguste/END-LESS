@@ -58,7 +58,7 @@ func exit():
 		attack_timer.stop()
 		
 		
-func draw():
-	if body is GiantSpider:
-		body.draw_circle(Vector2.ZERO,body.base_detection_range,Color(Color.YELLOW,.1))
-		body.draw_circle(Vector2.ZERO,body.attack_detection_range,Color(Color.YELLOW,.1))
+#func draw():
+	#if body is GiantSpider:
+		#body.draw_circle(Vector2.ZERO,body.base_detection_range,Color(Color.YELLOW,.1))
+		#body.draw_circle(Vector2.ZERO,body.attack_detection_range,Color(Color.YELLOW,.1))

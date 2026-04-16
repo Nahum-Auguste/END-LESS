@@ -40,7 +40,6 @@ horizontal_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2134222111]
 stream = ExtResource("3_g6jwa")
 pitch_scale = 0.47
-autoplay = true
 
 [node name="continue" parent="." unique_id=1736505248 instance=ExtResource("4_valqh")]
 layout_mode = 0

@@ -54,7 +54,7 @@ func set_new_target_position():
 
 func draw():
 	var diff = max_wander_range - min_wander_range
-	body.draw_circle(Vector2.ZERO,min_wander_range+diff/2,Color(Color.ALICE_BLUE,.1),!true,diff)
+	#body.draw_circle(Vector2.ZERO,min_wander_range+diff/2,Color(Color.ALICE_BLUE,.1),!true,diff)
 	
 func get_random_nearby_position()-> Vector2:
 	var angle = randf_range(0,360)

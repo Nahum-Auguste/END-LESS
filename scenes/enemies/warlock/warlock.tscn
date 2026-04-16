@@ -186,7 +186,6 @@ target_desired_distance = 5.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 67.69
-debug_enabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1758513333]
 max_distance = 230.0

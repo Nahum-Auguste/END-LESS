@@ -85,7 +85,7 @@ func handle_death():
 	pass
 	
 func use_consummable(item: Consumable):
-	
+	if !item: return
 	for e in item.status_effects:
 		add_status_effect(e)
 	

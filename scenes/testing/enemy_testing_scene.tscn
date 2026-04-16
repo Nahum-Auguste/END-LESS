@@ -61,7 +61,7 @@ tile_set = ExtResource("2_lht80")
 navigation_enabled = false
 
 [node name="Warlock" parent="." unique_id=777216955 instance=ExtResource("5_m6wgr")]
-position = Vector2(157, 221)
+position = Vector2(307, 179)
 orb_burst_attack_cone = 95.0
 eye_frame_duration = 0.15
 
@@ -118,3 +118,4 @@ position = Vector2(67, 124)
 locked = false
 
 [node name="GiantSpider2" parent="." unique_id=78834954 instance=ExtResource("18_k0dhc")]
+position = Vector2(-18, -147)

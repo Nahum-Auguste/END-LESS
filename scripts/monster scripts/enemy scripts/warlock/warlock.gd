@@ -41,7 +41,7 @@ func inflict_damage(dmg: float):
 func _ready():
 	
 	super._ready()
-	attack_damage = 2.5
+	attack_damage = 5.5
 	sprite = $AnimatedSprite2D
 
 	attack_speed = 1.4

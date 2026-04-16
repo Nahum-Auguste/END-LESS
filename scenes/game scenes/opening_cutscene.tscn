@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://da1rbuii3cqfo"]
+
+[ext_resource type="Texture2D" uid="uid://bsck5i5ssr1kt" path="res://assets/sprites/cutscenes/endless_cutscene_1.png" id="1_10lsl"]
+[ext_resource type="Script" uid="uid://bxbno1mmnofd7" path="res://scripts/gui scripts/opening_cutscene.gd" id="1_v5k0u"]
+
+[node name="OpeningCutscene" type="Control" unique_id=1588657548 node_paths=PackedStringArray("screen")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v5k0u")
+screen = NodePath("Screen")
+
+[node name="Screen" type="TextureRect" parent="." unique_id=439741332]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_10lsl")
+stretch_mode = 5

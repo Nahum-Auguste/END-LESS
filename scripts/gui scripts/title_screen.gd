@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	LevelManager.sub_player = $AudioStreamPlayer
 	LevelManager.player_hud.visible = false
+	LevelManager.pause_screen.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,7 +18,7 @@ func _process(delta):
 
 
 func _on_play_pressed() -> void:
-	LevelManager.transition_to_scene(self,LevelManager.Scene.FirstResurrection)
+	LevelManager.transition_to_scene(self,LevelManager.Scene.OpeningScene)
 
 
 func _on_exit_pressed() -> void:

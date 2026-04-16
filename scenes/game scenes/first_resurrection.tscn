@@ -2751,9 +2751,9 @@ locked = false
 
 [node name="DialogueBox" parent="CanvasLayer" unique_id=1149130560 instance=ExtResource("27_ycobs")]
 visible = false
-offset_left = 218.5
+offset_left = 230.5
 offset_top = 474.0
-offset_right = 944.5
+offset_right = 956.5
 offset_bottom = 710.0
 paragraphs = Array[String](["Since this soldier is ready now, we should quickly move on to the next batch of candidates to resurrect.", "We need to meet our quota before our next onslaught on the villages in Maqel, or else we'll be the ones needing a resurrection. ", "Any more mishaps with you two will NOT be accepted.", "Before we move on to the next round of bodies, I will need to gather some more supplies for our trip, so you two can wait here until I get back. "])
 paragraph_step = 0

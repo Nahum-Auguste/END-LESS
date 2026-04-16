@@ -41,8 +41,10 @@ var last_attack_animation:String = ""
 @export var hurt_box_collider: CollisionShape2D
 @export var stamina_regen_timer: Timer
 
+var imbuements: Array[Imbuement] = []
+
 func _init(health:float=0,max_health:float=0) -> void:
-	max_health = 30
+	max_health = 25
 	super(health,max_health)
 
 func _ready() -> void:

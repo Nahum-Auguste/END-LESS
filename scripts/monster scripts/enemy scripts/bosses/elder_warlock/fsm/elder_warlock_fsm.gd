@@ -91,14 +91,14 @@ func physics_update(delta):
 func is_player_in_range(range: float):
 	return player and parent.global_position.distance_to(player.global_position) <= range*parent.scale.x
 	
-func draw():
-	super.draw()
-	parent.draw_circle(Vector2.ZERO,wander_state.min_wander_range,Color.WHEAT,false)
-	parent.draw_circle(Vector2.ZERO,wander_state.max_wander_range,Color.WHEAT,false)
-	parent.draw_circle(Vector2.ZERO,parent.detection_area_shape.radius,Color(Color.YELLOW,.2),true)
-	parent.draw_circle(Vector2.ZERO,close_range_attack_range,Color.YELLOW,false)
-	parent.draw_circle(Vector2.ZERO,mid_range_attack_range,Color.ORANGE,false)
-	parent.draw_circle(Vector2.ZERO,far_range_attack_range,Color.RED,false)
+#func draw():
+	#super.draw()
+	#parent.draw_circle(Vector2.ZERO,wander_state.min_wander_range,Color.WHEAT,false)
+	#parent.draw_circle(Vector2.ZERO,wander_state.max_wander_range,Color.WHEAT,false)
+	#parent.draw_circle(Vector2.ZERO,parent.detection_area_shape.radius,Color(Color.YELLOW,.2),true)
+	#parent.draw_circle(Vector2.ZERO,close_range_attack_range,Color.YELLOW,false)
+	#parent.draw_circle(Vector2.ZERO,mid_range_attack_range,Color.ORANGE,false)
+	#parent.draw_circle(Vector2.ZERO,far_range_attack_range,Color.RED,false)
 
 
 

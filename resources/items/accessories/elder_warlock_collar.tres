@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://65ulmj6w0d1i" path="res://scripts/imbuements/imbuement.gd" id="1_b7u7f"]
 [ext_resource type="Script" uid="uid://c5mi3a5j78r3f" path="res://scripts/item scripts/item types/armor/accessory.gd" id="1_qe0jy"]
 [ext_resource type="Texture2D" uid="uid://clp67ilrneay2" path="res://assets/sprites/items/accessories/elder_warlock_collar.png" id="2_b7u7f"]
+[ext_resource type="Resource" uid="uid://dla7ymf2jh1bc" path="res://resources/imbuements/warlock_blast_imbuement.tres" id="2_tni4m"]
 
 [resource]
 script = ExtResource("1_qe0jy")
 stamina_points = 2
 defense = 10
 speed = 5
+imbuements = Array[ExtResource("1_b7u7f")]([ExtResource("2_tni4m")])
 name = "Elder Warlock Collar"
 texture = ExtResource("2_b7u7f")
 metadata/_custom_type_script = "uid://c5mi3a5j78r3f"

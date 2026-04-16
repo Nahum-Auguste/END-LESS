@@ -2,6 +2,7 @@ extends CanvasLayer
 
 enum Scene {
 	TitleScreen,
+	OpeningScene,
 	SettingsScreen,
 	FirstResurrection,
 	GameLevel,
@@ -11,6 +12,7 @@ enum Scene {
 
 var scenes: Dictionary = {
 	Scene.TitleScreen: "res://scenes/ui/expo.tscn",
+	Scene.OpeningScene:"res://scenes/game scenes/opening_cutscene.tscn",
 	Scene.SettingsScreen: "res://scenes/ui/menus/settings_screen.tscn",
 	Scene.FirstResurrection: "res://scenes/game scenes/first_resurrection.tscn",
 	Scene.GameLevel: "res://scenes/testing/test_game.tscn",
@@ -43,16 +45,30 @@ func transition_to_scene(caller: Node, scene_id: int):
 	if scene_id == Scene.GameLevel:
 		audio_player.stream = load("res://assets/music/ghost_house_test.wav")
 		audio_player.play()
+		
+	print(caller.get_tree())
 			
 	player_hud.visible = false
+	
+	if scene_id == Scene.ContinueScreen:
+		caller.get_tree().change_scene_to_packed(load("res://scenes/ui/menus/continue_screen.tscn"))
+		return
+	
 	if caller:
 		caller.get_tree().change_scene_to_file(scenes[scene_id])
 	elif player:
 		player.get_tree().change_scene_to_file(scenes[scene_id])
+	
+	if caller:
+		print(caller.get_tree())
+		
 	#player = get_tree().root.find_child("Player",true,false)
 	#if player:
 		#print("have player")
 	#print(InventoryManager.player_hud)
+
+var continue_screen_prefab: PackedScene = preload("res://scenes/ui/menus/continue_screen.tscn")
+var continue_screen: Control
 
 
 var player: Player
@@ -79,7 +95,12 @@ var loot_tables: Array[LootTable] = [
 func _ready():
 	pause_screen = pause_screem_prefab.instantiate()
 	add_child(pause_screen)
-	#pause_screen.visible = false
+	pause_screen.visible = !false
+	
+	
+	continue_screen = continue_screen_prefab.instantiate()
+	add_child(continue_screen)
+	continue_screen.visible = false
 	
 	add_child(audio_player)
 	
@@ -92,7 +113,7 @@ func _ready():
 		#player_hud.visible = false
 		
 	player = get_tree().root.find_child("Player",true,false)
-	
+	#transition_to_scene(game_level,Scene.ContinueScreen)
 	InventoryManager.player = player
 			
 	#print(get_tree_string())
@@ -156,7 +177,7 @@ func _process(delta):
 		
 	if sub_player:
 		sub_player.volume_db = linear_to_db(music_volume )
-		print("hi")
+		#print("hi")
 	
 	#print(music_volume)
 	#print(get_tree().root.get_children())
@@ -174,11 +195,14 @@ func _process(delta):
 
 func handle_player_death():
 	deaths+=1
-	pause_after_player_death_timer.start()
-	level = clamp(level-1,0,1000)
-	audio_player.stop()
-	audio_player.stream = load("res://assets/sfx/player/death.wav")
-	audio_player.play()
+	#transition_to_scene(player,Scene.ContinueScreen)
+	player.get_tree().change_scene_to_packed(preload("res://scenes/ui/menus/continue_screen.tscn"))
+	#continue_screen.visible = true
+	#pause_after_player_death_timer.start()
+	#level = clamp(level-1,0,1000)
+	#audio_player.stop()
+	#audio_player.stream = load("res://assets/sfx/player/death.wav")
+	#audio_player.play()
 	#audio_player.stop()
 	
 func pause_level():
@@ -211,11 +235,22 @@ func display_continue_screen():
 	#tween.tween_property(drawer_node,"dead_player_texture_opacity",0,2)
 	#await  tween.finished
 	#drawer_node.drawing_dead_player = false
-	fade_out_black_screen(2)
+	
+	#fade_in_black_screen(2)
 	var t2 = create_tween()
 	t2.tween_property(drawer_node,"dead_player_texture_opacity",0,2)
 	await t2.finished
-	transition_to_scene(game_level,Scene.ContinueScreen)
+	#if game_level:
+		#game_level.queue_free()
+	drawer_node.drawing_dead_player = false
+	#fade_in_black_screen(1)
+	#await black_screen_finished
+	#continue_screen.visible = true
+	transition_to_scene(player,Scene.ContinueScreen)
+	fade_out_black_screen(2)
+	#fade_out_black_screen(2)
+	#await black_screen_finished
+	
 	#if game_level:
 		#game_level.queue_free()
 	

@@ -138,7 +138,6 @@ path_desired_distance = 10.0
 path_max_distance = 200.0
 path_postprocessing = 2
 avoidance_enabled = true
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0.36078432, 1, 1)
 

@@ -47,9 +47,9 @@ func _physics_process(delta):
 	else : 
 		set_masks = false
 		ray.global_position = global_position
-
-func _draw():
-	if debug:
-		var diff = max_range - min_range
-		draw_circle(Vector2.ZERO,diff,Color.ALICE_BLUE,false,1)
+#
+#func _draw():
+	#if debug:
+		#var diff = max_range - min_range
+		#draw_circle(Vector2.ZERO,diff,Color.ALICE_BLUE,false,1)
 	

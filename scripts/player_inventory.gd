@@ -22,6 +22,7 @@ func _input(event):
 			var i = 0;
 			
 			var slot : ItemSlot =  consumable_slots_container.get_child(i)
+			if !slot.item: return
 			var player: Player =  LevelManager.player
 			player.use_consummable(slot.item)
 			slot.item.stack_count-=1
@@ -31,6 +32,7 @@ func _input(event):
 			var i = 1;
 			
 			var slot : ItemSlot =  consumable_slots_container.get_child(i)
+			if !slot.item: return
 			var player: Player =  LevelManager.player
 			player.use_consummable(slot.item)
 			slot.item.stack_count-=1
@@ -40,6 +42,7 @@ func _input(event):
 			var i = 2;
 			
 			var slot : ItemSlot =  consumable_slots_container.get_child(i)
+			if !slot.item: return
 			var player: Player =  LevelManager.player
 			player.use_consummable(slot.item)
 			slot.item.stack_count-=1
@@ -49,6 +52,7 @@ func _input(event):
 			var i = 3;
 			
 			var slot : ItemSlot =  consumable_slots_container.get_child(i)
+			if !slot.item: return
 			var player: Player =  LevelManager.player
 			player.use_consummable(slot.item)
 			slot.item.stack_count-=1

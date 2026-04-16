@@ -108,7 +108,7 @@ func is_copy_area_colliding()-> bool:
 func draw():
 	if teleport_anchor:
 		var diff = max_teleport_range - min_teleport_range
-		body.draw_circle((teleport_anchor.global_position - body.global_position)/body.scale.x,(min_teleport_range+diff/2)/body.scale.x,Color(Color.PLUM,0.7),false,diff/body.scale.x)
+		#body.draw_circle((teleport_anchor.global_position - body.global_position)/body.scale.x,(min_teleport_range+diff/2)/body.scale.x,Color(Color.PLUM,0.7),false,diff/body.scale.x)
 
 	
 	
